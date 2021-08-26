@@ -15,3 +15,10 @@ Widget searchBar() {
     ],
   );
 }
+Widget chartWidget(){
+  return SizedBox(child: 
+  SimpleBarChart.withSampleData(),
+  height: 400
+  );
+}
+
