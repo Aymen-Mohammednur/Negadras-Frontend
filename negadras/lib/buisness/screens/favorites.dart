@@ -24,6 +24,7 @@ class Favorites extends StatelessWidget {
                 itemBuilder: (context, i) {
                   return BusinessCard(
                     businessName: 'Kaldi\'s Coffee',
+                    rating: 2,
                     locationInfo: 'Bole',
                   );
                 },

@@ -26,6 +26,7 @@ class SearchBusiness extends StatelessWidget {
                 itemBuilder: (context, i) {
                   return BusinessCard(
                     businessName: 'Kaldi\'s Coffee',
+                    rating: 1,
                     locationInfo: 'Bole',
                   );
                 },

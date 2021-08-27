@@ -4,10 +4,12 @@ import 'package:negadras/buisness/screens/widgets/star_rating.dart';
 
 class BusinessCard extends StatefulWidget {
   final String businessName;
+  final double rating;
   final String locationInfo;
   BusinessCard({
     Key? key,
     required this.businessName,
+    required this.rating,
     required this.locationInfo,
   }) : super(key: key);
 
@@ -16,7 +18,6 @@ class BusinessCard extends StatefulWidget {
 }
 
 class _BusinessCardState extends State<BusinessCard> {
-  double rating = 3.5;
   bool isFavorite = false;
 
   @override
@@ -39,9 +40,8 @@ class _BusinessCardState extends State<BusinessCard> {
                   ),
                   StarRating(
                     color: Colors.blue,
-                    rating: 3.5,
-                    onRatingChanged: (rating) =>
-                        setState(() => this.rating = rating),
+                    rating: widget.rating,
+                    onRatingChanged: (rating) => setState(() => {}),
                   ),
                   Text(widget.locationInfo)
                 ],
