@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:negadras/buisness/screens/widgets/business_card.dart';
+import 'package:negadras/buisness/screens/widgets/label.dart';
 import 'package:negadras/buisness/screens/widgets/search_bar.dart';
 
 class FilterBusiness extends StatelessWidget {
@@ -16,9 +17,7 @@ class FilterBusiness extends StatelessWidget {
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
-              child: const Text(
-                "Restaurants near you",
-              ),
+              child: Label(label: "Restaurants near you", fontStyle: FontStyle.italic,),
             ),
             Expanded(
               child: ListView.builder(
@@ -27,7 +26,8 @@ class FilterBusiness extends StatelessWidget {
                   return BusinessCard(
                     businessName: 'Kaldi\'s Coffee',
                     rating: 2.5,
-                    locationInfo: 'Bole',
+                    locationInfo: '103 Bole Street, Cameroon Ave',
+                    imagePath: 'assets/images/macbook.jpg',
                   );
                 },
               ),
