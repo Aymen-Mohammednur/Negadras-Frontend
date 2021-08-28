@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // import 'package:negadras/buisness/screens/favorites.dart';
 import 'package:negadras/buisness/screens/filter_business.dart';
 import 'package:negadras/buisness/screens/edit_business.dart';
+import 'package:negadras/buisness/screens/me_tab.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: Scaffold(
-          body: EditForm(),
+          body: MeTab(),
         ));
   }
 }
