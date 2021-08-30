@@ -2,16 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:negadras/SimpleBarChart.dart';
 
-
 TextStyle normalText() {
   return TextStyle(
     fontSize: 24,
   );
 }
 
+BoxDecoration listItemDecoration() {
+  return BoxDecoration(
+    border: Border.all(),
+    borderRadius: BorderRadius.all(Radius.circular(10)),
+  );
+}
+
+BoxDecoration gridItemDecoration() {
+  return BoxDecoration(
+    border: Border.all(),
+    borderRadius: BorderRadius.all(Radius.circular(10)),
+  );
+}
+
 Widget searchBar() {
   return Row(
     children: [
+      // SizedBox(
+      //   width: 200,
+      //   child: Expanded(child: TextField(),)
+      // ),
       Expanded(
         child: TextField(),
       ),
@@ -20,13 +37,6 @@ Widget searchBar() {
         color: Colors.black,
       ),
     ],
-  );
-}
-
-Widget chartWidget(){
-  return SizedBox(child: 
-  SimpleBarChart.withSampleData(),
-  height: 400
   );
 }
 
@@ -58,3 +68,55 @@ Widget imageStackWidget() {
     ],
   );
 }
+
+Widget iconPair(IconData icon,String displayString){
+  return Column(children: [
+    Icon(icon, size: 40),
+    Text(displayString),
+  ],);
+}
+
+
+Widget _iconRow(){
+  return Padding(
+    padding: const EdgeInsets.only(top: 8, bottom: 8),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisSize: MainAxisSize.max,
+      children: [
+      iconPair(Icons.edit, "Edit"),
+      iconPair(Icons.delete, "Drop Business"),
+      iconPair(Icons.reviews, "Reviews"),
+      
+    ],),
+  );
+}
+
+Widget buttonPanelWidget(){
+  return Padding(
+    padding: const EdgeInsets.only(top: 10, bottom: 10),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children:[
+            SizedBox(height: 10,),
+        Padding(
+          padding: const EdgeInsets.only(left:10),
+          child: Text(
+            "Organization Name",
+            style: normalText(),
+            ),
+        ),
+            SizedBox(height: 10,),
+        _iconRow(),
+      ]
+    ),
+  );
+}
+Widget chartWidget(){
+  return SizedBox(child: 
+  SimpleBarChart.withSampleData(),
+  height: 400
+  );
+}
+
+
