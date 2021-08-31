@@ -26,7 +26,7 @@ class Home extends StatelessWidget {
           children: [
             // BusinessPhoto(),
             DropBusiness(),
-            // EditForm(),
+            EditForm(),
           ],
         ),
       ),
@@ -106,17 +106,40 @@ class DropBusiness extends StatelessWidget {
   }
 }
 
-class EditForm extends StatelessWidget {
+class EditForm extends StatefulWidget {
+  @override
+  _EditFormState createState() => _EditFormState();
+}
+
+class _EditFormState extends State<EditForm> {
   late String name;
+
   late String type;
+
   late String location;
+
   late String website;
+
   late String phoneNumber;
+
   late String email;
+
   late String organization;
 
-  final List<String> types = ['Restaurant', 'Hotel', 'Shop', 'Cafe', 'Other'];
-  String _currentType = "Choose";
+  final List<String> _types = ['Restaurant', 'Hotel', 'Shop', 'Cafe', 'Other'];
+
+  String _currentType = "Restaurant";
+
+  var _currencies = [
+    "Food",
+    "Transport",
+    "Personal",
+    "Shopping",
+    "Medical",
+    "Rent",
+    "Movie",
+    "Salary"
+  ];
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -148,21 +171,41 @@ class EditForm extends StatelessWidget {
     //   },
     // );
 
-    return DropdownButton(
-      // value: _currentType,
+    return DropdownButtonFormField(
+      // hint: Text("Please choose"),
 
-      // items: types.map((type) {
-      //   return DropdownMenuItem(
-      //     value: type,
-      //     child: Text("$type"),
+      // items: _types
+      //     .map((String type) =>
+      //         DropdownMenuItem<String>(value: type, child: Text(type)))
+      //     .toList(),
+
+      //   items: _types
+      // .map<DropdownMenuItem<String>> ((String value)) {
+      //   return DropdownMenuItem<String>(
+      //       value: value,
+      //       child: Text(value),
       //   );
-      // }).toList(),
-      items: [
-        DropdownMenuItem(
-          child: Text("Hi"),
-        ),
-        DropdownMenuItem(child: Text("Wow"))
-      ],
+      // }
+
+      // .toList(),
+      hint: Text("Please choose"),
+
+      value: _currentType,
+
+       items: _types
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+
+      onChanged: (String? newValue) {
+        setState(() {
+          _currentType = newValue!;
+        });
+      },
+
       // onSaved: (String? value) {
       //   _currentType = value!;
       // },
