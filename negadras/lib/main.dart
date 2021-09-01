@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:negadras/buisness/screens/favorites.dart';
 import 'package:negadras/buisness/screens/filter_business.dart';
+import 'package:negadras/buisness/screens/edit_business.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,6 +17,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const FilterBusiness());
+        home: Scaffold(
+          body: EditForm(),
+        ));
   }
 }

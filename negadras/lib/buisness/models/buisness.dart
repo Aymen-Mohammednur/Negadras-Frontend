@@ -1,0 +1,32 @@
+class Buisness {
+  final String id;
+  final String name;
+  final String type;
+  final String location;
+  final String? phoneNumber;
+  final String? website;
+  final String? email;
+  final String? imageURL;
+
+  Buisness(
+      {required this.id,
+      required this.name,
+      required this.type,
+      required this.location,
+      this.phoneNumber,
+      this.website,
+      this.email,
+      this.imageURL});
+
+  factory Buisness.fromJson(Map<String, dynamic> json) {
+    return Buisness(
+        id: json['id'],
+        name: json['name'],
+        type: json['type'],
+        location: json['location'],
+        phoneNumber: json['phoneNumber'],
+        website: json['website'],
+        email: json['email'],
+        imageURL: json['imageURL']);
+  }
+}

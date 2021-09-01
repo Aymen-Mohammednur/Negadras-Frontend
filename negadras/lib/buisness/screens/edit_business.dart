@@ -1,38 +1,5 @@
 import 'package:flutter/material.dart';
-
-void main() => runApp(App());
-
-class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Business Edit",
-      home: Home(),
-    );
-  }
-}
-
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          children: [
-            // BusinessPhoto(),
-            DropBusiness(),
-            EditForm(),
-          ],
-        ),
-      ),
-    );
-  }
-}
+import 'package:negadras/buisness/screens/widgets/form.dart';
 
 class BusinessPhoto extends StatelessWidget {
   const BusinessPhoto({Key? key}) : super(key: key);
@@ -112,44 +79,33 @@ class EditForm extends StatefulWidget {
 }
 
 class _EditFormState extends State<EditForm> {
-  late String name;
+  String _name = "";
 
-  late String type;
+  String? _type;
 
-  late String location;
+  String? _location;
 
-  late String website;
+  String? _website;
 
-  late String phoneNumber;
+  String? _phoneNumber;
 
-  late String email;
+  String? _email;
 
-  late String organization;
-
+  String? _organization;
   final List<String> _types = ['Restaurant', 'Hotel', 'Shop', 'Cafe', 'Other'];
 
   String _currentType = "Restaurant";
 
-  var _currencies = [
-    "Food",
-    "Transport",
-    "Personal",
-    "Shopping",
-    "Medical",
-    "Rent",
-    "Movie",
-    "Salary"
-  ];
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  Widget _buildName() {
+  Widget _buildName(name) {
     return TextFormField(
       decoration: InputDecoration(labelText: "Name"),
       validator: (String? value) {
         if (value!.isEmpty) {
           return 'Name is required';
         }
+        return null;
       },
       onSaved: (String? value) {
         name = value!;
@@ -157,158 +113,154 @@ class _EditFormState extends State<EditForm> {
     );
   }
 
-  Widget _buildType() {
-    // return TextFormField(
-    //   decoration: InputDecoration(labelText: "Type"),
-    //   // validator: (String? value) {
-    //   //   if (value!.isEmpty) {
-    //   //     return 'Password is required';
-    //   //   }
-    //   // },
-    //   // validator: (val) => val!.isEmpty ? 'Type is required' : null,
-    //   onSaved: (String? value) {
-    //     type = value!;
-    //   },
-    // );
+  // Widget _buildType() {
 
-    return DropdownButtonFormField(
-      // hint: Text("Please choose"),
+  //   return DropdownButtonFormField(
+  //     // hint: Text("Please choose"),
 
-      // items: _types
-      //     .map((String type) =>
-      //         DropdownMenuItem<String>(value: type, child: Text(type)))
-      //     .toList(),
+  //     // items: _types
+  //     //     .map((String type) =>
+  //     //         DropdownMenuItem<String>(value: type, child: Text(type)))
+  //     //     .toList(),
 
-      //   items: _types
-      // .map<DropdownMenuItem<String>> ((String value)) {
-      //   return DropdownMenuItem<String>(
-      //       value: value,
-      //       child: Text(value),
-      //   );
-      // }
+  //     //   items: _types
+  //     // .map<DropdownMenuItem<String>> ((String value)) {
+  //     //   return DropdownMenuItem<String>(
+  //     //       value: value,
+  //     //       child: Text(value),
+  //     //   );
+  //     // }
 
-      // .toList(),
-      hint: Text("Please choose"),
+  //     // .toList(),
+  //     hint: Text("Please choose"),
 
-      value: _currentType,
+  //     value: _currentType,
 
-       items: _types
-          .map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
+  //      items: _types
+  //         .map<DropdownMenuItem<String>>((String value) {
+  //       return DropdownMenuItem<String>(
+  //         value: value,
+  //         child: Text(value),
+  //       );
+  //     }).toList(),
 
-      onChanged: (String? newValue) {
-        setState(() {
-          _currentType = newValue!;
-        });
-      },
+  //     onChanged: (String? newValue) {
+  //       setState(() {
+  //         _currentType = newValue!;
+  //       });
+  //     },
 
-      // onSaved: (String? value) {
-      //   _currentType = value!;
-      // },
-    );
-  }
+  //     // onSaved: (String? value) {
+  //     //   _currentType = value!;
+  //     // },
+  //   );
+  // }
 
-  Widget _buildLocation() {
-    return TextFormField(
-      decoration: InputDecoration(labelText: "Location"),
-      onSaved: (String? value) {
-        location = value!;
-      },
-    );
-  }
+  // Widget _buildLocation() {
+  //   return TextFormField(
+  //     decoration: InputDecoration(labelText: "Location"),
+  //     onSaved: (String? value) {
+  //       location = value!;
+  //     },
 
-  Widget _buildWebsite() {
-    return TextFormField(
-      decoration: InputDecoration(labelText: "Website"),
-      keyboardType: TextInputType.url,
-      onSaved: (String? value) {
-        website = value!;
-      },
-    );
-  }
+  //   );
+  // }
 
-  Widget _buildPhoneNumber() {
-    return TextFormField(
-      decoration: InputDecoration(labelText: "Phone Number"),
-      keyboardType: TextInputType.phone,
-      onSaved: (String? value) {
-        phoneNumber = value!;
-      },
-    );
-  }
+  // Widget _buildWebsite() {
+  //   return TextFormField(
+  //     decoration: InputDecoration(labelText: "Website"),
+  //     keyboardType: TextInputType.url,
+  //     onSaved: (String? value) {
+  //       website = value!;
+  //     },
+  //   );
+  // }
 
-  Widget _buildEmail() {
-    return TextFormField(
-      decoration: InputDecoration(labelText: "Email"),
-      validator: (String? value) {
-        if (value!.isEmpty) {
-          return 'Name is required';
-        }
+  // Widget _buildPhoneNumber() {
+  //   return TextFormField(
+  //     decoration: InputDecoration(labelText: "Phone Number"),
+  //     keyboardType: TextInputType.phone,
+  //     onSaved: (String? value) {
+  //       phoneNumber = value!;
+  //     },
+  //   );
+  // }
 
-        if (!RegExp(
-                r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
-            .hasMatch(value)) {
-          return 'Please enter a valid email address';
-        }
-      },
-      onSaved: (String? value) {
-        email = value!;
-      },
-    );
-  }
+  // Widget _buildEmail() {
+  //   return TextFormField(
+  //     decoration: InputDecoration(labelText: "Email"),
+  //     validator: (String? value) {
+  //       if (value!.isEmpty) {
+  //         return 'Name is required';
+  //       }
 
-  Widget _buildOrganization() {
-    return TextFormField(
-      decoration: InputDecoration(labelText: "Organization"),
-      onSaved: (String? value) {
-        organization = value!;
-      },
-    );
-  }
+  //       if (!RegExp(
+  //               r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+  //           .hasMatch(value)) {
+  //         return 'Please enter a valid email address';
+  //       }
+  //     },
+  //     onSaved: (String? value) {
+  //       email = value!;
+  //     },
+  //   );
+  // }
+
+  // Widget _buildOrganization() {
+  //   return TextFormField(
+  //     decoration: InputDecoration(labelText: "Organization"),
+  //     onSaved: (String? value) {
+  //       organization = value!;
+  //     },
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(24),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _buildName(),
-            SizedBox(height: 20),
-            _buildType(),
-            // _buildLocation(),
-            // _buildWebsite(),
-            // _buildPhoneNumber(),
-            // _buildEmail(),
-            // _buildOrganization(),
-            SizedBox(height: 100),
-            ElevatedButton(
-              onPressed: () {
-                if (!_formKey.currentState!.validate()) {
-                  return;
-                }
+    return SingleChildScrollView(
+      child: Container(
+        margin: EdgeInsets.all(24),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _buildName(_name),
+              SizedBox(height: 20),
+              // _buildType(),
+              // _buildLocation(),
+              // _buildWebsite(),
+              // _buildPhoneNumber(),
+              // _buildEmail(),
+              // _buildOrganization(),
+              SizedBox(height: 100),
+              ElevatedButton(
+                onPressed: () {
+                  // if (!_formKey.currentState!.validate()) {
+                  //   return;
+                  // }
 
-                _formKey.currentState!.save();
+                  // _formKey.currentState?.save();
 
-                print(name);
-                // print(type);
-                // print(location);
-                // print(website);
-                // print(phoneNumber);
-                // print(email);
-              },
-              child: Text(
-                "Update",
-                style: TextStyle(color: Colors.white, fontSize: 16),
-              ),
-            )
-          ],
+                  final form = _formKey.currentState;
+                  if (form != null && form.validate()) {
+                    form.save();
+                    print(_name);
+                  }
+
+                  // print(type);
+                  // print(location);
+                  // print(website);
+                  // print(phoneNumber);
+                  // print(email);
+                },
+                child: Text(
+                  "Update",
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
