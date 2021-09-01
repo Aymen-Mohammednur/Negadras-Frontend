@@ -6,7 +6,7 @@ class Buisness {
   final String? phoneNumber;
   final String? website;
   final String? email;
-  final String? imageURL;
+  final String? organization;
 
   Buisness(
       {required this.id,
@@ -16,7 +16,7 @@ class Buisness {
       this.phoneNumber,
       this.website,
       this.email,
-      this.imageURL});
+      this.organization});
 
   factory Buisness.fromJson(Map<String, dynamic> json) {
     return Buisness(
@@ -27,6 +27,6 @@ class Buisness {
         phoneNumber: json['phoneNumber'],
         website: json['website'],
         email: json['email'],
-        imageURL: json['imageURL']);
+        organization: json['organization']);
   }
 }
