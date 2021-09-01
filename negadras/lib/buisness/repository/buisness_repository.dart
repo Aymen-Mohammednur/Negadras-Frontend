@@ -9,7 +9,7 @@ class BuisnessRepository {
     return this.dataProvider.create(buisness);
   }
 
-  Future<Buisness> update(int id, Buisness buisness) async {
+  Future<Buisness> update(String id, Buisness buisness) async {
     return this.dataProvider.update(id, buisness);
   }
 
@@ -17,7 +17,11 @@ class BuisnessRepository {
     return this.dataProvider.fetchAll();
   }
 
-  Future<void> delete(int id) async {
+  Future<Buisness> fetchOne(String id) async {
+    return this.dataProvider.fetchOne(id);
+  }
+
+  Future<void> delete(String id) async {
     this.dataProvider.delete(id);
   }
 }
