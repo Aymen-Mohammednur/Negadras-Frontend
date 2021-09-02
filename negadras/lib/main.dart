@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:negadras/buisness/screens/account_management.dart';
+import 'package:negadras/buisness/screens/add_business.dart';
 // import 'package:negadras/buisness/screens/favorites.dart';
 import 'package:negadras/buisness/screens/filter_business.dart';
 import 'package:negadras/buisness/screens/edit_business.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: Scaffold(
-          body: AccManage(),
+          body: BusinessForm(),
         ));
   }
 }
