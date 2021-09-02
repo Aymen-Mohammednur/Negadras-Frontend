@@ -37,9 +37,58 @@ class MeTab extends StatelessWidget {
               )
             ],
           ),
-          ]
+          Column(
+             children:[
+               GestureDetector(
+                 onTap: () => {},
+                 child:Card(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const ListTile(
+                        leading: Icon(Icons.person),
+                        title: Text('Account Management'),
+                      ),
+                    ],
+                  ),
+
+                 ),
+               ),
+               GestureDetector(
+                 onTap: () => {},
+                 child:Card(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const ListTile(
+                        leading: Icon(Icons.pin_drop_outlined),
+                        title: Text('Favorite Places'),
+                      ),
+                    ],
+                  ),
+                ),
+               ),
+               GestureDetector(
+                 onTap: () => {},
+                 child:Card(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const ListTile(
+                        leading: Icon(Icons.home_filled),
+                        title: Text('Claim A Business'),
+                      ),
+                    ],
+                  ),
+
+                 ),
+               ),
+               
+             ],
           ),
-          
+          ],
+
+        )
 
         )
 
