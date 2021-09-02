@@ -37,7 +37,55 @@ class AccManage extends StatelessWidget {
               )
             ],
           ),
-          
+          Column(
+             children:[
+               GestureDetector(
+                 onTap: () => {},
+                 child:Card(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const ListTile(
+                        leading: Icon(Icons.person),
+                        title: Text('Change Username'),
+                      ),
+                    ],
+                  ),
+
+                 ),
+               ),
+               GestureDetector(
+                 onTap: () => {},
+                 child:Card(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const ListTile(
+                        leading: Icon(Icons.pin_drop_outlined),
+                        title: Text('Change Password'),
+                      ),
+                    ],
+                  ),
+                ),
+               ),
+               GestureDetector(
+                 onTap: () => {},
+                 child:Card(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const ListTile(
+                        leading: Icon(Icons.home_filled),
+                        title: Text('Delete Account'),
+                      ),
+                    ],
+                  ),
+
+                 ),
+               ),
+               
+             ],
+          ),
           ],
 
         )
