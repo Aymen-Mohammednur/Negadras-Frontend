@@ -7,10 +7,10 @@ class ListOrganizationPage extends StatefulWidget {
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _ListOrganizationPageState createState() => _ListOrganizationPageState();
 }
 
-class _MyHomePageState extends State<ListOrganizationPage> {
+class _ListOrganizationPageState extends State<ListOrganizationPage> {
   Row singleOrgEntry(int i) {
     return Row(children: [
       Expanded(
