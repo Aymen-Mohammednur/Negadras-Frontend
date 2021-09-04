@@ -33,8 +33,12 @@ dependencies:
   equatable: ^2.0.3
   http: ^0.13.3
   charts_flutter: ^0.11.0
+  auto_route: ^2.3.0
+  bottom_navy_bar: ^6.0.0
 
 dev_dependencies:
+  auto_route_generator: ^2.1.0
+  build_runner: ^2.1.2
   flutter_test:
     sdk: flutter
 

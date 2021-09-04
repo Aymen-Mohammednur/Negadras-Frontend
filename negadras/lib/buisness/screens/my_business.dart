@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:negadras/buisness/screens/widgets/business_card.dart';
 import 'package:negadras/buisness/screens/widgets/label.dart';
 
-class FilterBusiness extends StatelessWidget {
-  const FilterBusiness({Key? key}) : super(key: key);
+class MyBusiness extends StatelessWidget {
+  const MyBusiness({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
