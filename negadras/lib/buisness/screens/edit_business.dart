@@ -188,7 +188,7 @@ class _EditFormState extends State<EditForm> {
       decoration: InputDecoration(labelText: "Email"),
       validator: (String? value) {
         if (value!.isEmpty) {
-          return 'Name is required';
+          return 'Email is required';
         }
 
         if (!RegExp(
