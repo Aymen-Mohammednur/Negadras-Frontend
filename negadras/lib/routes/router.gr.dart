@@ -7,11 +7,11 @@
 import 'package:auto_route/auto_route.dart' as _i1;
 import 'package:flutter/material.dart' as _i2;
 
-import '../app.dart' as _i3;
 import '../buisness/screens/favorites.dart' as _i6;
 import '../buisness/screens/filter_business.dart' as _i4;
 import '../buisness/screens/my_business.dart' as _i9;
 import '../buisness/screens/search_business.dart' as _i5;
+import '../category/screens/home_page.dart' as _i3;
 import '../user/screens/account_management.dart' as _i8;
 import '../user/screens/me_tab.dart' as _i7;
 
@@ -21,10 +21,12 @@ class AppRouter extends _i1.RootStackRouter {
 
   @override
   final Map<String, _i1.PageFactory> pagesMap = {
-    App.name: (routeData) => _i1.MaterialPageX<dynamic>(
+    HomeRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
-        builder: (_) {
-          return const _i3.App();
+        builder: (data) {
+          final args =
+              data.argsAs<HomeRouteArgs>(orElse: () => const HomeRouteArgs());
+          return _i3.HomePage(key: args.key);
         }),
     FilterBusinessRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
@@ -60,7 +62,7 @@ class AppRouter extends _i1.RootStackRouter {
 
   @override
   List<_i1.RouteConfig> get routes => [
-        _i1.RouteConfig(App.name, path: '/'),
+        _i1.RouteConfig(HomeRoute.name, path: '/'),
         _i1.RouteConfig(FilterBusinessRoute.name,
             path: '/filter-business-page'),
         _i1.RouteConfig(SearchBusinessRoute.name,
@@ -73,10 +75,17 @@ class AppRouter extends _i1.RootStackRouter {
       ];
 }
 
-class App extends _i1.PageRouteInfo {
-  const App() : super(name, path: '/');
+class HomeRoute extends _i1.PageRouteInfo<HomeRouteArgs> {
+  HomeRoute({_i2.Key? key})
+      : super(name, path: '/', args: HomeRouteArgs(key: key));
 
-  static const String name = 'App';
+  static const String name = 'HomeRoute';
+}
+
+class HomeRouteArgs {
+  const HomeRouteArgs({this.key});
+
+  final _i2.Key? key;
 }
 
 class FilterBusinessRoute extends _i1.PageRouteInfo {

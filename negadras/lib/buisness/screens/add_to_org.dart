@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:negadras/buisness/screens/widgets.dart';
+import 'package:negadras/utils/bottom_nav_bar.dart';
 
 class ListOrganizationPage extends StatefulWidget {
-  ListOrganizationPage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  ListOrganizationPage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -41,9 +40,7 @@ class _MyHomePageState extends State<ListOrganizationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      bottomNavigationBar: BottomNav(context),
       body: Center(
         child: Column(
           children: [

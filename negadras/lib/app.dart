@@ -1,70 +1,22 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'package:negadras/buisness/screens/edit_business.dart';
-import 'package:negadras/buisness/screens/favorites.dart';
-import 'package:negadras/buisness/screens/my_business.dart';
-import 'package:negadras/category/screens/home_page.dart';
-import 'package:negadras/user/screens/me_tab.dart';
+import 'package:negadras/routes/router.gr.dart';
 
-class App extends StatefulWidget {
-  const App({Key? key}) : super(key: key);
-
-  @override
-  _AppState createState() => _AppState();
-}
-
-class _AppState extends State<App> {
-  int currentIndex = 0;
-
-  List<Widget> listOfPages = [
-    HomePage(),
-    FavoritesPage(),
-    MePage(),
-  ];
+class App extends StatelessWidget {
+  final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Negadras",
-          style: TextStyle(color: Colors.black),
-        ),
-        backgroundColor: Colors.white,
-        centerTitle: true,
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
-      body: IndexedStack(
-        index: currentIndex,
-        children: listOfPages,
+      routerDelegate: AutoRouterDelegate(
+        _appRouter,
+        navigatorObservers: () => [AutoRouteObserver()],
       ),
-      bottomNavigationBar: BottomNavyBar(
-        // animationDuration: Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-        selectedIndex: currentIndex,
-        onItemSelected: (index) {
-          setState(() {
-            currentIndex = index;
-          });
-        },
-
-        items: [
-          BottomNavyBarItem(
-              icon: Icon(Icons.home),
-              title: Text("Discover"),
-              activeColor: Colors.blueAccent,
-              inactiveColor: Colors.black),
-          BottomNavyBarItem(
-              icon: Icon(Icons.favorite),
-              title: Text("Favorites"),
-              activeColor: Colors.blueAccent,
-              inactiveColor: Colors.black),
-          BottomNavyBarItem(
-              icon: Icon(Icons.manage_accounts),
-              title: Text("Me"),
-              activeColor: Colors.blueAccent,
-              inactiveColor: Colors.black)
-        ],
-      ),
+      routeInformationParser: _appRouter.defaultRouteParser(),
     );
   }
 }
