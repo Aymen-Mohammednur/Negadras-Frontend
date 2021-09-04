@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../buisness/screens/widgets/label.dart';
+import 'package:negadras/business/screens/widgets/label.dart';
 
 class AccountManagementPage extends StatelessWidget {
   const AccountManagementPage ({ Key? key }) : super(key: key);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:negadras/buisness/screens/widgets/business_card.dart';
-import 'package:negadras/buisness/screens/widgets/label.dart';
-import 'package:negadras/buisness/screens/widgets/search_bar.dart';
+import 'package:negadras/business/screens/widgets/business_card.dart';
+import 'package:negadras/business/screens/widgets/label.dart';
+import 'package:negadras/business/screens/widgets/search_bar.dart';
 
 class SearchBusinessPage extends StatelessWidget {
   const SearchBusinessPage({Key? key}) : super(key: key);

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:negadras/buisness/screens/widgets/business_card.dart';
-import 'package:negadras/buisness/screens/widgets/label.dart';
-
+import 'package:negadras/business/screens/widgets/business_card.dart';
+import 'package:negadras/business/screens/widgets/label.dart';
 class MyBusinessPage extends StatelessWidget {
   const MyBusinessPage({Key? key}) : super(key: key);
 

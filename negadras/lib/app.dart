@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'package:negadras/buisness/screens/edit_business.dart';
-import 'package:negadras/buisness/screens/favorites.dart';
-import 'package:negadras/buisness/screens/my_business.dart';
+import 'package:negadras/business/screens/favorites.dart';
 import 'package:negadras/category/screens/home_page.dart';
 import 'package:negadras/user/screens/me_tab.dart';
 
