@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:negadras/review/models/review.dart';
 import 'package:http/http.dart' as http;
 
-class BuisnessDataProvider {
+class ReviewDataProvider {
   static final String _baseUrl = "http://localhost/3000/review";
 
   Future<Review> create(Review review) async {
@@ -19,7 +19,7 @@ class BuisnessDataProvider {
     if (response.statusCode == 201) {
       return Review.fromJson(jsonDecode(response.body));
     } else {
-      throw Exception("Failed to create business");
+      throw Exception("Failed to create review");
     }
   }
 
