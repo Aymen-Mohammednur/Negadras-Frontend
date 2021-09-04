@@ -12,6 +12,7 @@ import '../business/screens/filter_business.dart' as _i4;
 import '../business/screens/my_business.dart' as _i9;
 import '../business/screens/search_business.dart' as _i5;
 import '../category/screens/home_page.dart' as _i3;
+import '../review/screens/user_view.dart' as _i10;
 import '../user/screens/account_management.dart' as _i8;
 import '../user/screens/me_tab.dart' as _i7;
 
@@ -57,6 +58,11 @@ class AppRouter extends _i1.RootStackRouter {
         routeData: routeData,
         builder: (_) {
           return const _i9.MyBusinessPage();
+        }),
+    UserViewRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return const _i10.UserViewPage();
         })
   };
 
@@ -71,7 +77,8 @@ class AppRouter extends _i1.RootStackRouter {
         _i1.RouteConfig(MeRoute.name, path: '/me-page'),
         _i1.RouteConfig(AccountManagementRoute.name,
             path: '/account-management-page'),
-        _i1.RouteConfig(MyBusinessRoute.name, path: '/my-business-page')
+        _i1.RouteConfig(MyBusinessRoute.name, path: '/my-business-page'),
+        _i1.RouteConfig(UserViewRoute.name, path: '/user-view-page')
       ];
 }
 
@@ -123,4 +130,10 @@ class MyBusinessRoute extends _i1.PageRouteInfo {
   const MyBusinessRoute() : super(name, path: '/my-business-page');
 
   static const String name = 'MyBusinessRoute';
+}
+
+class UserViewRoute extends _i1.PageRouteInfo {
+  const UserViewRoute() : super(name, path: '/user-view-page');
+
+  static const String name = 'UserViewRoute';
 }

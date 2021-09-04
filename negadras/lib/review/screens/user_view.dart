@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'package:negadras/buisness/screens/favorites.dart';
-import 'package:negadras/buisness/screens/my_business.dart';
-import 'package:negadras/buisness/screens/widgets.dart';
+import 'package:negadras/business/screens/favorites.dart';
+import 'package:negadras/business/screens/my_business.dart';
+import 'package:negadras/business/screens/widgets.dart';
 import 'package:negadras/user/screens/me_tab.dart';
 
-class App extends StatefulWidget {
-  const App({Key? key}) : super(key: key);
+class UserViewPage extends StatefulWidget {
+  const UserViewPage({Key? key}) : super(key: key);
 
   @override
-  _AppState createState() => _AppState();
+  UserViewPageState createState() => UserViewPageState();
 }
 
-class _AppState extends State<App> {
+class UserViewPageState extends State<UserViewPage> {
   Widget businessType() => GridView.count(
         crossAxisCount: 3,
         children: List.generate(

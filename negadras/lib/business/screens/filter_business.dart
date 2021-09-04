@@ -45,7 +45,8 @@ class FilterBusinessPage extends StatelessWidget {
                     );
                   }
                   if (businessState is BusinessView) {
-                    context.pushRoute(MeRoute());
+                    context.pushRoute(UserViewRoute());
+                    businessBloc.add(SearchBusinesses());
                   }
                   if (businessState is AllBusinessSearchResult) {
                     return Expanded(
@@ -68,9 +69,7 @@ class FilterBusinessPage extends StatelessWidget {
                       ),
                     );
                   } else {
-                    return Center(
-                      child: const Text("Testing"),
-                    );
+                    return Container();
                   }
                 },
               ),

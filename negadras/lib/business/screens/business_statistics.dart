@@ -51,7 +51,11 @@ class _BusinessStaticsPageState extends State<BusinessStaticsPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               imageStackWidget(),
-              buttonPanelWidget(),
+              buttonPanelWidget([
+                IconTextPair().edit(),
+                IconTextPair().drop(),
+                IconTextPair().review()
+              ]),
               chartWidget(),
             ],
           ),

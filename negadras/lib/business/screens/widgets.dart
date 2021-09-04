@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:negadras/buisness/screens/SimpleBarChart.dart';
+import 'package:negadras/business/screens/SimpleBarChart.dart';
 import 'dart:convert';
 // import 'package:negadras/SimpleBarChart.dart';
 

@@ -21,8 +21,8 @@ class _HomePageState extends State<HomePage> {
           (index) {
             return GestureDetector(
                 onTap: () {
+                  bloc.add(SearchBusinesses());
                   context.pushRoute(FilterBusinessRoute());
-                  bloc.add(LoadBusiness(businessId: "businessId"));
                 },
                 onDoubleTap: () => setText(""),
                 child: _businessTypeContainer(index));
