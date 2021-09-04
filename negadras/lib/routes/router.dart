@@ -1,5 +1,4 @@
 import 'package:auto_route/annotations.dart';
-import 'package:negadras/app.dart';
 import 'package:negadras/business/screens/favorites.dart';
 import 'package:negadras/business/screens/filter_business.dart';
 import 'package:negadras/business/screens/my_business.dart';
@@ -11,7 +10,7 @@ import 'package:negadras/user/screens/me_tab.dart';
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
-    AutoRoute(page: App, initial: true),
+    AutoRoute(page: HomePage, initial: true),
     AutoRoute(page: FilterBusinessPage),
     AutoRoute(page: SearchBusinessPage),
     AutoRoute(page: FavoritesPage),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:negadras/utils/bottom_nav_bar.dart';
 // import 'package:negadras/buisness/screens/widgets/form.dart';
 
 class EditBusinessPage extends StatelessWidget {
@@ -6,13 +7,16 @@ class EditBusinessPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        BusinessPhoto(),
-        DropBusiness(),
-        EditForm(),
-      ],
-      
+    return Scaffold(
+      bottomNavigationBar: BottomNav(context),
+      body: Column(
+        children: [
+          BusinessPhoto(),
+          DropBusiness(),
+          EditForm(),
+        ],
+        
+      ),
     );
   }
 }

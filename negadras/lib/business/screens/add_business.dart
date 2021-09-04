@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:negadras/business/screens/widgets/label.dart';
-class AddBusiness extends StatefulWidget {
+import 'package:negadras/utils/bottom_nav_bar.dart';
+
+class AddBusinessPage extends StatefulWidget {
   @override
-  _BusinessFormState createState() => _BusinessFormState();
+  _AddBusinessPageState createState() => _AddBusinessPageState();
 }
 
-class _BusinessFormState extends State<AddBusiness> {
+class _AddBusinessPageState extends State<AddBusinessPage> {
   String _name = "";
 
   String? _type;
@@ -127,7 +129,6 @@ class _BusinessFormState extends State<AddBusiness> {
     );
   }
 
-
   Widget _buildCheckboxLocation() {
     return CheckboxListTile(   
       title: const Text('Use current location'),  
@@ -145,61 +146,64 @@ class _BusinessFormState extends State<AddBusiness> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        margin: EdgeInsets.all(24),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _buildName(_name),
-              SizedBox(height: 20),
-              _buildType(),
-              _buildCheckboxLocation(),
-              ElevatedButton(
-                onPressed: (){}, 
-                child: Text('Open Maps'),
-                ),
-              Label(label: 'Contact Information(Optional)'),
-              _buildWebsite(),
-              _buildPhoneNumber(),
-              _buildEmail(),
-              Label(label: 'Additional Information(Optional)'),
-              Row(
-                children: [
-                  Label(label: 'Upload Image'),
-                  ElevatedButton(
-                    onPressed: (){}, 
-                    child: Icon(Icons.upload_rounded),
+    return Scaffold(
+      bottomNavigationBar: BottomNav(context),
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.all(24),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildName(_name),
+                SizedBox(height: 20),
+                _buildType(),
+                _buildCheckboxLocation(),
+                ElevatedButton(
+                  onPressed: (){}, 
+                  child: Text('Open Maps'),
                   ),
-                ],
-              ),
-              SizedBox(height: 100),
-              ElevatedButton(
-                onPressed: () {
-                  
-                  final form = _formKey.currentState;
-                  if (form != null && form.validate()) {
-                    form.save();
-                    print(_name);
-                  }
-
-                },
-                child: Text(
-                  "Create Business",
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                Label(label: 'Contact Information(Optional)'),
+                _buildWebsite(),
+                _buildPhoneNumber(),
+                _buildEmail(),
+                Label(label: 'Additional Information(Optional)'),
+                Row(
+                  children: [
+                    Label(label: 'Upload Image'),
+                    ElevatedButton(
+                      onPressed: (){}, 
+                      child: Icon(Icons.upload_rounded),
+                    ),
+                  ],
                 ),
-              ),
-              ElevatedButton(
-                onPressed: () {
+                SizedBox(height: 100),
+                ElevatedButton(
+                  onPressed: () {
+                    
+                    final form = _formKey.currentState;
+                    if (form != null && form.validate()) {
+                      form.save();
+                      print(_name);
+                    }
+    
                   },
-                child: Text(
-                  "Cancel",
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                  child: Text(
+                    "Create Business",
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
                 ),
-              )
-            ],
+                ElevatedButton(
+                  onPressed: () {
+                    },
+                  child: Text(
+                    "Cancel",
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

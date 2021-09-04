@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:negadras/business/screens/widgets/label.dart';
+import 'package:negadras/utils/bottom_nav_bar.dart';
+import '../../business/screens/widgets/label.dart';
 
 class AccountManagementPage extends StatelessWidget {
   const AccountManagementPage ({ Key? key }) : super(key: key);
@@ -7,6 +8,7 @@ class AccountManagementPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNav(context),
       body: SafeArea(
         child:Column(
           children: [Row(
