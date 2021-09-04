@@ -17,9 +17,9 @@ class _AppState extends State<App> {
   int currentIndex = 0;
 
   List<Widget> listOfPages = [
-    HomePage(title: "Negardas"),
-    Favorites(),
-    MeTab(),
+    HomePage(),
+    FavoritesPage(),
+    MePage(),
   ];
 
   @override

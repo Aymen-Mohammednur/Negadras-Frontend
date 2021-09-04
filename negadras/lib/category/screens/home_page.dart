@@ -1,10 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:negadras/buisness/screens/widgets.dart';
+import 'package:negadras/routes/router.gr.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -27,8 +27,7 @@ class _HomePageState extends State<HomePage> {
           9,
           (index) {
             return GestureDetector(
-                onTap: () => setText(
-                    "Item $index\n(To show the icons listen for events)"),
+                onTap: () => context.pushRoute(FilterBusinessRoute()),
                 onDoubleTap: () => setText(""),
                 child: _businessTypeContainer(index));
           },

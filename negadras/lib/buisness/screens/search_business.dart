@@ -3,8 +3,8 @@ import 'package:negadras/buisness/screens/widgets/business_card.dart';
 import 'package:negadras/buisness/screens/widgets/label.dart';
 import 'package:negadras/buisness/screens/widgets/search_bar.dart';
 
-class SearchBusiness extends StatelessWidget {
-  const SearchBusiness({Key? key}) : super(key: key);
+class SearchBusinessPage extends StatelessWidget {
+  const SearchBusinessPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
