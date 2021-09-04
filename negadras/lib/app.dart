@@ -15,7 +15,7 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   int currentIndex = 0;
 
-  List<Widget> listOfPages = [EditForm(), Favorites(), MeTab()];
+  List<Widget> listOfPages = [EditForm(), FavoritesPage(), MePage()];
 
   @override
   Widget build(BuildContext context) {

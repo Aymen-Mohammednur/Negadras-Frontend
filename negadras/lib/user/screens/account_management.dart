@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../buisness/screens/widgets/label.dart';
 
-class AccManage extends StatelessWidget {
-  const AccManage ({ Key? key }) : super(key: key);
+class AccountManagementPage extends StatelessWidget {
+  const AccountManagementPage ({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
