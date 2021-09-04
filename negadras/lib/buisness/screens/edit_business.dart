@@ -1,6 +1,22 @@
 import 'package:flutter/material.dart';
 // import 'package:negadras/buisness/screens/widgets/form.dart';
 
+class EditBusinessPage extends StatelessWidget {
+  const EditBusinessPage({ Key? key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        BusinessPhoto(),
+        DropBusiness(),
+        EditForm(),
+      ],
+      
+    );
+  }
+}
+
 class BusinessPhoto extends StatelessWidget {
   const BusinessPhoto({Key? key}) : super(key: key);
 
@@ -188,7 +204,7 @@ class _EditFormState extends State<EditForm> {
       decoration: InputDecoration(labelText: "Email"),
       validator: (String? value) {
         if (value!.isEmpty) {
-          return 'Name is required';
+          return 'Email is required';
         }
 
         if (!RegExp(

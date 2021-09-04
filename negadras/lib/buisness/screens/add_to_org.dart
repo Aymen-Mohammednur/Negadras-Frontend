@@ -1,25 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:negadras/buisness/screens/widgets.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'My Organizations'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
+class ListOrganizationPage extends StatefulWidget {
+  ListOrganizationPage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -27,7 +10,7 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<ListOrganizationPage> {
   Row singleOrgEntry(int i) {
     return Row(children: [
       Expanded(

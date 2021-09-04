@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../buisness/screens/widgets/label.dart';
 
-class MeTab extends StatelessWidget {
-  const MeTab ({ Key? key }) : super(key: key);
+class MePage extends StatelessWidget {
+  const MePage ({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

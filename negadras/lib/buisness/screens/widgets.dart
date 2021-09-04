@@ -115,7 +115,7 @@ Widget buttonPanelWidget(){
 }
 Widget chartWidget(){
   return SizedBox(child: 
-  SimpleBarChart.withSampleData(),
+  SimpleBarChartPage.withSampleData(),
   height: 400
   );
 }
