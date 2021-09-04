@@ -1,23 +1,21 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:negadras/buisness/screens/widgets/business_card.dart';
-import 'package:negadras/buisness/screens/widgets/label.dart';
-
-class FavoritesPage extends StatelessWidget {
-  const FavoritesPage({Key? key}) : super(key: key);
+import 'package:negadras/business/screens/widgets/business_card.dart';
+import 'package:negadras/business/screens/widgets/label.dart';
+class MyBusinessPage extends StatelessWidget {
+  const MyBusinessPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
               child: Label(
-                label: "Favorites",
+                label: "My Businesses",
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),

@@ -1,24 +1,33 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:negadras/buisness/screens/widgets.dart';
+import 'package:negadras/business/screens/widgets.dart';
+import 'package:negadras/routes/router.gr.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+class HomePage extends StatefulWidget {
+  HomePage({Key? key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomePageState extends State<HomePage> {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(
+      () {
+        _counter++;
+      },
+    );
+  }
+
   Widget businessType() => GridView.count(
         crossAxisCount: 3,
         children: List.generate(
           9,
           (index) {
             return GestureDetector(
-                onTap: () => setText(
-                    "Item $index\n(To show the icons listen for events)"),
+                onTap: () => context.pushRoute(FilterBusinessRoute()),
                 onDoubleTap: () => setText(""),
                 child: _businessTypeContainer(index));
           },
@@ -54,10 +63,10 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text("What are you looking for...", style: normalText()),
             ),
             Expanded(flex: 3, child: businessType()),
-            Expanded(
-              flex: 2,
-              child: Center(child: Text(textString)),
-            )
+            // Expanded(
+            //   flex: 1,
+            //   child: Center(child: Text(textString)),
+            // )
           ],
         ),
       ),

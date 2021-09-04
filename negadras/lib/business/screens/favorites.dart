@@ -1,25 +1,25 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:negadras/buisness/screens/widgets/business_card.dart';
-import 'package:negadras/buisness/screens/widgets/label.dart';
-import 'package:negadras/buisness/screens/widgets/search_bar.dart';
+import 'package:negadras/business/screens/widgets/business_card.dart';
+import 'package:negadras/business/screens/widgets/label.dart';
 
-class SearchBusiness extends StatelessWidget {
-  const SearchBusiness({Key? key}) : super(key: key);
+class FavoritesPage extends StatelessWidget {
+  const FavoritesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SearchBar(),
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
               child: Label(
-                label: "Kaldi's Coffee near you",
-                fontStyle: FontStyle.italic,
+                label: "Favorites",
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
               ),
             ),
             Expanded(
@@ -30,7 +30,7 @@ class SearchBusiness extends StatelessWidget {
                     businessName: 'Kaldi\'s Coffee',
                     rating: 2.5,
                     locationInfo: '103 Bole Street, Cameroon Ave',
-                    imagePath: 'assets/images/hacker.jpeg',
+                    imagePath: 'assets/images/macbook.jpg',
                   );
                 },
               ),

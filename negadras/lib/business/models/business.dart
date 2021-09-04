@@ -1,4 +1,4 @@
-class Buisness {
+class Business {
   final String id;
   final String name;
   final String type;
@@ -8,7 +8,7 @@ class Buisness {
   final String? email;
   final String? organization;
 
-  Buisness(
+  Business(
       {required this.id,
       required this.name,
       required this.type,
@@ -18,8 +18,8 @@ class Buisness {
       this.email,
       this.organization});
 
-  factory Buisness.fromJson(Map<String, dynamic> json) {
-    return Buisness(
+  factory Business.fromJson(Map<String, dynamic> json) {
+    return Business(
         id: json['id'],
         name: json['name'],
         type: json['type'],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:negadras/buisness/screens/widgets.dart';
+import 'package:negadras/business/screens/widgets.dart';
 
 class BusinessStaticsPage extends StatefulWidget {
   BusinessStaticsPage({Key? key, required this.title}) : super(key: key);

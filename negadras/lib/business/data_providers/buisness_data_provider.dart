@@ -1,67 +1,67 @@
 import 'dart:convert';
-import 'package:negadras/buisness/models/buisness.dart';
 import 'package:http/http.dart' as http;
+import 'package:negadras/business/models/models.dart';
 
-class BuisnessDataProvider {
-  static final String _baseUrl = "http://localhost/3000/buisness";
+class BusinessDataProvider {
+  static final String _baseUrl = "http://localhost/3000/Business";
 
-  Future<Buisness> create(Buisness buisness) async {
+  Future<Business> create(Business business) async {
     final http.Response response = await http.post(Uri.parse(_baseUrl),
         headers: <String, String>{"Content-Type": "application/json"},
         body: jsonEncode({
-          "name": buisness.name,
-          "type": buisness.type,
-          "location": buisness.location,
-          "phoneNumber": buisness.phoneNumber,
-          "website": buisness.website,
-          "email": buisness.email,
-          "organization": buisness.organization,
+          "name": business.name,
+          "type": business.type,
+          "location": business.location,
+          "phoneNumber": business.phoneNumber,
+          "website": business.website,
+          "email": business.email,
+          "organization": business.organization,
         }));
 
     if (response.statusCode == 201) {
-      return Buisness.fromJson(jsonDecode(response.body));
+      return Business.fromJson(jsonDecode(response.body));
     } else {
       throw Exception("Failed to create business");
     }
   }
 
-  Future<List<Buisness>> fetchAll() async {
+  Future<List<Business>> fetchAll() async {
     final response = await http.get(Uri.parse(_baseUrl));
 
     if (response.statusCode == 200) {
       final business = jsonDecode(response.body) as List;
-      return business.map((b) => Buisness.fromJson(b)).toList();
+      return business.map((b) => Business.fromJson(b)).toList();
     } else {
       throw Exception("Failed to get business");
     }
   }
 
-  Future<Buisness> fetchOne(String id) async {
+  Future<Business> fetchOne(String id) async {
     final response = await http.get(Uri.parse("$_baseUrl/$id"));
 
     if (response.statusCode == 200) {
-      return Buisness.fromJson(jsonDecode(response.body));
+      return Business.fromJson(jsonDecode(response.body));
     } else {
       throw Exception("Failed to get one business");
     }
   }
 
-  Future<Buisness> update(String id, Buisness buisness) async {
+  Future<Business> update(String id, Business business) async {
     final response = await http.put(Uri.parse("$_baseUrl/$id"),
         headers: <String, String>{"Content-Type": "application/json"},
         body: jsonEncode({
           "_id": id,
-          "name": buisness.name,
-          "type": buisness.type,
-          "location": buisness.location,
-          "phoneNumber": buisness.phoneNumber,
-          "website": buisness.website,
-          "email": buisness.email,
-          "organization": buisness.organization,
+          "name": business.name,
+          "type": business.type,
+          "location": business.location,
+          "phoneNumber": business.phoneNumber,
+          "website": business.website,
+          "email": business.email,
+          "organization": business.organization,
         }));
 
     if (response.statusCode == 200) {
-      return Buisness.fromJson(jsonDecode(response.body));
+      return Business.fromJson(jsonDecode(response.body));
     } else {
       throw Exception("Failed to update business");
     }
@@ -70,7 +70,7 @@ class BuisnessDataProvider {
   Future<void> delete(String id) async {
     final response = await http.delete(Uri.parse("$_baseUrl/$id"));
     if (response.statusCode != 204) {
-      throw Exception("Field to delete the buisness");
+      throw Exception("Field to delete the Business");
     }
   }
 }
