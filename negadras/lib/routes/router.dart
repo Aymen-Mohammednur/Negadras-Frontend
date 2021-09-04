@@ -3,7 +3,7 @@ import 'package:negadras/business/screens/favorites.dart';
 import 'package:negadras/business/screens/filter_business.dart';
 import 'package:negadras/business/screens/my_business.dart';
 import 'package:negadras/business/screens/search_business.dart';
-// import 'package:negadras/category/screens/home_page.dart';
+import 'package:negadras/category/screens/home_page.dart';
 import 'package:negadras/user/screens/account_management.dart';
 import 'package:negadras/user/screens/me_tab.dart';
 

@@ -16,8 +16,8 @@ class BusinessBloc extends Bloc<BusinessEvent, BusinessState> {
   Stream<BusinessState> mapEventToState(
     BusinessEvent event,
   ) async* {
-    if (event is LoadBusiness) {
-      yield BusinessLoading();
+    if (event is SearchBusinesses) {
+      yield Fetching();
       await Future.delayed(Duration(seconds: 2));
 
       // //When the backend works
@@ -26,13 +26,19 @@ class BusinessBloc extends Bloc<BusinessEvent, BusinessState> {
       // final realBusiness = await businessRepository.fetchOne(businessId);
       // yield BusinessLoaded(realBusiness);
 
-      final business = Business(
-          id: "test_id",
-          name: "Kaldis' Coffee",
-          type: "Restaurant",
-          location: "302 Bole Street");
+      // final business = Business(
+      //     id: "test_id",
+      //     name: "Kaldis' Coffee",
+      //     type: "Restaurant",
+      //     location: "302 Bole Street");
 
-      yield BusinessLoaded(business);
+      yield AllBusinessSearchResult();
+    }
+
+    if (event is LoadBusiness) {
+      yield Fetching();
+      await Future.delayed(Duration(seconds: 2));
+      yield BusinessView();
     }
   }
 }

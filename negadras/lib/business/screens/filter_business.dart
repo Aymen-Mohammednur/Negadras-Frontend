@@ -4,7 +4,10 @@ import 'package:negadras/business/bloc/business_bloc.dart';
 import 'package:negadras/business/screens/widgets/business_card.dart';
 import 'package:negadras/business/screens/widgets/label.dart';
 import 'package:negadras/business/screens/widgets/search_bar.dart';
+import 'package:negadras/routes/router.gr.dart';
+import 'package:negadras/user/screens/me_tab.dart';
 import 'package:negadras/utils/bottom_nav_bar.dart';
+import 'package:auto_route/auto_route.dart';
 
 class FilterBusinessPage extends StatelessWidget {
   const FilterBusinessPage({Key? key}) : super(key: key);
@@ -29,10 +32,11 @@ class FilterBusinessPage extends StatelessWidget {
               ),
               BlocBuilder<BusinessBloc, BusinessState>(
                 builder: (context, businessState) {
+                  print(businessState);
                   if (businessState is BusinessInitial) {
-                    businessBloc.add(LoadBusiness(businessId: "businessId"));
+                    businessBloc.add(SearchBusinesses());
                   }
-                  if (businessState is BusinessLoading) {
+                  if (businessState is Fetching) {
                     return Expanded(
                       child: Center(
                           child: CircularProgressIndicator(
@@ -40,7 +44,10 @@ class FilterBusinessPage extends StatelessWidget {
                       )),
                     );
                   }
-                  if (businessState is BusinessLoaded) {
+                  if (businessState is BusinessView) {
+                    context.pushRoute(MeRoute());
+                  }
+                  if (businessState is AllBusinessSearchResult) {
                     return Expanded(
                       child: ListView.builder(
                         itemCount: 10,

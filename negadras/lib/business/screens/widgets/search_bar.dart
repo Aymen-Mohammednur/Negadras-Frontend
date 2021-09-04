@@ -22,7 +22,10 @@ class SearchBar extends StatelessWidget {
               ),
             ),
           ),
-          Icon(Icons.search)
+          GestureDetector(
+            child: Icon(Icons.search),
+            onTap: () => print("working"),
+          )
         ],
       ),
     );

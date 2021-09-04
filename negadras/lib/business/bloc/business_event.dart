@@ -11,3 +11,5 @@ class LoadBusiness extends BusinessEvent {
   final String businessId;
   LoadBusiness({required this.businessId});
 }
+
+class SearchBusinesses extends BusinessEvent {}
