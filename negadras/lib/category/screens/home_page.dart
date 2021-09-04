@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:negadras/widgets.dart';
+import 'package:negadras/buisness/screens/widgets.dart';
 
 void main() {
   runApp(MyApp());

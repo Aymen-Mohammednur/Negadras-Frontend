@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:negadras/buisness/screens/account_management.dart';
+import 'package:negadras/user/screens/account_management.dart';
 import 'package:negadras/buisness/screens/add_business.dart';
-// import 'package:negadras/buisness/screens/favorites.dart';
+import 'package:negadras/buisness/screens/favorites.dart';
 import 'package:negadras/buisness/screens/filter_business.dart';
 import 'package:negadras/buisness/screens/edit_business.dart';
-import 'package:negadras/buisness/screens/me_tab.dart';
+import 'package:negadras/user/screens/me_tab.dart';
 
 void main() {
   runApp(MyApp());
