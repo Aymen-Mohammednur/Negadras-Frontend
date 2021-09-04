@@ -1,9 +1,8 @@
-# Negadras Android Client
+# Negadras
 
-Negadras is an Android application that aims to connect businesses and users in a meaningful way. 
+Negadras is a mobile application that aims to connect businesses and users in a meaningful way. 
 
-It allows users to search, review, and discover new businesses, and lets them make well informed decisions on the places they plan to spend their time and money. business owners will also be able to extract value from this program. Business owners will be able to directly interact with customers and quantitatively view how their customers are feeling about their business through the use of graphs.
-
+It allows users to search, review, and discover new businesses, and lets them make well informed decisions on the places they plan to spend their time and money. business owners will also be able to extract value from this program.
 
 
 #### Feature List
@@ -19,15 +18,12 @@ It allows users to search, review, and discover new businesses, and lets them ma
   business
 - Business Owners can update their business’s contact
   information
-- Business Owners can view a graph of average customer
-  reviews to see how they are doing
-
 
 
 **Group Members**
 
-2. Abenezer Sleshi ATR/7940/11
-2. Aymen Mohammednur ATR/5985/11
-3. Bethlehem Teshibelay ETR/9292/11
-4. Semere Habtu ATR/2583/11
-5. Semere Tereffe ATR/4113/11
+2. Abenezer Sleshi ATR/7940/11 Section 2
+2. Aymen Mohammednur ATR/5985/11 Section 2
+3. Bethlehem Teshibelay ETR/9292/11 Section 2
+4. Semere Habtu ATR/2583/11 Section 2
+5. Semere Tereffe ATR/4113/11 Section 2
