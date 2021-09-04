@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:negadras/buisness/screens/widgets/label.dart';
+import '../../buisness/screens/widgets/label.dart';
 
-class AccManage extends StatelessWidget {
-  const AccManage ({ Key? key }) : super(key: key);
+class MeTab extends StatelessWidget {
+  const MeTab ({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class AccManage extends StatelessWidget {
               ),
               Expanded(
                 child: Label(
-                  label: "Account Management",
+                  label: "Firstname Secondname",
                   fontStyle: FontStyle.normal,
                   fontSize: 15.0,
                 )
@@ -47,7 +47,7 @@ class AccManage extends StatelessWidget {
                     children: <Widget>[
                       const ListTile(
                         leading: Icon(Icons.person),
-                        title: Text('Change Username'),
+                        title: Text('Account Management'),
                       ),
                     ],
                   ),
@@ -62,7 +62,7 @@ class AccManage extends StatelessWidget {
                     children: <Widget>[
                       const ListTile(
                         leading: Icon(Icons.pin_drop_outlined),
-                        title: Text('Change Password'),
+                        title: Text('Favorite Places'),
                       ),
                     ],
                   ),
@@ -76,7 +76,7 @@ class AccManage extends StatelessWidget {
                     children: <Widget>[
                       const ListTile(
                         leading: Icon(Icons.home_filled),
-                        title: Text('Delete Account'),
+                        title: Text('Claim A Business'),
                       ),
                     ],
                   ),
@@ -90,7 +90,9 @@ class AccManage extends StatelessWidget {
 
         )
 
-    ),
+        )
+
     );
+    
   }
 }
