@@ -3,6 +3,7 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:negadras/buisness/screens/edit_business.dart';
 import 'package:negadras/buisness/screens/favorites.dart';
 import 'package:negadras/buisness/screens/my_business.dart';
+import 'package:negadras/category/screens/home_page.dart';
 import 'package:negadras/user/screens/me_tab.dart';
 
 class App extends StatefulWidget {
@@ -15,7 +16,11 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   int currentIndex = 0;
 
-  List<Widget> listOfPages = [EditForm(), Favorites(), MeTab()];
+  List<Widget> listOfPages = [
+    HomePage(title: "Negardas"),
+    Favorites(),
+    MeTab(),
+  ];
 
   @override
   Widget build(BuildContext context) {
