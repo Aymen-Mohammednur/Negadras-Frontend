@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:negadras/buisness/screens/widgets/form.dart';
 import 'package:negadras/buisness/screens/widgets/label.dart';
 
-class BusinessForm extends StatefulWidget {
+class AddBusiness extends StatefulWidget {
   @override
   _BusinessFormState createState() => _BusinessFormState();
 }
 
-class _BusinessFormState extends State<BusinessForm> {
+class _BusinessFormState extends State<AddBusiness> {
   String _name = "";
 
   String? _type;
