@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:negadras/buisness/screens/widgets.dart';
+import 'package:negadras/business/screens/widgets.dart';
 import 'package:negadras/routes/router.gr.dart';
 import 'package:negadras/utils/bottom_nav_bar.dart';
 

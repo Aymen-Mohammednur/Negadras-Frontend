@@ -7,10 +7,10 @@
 import 'package:auto_route/auto_route.dart' as _i1;
 import 'package:flutter/material.dart' as _i2;
 
-import '../buisness/screens/favorites.dart' as _i6;
-import '../buisness/screens/filter_business.dart' as _i4;
-import '../buisness/screens/my_business.dart' as _i9;
-import '../buisness/screens/search_business.dart' as _i5;
+import '../business/screens/favorites.dart' as _i6;
+import '../business/screens/filter_business.dart' as _i4;
+import '../business/screens/my_business.dart' as _i9;
+import '../business/screens/search_business.dart' as _i5;
 import '../category/screens/home_page.dart' as _i3;
 import '../user/screens/account_management.dart' as _i8;
 import '../user/screens/me_tab.dart' as _i7;

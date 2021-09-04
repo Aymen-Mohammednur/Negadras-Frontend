@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:negadras/buisness/screens/widgets/circular_avatar.dart';
-import 'package:negadras/buisness/screens/widgets/star_rating.dart';
-
+import 'package:negadras/business/screens/widgets/circular_avatar.dart';
+import 'package:negadras/business/screens/widgets/star_rating.dart';
 class BusinessCard extends StatefulWidget {
   final String businessName;
   final double rating;

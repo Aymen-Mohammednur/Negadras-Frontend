@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:negadras/buisness/screens/widgets.dart';
+import 'package:negadras/business/screens/widgets.dart';
 
 class BusinessStaticsPage extends StatefulWidget {
   BusinessStaticsPage({Key? key, required this.title}) : super(key: key);
@@ -7,10 +7,10 @@ class BusinessStaticsPage extends StatefulWidget {
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _BusinessStaticsPageState createState() => _BusinessStaticsPageState();
 }
 
-class _MyHomePageState extends State<BusinessStaticsPage> {
+class _BusinessStaticsPageState extends State<BusinessStaticsPage> {
   Widget businessType() => GridView.count(
         crossAxisCount: 3,
         children: List.generate(

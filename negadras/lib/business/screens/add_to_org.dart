@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:negadras/buisness/screens/widgets.dart';
+import 'package:negadras/business/screens/widgets.dart';
 import 'package:negadras/utils/bottom_nav_bar.dart';
 
 class ListOrganizationPage extends StatefulWidget {
   ListOrganizationPage({Key? key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _ListOrganizationPageState createState() => _ListOrganizationPageState();
 }
 
-class _MyHomePageState extends State<ListOrganizationPage> {
+class _ListOrganizationPageState extends State<ListOrganizationPage> {
   Row singleOrgEntry(int i) {
     return Row(children: [
       Expanded(

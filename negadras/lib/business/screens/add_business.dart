@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:negadras/buisness/screens/widgets/label.dart';
+import 'package:negadras/business/screens/widgets/label.dart';
 import 'package:negadras/utils/bottom_nav_bar.dart';
 
 class AddBusinessPage extends StatefulWidget {

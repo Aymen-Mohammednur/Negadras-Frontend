@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:negadras/buisness/screens/widgets/business_card.dart';
-import 'package:negadras/buisness/screens/widgets/label.dart';
-import 'package:negadras/buisness/screens/widgets/search_bar.dart';
+import 'package:negadras/business/screens/widgets/business_card.dart';
+import 'package:negadras/business/screens/widgets/label.dart';
 import 'package:negadras/utils/bottom_nav_bar.dart';
 
-class FilterBusinessPage extends StatelessWidget {
-  const FilterBusinessPage({Key? key}) : super(key: key);
+class MyBusinessPage extends StatelessWidget {
+  const MyBusinessPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +14,14 @@ class FilterBusinessPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SearchBar(),
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
-              child: Label(label: "Restaurants near you", fontStyle: FontStyle.italic,),
+              child: Label(
+                label: "My Businesses",
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
             ),
             Expanded(
               child: ListView.builder(

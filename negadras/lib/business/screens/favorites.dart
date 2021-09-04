@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:negadras/buisness/screens/widgets/business_card.dart';
-import 'package:negadras/buisness/screens/widgets/label.dart';
+import 'package:negadras/business/screens/widgets/business_card.dart';
+import 'package:negadras/business/screens/widgets/label.dart';
 import 'package:negadras/utils/bottom_nav_bar.dart';
 
 class FavoritesPage extends StatelessWidget {
