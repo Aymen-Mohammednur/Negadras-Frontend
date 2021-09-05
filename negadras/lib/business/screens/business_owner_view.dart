@@ -13,34 +13,6 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  Widget businessType() => GridView.count(
-        crossAxisCount: 3,
-        children: List.generate(
-          9,
-          (index) {
-            return GestureDetector(
-                onTap: () => setText(
-                    "Item $index\n(To show the icons listen for events)"),
-                onDoubleTap: () => setText(""),
-                child: _businessTypeContainer(index));
-          },
-        ),
-      );
-
-  Container _businessTypeContainer(int index) {
-    return Container(
-        decoration: gridItemDecoration(),
-        child: Center(child: Text("Item $index")),
-        margin: EdgeInsets.all(10));
-  }
-
-  String textString = "";
-
-  void setText(String s) {
-    textString = s;
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

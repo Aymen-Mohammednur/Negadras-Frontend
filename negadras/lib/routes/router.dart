@@ -12,7 +12,7 @@ import 'package:negadras/user/screens/me_tab.dart';
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
     AutoRoute(page: HomePage, initial: true),
-    AutoRoute(page: FilterBusinessPage),
+    AutoRoute(page: FilteredBusinessPage),
     AutoRoute(page: SearchBusinessPage),
     AutoRoute(page: FavoritesPage),
     AutoRoute(page: MePage),

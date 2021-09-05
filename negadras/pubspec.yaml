@@ -37,6 +37,7 @@ dependencies:
   bottom_navy_bar: ^6.0.0
 
 dev_dependencies:
+  wakelock: ^0.5.3+3
   auto_route_generator: ^2.1.0
   build_runner: ^2.1.2
   flutter_test:

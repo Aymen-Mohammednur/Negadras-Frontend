@@ -29,10 +29,10 @@ class AppRouter extends _i1.RootStackRouter {
               data.argsAs<HomeRouteArgs>(orElse: () => const HomeRouteArgs());
           return _i3.HomePage(key: args.key);
         }),
-    FilterBusinessRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+    FilteredBusinessRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i4.FilterBusinessPage();
+          return const _i4.FilteredBusinessPage();
         }),
     SearchBusinessRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
@@ -69,8 +69,8 @@ class AppRouter extends _i1.RootStackRouter {
   @override
   List<_i1.RouteConfig> get routes => [
         _i1.RouteConfig(HomeRoute.name, path: '/'),
-        _i1.RouteConfig(FilterBusinessRoute.name,
-            path: '/filter-business-page'),
+        _i1.RouteConfig(FilteredBusinessRoute.name,
+            path: '/filtered-business-page'),
         _i1.RouteConfig(SearchBusinessRoute.name,
             path: '/search-business-page'),
         _i1.RouteConfig(FavoritesRoute.name, path: '/favorites-page'),
@@ -95,10 +95,10 @@ class HomeRouteArgs {
   final _i2.Key? key;
 }
 
-class FilterBusinessRoute extends _i1.PageRouteInfo {
-  const FilterBusinessRoute() : super(name, path: '/filter-business-page');
+class FilteredBusinessRoute extends _i1.PageRouteInfo {
+  const FilteredBusinessRoute() : super(name, path: '/filtered-business-page');
 
-  static const String name = 'FilterBusinessRoute';
+  static const String name = 'FilteredBusinessRoute';
 }
 
 class SearchBusinessRoute extends _i1.PageRouteInfo {

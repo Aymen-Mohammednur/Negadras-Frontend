@@ -1,5 +1,3 @@
-
-
 import 'package:negadras/business/data_providers/buisness_data_provider.dart';
 import 'package:negadras/business/models/models.dart';
 

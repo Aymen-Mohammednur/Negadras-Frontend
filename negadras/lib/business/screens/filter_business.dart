@@ -9,8 +9,8 @@ import 'package:negadras/user/screens/me_tab.dart';
 import 'package:negadras/utils/bottom_nav_bar.dart';
 import 'package:auto_route/auto_route.dart';
 
-class FilterBusinessPage extends StatelessWidget {
-  const FilterBusinessPage({Key? key}) : super(key: key);
+class FilteredBusinessPage extends StatelessWidget {
+  const FilteredBusinessPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,7 @@ import 'package:negadras/utils/bottom_nav_bar.dart';
 // import 'package:negadras/buisness/screens/widgets/form.dart';
 
 class EditBusinessPage extends StatelessWidget {
-  const EditBusinessPage({ Key? key }) : super(key: key);
+  const EditBusinessPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,6 @@ class EditBusinessPage extends StatelessWidget {
           DropBusiness(),
           EditForm(),
         ],
-        
       ),
     );
   }

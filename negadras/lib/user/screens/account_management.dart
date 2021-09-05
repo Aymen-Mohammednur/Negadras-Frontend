@@ -3,15 +3,16 @@ import 'package:negadras/utils/bottom_nav_bar.dart';
 import '../../business/screens/widgets/label.dart';
 
 class AccountManagementPage extends StatelessWidget {
-  const AccountManagementPage ({ Key? key }) : super(key: key);
+  const AccountManagementPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNav(context),
       body: SafeArea(
-        child:Column(
-          children: [Row(
+          child: Column(
+        children: [
+          Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
@@ -22,28 +23,23 @@ class AccountManagementPage extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: Colors.red,
                   image: DecorationImage(
-                    image: AssetImage('assets/images/hacker.jpeg'),
-                    fit: BoxFit.fill
-                  ),
-                
+                      image: AssetImage('assets/images/hacker.jpeg'),
+                      fit: BoxFit.fill),
                 ),
-                
               ),
               Expanded(
-                child: Label(
-                  label: "Account Management",
-                  fontStyle: FontStyle.normal,
-                  fontSize: 15.0,
-                )
-                
-              )
+                  child: Label(
+                label: "Account Management",
+                fontStyle: FontStyle.normal,
+                fontSize: 15.0,
+              ))
             ],
           ),
           Column(
-             children:[
-               GestureDetector(
-                 onTap: () => {},
-                 child:Card(
+            children: [
+              GestureDetector(
+                onTap: () => {},
+                child: Card(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
@@ -53,12 +49,11 @@ class AccountManagementPage extends StatelessWidget {
                       ),
                     ],
                   ),
-
-                 ),
-               ),
-               GestureDetector(
-                 onTap: () => {},
-                 child:Card(
+                ),
+              ),
+              GestureDetector(
+                onTap: () => {},
+                child: Card(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
@@ -69,10 +64,10 @@ class AccountManagementPage extends StatelessWidget {
                     ],
                   ),
                 ),
-               ),
-               GestureDetector(
-                 onTap: () => {},
-                 child:Card(
+              ),
+              GestureDetector(
+                onTap: () => {},
+                child: Card(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
@@ -82,17 +77,12 @@ class AccountManagementPage extends StatelessWidget {
                       ),
                     ],
                   ),
-
-                 ),
-               ),
-               
-             ],
+                ),
+              ),
+            ],
           ),
-          ],
-
-        )
-
-    ),
+        ],
+      )),
     );
   }
 }

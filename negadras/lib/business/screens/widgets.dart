@@ -117,17 +117,22 @@ Widget chartWidget() {
   return SizedBox(child: SimpleBarChart.withSampleData(), height: 400);
 }
 
-Widget _businessReviewBox(r){
+Widget _businessReviewBox(r) {
   return _reviewBox(r, 1);
 }
-Widget _userReviewBox(r){
+
+Widget _userReviewBox(r) {
   return _reviewBox(r, 0);
 }
 
-
 Widget _reviewBox(r, i) {
-  var iconS = (i > 0 ? [Icon(Icons.reply_outlined),Icon(Icons.flag),] : [Container()] );
-  
+  var iconS = (i > 0
+      ? [
+          Icon(Icons.reply_outlined),
+          Icon(Icons.flag),
+        ]
+      : [Container()]);
+
   var review = jsonDecode(r);
   String name = review["name"];
   String content = review["content"];
@@ -158,9 +163,8 @@ Widget _reviewBox(r, i) {
             width: double.infinity,
           ),
           Padding(
-            padding: const EdgeInsets.only(left:10, right:10, bottom: 10),
+            padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
             child: Row(
-              
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: iconS,
             ),
@@ -179,21 +183,23 @@ Widget businessReviewList(reviewList) {
         return _businessReviewBox(dummyJson);
       });
 }
+
 Widget userReviewList(reviewList) {
   String dummyJson = '{"name": "Adam Smith", "content": "I love this place"}';
   return Container(
-            decoration: BoxDecoration(
-              border: Border.all(),
-            ),
+    decoration: BoxDecoration(
+      border: Border.all(),
+    ),
     child: ListView.builder(
-        itemCount: 30,
-        itemBuilder: (BuildContext context, int index) {
-          return _userReviewBox(dummyJson);
-        },
-        ),
+      physics: ClampingScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: 30,
+      itemBuilder: (BuildContext context, int index) {
+        return _userReviewBox(dummyJson);
+      },
+    ),
   );
 }
-
 
 class IconTextPair {
   Widget edit({String s = "Edit"}) => iconPair(Icons.edit, s);

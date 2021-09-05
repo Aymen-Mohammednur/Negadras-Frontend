@@ -14,21 +14,24 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Widget businessType(BuildContext context, Bloc bloc) => GridView.count(
-        crossAxisCount: 3,
-        children: List.generate(
-          9,
-          (index) {
-            return GestureDetector(
-                onTap: () {
-                  bloc.add(SearchBusinesses());
-                  context.pushRoute(FilterBusinessRoute());
-                },
-                onDoubleTap: () => setText(""),
-                child: _businessTypeContainer(index));
-          },
-        ),
-      );
+  Widget businessFilterButton(BuildContext context) {
+    var bloc = BlocProvider.of<BusinessBloc>(context);
+    return GridView.count(
+      crossAxisCount: 3,
+      children: List.generate(
+        9,
+        (index) {
+          return GestureDetector(
+            onTap: () {
+              bloc.add(SearchBusinesses());
+              context.pushRoute(FilteredBusinessRoute());
+            },
+            child: _businessTypeContainer(index),
+          );
+        },
+      ),
+    );
+  }
 
   Container _businessTypeContainer(int index) {
     return Container(
@@ -46,7 +49,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final businessBloc = BlocProvider.of<BusinessBloc>(context);
+    // final businessBloc = BlocProvider.of<BusinessBloc>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -60,17 +63,13 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.only(left: 8.0, top: 8.0),
               child: Text("What are you looking for...", style: normalText()),
             ),
-            Expanded(flex: 3, child: businessType(context, businessBloc)),
-            // Expanded(
-            //   flex: 1,
-            //   child: Center(child: Text(textString)),
-            // )
+            Expanded(flex: 3, child: businessFilterButton(context)),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        tooltip: 'Increment',
+        tooltip: 'Add a new Business',
         child: Icon(Icons.add),
       ),
       bottomNavigationBar: BottomNav(context),
