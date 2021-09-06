@@ -1,4 +1,5 @@
 import 'package:auto_route/annotations.dart';
+import 'package:negadras/business/screens/add_business.dart';
 import 'package:negadras/business/screens/favorites.dart';
 import 'package:negadras/business/screens/filter_business.dart';
 import 'package:negadras/business/screens/my_business.dart';
@@ -19,6 +20,7 @@ import 'package:negadras/user/screens/me_tab.dart';
     AutoRoute(page: AccountManagementPage),
     AutoRoute(page: MyBusinessPage),
     AutoRoute(page: UserViewPage),
+    AutoRoute(page: AddBusinessPage),
   ],
 )
 class $AppRouter {}

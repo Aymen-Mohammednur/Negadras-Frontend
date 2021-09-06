@@ -22,9 +22,9 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
 
   String? _organization;
 
-  bool ischecked = false;  
+  bool ischecked = false;
   late bool checkvalue;
-  
+
   final List<String> _types = ['Restaurant', 'Hotel', 'Shop', 'Cafe', 'Other'];
 
   String _currentType = "Restaurant";
@@ -47,7 +47,6 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
   }
 
   Widget _buildType() {
-
     return DropdownButtonFormField(
       // hint: Text("Please choose"),
 
@@ -69,8 +68,7 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
 
       value: _currentType,
 
-       items: _types
-          .map<DropdownMenuItem<String>>((String value) {
+      items: _types.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(value),
@@ -130,18 +128,17 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
   }
 
   Widget _buildCheckboxLocation() {
-    return CheckboxListTile(   
-      title: const Text('Use current location'),  
-      controlAffinity: ListTileControlAffinity.leading,  
-      value: ischecked,  
-      onChanged:(bool? _checkvalue) {
-    if (_checkvalue != null) {
-      setState(() {
-        ischecked = checkvalue;
-      });
-    }
-  }
-    );  
+    return CheckboxListTile(
+        title: const Text('Use current location'),
+        controlAffinity: ListTileControlAffinity.leading,
+        value: ischecked,
+        onChanged: (bool? _checkvalue) {
+          if (_checkvalue != null) {
+            setState(() {
+              ischecked = checkvalue;
+            });
+          }
+        });
   }
 
   @override
@@ -161,9 +158,9 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
                 _buildType(),
                 _buildCheckboxLocation(),
                 ElevatedButton(
-                  onPressed: (){}, 
+                  onPressed: () {},
                   child: Text('Open Maps'),
-                  ),
+                ),
                 Label(label: 'Contact Information(Optional)'),
                 _buildWebsite(),
                 _buildPhoneNumber(),
@@ -173,7 +170,7 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
                   children: [
                     Label(label: 'Upload Image'),
                     ElevatedButton(
-                      onPressed: (){}, 
+                      onPressed: () {},
                       child: Icon(Icons.upload_rounded),
                     ),
                   ],
@@ -181,13 +178,11 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
                 SizedBox(height: 100),
                 ElevatedButton(
                   onPressed: () {
-                    
                     final form = _formKey.currentState;
                     if (form != null && form.validate()) {
                       form.save();
                       print(_name);
                     }
-    
                   },
                   child: Text(
                     "Create Business",
@@ -195,8 +190,7 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    },
+                  onPressed: () {},
                   child: Text(
                     "Cancel",
                     style: TextStyle(color: Colors.white, fontSize: 16),

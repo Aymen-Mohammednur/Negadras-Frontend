@@ -7,6 +7,7 @@
 import 'package:auto_route/auto_route.dart' as _i1;
 import 'package:flutter/material.dart' as _i2;
 
+import '../business/screens/add_business.dart' as _i11;
 import '../business/screens/favorites.dart' as _i6;
 import '../business/screens/filter_business.dart' as _i4;
 import '../business/screens/my_business.dart' as _i9;
@@ -63,6 +64,11 @@ class AppRouter extends _i1.RootStackRouter {
         routeData: routeData,
         builder: (_) {
           return const _i10.UserViewPage();
+        }),
+    AddBusinessRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return _i11.AddBusinessPage();
         })
   };
 
@@ -78,7 +84,8 @@ class AppRouter extends _i1.RootStackRouter {
         _i1.RouteConfig(AccountManagementRoute.name,
             path: '/account-management-page'),
         _i1.RouteConfig(MyBusinessRoute.name, path: '/my-business-page'),
-        _i1.RouteConfig(UserViewRoute.name, path: '/user-view-page')
+        _i1.RouteConfig(UserViewRoute.name, path: '/user-view-page'),
+        _i1.RouteConfig(AddBusinessRoute.name, path: '/add-business-page')
       ];
 }
 
@@ -136,4 +143,10 @@ class UserViewRoute extends _i1.PageRouteInfo {
   const UserViewRoute() : super(name, path: '/user-view-page');
 
   static const String name = 'UserViewRoute';
+}
+
+class AddBusinessRoute extends _i1.PageRouteInfo {
+  const AddBusinessRoute() : super(name, path: '/add-business-page');
+
+  static const String name = 'AddBusinessRoute';
 }
