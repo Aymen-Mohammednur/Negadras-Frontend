@@ -19,7 +19,10 @@ Widget BottomNav(BuildContext context) {
     curve: Curves.easeInOut,
     selectedIndex: currentIndex,
     onItemSelected: (index) {
+      // context.router.push(routes[index]);
+      context.router.popUntilRoot();
       context.router.push(routes[index]);
+
     },
 
     items: [

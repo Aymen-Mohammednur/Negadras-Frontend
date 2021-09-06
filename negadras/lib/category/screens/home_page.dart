@@ -51,6 +51,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: searchBar(),
+        automaticallyImplyLeading: false,
       ),
       body: Center(
         child: Column(
@@ -69,7 +70,9 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          context.router.push(EditBusinessRoute());
+        },
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),

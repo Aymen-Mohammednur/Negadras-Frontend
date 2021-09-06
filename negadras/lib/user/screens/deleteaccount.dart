@@ -1,14 +1,14 @@
-import 'dart:html';
+// import 'dart:html';
 
 import 'package:flutter/material.dart';
 
 
-class DeleteAccountScreen extends StatefulWidget{
+class DeleteAccountPage extends StatefulWidget{
   @override
   State<StatefulWidget> createState() => new _State();
 }
 
-class _State extends State<DeleteAccountScreen> {
+class _State extends State<DeleteAccountPage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 

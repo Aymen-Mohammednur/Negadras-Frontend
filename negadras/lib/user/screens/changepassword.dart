@@ -1,14 +1,13 @@
-import 'dart:html';
+// import 'dart:html';
 
 import 'package:flutter/material.dart';
 
-
-class ChangePasswordScreen extends StatefulWidget{
+class ChangePasswordPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => new _State();
 }
 
-class _State extends State<ChangePasswordScreen> {
+class _State extends State<ChangePasswordPage> {
   TextEditingController newPasswordController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 

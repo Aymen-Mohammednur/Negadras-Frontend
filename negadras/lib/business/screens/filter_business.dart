@@ -45,8 +45,8 @@ class FilterBusinessPage extends StatelessWidget {
                     );
                   }
                   if (businessState is BusinessView) {
-                    context.pushRoute(UserViewRoute());
                     businessBloc.add(SearchBusinesses());
+                    context.pushRoute(UserViewRoute());
                   }
                   if (businessState is AllBusinessSearchResult) {
                     return Expanded(

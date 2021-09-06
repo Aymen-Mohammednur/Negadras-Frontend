@@ -12,8 +12,8 @@ class EditBusinessPage extends StatelessWidget {
       bottomNavigationBar: BottomNav(context),
       body: Column(
         children: [
-          BusinessPhoto(),
-          DropBusiness(),
+          // BusinessPhoto(),
+          // DropBusiness(),
           EditForm(),
         ],
       ),

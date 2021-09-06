@@ -1,14 +1,15 @@
-import 'dart:html';
+// import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:negadras/routes/router.gr.dart';
 
-
-class SignUpScreen extends StatefulWidget{
+class SignUpPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => new _State();
 }
 
-class _State extends State<SignUpScreen> {
+class _State extends State<SignUpPage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
@@ -97,25 +98,28 @@ class _State extends State<SignUpScreen> {
                       onPressed: () {
                         print(nameController.text);
                         print(passwordController.text);
+                        context.router.push(HomeRoute());
                       },
                     )),
                 Container(
                     child: Row(
-                      children: <Widget>[
-                        Text('Already have an account?'),
-                        FlatButton(
-                          textColor: Colors.blue,
-                          child: Text(
-                            'Sign in',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          onPressed: () {
-                            //signup screen
-                          },
-                        )
-                      ],
-                      mainAxisAlignment: MainAxisAlignment.center,
-                    ))],
+                  children: <Widget>[
+                    Text('Already have an account?'),
+                    FlatButton(
+                      textColor: Colors.blue,
+                      child: Text(
+                        'Sign in',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        //signup screen
+                        context.router.push(SignInRoute());
+                      },
+                    )
+                  ],
+                  mainAxisAlignment: MainAxisAlignment.center,
+                ))
+              ],
             )));
   }
 }

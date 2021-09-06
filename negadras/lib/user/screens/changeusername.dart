@@ -1,14 +1,14 @@
-import 'dart:html';
+// import 'dart:html';
 
 import 'package:flutter/material.dart';
 
 
-class ChangeUsernameScreen extends StatefulWidget{
+class ChangeUsernamePage extends StatefulWidget{
   @override
   State<StatefulWidget> createState() => new _State();
 }
 
-class _State extends State<ChangeUsernameScreen> {
+class _State extends State<ChangeUsernamePage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
