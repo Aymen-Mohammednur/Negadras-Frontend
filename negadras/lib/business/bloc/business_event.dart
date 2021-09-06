@@ -13,3 +13,5 @@ class LoadBusiness extends BusinessEvent {
 }
 
 class SearchBusinesses extends BusinessEvent {}
+
+class AddBusiness extends BusinessEvent {}

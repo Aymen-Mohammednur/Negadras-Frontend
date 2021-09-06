@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:negadras/business/bloc/business_bloc.dart';
+import 'package:negadras/business/screens/add_business.dart';
 import 'package:negadras/business/screens/widgets.dart';
 import 'package:negadras/routes/router.gr.dart';
 import 'package:negadras/utils/bottom_nav_bar.dart';
@@ -47,7 +48,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final businessBloc = BlocProvider.of<BusinessBloc>(context);
-
     return Scaffold(
       appBar: AppBar(
         title: searchBar(),
@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          context.router.push(EditBusinessRoute());
+          context.pushRoute(AddBusinessRoute());
         },
         tooltip: 'Increment',
         child: Icon(Icons.add),
