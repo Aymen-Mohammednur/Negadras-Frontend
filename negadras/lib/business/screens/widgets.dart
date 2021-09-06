@@ -9,6 +9,24 @@ TextStyle normalText() {
     fontSize: 24,
   );
 }
+TextStyle smallText() {
+  return TextStyle(
+    fontSize: 20,
+  );
+}TextStyle verySmallText() {
+  return TextStyle(
+    fontSize: 18,
+  );
+}
+TextStyle bigText() {
+  return TextStyle(
+    fontSize: 28,
+  );
+}TextStyle veryBigText() {
+  return TextStyle(
+    fontSize: 30,
+  );
+}
 
 BoxDecoration listItemDecoration() {
   return BoxDecoration(
