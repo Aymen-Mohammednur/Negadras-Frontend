@@ -3,10 +3,27 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:negadras/business/screens/SimpleBarChart.dart';
 import 'dart:convert';
 // import 'package:negadras/SimpleBarChart.dart';
-
 TextStyle normalText() {
   return TextStyle(
     fontSize: 24,
+  );
+}
+TextStyle smallText() {
+  return TextStyle(
+    fontSize: 20,
+  );
+}TextStyle verySmallText() {
+  return TextStyle(
+    fontSize: 18,
+  );
+}
+TextStyle bigText() {
+  return TextStyle(
+    fontSize: 28,
+  );
+}TextStyle veryBigText() {
+  return TextStyle(
+    fontSize: 30,
   );
 }
 
