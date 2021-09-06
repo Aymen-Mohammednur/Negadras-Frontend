@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:negadras/utils/bottom_nav_bar.dart';
+import 'package:negadras/business/screens/widgets/drop_business.dart';
 // import 'package:negadras/buisness/screens/widgets/form.dart';
 
 class EditBusinessPage extends StatelessWidget {
-  const EditBusinessPage({ Key? key }) : super(key: key);
+  const EditBusinessPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,6 @@ class EditBusinessPage extends StatelessWidget {
           DropBusiness(),
           EditForm(),
         ],
-        
       ),
     );
   }
@@ -43,55 +43,7 @@ class BusinessPhoto extends StatelessWidget {
   }
 }
 
-class DropBusiness extends StatelessWidget {
-  const DropBusiness({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Text("Organization Name"),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Column(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.delete),
-                    iconSize: 50,
-                  ),
-                  Text("Drop Business"),
-                ],
-              ),
-              Column(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.bar_chart),
-                    iconSize: 50,
-                  ),
-                  Text("Statistics"),
-                ],
-              ),
-              Column(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.reviews),
-                    iconSize: 50,
-                  ),
-                  Text("Reviews"),
-                ],
-              )
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 class EditForm extends StatefulWidget {
   @override
@@ -121,9 +73,9 @@ class _EditFormState extends State<EditForm> {
   Widget _buildName() {
     return TextFormField(
       decoration: InputDecoration(labelText: "Name"),
-      validator: (String? value) {
+      validator: (value) {
         if (value!.isEmpty) {
-          return 'Name is required';
+          return "Name is required";
         }
         return null;
       },
