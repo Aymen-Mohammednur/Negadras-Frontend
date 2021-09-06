@@ -12,8 +12,8 @@ import 'package:negadras/user/screens/changepassword.dart';
 import 'package:negadras/user/screens/changeusername.dart';
 import 'package:negadras/user/screens/deleteaccount.dart';
 import 'package:negadras/user/screens/me_tab.dart';
-import 'package:negadras/user/screens/signin.dart';
-import 'package:negadras/user/screens/signup.dart';
+import 'package:negadras/auth/screens/signin.dart';
+import 'package:negadras/auth/screens/signup.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',

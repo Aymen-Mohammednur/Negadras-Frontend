@@ -20,8 +20,8 @@ import '../user/screens/changepassword.dart' as _i15;
 import '../user/screens/changeusername.dart' as _i14;
 import '../user/screens/deleteaccount.dart' as _i13;
 import '../user/screens/me_tab.dart' as _i7;
-import '../user/screens/signin.dart' as _i12;
-import '../user/screens/signup.dart' as _i11;
+import '../auth/screens/signin.dart' as _i12;
+import '../auth/screens/signup.dart' as _i11;
 
 class AppRouter extends _i1.RootStackRouter {
   AppRouter([_i2.GlobalKey<_i2.NavigatorState>? navigatorKey])
