@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:negadras/buisness/screens/widgets/circular_avatar.dart';
-import 'package:negadras/buisness/screens/widgets/star_rating.dart';
+import 'package:negadras/business/screens/widgets/circular_avatar.dart';
+import 'package:negadras/business/screens/widgets/star_rating.dart';
 
 class BusinessCard extends StatefulWidget {
   final String businessName;
@@ -74,8 +74,12 @@ class _BusinessCardState extends State<BusinessCard> {
                   ? Icon(
                       Icons.favorite,
                       color: Colors.red,
+                      size: 30,
                     )
-                  : Icon(Icons.favorite_border_outlined),
+                  : Icon(
+                      Icons.favorite_outline_outlined,
+                      size: 30,
+                    ),
             ),
             Spacer(),
             CircularAvatar(imagePath: widget.imagePath),
@@ -85,4 +89,3 @@ class _BusinessCardState extends State<BusinessCard> {
     );
   }
 }
-

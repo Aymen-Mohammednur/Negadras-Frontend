@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:negadras/buisness/screens/widgets/business_card.dart';
-import 'package:negadras/buisness/screens/widgets/label.dart';
+import 'package:negadras/business/screens/widgets/business_card.dart';
+import 'package:negadras/business/screens/widgets/label.dart';
+import 'package:negadras/utils/bottom_nav_bar.dart';
 
-class FilterBusiness extends StatelessWidget {
-  const FilterBusiness({Key? key}) : super(key: key);
+class MyBusinessPage extends StatelessWidget {
+  const MyBusinessPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNav(context),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
