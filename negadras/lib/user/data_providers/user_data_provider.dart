@@ -5,7 +5,7 @@ import 'package:negadras/user/models/models.dart';
 class UserDataProvider {
   static final String _baseUrl = "http://localhost/3000/User";
 
-  Future<User> fetch(String id) async {
+  Future<User> fetchOne(String id) async {
     final response = await http.get(Uri.parse("$_baseUrl/$id"));
 
     if (response.statusCode == 200) {
