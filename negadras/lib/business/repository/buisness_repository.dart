@@ -1,5 +1,3 @@
-
-
 import 'package:negadras/business/data_providers/buisness_data_provider.dart';
 import 'package:negadras/business/models/business.dart';
 
@@ -15,12 +13,16 @@ class BusinessRepository {
     return this.dataProvider.update(id, business);
   }
 
-  Future<List<Business>> fetchAll() async {
-    return this.dataProvider.fetchAll();
+  Future<List<Business>> fetch() async {
+    return this.dataProvider.fetch();
   }
 
   Future<Business> fetchOne(String id) async {
     return this.dataProvider.fetchOne(id);
+  }
+
+  Future<List<Business>> fetchByCategory(String categoryId) async {
+    return this.dataProvider.fetchByCategory(categoryId);
   }
 
   Future<void> delete(String id) async {

@@ -3,7 +3,10 @@ import 'package:http/http.dart' as http;
 import 'package:negadras/business/models/models.dart';
 
 class BusinessDataProvider {
-  static final String _baseUrl = "http://localhost/3000/Business";
+  // FOR ACTUAL DEVICE
+  //static final String _baseUrl = "http://localhost:3000/api/category";
+  // FOR EMULATOR
+  static final String _baseUrl = "http://10.0.2.2:8000/api/category";
 
   Future<Business> create(Business business) async {
     final http.Response response = await http.post(Uri.parse(_baseUrl),
@@ -25,8 +28,19 @@ class BusinessDataProvider {
     }
   }
 
-  Future<List<Business>> fetchAll() async {
+  Future<List<Business>> fetch() async {
     final response = await http.get(Uri.parse(_baseUrl));
+
+    if (response.statusCode == 200) {
+      final business = jsonDecode(response.body) as List;
+      return business.map((b) => Business.fromJson(b)).toList();
+    } else {
+      throw Exception("Failed to get business");
+    }
+  }
+
+  Future<List<Business>> fetchByCategory(String categoryId) async {
+    final response = await http.get(Uri.parse("$_baseUrl/filter/$categoryId"));
 
     if (response.statusCode == 200) {
       final business = jsonDecode(response.body) as List;
