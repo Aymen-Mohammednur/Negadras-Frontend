@@ -25,3 +25,15 @@ class AddBusiness extends BusinessEvent {
   @override
   String toString() => 'Course Created {course: $business}';
 }
+class UpdateBusiness extends BusinessEvent {
+  final Business business;
+
+  const UpdateBusiness(this.business);
+
+  @override
+  List<Object> get props => [business];
+
+  @override
+  String toString() => 'Course Updated {course: $business}';
+}
+
