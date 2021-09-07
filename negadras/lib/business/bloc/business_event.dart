@@ -36,4 +36,14 @@ class UpdateBusiness extends BusinessEvent {
   @override
   String toString() => 'Course Updated {course: $business}';
 }
+class DeleteBusiness extends BusinessEvent {
+  final String id;
 
+  const DeleteBusiness(this.id);
+
+  @override
+  List<Object> get props => [id];
+
+  @override
+  toString() => 'Course Deleted {course Id: $id}';
+}
