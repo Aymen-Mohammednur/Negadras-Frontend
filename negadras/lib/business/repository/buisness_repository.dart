@@ -7,8 +7,8 @@ class BusinessRepository {
   final BusinessDataProvider dataProvider;
   BusinessRepository(this.dataProvider);
 
-  Future<Business> create(Business Business) async {
-    return this.dataProvider.create(Business);
+  Future<Business> create(Business business) async {
+    return this.dataProvider.create(business);
   }
 
   Future<Business> update(String id, Business Business) async {

@@ -24,3 +24,14 @@ class BusinessView extends BusinessState {}
 class AllBusinessSearchResult extends BusinessState {}
 
 class BusinessFilterResult extends BusinessState {}
+
+class BusinessOperationSuccess extends BusinessState {
+  final Iterable<Business> business;
+
+  BusinessOperationSuccess([this.business = const[]]);
+
+  @override
+  List<Object> get props => [business];
+}
+
+class BusinessOperationFailure extends BusinessState {}

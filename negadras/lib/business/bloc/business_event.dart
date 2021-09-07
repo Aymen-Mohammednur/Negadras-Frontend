@@ -14,4 +14,14 @@ class LoadBusiness extends BusinessEvent {
 
 class SearchBusinesses extends BusinessEvent {}
 
-class AddBusiness extends BusinessEvent {}
+class AddBusiness extends BusinessEvent {
+  final Business business;
+
+  const AddBusiness(this.business);
+
+  @override
+  List<Object> get props => [business];
+
+  @override
+  String toString() => 'Course Created {course: $business}';
+}
