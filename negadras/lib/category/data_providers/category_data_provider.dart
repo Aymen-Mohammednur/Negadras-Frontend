@@ -6,8 +6,7 @@ class CategoryDataProvider {
   // FOR ACTUAL DEVICE
   //static final String _baseUrl = "http://localhost:3000/api/category";
   // FOR EMULATOR
-  static final String _baseUrl = "http://10.0.2.2:8000/api/category";
-
+  static final String _baseUrl = "http://10.0.2.2:3000/api/category";
 
   Future<Category> create(Category category) async {
     final http.Response response = await http.post(Uri.parse(_baseUrl),
@@ -24,7 +23,10 @@ class CategoryDataProvider {
   }
 
   Future<List<Category>> fetchAll() async {
+    print("Inside data provider");
     final response = await http.get(Uri.parse(_baseUrl));
+    print(response.body);
+    print(response.statusCode);
 
     if (response.statusCode == 200) {
       final category = jsonDecode(response.body) as List;

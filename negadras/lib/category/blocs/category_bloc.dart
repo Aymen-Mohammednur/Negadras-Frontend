@@ -24,11 +24,11 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       try {
         print("Inside Try before fetch");
         final categories = await categoryRepository.fetchAll();
-        print("after fetch");
-        print("Categories: $categories");
+        // print("after fetch");
+        // print("Categories: $categories");
         yield CategoryOperationSuccess(categories);
       } catch (e) {
-        // print(e);
+        print(e);
         yield CategoryOperationFailed();
       }
     }

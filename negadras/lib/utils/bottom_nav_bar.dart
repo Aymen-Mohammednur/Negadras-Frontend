@@ -20,8 +20,8 @@ Widget BottomNav(BuildContext context) {
     selectedIndex: currentIndex,
     onItemSelected: (index) {
       // context.router.push(routes[index]);
-      context.router.popUntilRoot();
-      context.router.push(routes[index]);
+      // context.router.popUntilRoot();
+      context.router.popAndPush(routes[index]);
 
     },
 

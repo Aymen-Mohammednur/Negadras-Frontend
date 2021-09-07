@@ -6,7 +6,7 @@ class BusinessDataProvider {
   // FOR ACTUAL DEVICE
   //static final String _baseUrl = "http://localhost:3000/api/category";
   // FOR EMULATOR
-  static final String _baseUrl = "http://10.0.2.2:8000/api/category";
+  static final String _baseUrl = "http://10.0.2.2:3000/api/category";
 
   Future<Business> create(Business business) async {
     final http.Response response = await http.post(Uri.parse(_baseUrl),
