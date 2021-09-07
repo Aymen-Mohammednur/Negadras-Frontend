@@ -31,5 +31,11 @@ class UserDataProvider {
       throw Exception("Failed to update username or password");
     }
   }
+  Future<void> delete(String id) async {
+    final response = await http.delete(Uri.parse("$_baseUrl/$id"));
+    if (response.statusCode != 204) {
+      throw Exception("Field to delete the user");
+    }
+  }
 
 }
