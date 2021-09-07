@@ -7,13 +7,13 @@ import 'package:negadras/business/models/business.dart';
 import 'package:negadras/business/models/models.dart';
 
 import 'package:negadras/business/repository/buisness_repository.dart';
-import 'package:negadras/business/data_providers/buisness_data_provider.dart';
 part 'business_event.dart';
 part 'business_state.dart';
 
 class BusinessBloc extends Bloc<BusinessEvent, BusinessState> {
-  // final BusinessRepository businessRepository;
-  BusinessBloc() : super(BusinessInitial());
+  final BusinessRepository businessRepository;
+
+  BusinessBloc({required this.businessRepository}) : super(BusinessInitial());
 
   @override
   Stream<BusinessState> mapEventToState(
@@ -45,9 +45,9 @@ class BusinessBloc extends Bloc<BusinessEvent, BusinessState> {
     }
     if (event is AddBusiness) {
       try {
-        await BusinessRepository.create(event.business);
-        final Business = await BusinessRepository.fetchAll();
-        yield BusinessOperationSuccess(Business);
+        await businessRepository.create(event.business);
+        final business = await businessRepository.fetchAll();
+        yield BusinessOperationSuccess(business);
       } catch (_) {
         yield BusinessOperationFailure();
       }
