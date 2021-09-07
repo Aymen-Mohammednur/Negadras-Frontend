@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
       GridView.count(
         crossAxisCount: 3,
         children: List.generate(
-          9,
+          categories.length,
           (index) {
             return GestureDetector(
                 onTap: () {
