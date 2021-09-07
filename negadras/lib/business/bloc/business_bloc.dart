@@ -52,5 +52,23 @@ class BusinessBloc extends Bloc<BusinessEvent, BusinessState> {
         yield BusinessOperationFailure();
       }
     }
+    if (event is UpdateBusiness) {
+      try {
+        await businessRepository.update(event.business.id, event.business);
+        final courses = await businessRepository.fetchAll();
+        yield BusinessOperationSuccess(courses);
+      } catch (_) {
+        yield BusinessOperationFailure();
+      }
+    }
+    if (event is DeleteBusiness) {
+      try {
+        await businessRepository.delete(event.id);
+        final courses = await businessRepository.fetchAll();
+        yield BusinessOperationSuccess(courses);
+      } catch (_) {
+        yield BusinessOperationFailure();
+      }
+    }
   }
 }
