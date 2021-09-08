@@ -8,16 +8,22 @@ abstract class ReviewState extends Equatable {
 
 class ReviewInitial extends ReviewState {}
 
-class HasReviewed extends ReviewState {
-  HasReviewed({required reviewId});
-  late String reviewId;
+class Rated extends ReviewState {
 }
 
-class ClientReviewed extends ReviewState {
-  ClientReviewed({required userReview});
-  late String userReview;
+class ReviewStarted extends ReviewState{
+}
+
+
+class ReviewSent extends ReviewState {
+  // ReviewSent({required userReview});
+  // late String userReview;
 }
 
 class HasNotReviewed extends ReviewState {}
 
-class RatingEntered extends ReviewState {}
+class ReviewExist extends ReviewState {
+  ReviewExist({required reviewId});
+  late String reviewId;
+}
+

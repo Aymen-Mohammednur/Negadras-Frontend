@@ -3,6 +3,7 @@ import 'dart:convert';
 // import 'dart:html';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/widgets.dart';
 import 'package:negadras/business/models/models.dart';
 // import 'package:negadras/business/repository/buisness_repository.dart';
 
@@ -11,20 +12,36 @@ part 'review_state.dart';
 
 class ReviewBloc extends Bloc<ReviewEvent, ReviewState> {
   ReviewBloc() : super(HasNotReviewed());
+  int? rating = 0;
+  String? review = null;
+  TextEditingController reviewController = TextEditingController();
 
   @override
   Stream<ReviewState> mapEventToState(
     ReviewEvent event,
   ) async* {
-    if (event is StartReview) {
-      yield RatingEntered();
-    } else if (event is ReviewExistNotify) {
-      yield HasReviewed(reviewId: event.reviewId);
-    } else if (event is AddReview) {
-      yield ClientReviewed(userReview: event.reviewDetails);
-    } else if (event is DeleteReview) {
+
+    if (event is RatingEnter) {
+      rating = event.rating;
+      yield Rated();
+    } 
+
+    else if (event is ReviewStart){
+      yield ReviewStarted();
+    }
+
+    else if (event is ReviewAdd) {
+      review = reviewController.text;
+      yield ReviewSent();
+    } 
+    
+    else if (event is ReviewDelete) {
       yield ReviewInitial();
     }
+
+    else if (event is ReviewExistNotify) {
+      yield ReviewExist(reviewId: event.reviewId);
+    } 
   }
 }
 
