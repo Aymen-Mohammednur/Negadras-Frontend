@@ -37,14 +37,14 @@ class UserViewPageState extends State<UserViewPage> {
                 imageStackWidget(),
                 buttonPanelWidget([
                   IconTextPair().call(),
-                  IconTextPair().map(),
-                  IconTextPair().website()
+                  // IconTextPair().map(),
+                  IconTextPair().website(),
+                  IconTextPair().claim()
                 ]),
                 BlocBuilder<ReviewBloc, ReviewState>(
                   builder: (context, state) => UserReviewPrompt(context),
                 ),
-                userReviewList(1),
-              ],
+              ] + userReviewList(1),
             ),
             onNotification: (ping) {
               return scrollToTopWidgetMaker(ping, _scrollController);
