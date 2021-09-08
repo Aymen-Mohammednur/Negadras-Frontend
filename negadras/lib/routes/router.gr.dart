@@ -7,6 +7,8 @@
 import 'package:auto_route/auto_route.dart' as _i1;
 import 'package:flutter/material.dart' as _i2;
 
+import '../auth/login/login_view.dart' as _i12;
+import '../auth/signup/sign_up_view.dart' as _i11;
 import '../business/screens/add_business.dart' as _i16;
 import '../business/screens/edit_business.dart' as _i17;
 import '../business/screens/favorites.dart' as _i6;
@@ -20,8 +22,6 @@ import '../user/screens/changepassword.dart' as _i15;
 import '../user/screens/changeusername.dart' as _i14;
 import '../user/screens/deleteaccount.dart' as _i13;
 import '../user/screens/me_tab.dart' as _i7;
-import '../auth/screens/signin.dart' as _i12;
-import '../auth/screens/signup.dart' as _i11;
 
 class AppRouter extends _i1.RootStackRouter {
   AppRouter([_i2.GlobalKey<_i2.NavigatorState>? navigatorKey])
@@ -71,15 +71,19 @@ class AppRouter extends _i1.RootStackRouter {
         builder: (_) {
           return const _i10.UserViewPage();
         }),
-    SignUpRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+    SignUpView.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
-        builder: (_) {
-          return _i11.SignUpPage();
+        builder: (data) {
+          final args =
+              data.argsAs<SignUpViewArgs>(orElse: () => const SignUpViewArgs());
+          return _i11.SignUpView(key: args.key);
         }),
-    SignInRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+    LoginView.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
-        builder: (_) {
-          return _i12.SignInPage();
+        builder: (data) {
+          final args =
+              data.argsAs<LoginViewArgs>(orElse: () => const LoginViewArgs());
+          return _i12.LoginView(key: args.key);
         }),
     DeleteAccountRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
@@ -121,8 +125,8 @@ class AppRouter extends _i1.RootStackRouter {
             path: '/account-management-page'),
         _i1.RouteConfig(MyBusinessRoute.name, path: '/my-business-page'),
         _i1.RouteConfig(UserViewRoute.name, path: '/user-view-page'),
-        _i1.RouteConfig(SignUpRoute.name, path: '/'),
-        _i1.RouteConfig(SignInRoute.name, path: '/sign-in-page'),
+        _i1.RouteConfig(SignUpView.name, path: '/'),
+        _i1.RouteConfig(LoginView.name, path: '/login-view'),
         _i1.RouteConfig(DeleteAccountRoute.name, path: '/delete-account-page'),
         _i1.RouteConfig(ChangeUsernameRoute.name,
             path: '/change-username-page'),
@@ -189,16 +193,30 @@ class UserViewRoute extends _i1.PageRouteInfo {
   static const String name = 'UserViewRoute';
 }
 
-class SignUpRoute extends _i1.PageRouteInfo {
-  const SignUpRoute() : super(name, path: '/');
+class SignUpView extends _i1.PageRouteInfo<SignUpViewArgs> {
+  SignUpView({_i2.Key? key})
+      : super(name, path: '/', args: SignUpViewArgs(key: key));
 
-  static const String name = 'SignUpRoute';
+  static const String name = 'SignUpView';
 }
 
-class SignInRoute extends _i1.PageRouteInfo {
-  const SignInRoute() : super(name, path: '/sign-in-page');
+class SignUpViewArgs {
+  const SignUpViewArgs({this.key});
 
-  static const String name = 'SignInRoute';
+  final _i2.Key? key;
+}
+
+class LoginView extends _i1.PageRouteInfo<LoginViewArgs> {
+  LoginView({_i2.Key? key})
+      : super(name, path: '/login-view', args: LoginViewArgs(key: key));
+
+  static const String name = 'LoginView';
+}
+
+class LoginViewArgs {
+  const LoginViewArgs({this.key});
+
+  final _i2.Key? key;
 }
 
 class DeleteAccountRoute extends _i1.PageRouteInfo {

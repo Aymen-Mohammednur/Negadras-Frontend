@@ -1,11 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:negadras/auth/blocs/auth_bloc.dart';
-import 'package:negadras/auth/blocs/auth_event.dart';
-import 'package:negadras/auth/blocs/auth_state.dart';
 import 'package:negadras/auth/data_providers/auth-data-provider.dart';
-import 'package:negadras/auth/repository/auth-repository.dart';
+import 'package:negadras/auth/login/bloc/login_bloc.dart';
+import 'package:negadras/auth/repository/auth_repository.dart';
+import 'package:negadras/auth/signup/bloc/sign_up_bloc.dart';
 import 'package:negadras/business/bloc/business_bloc.dart';
 import 'package:negadras/category/blocs/category_bloc.dart';
 import 'package:negadras/routes/router.gr.dart';
@@ -29,19 +28,16 @@ class App extends StatelessWidget {
         BlocProvider<CategoryBloc>(
           create: (_) => CategoryBloc(
               categoryRepository: categoryRepository,
-              businessRepository: businessRepository)..add(CategoryFetch()),
+              businessRepository: businessRepository)
+            ..add(CategoryFetch()),
         ),
         BlocProvider<BusinessBloc>(
           create: (_) => BusinessBloc(
             businessRepository: businessRepository,
           ),
         ),
-        BlocProvider(
-          create: (context) => LoginBloc(authRepository: authRepository)..add(LoginNormal()),
-        ),
-        BlocProvider(
-          create: (context) => RegisterBloc(authRepository: authRepository)..add(RegisterNormal()),
-        )
+        BlocProvider(create: (context) => LoginBloc(authRepo: authRepository)),
+        BlocProvider(create: (context) => SignUpBloc(authRepo: authRepository)),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
