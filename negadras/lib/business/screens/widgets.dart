@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:flutter/services.dart';
 import 'package:negadras/business/screens/SimpleBarChart.dart';
 import 'dart:convert';
 // import 'package:negadras/SimpleBarChart.dart';
@@ -135,19 +136,20 @@ Widget chartWidget() {
 }
 
 Widget _businessReviewBox(r){
-  return _reviewBox(r, 1);
+  return reviewBox(r, 1);
 }
 Widget _userReviewBox(r){
-  return _reviewBox(r, 0);
+  return reviewBox(r, 0);
 }
 
 
-Widget _reviewBox(r, i) {
-  var iconS = (i > 0 ? [Icon(Icons.reply_outlined),Icon(Icons.flag),] : [Container()] );
+Widget reviewBox(r, i) {
+  var businessOwnerButtons = (i > 0 ? [Icon(Icons.reply_outlined),Icon(Icons.flag),] : [Container()] );
   
   var review = jsonDecode(r);
   String name = review["name"];
   String content = review["content"];
+  String rating = review["rating"];
   // String? ownerReply = review["reply"];
 
   return Padding(
@@ -163,6 +165,9 @@ Widget _reviewBox(r, i) {
                 child: Icon(Icons.face),
               ),
               Text(name),
+              SizedBox(width: 5),
+              Text(rating),
+              Icon(Icons.star),
             ],
           ),
           Container(
@@ -179,7 +184,7 @@ Widget _reviewBox(r, i) {
             child: Row(
               
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: iconS,
+              children: businessOwnerButtons,
             ),
           ),
         ],
@@ -196,23 +201,19 @@ Widget businessReviewList(reviewList) {
         return _businessReviewBox(dummyJson);
       });
 }
-Widget userReviewList(reviewList) {
-  String dummyJson = '{"name": "Adam Smith", "content": "I love this place"}';
-  return Container(
-            decoration: BoxDecoration(
-              border: Border.all(),
-            ),
-    child: ListView.builder(
-        itemCount: 30,
-        itemBuilder: (BuildContext context, int index) {
-          return _userReviewBox(dummyJson);
-        },
-        ),
+List<Widget> userReviewList(reviewList) {
+  String dummyJson = '{"name": "Adam Smith", "content": "I love this place", "rating": "3.3"}';
+  return List<Widget>.generate(
+    10,
+    (i){
+      return _userReviewBox(dummyJson);
+    }
   );
 }
 
 
 class IconTextPair {
+  Widget claim({String s = "Claim"}) => iconPair(Icons.add_circle, s);
   Widget edit({String s = "Edit"}) => iconPair(Icons.edit, s);
   Widget drop({String s = "Drop"}) => iconPair(Icons.delete, s);
   Widget review({String s = "Reviews"}) => iconPair(Icons.reviews, s);
