@@ -6,6 +6,16 @@ abstract class LoginEvent extends Equatable {
   const LoginEvent();
 }
 
+class LoginNormal extends LoginEvent{
+  const LoginNormal();
+
+  @override
+  List<Object> get props => [];
+
+  @override
+  String toString() => 'Normal Login Screen';
+}
+
 class LoginRead extends LoginEvent {
   final Login login;
 
@@ -22,6 +32,16 @@ class LoginRead extends LoginEvent {
 
 abstract class RegisterEvent extends Equatable {
   const RegisterEvent();
+}
+
+class RegisterNormal extends RegisterEvent{
+  const RegisterNormal();
+
+  @override
+  List<Object> get props => [];
+
+  @override
+  String toString() => 'Normal Register Screen';
 }
 
 class RegisterCreate extends RegisterEvent {

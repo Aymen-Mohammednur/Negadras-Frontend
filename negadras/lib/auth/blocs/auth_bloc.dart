@@ -7,7 +7,7 @@ import 'auth_state.dart';
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   final AuthRepository authRepository;
 
-  RegisterBloc({required this.authRepository}) : super(RegisterNormal());
+  RegisterBloc({required this.authRepository}) : super(RegisterNormalWaiting());
 
   @override
   Stream<RegisterState> mapEventToState(RegisterEvent event) async* {
@@ -25,13 +25,15 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthRepository authRepository;
 
-  LoginBloc({required this.authRepository}) : super(LoginNormal());
+  LoginBloc({required this.authRepository}) : super(LoginNormalWaiting());
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
     if (event is LoginRead) {
       try {
         final login = await authRepository.readLogin(event.login);
+        print("Here is login for you: ");
+        print(login);
         yield LoginOperationSuccess(login);
       } catch (_) {
         yield LoginOperationFailure();
