@@ -41,7 +41,7 @@ class App extends StatelessWidget {
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(gi
+        theme: ThemeData(
           primaryColor: Colors.green.shade900,
         ),
         routerDelegate: AutoRouterDelegate(
