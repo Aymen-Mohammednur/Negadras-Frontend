@@ -68,15 +68,15 @@ class BusinessDataProvider {
     final response = await http.put(Uri.parse("$_baseUrl/$id"),
         headers: <String, String>{"Content-Type": "application/json"},
         body: jsonEncode({
-          "_id": id,
           "name": business.name,
           "categoryId": business.categoryId,
           "location": business.location,
           "phoneNumber": business.phoneNumber,
           "website": business.website,
           "email": business.email,
-          "organization": business.organization,
         }));
+
+    print(response.body);
 
     if (response.statusCode == 200) {
       return Business.fromJson(jsonDecode(response.body));
