@@ -18,7 +18,7 @@ class UpdateUsername extends UserEvent {
   final String username;
   final String id;
 
-  const UpdateUsername(this.id, this.username);
+  const UpdateUsername({required this.id, required this.username});
 
   @override
   // List<Object> get props => [user];

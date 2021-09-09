@@ -24,6 +24,7 @@ class _ChangePasswordState extends State<ChangePasswordPage> {
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController newPasswordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   @override
@@ -63,12 +64,9 @@ class _ChangePasswordState extends State<ChangePasswordPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 _label(),
-                Label(label: 'Enter Current Password'),
                 _passwordField(),
-                Label(label: 'Enter new Password'),
-                _passwordField(),
-                Label(label: 'Confirm new Password'),
-                _passwordField(),
+                _newPasswordField(),
+                _confirmPasswordField(),
                 SizedBox(
                   height: 10,
                 ),
@@ -97,10 +95,44 @@ class _ChangePasswordState extends State<ChangePasswordPage> {
         return TextFormField(
           controller: passwordController,
           obscureText: true,
-          decoration:
-              InputDecoration(icon: Icon(Icons.security), hintText: 'Password'),
+          decoration: InputDecoration(
+              icon: Icon(Icons.security), hintText: 'Current Password'),
           validator: (value) =>
               state.isValidPassword ? null : 'Password is too short',
+          onChanged: (value) => context.read<UserBloc>().add(UpdatePassword(
+              id: "to be received from session", password: value)),
+        );
+      },
+    );
+  }
+
+  Widget _newPasswordField() {
+    return BlocBuilder<UserBloc, UserState>(
+      builder: (context, state) {
+        return TextFormField(
+          controller: newPasswordController,
+          obscureText: true,
+          decoration: InputDecoration(
+              icon: Icon(Icons.security), hintText: 'New Password'),
+          validator: (value) =>
+              state.isValidPassword ? null : 'Password is too short',
+          onChanged: (value) => context.read<UserBloc>().add(UpdatePassword(
+              id: "to be received from session", password: value)),
+        );
+      },
+    );
+  }
+
+  Widget _confirmPasswordField() {
+    return BlocBuilder<UserBloc, UserState>(
+      builder: (context, state) {
+        return TextFormField(
+          controller: confirmPasswordController,
+          obscureText: true,
+          decoration: InputDecoration(
+              icon: Icon(Icons.security), hintText: 'Confirm New Password'),
+          validator: (value) =>
+              state.isValidConfirmPassword ? null : 'Password does not match',
           onChanged: (value) => context.read<UserBloc>().add(UpdatePassword(
               id: "to be received from session", password: value)),
         );
