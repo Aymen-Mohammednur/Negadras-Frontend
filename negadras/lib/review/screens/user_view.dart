@@ -34,24 +34,25 @@ class UserViewPageState extends State<UserViewPage> {
               controller: _scrollController,
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                imageStackWidget(),
-                buttonPanelWidget([
-                  IconTextPair().call(),
-                  // IconTextPair().map(),
-                  IconTextPair().website(),
-                  IconTextPair().claim()
-                ]),
-                BlocBuilder<ReviewBloc, ReviewState>(
-                  builder: (context, state) => UserReviewPrompt(context),
-                ),
-              ] + userReviewList(1),
+                    imageStackWidget(),
+                    buttonPanelWidget([
+                      IconTextPair().call(),
+                      // IconTextPair().map(),
+                      IconTextPair().website(),
+                      IconTextPair().claim()
+                    ]),
+                    BlocBuilder<ReviewBloc, ReviewState>(
+                      builder: (context, state) => UserReviewPrompt(context),
+                    ),
+                  ] +
+                  userReviewList(1),
             ),
             onNotification: (ping) {
               return scrollToTopWidgetMaker(ping, _scrollController);
             },
           ),
         ),
-        bottomNavigationBar: BottomNav(context),
+        bottomNavigationBar: bottomNav(context),
         floatingActionButton: Visibility(
           visible: _floatingActionIsVisible,
           child: FloatingActionButton(

@@ -40,7 +40,7 @@ class _ListOrganizationPageState extends State<ListOrganizationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNav(context),
+      bottomNavigationBar: bottomNav(context),
       body: Center(
         child: Column(
           children: [
