@@ -21,7 +21,7 @@ class OrganizationBloc extends Bloc<OrganizationEvent, OrganizationState> {
   ) async* {
     // Username updated
     if (event is OrganizationNameChanged) {
-      yield state.copyWith(username: event.organizationName);
+      yield state.copyWith(organizationName: event.organizationName);
 
       // Form Submitted
     } else if (event is OrganizationSubmitted) {
@@ -29,7 +29,8 @@ class OrganizationBloc extends Bloc<OrganizationEvent, OrganizationState> {
 
       try {
         await orgRepo.create(event.organization);
-        yield state.copyWith(formStatus: SubmissionSuccess());
+        yield state.copyWith(
+            formStatus: SubmissionSuccess(), organization: event.organization);
       } catch (e) {
         yield state.copyWith(formStatus: SubmissionFailed(e as Exception));
       }
