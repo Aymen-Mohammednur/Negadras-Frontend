@@ -5,11 +5,11 @@ class UserRepository {
   final UserDataProvider dataProvider;
   UserRepository(this.dataProvider);
 
-  Future<User> update(String id, User user) async {
-    return this.dataProvider.update(id, user);
+  Future<User> updateUsername(String id, String username) async {
+    return this.dataProvider.updateUsername(id, username);
   }
-  Future<User> change(String id, User user) async {
-    return this.dataProvider.change(id, user);
+  Future<User> changePassword(String id, String password) async {
+    return this.dataProvider.changePassword(id, password);
   }
   Future<User> fetchOne(String id) async {
     return this.dataProvider.fetchOne(id);

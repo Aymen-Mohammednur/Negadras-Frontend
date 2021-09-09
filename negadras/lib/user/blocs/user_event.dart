@@ -1,6 +1,6 @@
-import 'package:equatable/equatable.dart';
-import 'package:negadras/user/models/user.dart';
-// part of 'user_bloc.dart';
+// import 'package:equatable/equatable.dart';
+// import 'package:negadras/user/models/user.dart';
+part of 'user_bloc.dart';
 
 abstract class UserEvent extends Equatable {
   const UserEvent();
@@ -15,27 +15,29 @@ class LoadUser extends UserEvent {
 }
 
 class UpdateUsername extends UserEvent {
-  final User user;
+  final String username;
+  final String id;
 
-  const UpdateUsername(this.user);
-
-  @override
-  List<Object> get props => [user];
+  const UpdateUsername(this.id, this.username);
 
   @override
-  String toString() => 'username Updated {username: $user}';
+  // List<Object> get props => [user];
+
+  @override
+  String toString() => 'username Updated {username: $username}';
 }
 
 class UpdatePassword extends UserEvent {
-  final User userId;
+  final String id;
+  final String password;
 
-  const UpdatePassword(this.userId);
-
-  @override
-  List<Object> get props => [userId];
+  const UpdatePassword(this.id, this.password);
 
   @override
-  String toString() => 'password Updated {user: $userId}';
+  // List<Object> get props => [userId];
+
+  @override
+  String toString() => 'password Updated';
 }
 
 class DeleteUser extends UserEvent {

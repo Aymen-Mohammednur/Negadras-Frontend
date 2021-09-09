@@ -1,7 +1,11 @@
-// part of 'business_bloc.dart';
+part of 'user_bloc.dart';
 
-import 'package:equatable/equatable.dart';
-import 'package:negadras/user/models/user.dart';
+// import 'package:equatable/equatable.dart';
+// import 'package:negadras/user/models/user.dart';
+
+class UserInitial extends UserState {}
+class Fetching extends UserState {}
+class UserProfile extends UserState {}
 
 abstract class UserState extends Equatable {
   const UserState();
@@ -15,12 +19,14 @@ class UserLoaded extends UserState {
 }
 
 class UserOperationSuccess extends UserState {
-  final Iterable<User> user;
+  // UserOperationSuccess(user);
+  // final Iterable<User> user;
+  
 
-  UserOperationSuccess([this.user = const []]);
+  // UserOperationSuccess([this.user = const []]);
 
   @override
-  List<Object> get props => [user];
+  List<Object> get props => [];
 }
 
 class UserOperationFailure extends UserState {}
