@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
@@ -46,9 +48,10 @@ class _LoginViewState extends State<LoginView> {
   Widget _loginForm() {
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
-        final formStatus = state.formStatus;
-        if (formStatus is SubmissionFailed) {
-          _showSnackBar(context, formStatus.exception.toString());
+        if (state.formStatus is SubmissionFailed) {
+          _showSnackBar(context, "Username or Password is wrong");
+        }else if (state.formStatus is SubmissionSuccess){
+          context.router.pushAndPopUntil(HomeRoute(),predicate: (route)=>false);
         }
       },
       child: Form(
@@ -120,25 +123,27 @@ class _LoginViewState extends State<LoginView> {
   Widget _loginButton() {
     return BlocBuilder<LoginBloc, LoginState>(
       builder: (context, state) {
-        return state.formStatus is FormSubmitting
-            ? CircularProgressIndicator()
-            : ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    _formKey.currentState!.save();
-                    context.read<LoginBloc>().add(LoginSubmitted());
-                    print("Here");
-                    context.router.pushAndPopUntil(HomeRoute(),predicate: (route)=>false);
-                  }
-                },
-                style: ButtonStyle(
-                    shadowColor: MaterialStateProperty.all(Colors.grey),
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.black87)),
-                child: Text(
-                  "Login",
-                  style: TextStyle(color: Colors.white),
-                ));
+        if(state.formStatus is FormSubmitting){
+          return CircularProgressIndicator();
+        }else{
+          return ElevatedButton(
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  _formKey.currentState!.save();
+
+                  context.read<LoginBloc>().add(LoginSubmitted());
+                }
+              },
+              style: ButtonStyle(
+                  shadowColor: MaterialStateProperty.all(Colors.grey),
+                  backgroundColor:
+                  MaterialStateProperty.all<Color>(Colors.black87)),
+              child: Text(
+                "Login",
+                style: TextStyle(color: Colors.white),
+              ));
+        }
+
       },
     );
   }

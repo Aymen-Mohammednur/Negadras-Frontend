@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthDataProvider {
   static final String _baseUrl = "${StringConstants.BASE_URL_DEVICE}/auth";
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  final Future<SharedPreferences> _prefs = SharedPreferences?.getInstance();
 
   http.Client client;
 

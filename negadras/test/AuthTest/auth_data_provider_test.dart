@@ -16,16 +16,16 @@ main(){
     {
       test('registers a user', () async {
         final client = MockClient();
-        final String _baseUrl = "${StringConstants.BASE_URL_EMULATOR}/auth";
+        final String _baseUrl = "${StringConstants.BASE_URL_DEVICE}/auth";
 
         when(client
             .post(Uri.parse("$_baseUrl/register"),
             headers: anyNamed('headers'),
             body: anyNamed('body')))
-            .thenAnswer((_) async =>
-            http.Response(
-                '{ "username": "username", "password": "password","firstname": "firstname","lastname": "lastname", "token":"someToken"}',
-                200));
+            .thenAnswer((_) async => http.Response(
+            '{ "username": "username", "password": "password","firstName": "firstname","lastName": "lastname", "token":"someToken"}',
+            200)
+            );
 
         AuthDataProvider authDataProvider = new AuthDataProvider(client);
 

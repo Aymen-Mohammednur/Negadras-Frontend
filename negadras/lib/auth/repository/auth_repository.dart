@@ -10,10 +10,10 @@ class AuthRepository {
       {required String username, required String password}) async {
     try{
       print('attempting login');
-      final login = Login(username: username, password: password);
-      return dataProvider.readLogin(login) as Login;
+      Login login = Login(username: username, password: password);
+      return dataProvider.readLogin(login);
     }catch(e){
-      throw Exception('Login failed');
+      throw Exception('Login failed $e');
     }
 
 
@@ -33,7 +33,7 @@ class AuthRepository {
           lastname: lastname,
           firstname: firstname);
       // print("Register: $register");
-      return this.dataProvider.createRegister(register) as Register;
+      return dataProvider.createRegister(register);
     }catch(e){
       throw Exception("SignUp failed");
     }

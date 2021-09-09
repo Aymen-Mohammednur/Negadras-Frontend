@@ -37,6 +37,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         // context.router.push(LoginView())
         yield state.copyWith(formStatus: SubmissionSuccess());
       } catch (e) {
+        print("Exception at login event $e");
         yield state.copyWith(formStatus: SubmissionFailed(e as Exception));
       }
     }
