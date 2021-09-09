@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
                 onTap: () {
                   bloc.add(CategoryFilter(
                       categoryId: categories.elementAt(index).id));
-                  context.pushRoute(FilterBusinessRoute());
+                  context.pushRoute(FilterBusinessRoute(categoryId: ''));
                 },
                 onDoubleTap: () => setText(""),
                 child: _businessTypeContainer(index, categories));

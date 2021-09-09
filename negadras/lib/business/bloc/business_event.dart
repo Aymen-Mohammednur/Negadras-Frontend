@@ -14,6 +14,11 @@ class LoadBusinessEvent extends BusinessEvent {
 
 class SearchBusinessEvent extends BusinessEvent {}
 
+class FilterBusinessEvent extends BusinessEvent {
+  final String? categoryId;
+  FilterBusinessEvent(this.categoryId);
+}
+
 class AddBusiness extends BusinessEvent {
   final Business business;
 

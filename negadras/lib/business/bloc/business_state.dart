@@ -6,7 +6,10 @@ abstract class BusinessState extends Equatable {
   List<Object> get props => [];
 }
 
-class BusinessInitialState extends BusinessState {}
+class BusinessInitialState extends BusinessState {
+  final String id;
+  BusinessInitialState(this.id);
+}
 
 class FetchingState extends BusinessState {}
 
