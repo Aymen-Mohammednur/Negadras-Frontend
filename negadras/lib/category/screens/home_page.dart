@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
-      bottomNavigationBar: BottomNav(context),
+      bottomNavigationBar: bottomNav(context),
     );
   }
 }

@@ -9,7 +9,7 @@ class EditBusinessPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNav(context),
+      bottomNavigationBar: bottomNav(context),
       body: Column(
         children: [
           // BusinessPhoto(),
@@ -42,8 +42,6 @@ class BusinessPhoto extends StatelessWidget {
     );
   }
 }
-
-
 
 class EditForm extends StatefulWidget {
   @override

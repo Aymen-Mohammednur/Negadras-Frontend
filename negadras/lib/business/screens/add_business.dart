@@ -144,7 +144,7 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNav(context),
+      bottomNavigationBar: bottomNav(context),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.all(24),
