@@ -4,13 +4,17 @@ import 'package:negadras/business/bloc/business_bloc.dart';
 import 'package:negadras/business/screens/widgets/business_card.dart';
 import 'package:negadras/business/screens/widgets/label.dart';
 import 'package:negadras/business/screens/widgets/search_bar.dart';
+import 'package:negadras/review/repository/review_repository.dart';
 import 'package:negadras/routes/router.gr.dart';
 import 'package:negadras/user/screens/me_tab.dart';
 import 'package:negadras/utils/bottom_nav_bar.dart';
 import 'package:auto_route/auto_route.dart';
 
 class FilterBusinessPage extends StatelessWidget {
-  const FilterBusinessPage({Key? key}) : super(key: key);
+  final String? categoryId;
+  final String? queryParameter;
+  const FilterBusinessPage({Key? key, this.categoryId, this.queryParameter})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,17 +38,10 @@ class FilterBusinessPage extends StatelessWidget {
                 builder: (context, businessState) {
                   print(businessState);
                   if (businessState is BusinessInitialState) {
-                    businessBloc.add(SearchBusinessEvent());
-                  } else if (businessState is FetchingState) {
-                    return Expanded(
-                      child: Center(
-                          child: CircularProgressIndicator(
-                        color: Colors.black,
-                      )),
-                    );
+                    businessBloc.add(FilterBusinessEvent(categoryId));
                   } else if (businessState is BusinessView) {
-                    businessBloc.add(SearchBusinessEvent());
-                    // context.pushRoute(UserViewRoute());
+                    context.pushRoute(
+                        UserViewRoute(businessId: businessState.businessId));
                   } else if (businessState is StaticFetchState) {
                     return Expanded(
                       child: ListView.builder(
@@ -65,7 +62,8 @@ class FilterBusinessPage extends StatelessWidget {
                         },
                       ),
                     );
-                  } else if (businessState is BusinessFetchResultState) {
+                  }
+                  if (businessState is BusinessFetchResultState) {
                     ListView.builder(
                       itemCount: businessState.businessList.length,
                       itemBuilder: (context, i) {
@@ -85,12 +83,18 @@ class FilterBusinessPage extends StatelessWidget {
                         );
                       },
                     );
-                  } else if (businessState is BusinessOperationFailure) {
+                  }
+                  if (businessState is BusinessOperationFailure) {
                     return Center(
                       child: Text(businessState.errMsg.toString()),
                     );
                   }
-                  return Container();
+                  return Expanded(
+                    child: Center(
+                        child: CircularProgressIndicator(
+                      color: Colors.black,
+                    )),
+                  );
                 },
               ),
             ],

@@ -38,8 +38,10 @@ class AppRouter extends _i1.RootStackRouter {
         }),
     FilterBusinessRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
-        builder: (_) {
-          return const _i4.FilterBusinessPage();
+        builder: (data) {
+          final args = data.argsAs<FilterBusinessRouteArgs>();
+          return _i4.FilterBusinessPage(
+              key: args.key, categoryId: args.categoryId);
         }),
     SearchBusinessRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
@@ -68,8 +70,9 @@ class AppRouter extends _i1.RootStackRouter {
         }),
     UserViewRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
-        builder: (_) {
-          return const _i10.UserViewPage();
+        builder: (data) {
+          final args = data.argsAs<UserViewRouteArgs>();
+          return _i10.UserViewPage(key: args.key, businessId: args.businessId);
         }),
     SignUpView.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
@@ -150,10 +153,21 @@ class HomeRouteArgs {
   final _i2.Key? key;
 }
 
-class FilterBusinessRoute extends _i1.PageRouteInfo {
-  const FilterBusinessRoute() : super(name, path: '/filter-business-page');
+class FilterBusinessRoute extends _i1.PageRouteInfo<FilterBusinessRouteArgs> {
+  FilterBusinessRoute({_i2.Key? key, required String categoryId})
+      : super(name,
+            path: '/filter-business-page',
+            args: FilterBusinessRouteArgs(key: key, categoryId: categoryId));
 
   static const String name = 'FilterBusinessRoute';
+}
+
+class FilterBusinessRouteArgs {
+  const FilterBusinessRouteArgs({this.key, required this.categoryId});
+
+  final _i2.Key? key;
+
+  final String categoryId;
 }
 
 class SearchBusinessRoute extends _i1.PageRouteInfo {
@@ -187,10 +201,21 @@ class MyBusinessRoute extends _i1.PageRouteInfo {
   static const String name = 'MyBusinessRoute';
 }
 
-class UserViewRoute extends _i1.PageRouteInfo {
-  const UserViewRoute() : super(name, path: '/user-view-page');
+class UserViewRoute extends _i1.PageRouteInfo<UserViewRouteArgs> {
+  UserViewRoute({_i2.Key? key, required String businessId})
+      : super(name,
+            path: '/user-view-page',
+            args: UserViewRouteArgs(key: key, businessId: businessId));
 
   static const String name = 'UserViewRoute';
+}
+
+class UserViewRouteArgs {
+  const UserViewRouteArgs({this.key, required this.businessId});
+
+  final _i2.Key? key;
+
+  final String businessId;
 }
 
 class SignUpView extends _i1.PageRouteInfo<SignUpViewArgs> {

@@ -26,9 +26,7 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<CategoryBloc>(
-          create: (_) => CategoryBloc(
-              categoryRepository: categoryRepository,
-              businessRepository: businessRepository)
+          create: (_) => CategoryBloc(categoryRepository: categoryRepository,)
             ..add(CategoryFetch()),
         ),
         BlocProvider<BusinessBloc>(

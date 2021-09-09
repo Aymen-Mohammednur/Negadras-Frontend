@@ -12,23 +12,23 @@ part 'business_state.dart';
 class BusinessBloc extends Bloc<BusinessEvent, BusinessState> {
   final BusinessRepository businessRepository;
 
-  BusinessBloc({required this.businessRepository})
-      : super(BusinessInitialState());
+  BusinessBloc({required this.businessRepository}) : super(FetchingState());
 
   @override
   Stream<BusinessState> mapEventToState(
     BusinessEvent event,
   ) async* {
-    if (event is SearchBusinessEvent) {
+    if (event is FilterBusinessEvent) {
       yield FetchingState();
-      await Future.delayed(Duration(seconds: 2));
 
-      // try {
-      //   final businessList = await businessRepository.fetch();
-      //   yield BusinessFetchResultState(businessList);
-      // } catch (e) {
-      //   yield BusinessOperationFailure(e as Exception);
-      // }
+      try {
+        final categoryId = event.categoryId;
+        final businessList =
+            await businessRepository.fetchByCategory(categoryId);
+        yield BusinessFetchResultState(businessList);
+      } catch (e) {
+        yield BusinessOperationFailure(e as Exception);
+      }
 
       //Fake Fetch - Static Data
       yield StaticFetchState();

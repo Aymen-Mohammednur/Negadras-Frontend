@@ -11,7 +11,8 @@ import 'package:negadras/utils/bottom_nav_bar.dart';
 // import 'package:negadras/review/scre'
 
 class UserViewPage extends StatefulWidget {
-  const UserViewPage({Key? key}) : super(key: key);
+  final String businessId;
+  const UserViewPage({Key? key, required this.businessId}) : super(key: key);
 
   @override
   UserViewPageState createState() => UserViewPageState();

@@ -21,7 +21,7 @@ class BusinessRepository {
     return this.dataProvider.fetchOne(id);
   }
 
-  Future<List<Business>> fetchByCategory(String categoryId) async {
+  Future<List<Business>> fetchByCategory(String? categoryId) async {
     return this.dataProvider.fetchByCategory(categoryId);
   }
 
