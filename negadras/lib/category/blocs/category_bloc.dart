@@ -10,10 +10,9 @@ part 'category_state.dart';
 
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   final CategoryRepository categoryRepository;
-  final BusinessRepository businessRepository;
 
   CategoryBloc(
-      {required this.categoryRepository, required this.businessRepository})
+      {required this.categoryRepository})
       : super(Fetching());
 
   @override
@@ -33,25 +32,24 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       }
     }
 
-    if (event is CategorySearch) {
-      yield Fetching();
-      try {
-        final business = await businessRepository.fetch();
-        yield SearchSuccess(business);
-      } catch (_) {
-        yield CategoryOperationFailed();
-      }
-    }
+    // if (event is CategorySearch) {
+    //   yield Fetching();
+    //   try {
+    //     // final business = await businessRepository.fetch();
+    //     yield SearchSuccess(business);
+    //   } catch (_) {
+    //     yield CategoryOperationFailed();
+    //   }
+    // }
 
-    if (event is CategoryFilter) {
-      yield Fetching();
-      try {
-        final categoryId = event.categoryId;
-        final business = await businessRepository.fetchByCategory(categoryId);
-        yield FilterSuccess(business);
-      } catch (_) {
-        yield CategoryOperationFailed();
-      }
-    }
+    // if (event is CategoryFilter) {
+    //   yield Fetching();
+    //   try {
+    //     final categoryId = event.categoryId;
+    //     yield FilterSuccess(categoryId);
+    //   } catch (_) {
+    //     yield CategoryOperationFailed();
+    //   }
+    // }
   }
 }

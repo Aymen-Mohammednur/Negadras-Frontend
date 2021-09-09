@@ -11,15 +11,15 @@ class CategoryFetch extends CategoryEvent {
   List<Object> get props => [];
 }
 
-class CategoryFilter extends CategoryEvent {
-  final String categoryId;
-  CategoryFilter({required this.categoryId});
+// class CategoryFilter extends CategoryEvent {
+//   final String categoryId;
+//   CategoryFilter({required this.categoryId});
 
-  @override
-  List<Object> get props => [categoryId];
-}
+//   @override
+//   List<Object> get props => [categoryId];
+// }
 
-class CategorySearch extends CategoryEvent {
-  @override
-  List<Object> get props => [];
-}
+// class CategorySearch extends CategoryEvent {
+//   @override
+//   List<Object> get props => [];
+// }
