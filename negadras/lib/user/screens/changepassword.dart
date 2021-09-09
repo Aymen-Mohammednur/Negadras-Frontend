@@ -1,82 +1,140 @@
 // import 'dart:html';
 
+import 'dart:js';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:negadras/auth/form_submission_status.dart';
+import 'package:negadras/routes/router.gr.dart';
+import 'package:negadras/user/blocs/user_bloc.dart';
+import 'package:negadras/user/data_providers/user_data_provider.dart';
+
+import 'package:negadras/user/repository/user_repository.dart';
+import '../../business/screens/widgets/label.dart';
+
+import 'package:auto_route/auto_route.dart';
 
 class ChangePasswordPage extends StatefulWidget {
+  ChangePasswordPage({Key? key}) : super(key: key);
   @override
-  State<StatefulWidget> createState() => new _State();
+  State<StatefulWidget> createState() => new _ChangePasswordState();
 }
 
-class _State extends State<ChangePasswordPage> {
+class _ChangePasswordState extends State<ChangePasswordPage> {
+  final _formKey = GlobalKey<FormState>();
+
   TextEditingController newPasswordController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Change Password'),
-        ),
-        body: Padding(
-            padding: EdgeInsets.all(10),
-            child: ListView(
-              children: <Widget>[
-                Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.all(10),
-                    child: Text(
-                      'Change Password',
-                      style: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 30),
-                    )),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  child: TextField(
-                    controller: newPasswordController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'New Password',
-                    ),
-                  ),
+    return MaterialApp(
+        home: RepositoryProvider(
+            create: (context) =>
+                UserRepository(dataProvider: UserDataProvider()),
+            child: Scaffold(
+              body: BlocProvider(
+                create: (context) =>
+                    UserBloc(userRepository: context.read<UserRepository>()),
+                child: Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    _label(),
+                    _changePasswordForm(),
+                  ],
                 ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                  child: TextField(
-                    obscureText: true,
-                    controller: passwordController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Confirm New Password',
-                    ),
-                  ),
-                ),
-                Container(
-                    height: 50,
-                    padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    child: RaisedButton(
-                      textColor: Colors.white,
-                      color: Colors.blue,
-                      child: Text('Change Password'),
-                      onPressed: () {
-                        print(newPasswordController.text);
-                        print(passwordController.text);
-                      },
-                    )),
-                Container(
-                    height: 50,
-                    padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    child: RaisedButton(
-                      textColor: Colors.white,
-                      color: Colors.blue,
-                      child: Text('Cancel'),
-                      onPressed: () {
-                        print(newPasswordController.text);
-                        print(passwordController.text);
-                      },
-                    )),
-              ],
+              ),
             )));
+  }
+
+  Widget _changePasswordForm() {
+    return BlocListener<UserBloc, UserState>(
+      listener: (context, state) {
+        final formStatus = state.formStatus;
+        if (formStatus is SubmissionFailed) {
+          _showSnackBar(context, formStatus.exception.toString());
+        }
+      },
+      child: Form(
+        key: _formKey,
+        child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 40),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _label(),
+                Label(label: 'Enter Current Password'),
+                _passwordField(),
+                Label(label: 'Enter new Password'),
+                _passwordField(),
+                Label(label: 'Confirm new Password'),
+                _passwordField(),
+                SizedBox(
+                  height: 10,
+                ),
+                _submitButton(),
+              ],
+            )),
+      ),
+    );
+  }
+
+  Widget _label() {
+    return SafeArea(
+      child: Container(
+          alignment: Alignment.topCenter,
+          padding: EdgeInsets.only(top: 20),
+          child: Text(
+            'Change your Password',
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 30),
+          )),
+    );
+  }
+
+  Widget _passwordField() {
+    return BlocBuilder<UserBloc, UserState>(
+      builder: (context, state) {
+        return TextFormField(
+          controller: passwordController,
+          obscureText: true,
+          decoration:
+              InputDecoration(icon: Icon(Icons.security), hintText: 'Password'),
+          validator: (value) =>
+              state.isValidPassword ? null : 'Password is too short',
+          onChanged: (value) => context.read<UserBloc>().add(UpdatePassword(
+              id: "to be received from session", password: value)),
+        );
+      },
+    );
+  }
+
+  Widget _submitButton() {
+    return BlocBuilder<UserBloc, UserState>(
+      builder: (context, state) {
+        return state.formStatus is FormSubmitting
+            ? CircularProgressIndicator()
+            : ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
+                    context.read<UserBloc>().add(UserSubmitted());
+                    context.router.push(HomeRoute());
+                  }
+                },
+                style: ButtonStyle(
+                    shadowColor: MaterialStateProperty.all(Colors.grey),
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.black87)),
+                child: Text(
+                  "Change Password",
+                  style: TextStyle(color: Colors.white),
+                ));
+      },
+    );
+  }
+
+  void _showSnackBar(BuildContext context, String message) {
+    final snackBar = SnackBar(content: Text(message));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

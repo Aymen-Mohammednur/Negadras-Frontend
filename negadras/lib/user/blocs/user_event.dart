@@ -31,7 +31,7 @@ class UpdatePassword extends UserEvent {
   final String id;
   final String password;
 
-  const UpdatePassword(this.id, this.password);
+  const UpdatePassword({required this.id, required this.password});
 
   @override
   // List<Object> get props => [userId];
@@ -50,4 +50,7 @@ class DeleteUser extends UserEvent {
 
   @override
   toString() => 'User Deleted {user Id: $userid}';
+}
+class UserSubmitted extends UserEvent {
+  UserSubmitted();
 }
