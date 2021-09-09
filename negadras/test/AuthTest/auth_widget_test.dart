@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:negadras/app.dart';
 import 'package:negadras/auth/login/login_view.dart';
 import 'package:negadras/auth/signup/sign_up_view.dart';
 
