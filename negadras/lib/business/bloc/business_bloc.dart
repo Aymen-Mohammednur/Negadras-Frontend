@@ -12,7 +12,8 @@ part 'business_state.dart';
 class BusinessBloc extends Bloc<BusinessEvent, BusinessState> {
   final BusinessRepository businessRepository;
 
-  BusinessBloc({required this.businessRepository}) : super(FetchingState());
+  BusinessBloc({required this.businessRepository})
+      : super(BusinessInitialState());
 
   @override
   Stream<BusinessState> mapEventToState(
@@ -25,34 +26,36 @@ class BusinessBloc extends Bloc<BusinessEvent, BusinessState> {
         final categoryId = event.categoryId;
         final businessList =
             await businessRepository.fetchByCategory(categoryId);
+        print(businessList[0].name);
         yield BusinessFetchResultState(businessList);
       } catch (e) {
-        yield BusinessOperationFailure(e as Exception);
+        print(e);
+        yield BusinessOperationFailure();
       }
 
       //Fake Fetch - Static Data
-      yield StaticFetchState();
+      // yield StaticFetchState();
     }
 
-    if (event is LoadBusinessEvent) {
-      yield FetchingState();
+    // if (event is LoadBusinessEvent) {
+    //   yield FetchingState();
 
-      //When the backend works
+    //   //When the backend works
 
-      // final businessId = event.businessId;
-      // final business = await businessRepository.fetchOne(businessId);
-      // yield BusinessLoadedState(business);
+    //   // final businessId = event.businessId;
+    //   // final business = await businessRepository.fetchOne(businessId);
+    //   // yield BusinessLoadedState(business);
 
-      await Future.delayed(Duration(seconds: 2));
-      yield BusinessView("");
-    }
+    //   await Future.delayed(Duration(seconds: 2));
+    //   yield BusinessView("");
+    // }
     if (event is AddBusiness) {
       try {
         await businessRepository.create(event.business);
         final business = await businessRepository.fetch();
         yield BusinessOperationSuccess(business);
       } catch (e) {
-        yield BusinessOperationFailure(e as Exception);
+        yield BusinessOperationFailure();
       }
     }
     if (event is UpdateBusiness) {
@@ -61,7 +64,7 @@ class BusinessBloc extends Bloc<BusinessEvent, BusinessState> {
         final business = await businessRepository.fetch();
         yield BusinessOperationSuccess(business);
       } catch (e) {
-        yield BusinessOperationFailure(e as Exception);
+        yield BusinessOperationFailure();
       }
     }
     if (event is DeleteBusiness) {
@@ -70,7 +73,7 @@ class BusinessBloc extends Bloc<BusinessEvent, BusinessState> {
         final business = await businessRepository.fetch();
         yield BusinessOperationSuccess(business);
       } catch (e) {
-        yield BusinessOperationFailure(e as Exception);
+        yield BusinessOperationFailure();
       }
     }
   }

@@ -32,7 +32,7 @@ class App extends StatelessWidget {
         BlocProvider<BusinessBloc>(
           create: (_) => BusinessBloc(
             businessRepository: businessRepository,
-          ),
+          )
         ),
         BlocProvider(create: (context) => LoginBloc(authRepo: authRepository)),
         BlocProvider(create: (context) => SignUpBloc(authRepo: authRepository)),

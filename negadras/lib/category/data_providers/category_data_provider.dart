@@ -23,10 +23,10 @@ class CategoryDataProvider {
   }
 
   Future<List<Category>> fetchAll() async {
-    print("Inside data provider");
+    // print("Inside data provider");
     final response = await http.get(Uri.parse(_baseUrl));
-    print(response.body);
-    print(response.statusCode);
+    // print(response.body);
+    // print(response.statusCode);
 
     if (response.statusCode == 200) {
       final category = jsonDecode(response.body) as List;

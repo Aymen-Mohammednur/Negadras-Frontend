@@ -7,28 +7,28 @@ abstract class BusinessState extends Equatable {
 }
 
 class BusinessInitialState extends BusinessState {
-  final String id;
-  BusinessInitialState(this.id);
+  // final String id;
+  // BusinessInitialState(this.id);
 }
 
 class FetchingState extends BusinessState {}
 
-class BusinessLoadedState extends BusinessState {
-  final Business business;
-  BusinessLoadedState(this.business);
-}
+// class BusinessLoadedState extends BusinessState {
+//   final Business business;
+//   BusinessLoadedState(this.business);
+// }
 
-class BusinessView extends BusinessState {
-  final String businessId;
-  BusinessView(this.businessId);
-}
+// class BusinessView extends BusinessState {
+//   final String businessId;
+//   BusinessView(this.businessId);
+// }
 
 class BusinessFetchResultState extends BusinessState {
   final List<Business> businessList;
   BusinessFetchResultState(this.businessList);
 }
 
-class StaticFetchState extends BusinessState {}
+// class StaticFetchState extends BusinessState {}
 
 class BusinessFilterResult extends BusinessState {}
 
@@ -42,7 +42,7 @@ class BusinessOperationSuccess extends BusinessState {
 }
 
 class BusinessOperationFailure extends BusinessState {
-  final Exception errMsg;
+  // final Exception errMsg;
 
-  BusinessOperationFailure(this.errMsg);
+  // BusinessOperationFailure(this.errMsg);
 }

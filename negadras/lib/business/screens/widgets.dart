@@ -50,34 +50,36 @@ BoxDecoration gridItemDecoration() {
 }
 
 Widget searchBar() {
-  // return Row(
-  //   children: [
-  //     // SizedBox(
-  //     //   width: 200,
-  //     //   child: Expanded(child: TextField(),)
-  //     // ),
-  //     Expanded(
-  //       child: TextField(),
-  //     ),
-  //     Icon(
-  //       Icons.search,
-  //       color: Colors.black,
-  //     ),
-  //   ],
+  return Row(
+    children: [
+      // SizedBox(
+      //   width: 200,
+      //   child: Expanded(child: TextField(),)
+      // ),
+      Expanded(
+        child: TextField(),
+      ),
+      Icon(
+        Icons.search,
+        color: Colors.black,
+      ),
+    ],
+  );
+  // return Expanded(
+  //   child: Padding(
+  //       padding: const EdgeInsets.all(8.0),
+  //       child: Row(
+  //         children: [
+  //           TextField(
+  //             decoration: InputDecoration(hintText: "Search..."),
+  //           ),
+  //           IconButton(
+  //             onPressed: () {},
+  //             icon: Icon(Icons.search, color: Colors.black),
+  //           )
+  //         ],
+  //       )),
   // );
-  return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        children: [
-          TextField(
-            decoration: InputDecoration(hintText: "Search..."),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.search, color: Colors.black),
-          )
-        ],
-      ));
 }
 
 Widget imageStackWidget() {

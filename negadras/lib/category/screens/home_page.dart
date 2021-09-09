@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
                 onTap: () {
                   // bloc.add(CategoryFilter(
                   //     categoryId: categories.elementAt(index).id));
-                  context.pushRoute(FilterBusinessRoute(
+                  context.router.push(FilterBusinessRoute(
                       categoryId: categories.elementAt(index).id));
                 },
                 onDoubleTap: () => setText(""),
@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: BlocBuilder<CategoryBloc, CategoryState>(
         builder: (context, state) {
-          // print(state);
+          print(state);
           if (state is CategoryOperationFailed) {
             return Center(
               child: Text("Could not do category operation"),
@@ -64,7 +64,6 @@ class _HomePageState extends State<HomePage> {
 
           if (state is CategoryOperationSuccess) {
             final categories = state.categories;
-            print(categories);
 
             return Center(
               child: Column(

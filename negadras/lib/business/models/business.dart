@@ -1,7 +1,7 @@
 class Business {
   final String id;
   final String name;
-  final String type;
+  final String categoryId;
   final String location;
   final String? phoneNumber;
   final String? website;
@@ -11,7 +11,7 @@ class Business {
   Business(
       {required this.id,
       required this.name,
-      required this.type,
+      required this.categoryId,
       required this.location,
       this.phoneNumber,
       this.website,
@@ -20,13 +20,13 @@ class Business {
 
   factory Business.fromJson(Map<String, dynamic> json) {
     return Business(
-        id: json['id'],
+        id: json['_id'],
         name: json['name'],
-        type: json['type'],
+        categoryId: json['categoryId'],
         location: json['location'],
         phoneNumber: json['phoneNumber'],
         website: json['website'],
         email: json['email'],
-        organization: json['organization']);
+        organization: json['organizationId']);
   }
 }
