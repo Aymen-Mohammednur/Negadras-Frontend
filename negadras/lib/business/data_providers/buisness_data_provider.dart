@@ -18,9 +18,9 @@ class BusinessDataProvider {
           "phoneNumber": business.phoneNumber,
           "website": business.website,
           "email": business.email,
-          "organization": business.organization,
         }));
 
+    print(response.body);
     if (response.statusCode == 201) {
       return Business.fromJson(jsonDecode(response.body));
     } else {

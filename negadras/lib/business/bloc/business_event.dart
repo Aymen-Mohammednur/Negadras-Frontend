@@ -28,7 +28,7 @@ class AddBusiness extends BusinessEvent {
   List<Object> get props => [business];
 
   @override
-  String toString() => 'Course Created {course: $business}';
+  String toString() => 'Business Created {course: $business}';
 }
 
 class AddBusinessToFavoritesEvent extends BusinessEvent {}
@@ -42,7 +42,7 @@ class UpdateBusiness extends BusinessEvent {
   List<Object> get props => [business];
 
   @override
-  String toString() => 'Course Updated {course: $business}';
+  String toString() => 'Business Updated {business: $business}';
 }
 
 class DeleteBusiness extends BusinessEvent {
@@ -54,5 +54,5 @@ class DeleteBusiness extends BusinessEvent {
   List<Object> get props => [id];
 
   @override
-  toString() => 'Course Deleted {course Id: $id}';
+  toString() => 'Business Deleted {business Id: $id}';
 }

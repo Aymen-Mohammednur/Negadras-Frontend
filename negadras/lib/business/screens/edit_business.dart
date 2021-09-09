@@ -85,22 +85,6 @@ class _EditFormState extends State<EditForm> {
 
   Widget _buildType() {
     return DropdownButtonFormField(
-      // hint: Text("Please choose"),
-
-      // items: _types
-      //     .map((String type) =>
-      //         DropdownMenuItem<String>(value: type, child: Text(type)))
-      //     .toList(),
-
-      //   items: _types
-      // .map<DropdownMenuItem<String>> ((String value)) {
-      //   return DropdownMenuItem<String>(
-      //       value: value,
-      //       child: Text(value),
-      //   );
-      // }
-
-      // .toList(),
       hint: Text("Please choose"),
 
       value: _currentType,

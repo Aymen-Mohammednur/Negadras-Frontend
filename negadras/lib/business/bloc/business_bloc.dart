@@ -51,7 +51,9 @@ class BusinessBloc extends Bloc<BusinessEvent, BusinessState> {
     // }
     if (event is AddBusiness) {
       try {
+        // print("inside bloc");
         await businessRepository.create(event.business);
+        
         final business = await businessRepository.fetch();
         yield BusinessOperationSuccess(business);
       } catch (e) {
