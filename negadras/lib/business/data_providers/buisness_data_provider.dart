@@ -39,7 +39,7 @@ class BusinessDataProvider {
     }
   }
 
-  Future<List<Business>> fetchByCategory(String categoryId) async {
+  Future<List<Business>> fetchByCategory(String? categoryId) async {
     final response = await http.get(Uri.parse("$_baseUrl/filter/$categoryId"));
 
     if (response.statusCode == 200) {
