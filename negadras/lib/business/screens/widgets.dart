@@ -3,26 +3,33 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/services.dart';
 import 'package:negadras/business/screens/SimpleBarChart.dart';
 import 'dart:convert';
+
 // import 'package:negadras/SimpleBarChart.dart';
 TextStyle normalText() {
   return TextStyle(
     fontSize: 24,
   );
 }
+
 TextStyle smallText() {
   return TextStyle(
     fontSize: 20,
   );
-}TextStyle verySmallText() {
+}
+
+TextStyle verySmallText() {
   return TextStyle(
     fontSize: 18,
   );
 }
+
 TextStyle bigText() {
   return TextStyle(
     fontSize: 28,
   );
-}TextStyle veryBigText() {
+}
+
+TextStyle veryBigText() {
   return TextStyle(
     fontSize: 30,
   );
@@ -43,21 +50,34 @@ BoxDecoration gridItemDecoration() {
 }
 
 Widget searchBar() {
-  return Row(
-    children: [
-      // SizedBox(
-      //   width: 200,
-      //   child: Expanded(child: TextField(),)
-      // ),
-      Expanded(
-        child: TextField(),
-      ),
-      Icon(
-        Icons.search,
-        color: Colors.black,
-      ),
-    ],
-  );
+  // return Row(
+  //   children: [
+  //     // SizedBox(
+  //     //   width: 200,
+  //     //   child: Expanded(child: TextField(),)
+  //     // ),
+  //     Expanded(
+  //       child: TextField(),
+  //     ),
+  //     Icon(
+  //       Icons.search,
+  //       color: Colors.black,
+  //     ),
+  //   ],
+  // );
+  return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+          TextField(
+            decoration: InputDecoration(hintText: "Search..."),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.search, color: Colors.black),
+          )
+        ],
+      ));
 }
 
 Widget imageStackWidget() {
@@ -135,17 +155,22 @@ Widget chartWidget() {
   return SizedBox(child: SimpleBarChart.withSampleData(), height: 400);
 }
 
-Widget _businessReviewBox(r){
+Widget _businessReviewBox(r) {
   return reviewBox(r, 1);
 }
-Widget _userReviewBox(r){
+
+Widget _userReviewBox(r) {
   return reviewBox(r, 0);
 }
 
-
 Widget reviewBox(r, i) {
-  var businessOwnerButtons = (i > 0 ? [Icon(Icons.reply_outlined),Icon(Icons.flag),] : [Container()] );
-  
+  var businessOwnerButtons = (i > 0
+      ? [
+          Icon(Icons.reply_outlined),
+          Icon(Icons.flag),
+        ]
+      : [Container()]);
+
   var review = jsonDecode(r);
   String name = review["name"];
   String content = review["content"];
@@ -180,9 +205,8 @@ Widget reviewBox(r, i) {
             width: double.infinity,
           ),
           Padding(
-            padding: const EdgeInsets.only(left:10, right:10, bottom: 10),
+            padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
             child: Row(
-              
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: businessOwnerButtons,
             ),
@@ -201,16 +225,14 @@ Widget businessReviewList(reviewList) {
         return _businessReviewBox(dummyJson);
       });
 }
-List<Widget> userReviewList(reviewList) {
-  String dummyJson = '{"name": "Adam Smith", "content": "I love this place", "rating": "3.3"}';
-  return List<Widget>.generate(
-    10,
-    (i){
-      return _userReviewBox(dummyJson);
-    }
-  );
-}
 
+List<Widget> userReviewList(reviewList) {
+  String dummyJson =
+      '{"name": "Adam Smith", "content": "I love this place", "rating": "3.3"}';
+  return List<Widget>.generate(10, (i) {
+    return _userReviewBox(dummyJson);
+  });
+}
 
 class IconTextPair {
   Widget claim({String s = "Claim"}) => iconPair(Icons.add_circle, s);

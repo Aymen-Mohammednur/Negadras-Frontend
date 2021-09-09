@@ -11,15 +11,15 @@ class CategoryInitial extends CategoryState {}
 
 class Fetching extends CategoryState {}
 
-class FilterSuccess extends CategoryState {
-  final List<Business> business;
-  FilterSuccess(this.business);
-}
+// class FilterSuccess extends CategoryState {
+//   final String categoryId;
+//   FilterSuccess(this.categoryId);
+// }
 
-class SearchSuccess extends CategoryState {
-  final List<Business> business;
-  SearchSuccess(this.business);
-}
+// class SearchSuccess extends CategoryState {
+//   final List<Business> business;
+//   SearchSuccess(this.business);
+// }
 
 class CategoryOperationSuccess extends CategoryState {
   final List<Category> categories;
