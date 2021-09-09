@@ -1,26 +1,44 @@
-// part of 'business_bloc.dart';
+part of 'user_bloc.dart';
 
-import 'package:equatable/equatable.dart';
-import 'package:negadras/user/models/user.dart';
+// import 'package:equatable/equatable.dart';
+// import 'package:negadras/user/models/user.dart';
 
-abstract class UserState extends Equatable {
-  const UserState();
+class UserState {
+  final String username;
+  bool get isValidUsername => username.length > 5;
 
-  List<Object> get props => [];
+  final String password;
+  bool get isValidPassword => password.length > 6;
+
+  final String newPassword;
+  bool get isValidNewPassword => newPassword.length > 6;
+
+  final String confirmPassword;
+  bool get isValidConfirmPassword => confirmPassword == newPassword;
+
+  final FormSubmissionStatus formStatus;
+
+  UserState(
+      {this.username = '',
+      this.password = '',
+      this.newPassword = '',
+      this.confirmPassword = '',
+
+      this.formStatus = const InitialFormStatus()});
+
+  UserState copyWith({
+    String? username,
+    String? password,
+    String? newPassword,
+    String? confirmPassword,
+    FormSubmissionStatus? formStatus,
+  }) {
+    return UserState(
+      username: username ?? this.username,
+      password: password ?? this.password,
+      newPassword: password ?? this.newPassword,
+      confirmPassword: password ?? this.confirmPassword,
+      formStatus: formStatus ?? this.formStatus,
+    );
+  }
 }
-
-class UserLoaded extends UserState {
-  final User user;
-  UserLoaded(this.user);
-}
-
-class UserOperationSuccess extends UserState {
-  final Iterable<User> user;
-
-  UserOperationSuccess([this.user = const []]);
-
-  @override
-  List<Object> get props => [user];
-}
-
-class UserOperationFailure extends UserState {}
