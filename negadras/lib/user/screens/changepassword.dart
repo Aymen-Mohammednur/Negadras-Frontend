@@ -9,7 +9,6 @@ import 'package:negadras/user/data_providers/user_data_provider.dart';
 
 import 'package:negadras/user/repository/user_repository.dart';
 
-
 import 'package:auto_route/auto_route.dart';
 
 class ChangePasswordPage extends StatefulWidget {
@@ -20,6 +19,9 @@ class ChangePasswordPage extends StatefulWidget {
 
 class _ChangePasswordState extends State<ChangePasswordPage> {
   final _formKey = GlobalKey<FormState>();
+
+  late String newPassword;
+  String passedId = "6134db2369ba186847c14dba";
 
   TextEditingController newPasswordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
@@ -95,10 +97,10 @@ class _ChangePasswordState extends State<ChangePasswordPage> {
           obscureText: true,
           decoration: InputDecoration(
               icon: Icon(Icons.security), hintText: 'Current Password'),
-          validator: (value) =>
-              state.isValidPassword ? null : 'Password is too short',
-          onChanged: (value) => context.read<UserBloc>().add(UpdatePassword(
-              id: "to be received from session", password: value)),
+          // validator: (value) =>
+          //     state.isValidPassword ? null : 'Password is too short',
+          // onChanged: (value) => context.read<UserBloc>().add(UpdatePassword(
+          //     id: "to be received from session", password: value)),
         );
       },
     );
@@ -112,10 +114,10 @@ class _ChangePasswordState extends State<ChangePasswordPage> {
           obscureText: true,
           decoration: InputDecoration(
               icon: Icon(Icons.security), hintText: 'New Password'),
-          validator: (value) =>
-              state.isValidPassword ? null : 'Password is too short',
-          onChanged: (value) => context.read<UserBloc>().add(UpdatePassword(
-              id: "to be received from session", password: value)),
+          // validator: (value) =>
+          //     state.isValidPassword ? null : 'Password is too short',
+          // onChanged: (value) => context.read<UserBloc>().add(UpdatePassword(
+          //     id: "to be received from session", password: value)),
         );
       },
     );
@@ -129,10 +131,15 @@ class _ChangePasswordState extends State<ChangePasswordPage> {
           obscureText: true,
           decoration: InputDecoration(
               icon: Icon(Icons.security), hintText: 'Confirm New Password'),
-          validator: (value) =>
-              state.isValidConfirmPassword ? null : 'Password does not match',
-          onChanged: (value) => context.read<UserBloc>().add(UpdatePassword(
-              id: "to be received from session", password: value)),
+          // validator: (value) =>
+          //     state.isValidConfirmPassword ? null : 'Password does not match',
+          // onChanged: (value) => context.read<UserBloc>().add(UpdatePassword(
+          //     id: "to be received from session", password: value)),
+          onChanged: (value) {
+            setState(() {
+              this.newPassword = value;
+            });
+          },
         );
       },
     );
@@ -145,11 +152,17 @@ class _ChangePasswordState extends State<ChangePasswordPage> {
             ? CircularProgressIndicator()
             : ElevatedButton(
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    _formKey.currentState!.save();
-                    context.read<UserBloc>().add(UserSubmitted());
-                    context.router.push(HomeRoute());
+                  final form = _formKey.currentState;
+                  if (form != null && form.validate()) {
+                    form.save();
+                    BlocProvider.of<UserBloc>(context).add(
+                        UpdatePassword(id: passedId, password: newPassword));
                   }
+                  // if (_formKey.currentState!.validate()) {
+                  //   _formKey.currentState!.save();
+                  //   context.read<UserBloc>().add(UserSubmitted());
+                  //   context.router.push(HomeRoute());
+                  // }
                 },
                 style: ButtonStyle(
                     shadowColor: MaterialStateProperty.all(Colors.grey),

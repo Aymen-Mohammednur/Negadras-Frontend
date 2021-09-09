@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:negadras/auth/form_submission_status.dart';
@@ -18,6 +17,9 @@ class ChangeUsernamePage extends StatefulWidget {
 
 class _ChangeUsernameState extends State<ChangeUsernamePage> {
   final _formKey = GlobalKey<FormState>();
+
+  late String newUsername;
+  String passedId = "6134db2369ba186847c14dba";
 
   TextEditingController newUsernameController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
@@ -90,10 +92,15 @@ class _ChangeUsernameState extends State<ChangeUsernamePage> {
           controller: newUsernameController,
           decoration: InputDecoration(
               icon: Icon(Icons.person), hintText: 'New Username'),
-          validator: (value) =>
-              state.isValidUsername ? null : 'Username is too short',
-          onChanged: (value) => context.read<UserBloc>().add(UpdateUsername(
-              id: "to be received from session", username: value)),
+          // validator: (value) =>
+          //     state.isValidUsername ? null : 'Username is too short',
+          // onChanged: (value) => context.read<UserBloc>().add(UpdateUsername(
+          //     id: "to be received from session", username: value)),
+          onChanged: (value) {
+            setState(() {
+              this.newUsername = value;
+            });
+          },
         );
       },
     );
@@ -106,10 +113,15 @@ class _ChangeUsernameState extends State<ChangeUsernamePage> {
           controller: usernameController,
           decoration: InputDecoration(
               icon: Icon(Icons.person), hintText: 'Current Username'),
-          validator: (value) =>
-              state.isValidUsername ? null : 'Username is too short',
-          onChanged: (value) => context.read<UserBloc>().add(UpdateUsername(
-              id: "to be received from session", username: value)),
+          // validator: (value) =>
+          //     state.isValidUsername ? null : 'Username is too short',
+          // onChanged: (value) => context.read<UserBloc>().add(UpdateUsername(
+          //     id: "to be received from session", username: value)),
+          // onChanged: (value) {
+          //   setState(() {
+          //     this.newUsername = value;
+          //   });
+          // },
         );
       },
     );
@@ -122,11 +134,17 @@ class _ChangeUsernameState extends State<ChangeUsernamePage> {
             ? CircularProgressIndicator()
             : ElevatedButton(
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    _formKey.currentState!.save();
-                    context.read<UserBloc>().add(UserSubmitted());
-                    context.router.push(HomeRoute());
+                  final form = _formKey.currentState;
+                  if (form != null && form.validate()) {
+                    form.save();
+                    BlocProvider.of<UserBloc>(context).add(
+                        UpdateUsername(id: passedId, username: newUsername));
                   }
+                  // if (_formKey.currentState!.validate()) {
+                  //   _formKey.currentState!.save();
+                  //   context.read<UserBloc>().add(UserSubmitted());
+                  //   // context.router.push(HomeRoute());
+                  // }
                 },
                 style: ButtonStyle(
                     shadowColor: MaterialStateProperty.all(Colors.grey),
