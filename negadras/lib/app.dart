@@ -9,6 +9,9 @@ import 'package:negadras/auth/repository/auth_repository.dart';
 import 'package:negadras/auth/signup/bloc/sign_up_bloc.dart';
 import 'package:negadras/business/bloc/business_bloc.dart';
 import 'package:negadras/category/blocs/category_bloc.dart';
+import 'package:negadras/organization/bloc/organization_bloc.dart';
+import 'package:negadras/organization/data_providers/organization_data_provider.dart';
+import 'package:negadras/organization/repository/organization_repository.dart';
 import 'package:negadras/routes/router.gr.dart';
 
 import 'package:negadras/category/repository/category_repository.dart';
@@ -24,18 +27,21 @@ class App extends StatelessWidget {
     final categoryRepository = CategoryRepository(CategoryDataProvider());
     final businessRepository = BusinessRepository(BusinessDataProvider());
     final authRepository = AuthRepository(AuthDataProvider(http.Client()));
+    final orgRepository = OrganizationRepository(OrganizationDataProvider());
 
     return MultiBlocProvider(
       providers: [
         BlocProvider<CategoryBloc>(
-          create: (_) => CategoryBloc(categoryRepository: categoryRepository,)
-            ..add(CategoryFetch()),
+          create: (_) => CategoryBloc(
+            categoryRepository: categoryRepository,
+          )..add(CategoryFetch()),
         ),
         BlocProvider<BusinessBloc>(
-          create: (_) => BusinessBloc(
-            businessRepository: businessRepository,
-          )
-        ),
+            create: (_) => BusinessBloc(
+                  businessRepository: businessRepository,
+                )),
+        BlocProvider(
+            create: (context) => OrganizationBloc(orgRepo: orgRepository)),
         BlocProvider(create: (context) => LoginBloc(authRepo: authRepository)),
         BlocProvider(create: (context) => SignUpBloc(authRepo: authRepository)),
       ],
