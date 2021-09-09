@@ -10,7 +10,7 @@ class FavoritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNav(context),
+      bottomNavigationBar: bottomNav(context),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

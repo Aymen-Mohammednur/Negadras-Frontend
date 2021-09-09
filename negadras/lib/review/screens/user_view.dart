@@ -11,7 +11,8 @@ import 'package:negadras/utils/bottom_nav_bar.dart';
 // import 'package:negadras/review/scre'
 
 class UserViewPage extends StatefulWidget {
-  const UserViewPage({Key? key}) : super(key: key);
+  final String businessId;
+  const UserViewPage({Key? key, required this.businessId}) : super(key: key);
 
   @override
   UserViewPageState createState() => UserViewPageState();
@@ -34,24 +35,25 @@ class UserViewPageState extends State<UserViewPage> {
               controller: _scrollController,
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                imageStackWidget(),
-                buttonPanelWidget([
-                  IconTextPair().call(),
-                  // IconTextPair().map(),
-                  IconTextPair().website(),
-                  IconTextPair().claim()
-                ]),
-                BlocBuilder<ReviewBloc, ReviewState>(
-                  builder: (context, state) => UserReviewPrompt(context),
-                ),
-              ] + userReviewList(1),
+                    imageStackWidget(),
+                    buttonPanelWidget([
+                      IconTextPair().call(),
+                      // IconTextPair().map(),
+                      IconTextPair().website(),
+                      IconTextPair().claim()
+                    ]),
+                    BlocBuilder<ReviewBloc, ReviewState>(
+                      builder: (context, state) => UserReviewPrompt(context),
+                    ),
+                  ] +
+                  userReviewList(1),
             ),
             onNotification: (ping) {
               return scrollToTopWidgetMaker(ping, _scrollController);
             },
           ),
         ),
-        bottomNavigationBar: BottomNav(context),
+        bottomNavigationBar: bottomNav(context),
         floatingActionButton: Visibility(
           visible: _floatingActionIsVisible,
           child: FloatingActionButton(

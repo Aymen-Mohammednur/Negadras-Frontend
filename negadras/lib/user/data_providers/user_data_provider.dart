@@ -15,13 +15,14 @@ class UserDataProvider {
     }
   }
 
-  Future<User> update(String id, User user) async {
+  Future<User> updateUsername(String id, String username) async {
     final response = await http.patch(Uri.parse("$_baseUrl/$id"),
         headers: <String, String>{"Content-Type": "application/json"},
         body: jsonEncode({
           // "firstName": user.firstName,
           // "lastName": user.lastName,
-          "username": user.username,
+          "id": id,
+          "username": username,
           // "role": user.role,
         }));
 
@@ -32,11 +33,12 @@ class UserDataProvider {
     }
   }
 
-  Future<User> change(String id, User user) async {
+  Future<User> changePassword(String id, String password) async {
     final response = await http.patch(Uri.parse("$_baseUrl/$id"),
         headers: <String, String>{"Content-Type": "application/json"},
         body: jsonEncode({
-          "password": user.password,
+          "id": id,
+          "password": password,
         }));
 
     if (response.statusCode == 200) {

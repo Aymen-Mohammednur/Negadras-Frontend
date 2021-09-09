@@ -6,14 +6,14 @@ class BusinessDataProvider {
   // FOR ACTUAL DEVICE
   //static final String _baseUrl = "http://localhost:3000/api/category";
   // FOR EMULATOR
-  static final String _baseUrl = "http://10.0.2.2:3000/api/category";
+  static final String _baseUrl = "http://10.0.2.2:3000/api/business";
 
   Future<Business> create(Business business) async {
     final http.Response response = await http.post(Uri.parse(_baseUrl),
         headers: <String, String>{"Content-Type": "application/json"},
         body: jsonEncode({
           "name": business.name,
-          "type": business.type,
+          "categoryId": business.categoryId,
           "location": business.location,
           "phoneNumber": business.phoneNumber,
           "website": business.website,
@@ -39,11 +39,15 @@ class BusinessDataProvider {
     }
   }
 
-  Future<List<Business>> fetchByCategory(String categoryId) async {
+  Future<List<Business>> fetchByCategory(String? categoryId) async {
+    print("Inside business data provider");
     final response = await http.get(Uri.parse("$_baseUrl/filter/$categoryId"));
-
+    // print(response.body);
     if (response.statusCode == 200) {
       final business = jsonDecode(response.body) as List;
+      // print(business);
+      // final test = business.map((b) => Business.fromJson(b)).toList();
+      // print(test[0].name);
       return business.map((b) => Business.fromJson(b)).toList();
     } else {
       throw Exception("Failed to get business");
@@ -66,7 +70,7 @@ class BusinessDataProvider {
         body: jsonEncode({
           "_id": id,
           "name": business.name,
-          "type": business.type,
+          "categoryId": business.categoryId,
           "location": business.location,
           "phoneNumber": business.phoneNumber,
           "website": business.website,

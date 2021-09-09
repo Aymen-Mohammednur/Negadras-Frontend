@@ -1,54 +1,60 @@
 import 'dart:async';
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:negadras/business/models/business.dart';
 import 'package:negadras/business/models/models.dart';
-
 import 'package:negadras/business/repository/buisness_repository.dart';
+
 part 'business_event.dart';
 part 'business_state.dart';
 
 class BusinessBloc extends Bloc<BusinessEvent, BusinessState> {
   final BusinessRepository businessRepository;
 
-  BusinessBloc({required this.businessRepository}) : super(BusinessInitial());
+  BusinessBloc({required this.businessRepository})
+      : super(BusinessInitialState());
 
   @override
   Stream<BusinessState> mapEventToState(
     BusinessEvent event,
   ) async* {
-    if (event is SearchBusinesses) {
-      yield Fetching();
-      await Future.delayed(Duration(seconds: 2));
+    if (event is FilterBusinessEvent) {
+      yield FetchingState();
 
-      // //When the backend works
-      //
-      // final businessId = event.businessId;
-      // final realBusiness = await businessRepository.fetchOne(businessId);
-      // yield BusinessLoaded(realBusiness);
+      try {
+        final categoryId = event.categoryId;
+        final businessList =
+            await businessRepository.fetchByCategory(categoryId);
+        print(businessList[0].name);
+        yield BusinessFetchResultState(businessList);
+      } catch (e) {
+        print(e);
+        yield BusinessOperationFailure();
+      }
 
-      // final business = Business(
-      //     id: "test_id",
-      //     name: "Kaldis' Coffee",
-      //     type: "Restaurant",
-      //     location: "302 Bole Street");
-
-      yield AllBusinessSearchResult();
+      //Fake Fetch - Static Data
+      // yield StaticFetchState();
     }
 
-    if (event is LoadBusiness) {
-      yield Fetching();
-      await Future.delayed(Duration(seconds: 2));
-      yield BusinessView();
-    }
+    // if (event is LoadBusinessEvent) {
+    //   yield FetchingState();
+
+    //   //When the backend works
+
+    //   // final businessId = event.businessId;
+    //   // final business = await businessRepository.fetchOne(businessId);
+    //   // yield BusinessLoadedState(business);
+
+    //   await Future.delayed(Duration(seconds: 2));
+    //   yield BusinessView("");
+    // }
     if (event is AddBusiness) {
       try {
         await businessRepository.create(event.business);
         final business = await businessRepository.fetch();
         yield BusinessOperationSuccess(business);
-      } catch (_) {
+      } catch (e) {
         yield BusinessOperationFailure();
       }
     }
@@ -57,7 +63,7 @@ class BusinessBloc extends Bloc<BusinessEvent, BusinessState> {
         await businessRepository.update(event.business.id, event.business);
         final business = await businessRepository.fetch();
         yield BusinessOperationSuccess(business);
-      } catch (_) {
+      } catch (e) {
         yield BusinessOperationFailure();
       }
     }
@@ -66,7 +72,7 @@ class BusinessBloc extends Bloc<BusinessEvent, BusinessState> {
         await businessRepository.delete(event.id);
         final business = await businessRepository.fetch();
         yield BusinessOperationSuccess(business);
-      } catch (_) {
+      } catch (e) {
         yield BusinessOperationFailure();
       }
     }

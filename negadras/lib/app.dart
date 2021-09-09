@@ -28,15 +28,13 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<CategoryBloc>(
-          create: (_) => CategoryBloc(
-              categoryRepository: categoryRepository,
-              businessRepository: businessRepository)
+          create: (_) => CategoryBloc(categoryRepository: categoryRepository,)
             ..add(CategoryFetch()),
         ),
         BlocProvider<BusinessBloc>(
           create: (_) => BusinessBloc(
             businessRepository: businessRepository,
-          ),
+          )
         ),
         BlocProvider(create: (context) => LoginBloc(authRepo: authRepository)),
         BlocProvider(create: (context) => SignUpBloc(authRepo: authRepository)),

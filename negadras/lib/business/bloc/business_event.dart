@@ -7,12 +7,17 @@ abstract class BusinessEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class LoadBusiness extends BusinessEvent {
+class LoadBusinessEvent extends BusinessEvent {
   final String businessId;
-  LoadBusiness({required this.businessId});
+  LoadBusinessEvent({required this.businessId});
 }
 
-class SearchBusinesses extends BusinessEvent {}
+class SearchBusinessEvent extends BusinessEvent {}
+
+class FilterBusinessEvent extends BusinessEvent {
+  String? categoryId;
+  FilterBusinessEvent(this.categoryId);
+}
 
 class AddBusiness extends BusinessEvent {
   final Business business;
@@ -25,6 +30,9 @@ class AddBusiness extends BusinessEvent {
   @override
   String toString() => 'Course Created {course: $business}';
 }
+
+class AddBusinessToFavoritesEvent extends BusinessEvent {}
+
 class UpdateBusiness extends BusinessEvent {
   final Business business;
 
@@ -36,6 +44,7 @@ class UpdateBusiness extends BusinessEvent {
   @override
   String toString() => 'Course Updated {course: $business}';
 }
+
 class DeleteBusiness extends BusinessEvent {
   final String id;
 
