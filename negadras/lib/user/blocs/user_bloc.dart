@@ -28,7 +28,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     }
     if (event is UpdatePassword) {
       try {
-        await userRepository.updateUsername(event.id, event.password);
+        await userRepository.changePassword(event.id, event.password);
         yield state.copyWith(formStatus: SubmissionSuccess());
       } catch (e) {
         yield state.copyWith(formStatus: SubmissionFailed(e as Exception));

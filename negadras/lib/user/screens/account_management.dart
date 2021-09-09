@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:negadras/routes/router.gr.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:negadras/utils/bottom_nav_bar.dart';
 import '../../business/screens/widgets/label.dart';
 
@@ -38,7 +40,7 @@ class AccountManagementPage extends StatelessWidget {
           Column(
             children: [
               GestureDetector(
-                onTap: () => {},
+                onTap: () => {context.router.push(ChangeUsernameRoute())},
                 child: Card(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -52,7 +54,7 @@ class AccountManagementPage extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () => {},
+                onTap: () => {context.router.push(ChangePasswordRoute())},
                 child: Card(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
