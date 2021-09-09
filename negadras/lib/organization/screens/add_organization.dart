@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:negadras/auth/form_submission_status.dart';
-import 'package:negadras/auth/login/bloc/login_bloc.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:negadras/organization/bloc/organization_bloc.dart';
 import 'package:negadras/organization/data_providers/organization_data_provider.dart';
@@ -23,23 +22,22 @@ class _AddOrganizationPageState extends State<AddOrganizationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: RepositoryProvider(
-            create: (context) =>
-                OrganizationRepository(OrganizationDataProvider()),
-            child: Scaffold(
-              body: BlocProvider(
-                create: (context) => OrganizationBloc(
-                    orgRepo: context.read<OrganizationRepository>()),
-                child: Stack(
-                  alignment: Alignment.bottomCenter,
-                  children: [
-                    _label(),
-                    _addOrganizationForm(),
-                  ],
-                ),
-              ),
-            )));
+    return Scaffold(
+      body: RepositoryProvider(
+        create: (context) => OrganizationRepository(OrganizationDataProvider()),
+        child: BlocProvider(
+          create: (context) =>
+              OrganizationBloc(orgRepo: context.read<OrganizationRepository>()),
+          child: Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
+              _label(),
+              _addOrganizationForm(),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _addOrganizationForm() {
@@ -87,12 +85,12 @@ class _AddOrganizationPageState extends State<AddOrganizationPage> {
           controller: organizationNameController,
           decoration: InputDecoration(
               icon: Icon(Icons.account_balance),
-              hintText: 'Organization Name: '),
+              hintText: 'Organization Name '),
           validator: (value) =>
               state.isValidUsername ? null : 'Organization Name is too short',
           onChanged: (value) => context
-              .read<LoginBloc>()
-              .add(LoginUsernameChanged(username: value)),
+              .read<OrganizationBloc>()
+              .add(OrganizationNameChanged(organizationName: value)),
         );
       },
     );
@@ -107,17 +105,20 @@ class _AddOrganizationPageState extends State<AddOrganizationPage> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
-                    context.read<OrganizationBloc>().add(OrganizationSubmitted(
-                        Organization(id: '', name: state.organizationName)));
-                    context.router.push(HomeRoute());
+                    final organization =
+                        Organization(id: '', name: state.organizationName);
+                    context
+                        .read<OrganizationBloc>()
+                        .add(OrganizationSubmitted(organization));
+                    context.router.push(ListOrganizationRoute());
                   }
                 },
                 style: ButtonStyle(
-                    shadowColor: MaterialStateProperty.all(Colors.grey),
+                    shadowColor: MaterialStateProperty.all(Colors.limeAccent),
                     backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.black87)),
+                        MaterialStateProperty.all<Color>(Colors.teal)),
                 child: Text(
-                  "Login",
+                  "Add Organization",
                   style: TextStyle(color: Colors.white),
                 ));
       },
