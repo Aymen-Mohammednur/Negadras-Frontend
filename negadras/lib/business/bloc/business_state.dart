@@ -6,32 +6,40 @@ abstract class BusinessState extends Equatable {
   List<Object> get props => [];
 }
 
-class BusinessInitial extends BusinessState {}
+class BusinessInitialState extends BusinessState {}
 
-class BusinessSearching extends BusinessState {}
+class FetchingState extends BusinessState {}
 
-class AllBusinessesLoaded extends BusinessState {}
-
-class BusinessLoaded extends BusinessState {
+class BusinessLoadedState extends BusinessState {
   final Business business;
-  BusinessLoaded(this.business);
+  BusinessLoadedState(this.business);
 }
 
-class Fetching extends BusinessState {}
+class BusinessView extends BusinessState {
+  final String businessId;
+  BusinessView(this.businessId);
+}
 
-class BusinessView extends BusinessState {}
+class BusinessFetchResultState extends BusinessState {
+  final List<Business> businessList;
+  BusinessFetchResultState(this.businessList);
+}
 
-class AllBusinessSearchResult extends BusinessState {}
+class StaticFetchState extends BusinessState {}
 
 class BusinessFilterResult extends BusinessState {}
 
 class BusinessOperationSuccess extends BusinessState {
   final Iterable<Business> business;
 
-  BusinessOperationSuccess([this.business = const[]]);
+  BusinessOperationSuccess([this.business = const []]);
 
   @override
   List<Object> get props => [business];
 }
 
-class BusinessOperationFailure extends BusinessState {}
+class BusinessOperationFailure extends BusinessState {
+  final Exception errMsg;
+
+  BusinessOperationFailure(this.errMsg);
+}

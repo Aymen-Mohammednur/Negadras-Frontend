@@ -16,7 +16,7 @@ class FilterBusinessPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final businessBloc = BlocProvider.of<BusinessBloc>(context);
     return Scaffold(
-        bottomNavigationBar: BottomNav(context),
+        bottomNavigationBar: bottomNav(context),
         body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,30 +33,27 @@ class FilterBusinessPage extends StatelessWidget {
               BlocBuilder<BusinessBloc, BusinessState>(
                 builder: (context, businessState) {
                   print(businessState);
-                  if (businessState is BusinessInitial) {
-                    businessBloc.add(SearchBusinesses());
-                  }
-                  if (businessState is Fetching) {
+                  if (businessState is BusinessInitialState) {
+                    businessBloc.add(SearchBusinessEvent());
+                  } else if (businessState is FetchingState) {
                     return Expanded(
                       child: Center(
                           child: CircularProgressIndicator(
                         color: Colors.black,
                       )),
                     );
-                  }
-                  if (businessState is BusinessView) {
-                    businessBloc.add(SearchBusinesses());
-                    context.pushRoute(UserViewRoute());
-                  }
-                  if (businessState is AllBusinessSearchResult) {
+                  } else if (businessState is BusinessView) {
+                    businessBloc.add(SearchBusinessEvent());
+                    // context.pushRoute(UserViewRoute());
+                  } else if (businessState is StaticFetchState) {
                     return Expanded(
                       child: ListView.builder(
                         itemCount: 10,
                         itemBuilder: (context, i) {
                           return GestureDetector(
                             onTap: () {
-                              businessBloc
-                                  .add(LoadBusiness(businessId: "businessId"));
+                              businessBloc.add(
+                                  LoadBusinessEvent(businessId: "businessId"));
                             },
                             child: BusinessCard(
                               businessName: 'Kaldi\'s Coffee',
@@ -68,9 +65,32 @@ class FilterBusinessPage extends StatelessWidget {
                         },
                       ),
                     );
-                  } else {
-                    return Container();
+                  } else if (businessState is BusinessFetchResultState) {
+                    ListView.builder(
+                      itemCount: businessState.businessList.length,
+                      itemBuilder: (context, i) {
+                        return GestureDetector(
+                          onTap: () {
+                            businessBloc.add(LoadBusinessEvent(
+                                businessId: businessState.businessList[i].id));
+                          },
+                          child: BusinessCard(
+                            businessName: businessState.businessList[i].name,
+                            rating:
+                                4, //Get the review repo and pass the business id
+                            locationInfo:
+                                businessState.businessList[i].location,
+                            imagePath: 'assets/images/macbook.jpg',
+                          ),
+                        );
+                      },
+                    );
+                  } else if (businessState is BusinessOperationFailure) {
+                    return Center(
+                      child: Text(businessState.errMsg.toString()),
+                    );
                   }
+                  return Container();
                 },
               ),
             ],
