@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart' as http;
 import 'package:negadras/auth/data_providers/auth-data-provider.dart';
 import 'package:negadras/auth/repository/auth_repository.dart';
 import 'package:negadras/auth/form_submission_status.dart';
@@ -24,7 +25,7 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: RepositoryProvider(
-            create: (context) => AuthRepository(AuthDataProvider()),
+            create: (context) => AuthRepository(AuthDataProvider(http.Client())),
             child: Scaffold(
               body: BlocProvider(
                 create: (context) =>

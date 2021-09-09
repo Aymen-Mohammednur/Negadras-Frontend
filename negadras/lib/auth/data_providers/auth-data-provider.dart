@@ -5,11 +5,13 @@ import 'package:http/http.dart' as http;
 
 class AuthDataProvider {
   static final String _baseUrl = "${StringConstants.BASE_URL_EMULATOR}/auth";
+  http.Client client;
+
+  AuthDataProvider(this.client);
 
   Future<Register> createRegister(Register register) async {
-    print("before calling api");
     final http.Response response =
-        await http.post(Uri.parse("$_baseUrl/register"),
+        await client.post(Uri.parse("$_baseUrl/register"),
             headers: <String, String>{"Content-Type": "application/json"},
             body: jsonEncode({
               "username": register.username,
@@ -17,10 +19,7 @@ class AuthDataProvider {
               "firstName": register.firstname,
               "lastName": register.lastname
             }));
-    print("finished request");
     if (response.statusCode == 200) {
-      print("response is for register: ");
-      print(response.body);
       return Register.fromJson(jsonDecode(response.body));
     }
     {
@@ -29,8 +28,7 @@ class AuthDataProvider {
   }
 
   Future<Login> readLogin(Login login) async {
-    print("let's do some logging in from backend");
-    final http.Response response = await http.post(
+    final http.Response response = await client.post(
       Uri.parse("$_baseUrl/login"),
       headers: <String, String>{"Content-Type": "application/json"},
       body: jsonEncode({
@@ -38,11 +36,8 @@ class AuthDataProvider {
         StringConstants.PASSWORD: login.password
       }),
     );
-    print("response was: ");
-    print(response.statusCode);
+
     if (response.statusCode == 200) {
-      print("response with 201");
-      print(response.body);
       return Login.fromJson(jsonDecode(response.body));
     }
     {
