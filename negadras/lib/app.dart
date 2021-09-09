@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart' as http;
+
 import 'package:negadras/auth/data_providers/auth-data-provider.dart';
 import 'package:negadras/auth/login/bloc/login_bloc.dart';
 import 'package:negadras/auth/repository/auth_repository.dart';
@@ -21,7 +23,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     final categoryRepository = CategoryRepository(CategoryDataProvider());
     final businessRepository = BusinessRepository(BusinessDataProvider());
-    final authRepository = AuthRepository(AuthDataProvider());
+    final authRepository = AuthRepository(AuthDataProvider(http.Client()));
 
     return MultiBlocProvider(
       providers: [
