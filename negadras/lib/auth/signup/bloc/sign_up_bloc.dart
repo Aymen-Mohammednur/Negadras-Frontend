@@ -4,12 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:negadras/auth/repository/auth_repository.dart';
 import 'package:negadras/auth/form_submission_status.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'sign_up_event.dart';
 part 'sign_up_state.dart';
 
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   final AuthRepository authRepo;
+
   SignUpBloc({required this.authRepo}) : super(SignUpState());
 
   @override

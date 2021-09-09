@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:negadras/auth/data_providers/auth-data-provider.dart';
+import 'package:negadras/auth/models/login.dart';
 import 'package:negadras/auth/repository/auth_repository.dart';
 import 'package:negadras/auth/form_submission_status.dart';
 import 'package:negadras/auth/login/bloc/login_bloc.dart';
@@ -126,7 +127,8 @@ class _LoginViewState extends State<LoginView> {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
                     context.read<LoginBloc>().add(LoginSubmitted());
-                    context.router.push(HomeRoute());
+                    print("Here");
+                    context.router.pushAndPopUntil(HomeRoute(),predicate: (route)=>false);
                   }
                 },
                 style: ButtonStyle(

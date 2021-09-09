@@ -19,6 +19,7 @@ import 'package:negadras/business/data_providers/buisness_data_provider.dart';
 class App extends StatelessWidget {
   final _appRouter = AppRouter();
 
+
   @override
   Widget build(BuildContext context) {
     final categoryRepository = CategoryRepository(CategoryDataProvider());

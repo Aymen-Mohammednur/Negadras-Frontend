@@ -8,14 +8,15 @@ class AuthRepository {
 
   Future<Login> login(
       {required String username, required String password}) async {
-    print('attempting login');
-    if (username == 'valid' && password == 'password') {
-      await Future.delayed(Duration(seconds: 2));
-      print('logged in');
+    try{
+      print('attempting login');
       final login = Login(username: username, password: password);
-      return this.dataProvider.readLogin(login) as Login;
+      return dataProvider.readLogin(login) as Login;
+    }catch(e){
+      throw Exception('Login failed');
     }
-    throw Exception('Login failed');
+
+
   }
 
   Future<Register> signUp(
@@ -23,13 +24,20 @@ class AuthRepository {
       required String lastname,
       required String firstname,
       required String password}) async {
-    await Future.delayed(Duration(seconds: 2));
-    final register = Register(
-        username: username,
-        password: password,
-        lastname: lastname,
-        firstname: firstname);
-    return this.dataProvider.createRegister(register) as Register;
+
+    try{
+      // print("attempting signup");
+      final register = Register(
+          username: username,
+          password: password,
+          lastname: lastname,
+          firstname: firstname);
+      // print("Register: $register");
+      return this.dataProvider.createRegister(register) as Register;
+    }catch(e){
+      throw Exception("SignUp failed");
+    }
+
   }
 
   Future<void> signOut() async {
