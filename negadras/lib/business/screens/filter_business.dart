@@ -115,7 +115,7 @@ class FilterBusinessPage extends StatelessWidget {
                     }
                     return Center(
                       // child: Text(businessState.errMsg.toString()),
-                      child: Text("Some error occurred"),
+                      child: Text("Failed to Fetch Businesses"),
                     );
                   }
                   return Expanded(
