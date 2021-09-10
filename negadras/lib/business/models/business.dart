@@ -7,12 +7,14 @@ class Business {
   final String? website;
   final String? email;
   final String? organization;
+  final bool? favorite;
 
   Business(
       {required this.id,
       required this.name,
       required this.categoryId,
       required this.location,
+      required this.favorite,
       this.phoneNumber,
       this.website,
       this.email,
@@ -20,13 +22,15 @@ class Business {
 
   factory Business.fromJson(Map<String, dynamic> json) {
     return Business(
-        id: json['_id'],
-        name: json['name'],
-        categoryId: json['categoryId'],
-        location: json['location'],
-        phoneNumber: json['phoneNumber'],
-        website: json['website'],
-        email: json['email'],
-        organization: json['organizationId']);
+      id: json['_id'],
+      name: json['name'],
+      categoryId: json['categoryId'],
+      location: json['location'],
+      favorite: json['favorite'],
+      phoneNumber: json['phoneNumber'],
+      website: json['website'],
+      email: json['email'],
+      organization: json['organizationId'],
+    );
   }
 }

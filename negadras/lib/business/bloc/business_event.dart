@@ -15,9 +15,11 @@ class LoadBusinessEvent extends BusinessEvent {
 class SearchBusinessEvent extends BusinessEvent {}
 
 class FilterBusinessEvent extends BusinessEvent {
-  String? categoryId;
+  final String? categoryId;
   FilterBusinessEvent(this.categoryId);
 }
+
+class ShowFavoritesEvent extends BusinessEvent {}
 
 class AddBusiness extends BusinessEvent {
   final Business business;
@@ -31,7 +33,17 @@ class AddBusiness extends BusinessEvent {
   String toString() => 'Business Created {course: $business}';
 }
 
-class AddBusinessToFavoritesEvent extends BusinessEvent {}
+class AddToFavoritesEvent extends BusinessEvent {
+  final String userId;
+  final String businessId;
+  AddToFavoritesEvent(this.businessId, this.userId);
+}
+
+class RemoveFromFavoritesEvent extends BusinessEvent {
+  final String userId;
+  final String businessId;
+  RemoveFromFavoritesEvent(this.businessId, this.userId);
+}
 
 class UpdateBusiness extends BusinessEvent {
   final Business business;

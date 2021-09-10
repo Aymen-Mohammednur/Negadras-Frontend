@@ -30,4 +30,12 @@ class BusinessRepository {
   Future<void> delete(String id) async {
     this.dataProvider.delete(id);
   }
+
+  Future<void> addToFavorites(String businessId, String userId) async {
+    this.dataProvider.addToFavorites(businessId, userId);
+  }
+
+  Future<void> removeFromFavorites(String businessId, String userId) async {
+    this.dataProvider.removeFromFavorites(businessId, userId);
+  }
 }

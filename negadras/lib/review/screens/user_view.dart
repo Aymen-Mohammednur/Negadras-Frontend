@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:negadras/business/screens/favorites.dart';
+import 'package:negadras/business/screens/favorites_page.dart';
 import 'package:negadras/business/screens/my_business.dart';
 import 'package:negadras/business/screens/widgets.dart';
 import 'package:negadras/review/blocs/review_bloc.dart';

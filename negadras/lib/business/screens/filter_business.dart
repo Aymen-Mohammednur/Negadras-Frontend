@@ -102,7 +102,7 @@ class FilterBusinessPage extends StatelessWidget {
                   if (businessState is BusinessOperationFailure) {
                     return Center(
                       // child: Text(businessState.errMsg.toString()),
-                      child: Text("Some error occurred"),
+                      child: Text("Failed to retrieve businesses"),
                     );
                   }
                   return Expanded(

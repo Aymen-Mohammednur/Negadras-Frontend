@@ -91,4 +91,21 @@ class BusinessDataProvider {
       throw Exception("Field to delete the Business");
     }
   }
+
+  Future<void> addToFavorites(String businessId, String userId) async {
+    String query = businessId + userId;
+    final response = await http.post(Uri.parse("$_baseUrl/Favorites/?$query"));
+    if (response.statusCode != 204) {
+      throw Exception("Failed to add business to favorites");
+    }
+  }
+
+  Future<void> removeFromFavorites(String businessId, String userId) async {
+    String query = businessId + userId;
+    final response =
+        await http.delete(Uri.parse("$_baseUrl/Favorites/?$query"));
+    if (response.statusCode != 204) {
+      throw Exception("Failed to delete business to favorites");
+    }
+  }
 }
