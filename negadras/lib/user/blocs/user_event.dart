@@ -43,7 +43,7 @@ class UpdatePassword extends UserEvent {
 class DeleteUser extends UserEvent {
   final String userid;
 
-  const DeleteUser(this.userid);
+  const DeleteUser( {required this.userid});
 
   @override
   List<Object> get props => [userid];
