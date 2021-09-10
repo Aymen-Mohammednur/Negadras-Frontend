@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
@@ -8,16 +7,15 @@ import 'package:negadras/auth/form_submission_status.dart';
 import 'package:negadras/auth/signup/bloc/sign_up_bloc.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:negadras/routes/router.gr.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-class SignUpPage extends StatefulWidget {
-  SignUpPage({Key? key}) : super(key: key);
+class SignUpView extends StatefulWidget {
+  SignUpView({Key? key}) : super(key: key);
 
   @override
-  _SignUpPageState createState() => _SignUpPageState();
+  _SignUpViewState createState() => _SignUpViewState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _SignUpViewState extends State<SignUpView> {
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController firstNameController = TextEditingController();
@@ -30,18 +28,6 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        textTheme: TextTheme(headline1: TextStyle(color: Colors.white)),
-        primaryColor: Colors.amber,
-        fontFamily: GoogleFonts.josefinSans(
-          fontSize: 40,
-          fontWeight: FontWeight.bold,
-        ).fontFamily,
-        elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ButtonStyle(
-                // backgroundColor: Colors.amber,
-                )),
-      ),
       home: RepositoryProvider(
         create: (context) => AuthRepository(AuthDataProvider(http.Client())),
         child: Scaffold(
@@ -51,8 +37,6 @@ class _SignUpPageState extends State<SignUpPage> {
             child: Stack(
               alignment: Alignment.bottomCenter,
               children: [
-                // _helloLabel(),
-                // SizedBox(height: 30,),
                 _label(),
                 _signUpForm(),
                 _showLoginButton(),
@@ -75,7 +59,7 @@ class _SignUpPageState extends State<SignUpPage> {
       child: Form(
         key: _formKey,
         child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 70),
+            padding: EdgeInsets.symmetric(horizontal: 40),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -95,18 +79,6 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  // Widget _helloLabel() {
-  //   return SafeArea(
-  //       child: Container(
-  //     alignment: Alignment.topCenter,
-  //     child: Text(
-  //       'Hello.',
-  //       style: TextStyle(
-  //           color: Colors.black54, fontSize: 60, fontWeight: FontWeight.w800),
-  //     ),
-  //   ));
-  // }
-
   Widget _label() {
     return SafeArea(
       child: Container(
@@ -114,8 +86,7 @@ class _SignUpPageState extends State<SignUpPage> {
           padding: EdgeInsets.only(top: 5),
           child: Text(
             'Create Account',
-            style:
-                TextStyle(fontWeight: FontWeight.w500, fontSize: 30, height: 3),
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 30),
           )),
     );
   }
@@ -125,9 +96,8 @@ class _SignUpPageState extends State<SignUpPage> {
       builder: (context, state) {
         return TextFormField(
           controller: usernameController,
-          decoration: InputDecoration(
-              icon: new Image.asset("../../assets/images/icons8-person-24.png"),
-              hintText: 'Username'),
+          decoration:
+              InputDecoration(icon: Icon(Icons.person), hintText: 'Username'),
           validator: (value) =>
               state.isValidUsername ? null : 'Username is too short',
           onChanged: (value) => context
@@ -233,13 +203,11 @@ class _SignUpPageState extends State<SignUpPage> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     context.read<SignUpBloc>().add(SignUpSubmitted());
-                    context.router.push(LoginRoute());
+                    context.router.push(LoginView());
                   }
                 },
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.green.shade800,
-                  minimumSize: Size(200, 48),
-                ),
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.black87)),
                 child: Text(
                   "Sign Up",
                   style: TextStyle(color: Colors.white),
@@ -254,11 +222,10 @@ class _SignUpPageState extends State<SignUpPage> {
         padding: EdgeInsets.only(bottom: 30),
         child: TextButton(
           onPressed: () {
-            context.router.push(LoginRoute());
+            context.router.push(LoginView());
           },
           child: Text(
             'Already have an account? Sign in.',
-            style: TextStyle(color: Colors.green.shade800),
           ),
         ),
       ),

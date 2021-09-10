@@ -20,18 +20,18 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   ) async* {
     if (event is UpdateUsername) {
       try {
-        await userRepository.updateUsername(event.username);
+        await userRepository.updateUsername(event.id, event.username);
         yield state.copyWith(formStatus: SubmissionSuccess());
       } catch (e) {
-        yield state.copyWith(formStatus: SubmissionFailed());
+        yield state.copyWith(formStatus: SubmissionFailed(e as Exception));
       }
     }
     if (event is UpdatePassword) {
       try {
-        await userRepository.changePassword(event.password);
+        await userRepository.changePassword(event.id, event.password);
         yield state.copyWith(formStatus: SubmissionSuccess());
       } catch (e) {
-        yield state.copyWith(formStatus: SubmissionFailed());
+        yield state.copyWith(formStatus: SubmissionFailed(e as Exception));
       }
     }
     if (event is DeleteUser) {
@@ -39,7 +39,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         await userRepository.delete(event.userid);
         yield state.copyWith(formStatus: SubmissionSuccess());
       } catch (e) {
-        yield state.copyWith(formStatus: SubmissionFailed());
+        yield state.copyWith(formStatus: SubmissionFailed(e as Exception));
       }
     }
   }

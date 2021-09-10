@@ -82,7 +82,6 @@ class AccountManagementPage extends StatelessWidget {
                   ),
                 ),
               ),
-              
             ],
           ),
         ],

@@ -53,8 +53,7 @@ class _ChangePasswordState extends State<ChangePasswordPage> {
       listener: (context, state) {
         final formStatus = state.formStatus;
         if (formStatus is SubmissionFailed) {
-          // _showSnackBar(context, formStatus.exception.toString());
-          _showSnackBar(context, "Some error occured");
+          _showSnackBar(context, formStatus.exception.toString());
         }
       },
       child: Form(
@@ -156,10 +155,8 @@ class _ChangePasswordState extends State<ChangePasswordPage> {
                   final form = _formKey.currentState;
                   if (form != null && form.validate()) {
                     form.save();
-                    BlocProvider.of<UserBloc>(context)
-                        .add(UpdatePassword(password: newPassword));
-                    context.router.pop();
-                    _showSnackBar(context, "Success");
+                    BlocProvider.of<UserBloc>(context).add(
+                        UpdatePassword(id: passedId, password: newPassword));
                   }
                   // if (_formKey.currentState!.validate()) {
                   //   _formKey.currentState!.save();

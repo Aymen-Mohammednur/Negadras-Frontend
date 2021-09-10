@@ -142,7 +142,6 @@ flutter:
   assets:
     - assets/images/
     - images/placeholder-1.jpg
-    - images/icons8-person-24.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
