@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:negadras/auth/form_submission_status.dart';
+import 'package:negadras/organization/form_submission_status.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:negadras/organization/bloc/organization_bloc.dart';
 import 'package:negadras/organization/data_providers/organization_data_provider.dart';

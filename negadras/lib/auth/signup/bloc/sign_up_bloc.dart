@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:negadras/auth/models/response/registerResponse.dart';
 import 'package:negadras/auth/repository/auth_repository.dart';
 import 'package:negadras/auth/form_submission_status.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,7 +12,6 @@ part 'sign_up_state.dart';
 
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   final AuthRepository authRepo;
-
   SignUpBloc({required this.authRepo}) : super(SignUpState());
 
   @override
@@ -46,12 +46,13 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       yield state.copyWith(formStatus: FormSubmitting());
 
       try {
-        await authRepo.signUp(
+        RegisterResponse registerResponse = await authRepo.signUp(
             username: state.username,
             lastname: state.lastname,
             firstname: state.firstname,
             password: state.password);
-        yield state.copyWith(formStatus: SubmissionSuccess());
+
+        yield state.copyWith(formStatus: SubmissionSuccess(registerResponse));
       } catch (e) {
         yield state.copyWith(formStatus: SubmissionFailed(e as Exception));
       }

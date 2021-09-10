@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:negadras/auth/form_submission_status.dart';
+import 'package:negadras/user/form_submission_status.dart';
 
 import 'package:negadras/user/repository/user_repository.dart';
 part 'user_event.dart';

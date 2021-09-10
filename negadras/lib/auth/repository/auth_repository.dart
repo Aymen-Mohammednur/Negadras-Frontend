@@ -1,4 +1,6 @@
 import 'package:negadras/auth/data_providers/auth-data-provider.dart';
+import 'package:negadras/auth/models/response/loginResponse.dart';
+import 'package:negadras/auth/models/response/registerResponse.dart';
 
 import '../models/models.dart';
 
@@ -6,7 +8,7 @@ class AuthRepository {
   final AuthDataProvider dataProvider;
   AuthRepository(this.dataProvider);
 
-  Future<Login> login(
+  Future<LoginResponse> login(
       {required String username, required String password}) async {
     try{
       print('attempting login');
@@ -19,7 +21,7 @@ class AuthRepository {
 
   }
 
-  Future<Register> signUp(
+  Future<RegisterResponse> signUp(
       {required String username,
       required String lastname,
       required String firstname,

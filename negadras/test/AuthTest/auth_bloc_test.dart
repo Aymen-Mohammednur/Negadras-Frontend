@@ -94,7 +94,7 @@ void main() {
       },
       wait: const Duration(milliseconds: 500),
       expect: () {
-        return [isA<SignUpState>()];
+        return [isA<SignUpState>(),isA<SignUpState>()];
       },
     );
 

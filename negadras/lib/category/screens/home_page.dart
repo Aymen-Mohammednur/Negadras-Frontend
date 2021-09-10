@@ -7,6 +7,7 @@ import 'package:negadras/business/screens/widgets.dart';
 import 'package:negadras/routes/router.gr.dart';
 import 'package:negadras/utils/bottom_nav_bar.dart';
 import 'package:negadras/category/blocs/category_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -56,7 +57,10 @@ class _HomePageState extends State<HomePage> {
       body: BlocBuilder<CategoryBloc, CategoryState>(
         builder: (context, state) {
           print(state);
+
+
           if (state is CategoryOperationFailed) {
+
             return Center(
               child: Text("Could not do category operation"),
             );

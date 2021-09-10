@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:negadras/auth/form_submission_status.dart';
+import 'package:negadras/user/form_submission_status.dart';
 import 'package:negadras/routes/router.gr.dart';
 import 'package:negadras/user/blocs/user_bloc.dart';
 import 'package:negadras/user/data_providers/user_data_provider.dart';

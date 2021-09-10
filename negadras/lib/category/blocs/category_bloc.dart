@@ -4,6 +4,7 @@ import 'package:negadras/category/models/category.dart';
 import 'package:negadras/business/models/business.dart';
 import 'package:negadras/category/repository/category_repository.dart';
 import 'package:negadras/business/repository/buisness_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'category_event.dart';
 part 'category_state.dart';
@@ -20,6 +21,11 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     if (event is CategoryFetch) {
       yield Fetching();
       print("Before Try");
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      final val = await prefs.getString("user_id");
+      print("SAVED the id: $val");
+
       try {
         // print("Inside Try before fetch");
         final categories = await categoryRepository.fetchAll();

@@ -1,22 +1,22 @@
 class RegisterResponse {
   final String username;
-  final String password;
   final String firstname;
   final String lastname;
+  final String id;
   RegisterResponse(
       {required this.username,
-      required this.password,
       required this.firstname,
-      required this.lastname});
+      required this.lastname,
+      required this.id});
 
-  List<Object> get props => [username, password, firstname, lastname];
+  List<Object> get props => [username, id, firstname, lastname];
 
   factory RegisterResponse.fromJson(Map<String, dynamic> json) {
     return RegisterResponse(
         username: json['username'],
-        password: json['password'],
-        firstname: json['firstname'],
-        lastname: json['lastname']);
+        id: json['_id'],
+        firstname: json['firstName'],
+        lastname: json['lastName']);
   }
 
   @override

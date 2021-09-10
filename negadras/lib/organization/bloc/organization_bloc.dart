@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:negadras/auth/form_submission_status.dart';
+import 'package:negadras/organization/form_submission_status.dart';
 import 'package:negadras/organization/data_providers/organization_data_provider.dart';
 import 'package:negadras/organization/models/organization_model.dart';
 import 'package:negadras/organization/repository/organization_repository.dart';

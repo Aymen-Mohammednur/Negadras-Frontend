@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:negadras/auth/data_providers/auth-data-provider.dart';
-import 'package:negadras/auth/models/login.dart';
+import 'package:negadras/auth/models/response/loginResponse.dart';
 import 'package:negadras/auth/repository/auth_repository.dart';
 import 'package:negadras/auth/form_submission_status.dart';
 import 'package:negadras/auth/login/bloc/login_bloc.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:negadras/routes/router.gr.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginView extends StatefulWidget {
   LoginView({Key? key}) : super(key: key);
@@ -20,6 +21,7 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   final _formKey = GlobalKey<FormState>();
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -46,11 +48,19 @@ class _LoginViewState extends State<LoginView> {
   }
 
   Widget _loginForm() {
+
     return BlocListener<LoginBloc, LoginState>(
-      listener: (context, state) {
+      listener: (context, state) async {
+
         if (state.formStatus is SubmissionFailed) {
           _showSnackBar(context, "Username or Password is wrong");
         }else if (state.formStatus is SubmissionSuccess){
+          LoginResponse loginResponse = (state.formStatus as SubmissionSuccess).response as LoginResponse;
+          SharedPreferences prefs = await _prefs;
+
+          await prefs.setString("user_id",loginResponse.id);
+          await prefs.setString("token",loginResponse.token);
+
           context.router.pushAndPopUntil(HomeRoute(),predicate: (route)=>false);
         }
       },
