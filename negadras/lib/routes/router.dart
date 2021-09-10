@@ -2,6 +2,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:negadras/auth/login/login_view.dart';
 import 'package:negadras/auth/signup/sign_up_view.dart';
 import 'package:negadras/business/screens/add_business.dart';
+import 'package:negadras/business/screens/business_owner_view.dart';
 import 'package:negadras/business/screens/edit_business.dart';
 import 'package:negadras/business/screens/favorites.dart';
 import 'package:negadras/business/screens/filter_business.dart';
@@ -28,8 +29,8 @@ import 'package:negadras/user/screens/me_tab.dart';
     AutoRoute(page: AccountManagementPage),
     AutoRoute(page: MyBusinessPage),
     AutoRoute(page: UserViewPage),
-    AutoRoute(page: SignUpView, initial: true),
-    AutoRoute(page: LoginView),
+    AutoRoute(page: SignUpPage, initial: true),
+    AutoRoute(page: LoginPage),
     AutoRoute(page: DeleteAccountPage),
     AutoRoute(page: ChangeUsernamePage),
     AutoRoute(page: ChangePasswordPage),
@@ -37,6 +38,7 @@ import 'package:negadras/user/screens/me_tab.dart';
     AutoRoute(page: EditBusinessPage),
     AutoRoute(page: AddOrganizationPage),
     AutoRoute(page: ListOrganizationPage),
+    AutoRoute(page: BusinessOwnerViewPage)
   ],
 )
 class $AppRouter {}
