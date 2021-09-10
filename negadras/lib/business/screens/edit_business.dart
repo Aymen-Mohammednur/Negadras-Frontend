@@ -247,7 +247,7 @@ class _EditFormState extends State<EditForm> {
       appBar: AppBar(
         title: Text("Edit Business"),
       ),
-      bottomNavigationBar: bottomNav(context),
+      // bottomNavigationBar: bottomNav(context),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.all(24),

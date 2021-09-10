@@ -201,7 +201,7 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
       appBar: AppBar(
         title: Text("Add New Business"),
       ),
-      bottomNavigationBar: bottomNav(context),
+      // bottomNavigationBar: bottomNav(context),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.all(24),

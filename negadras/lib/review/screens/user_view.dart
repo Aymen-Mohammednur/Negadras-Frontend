@@ -59,7 +59,7 @@ class UserViewPageState extends State<UserViewPage> {
               return scrollToTopWidgetMaker(ping, _scrollController);
             },
           ),
-        bottomNavigationBar: bottomNav(context),
+        // bottomNavigationBar: bottomNav(context),
         floatingActionButton: Visibility(
           visible: _floatingActionIsVisible,
           child: FloatingActionButton(

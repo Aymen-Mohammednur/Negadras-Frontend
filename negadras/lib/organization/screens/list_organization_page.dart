@@ -110,7 +110,8 @@ class _ListOrganizationPageState extends State<ListOrganizationPage> {
         title: Text("Your Organizations"),
         centerTitle: true,
       ),
-      bottomNavigationBar: bottomNav(context),
+      // bottomNavigationBar: bottomNav(context, 0),
+      bottomNavigationBar: ownerBottomNav(context, 2),
       body: BlocBuilder<OrganizationBloc, OrganizationState>(
         builder: (context, orgState) {
           print(orgState);

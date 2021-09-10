@@ -13,7 +13,8 @@ class FavoritesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final businessBloc = BlocProvider.of<BusinessBloc>(context);
     return Scaffold(
-      bottomNavigationBar: bottomNav(context),
+      // bottomNavigationBar: bottomNav(context, 1),
+      bottomNavigationBar: ownerBottomNav(context, 1),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

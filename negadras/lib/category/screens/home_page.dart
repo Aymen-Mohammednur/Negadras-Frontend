@@ -110,7 +110,8 @@ class _HomePageState extends State<HomePage> {
         child: Icon(Icons.add),
         backgroundColor: Colors.green.shade900,
       ),
-      bottomNavigationBar: bottomNav(context),
+      // bottomNavigationBar: bottomNav(context, 0),
+      bottomNavigationBar: ownerBottomNav(context, 0),
     );
   }
 }
