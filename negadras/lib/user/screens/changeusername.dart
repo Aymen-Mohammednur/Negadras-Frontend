@@ -19,7 +19,6 @@ class _ChangeUsernameState extends State<ChangeUsernamePage> {
   final _formKey = GlobalKey<FormState>();
 
   late String newUsername;
-  
   String passedId = "6134db2369ba186847c14dba";
 
   TextEditingController newUsernameController = TextEditingController();
@@ -51,8 +50,7 @@ class _ChangeUsernameState extends State<ChangeUsernamePage> {
       listener: (context, state) {
         final formStatus = state.formStatus;
         if (formStatus is SubmissionFailed) {
-          // _showSnackBar(context, formStatus.exception.toString());
-          _showSnackBar(context, "Some error occured");
+          _showSnackBar(context, formStatus.exception.toString());
         }
       },
       child: Form(
@@ -140,7 +138,7 @@ class _ChangeUsernameState extends State<ChangeUsernamePage> {
                   if (form != null && form.validate()) {
                     form.save();
                     BlocProvider.of<UserBloc>(context).add(
-                        UpdateUsername(username: newUsername));
+                        UpdateUsername(id: passedId, username: newUsername));
                   }
                   // if (_formKey.currentState!.validate()) {
                   //   _formKey.currentState!.save();

@@ -10,7 +10,6 @@ import 'package:flutter/material.dart' as _i2;
 import '../auth/login/login_view.dart' as _i12;
 import '../auth/signup/sign_up_view.dart' as _i11;
 import '../business/screens/add_business.dart' as _i16;
-import '../business/screens/business_owner_view.dart' as _i20;
 import '../business/screens/edit_business.dart' as _i17;
 import '../business/screens/favorites.dart' as _i6;
 import '../business/screens/filter_business.dart' as _i4;
@@ -80,19 +79,19 @@ class AppRouter extends _i1.RootStackRouter {
           final args = data.argsAs<UserViewRouteArgs>();
           return _i10.UserViewPage(key: args.key, businessId: args.businessId);
         }),
-    SignUpRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
-        routeData: routeData,
-        builder: (data) {
-          final args = data.argsAs<SignUpRouteArgs>(
-              orElse: () => const SignUpRouteArgs());
-          return _i11.SignUpPage(key: args.key);
-        }),
-    LoginRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+    SignUpView.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (data) {
           final args =
-              data.argsAs<LoginRouteArgs>(orElse: () => const LoginRouteArgs());
-          return _i12.LoginPage(key: args.key);
+              data.argsAs<SignUpViewArgs>(orElse: () => const SignUpViewArgs());
+          return _i11.SignUpView(key: args.key);
+        }),
+    LoginView.name: (routeData) => _i1.MaterialPageX<dynamic>(
+        routeData: routeData,
+        builder: (data) {
+          final args =
+              data.argsAs<LoginViewArgs>(orElse: () => const LoginViewArgs());
+          return _i12.LoginView(key: args.key);
         }),
     DeleteAccountRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
@@ -136,11 +135,6 @@ class AppRouter extends _i1.RootStackRouter {
           final args = data.argsAs<ListOrganizationRouteArgs>(
               orElse: () => const ListOrganizationRouteArgs());
           return _i19.ListOrganizationPage(key: args.key);
-        }),
-    BusinessOwnerViewRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
-        routeData: routeData,
-        builder: (_) {
-          return const _i20.BusinessOwnerViewPage();
         })
   };
 
@@ -157,8 +151,8 @@ class AppRouter extends _i1.RootStackRouter {
             path: '/account-management-page'),
         _i1.RouteConfig(MyBusinessRoute.name, path: '/my-business-page'),
         _i1.RouteConfig(UserViewRoute.name, path: '/user-view-page'),
-        _i1.RouteConfig(SignUpRoute.name, path: '/'),
-        _i1.RouteConfig(LoginRoute.name, path: '/login-page'),
+        _i1.RouteConfig(SignUpView.name, path: '/'),
+        _i1.RouteConfig(LoginView.name, path: '/login-view'),
         _i1.RouteConfig(DeleteAccountRoute.name, path: '/delete-account-page'),
         _i1.RouteConfig(ChangeUsernameRoute.name,
             path: '/change-username-page'),
@@ -169,9 +163,7 @@ class AppRouter extends _i1.RootStackRouter {
         _i1.RouteConfig(AddOrganizationRoute.name,
             path: '/add-organization-page'),
         _i1.RouteConfig(ListOrganizationRoute.name,
-            path: '/list-organization-page'),
-        _i1.RouteConfig(BusinessOwnerViewRoute.name,
-            path: '/business-owner-view-page')
+            path: '/list-organization-page')
       ];
 }
 
@@ -260,28 +252,28 @@ class UserViewRouteArgs {
   final String businessId;
 }
 
-class SignUpRoute extends _i1.PageRouteInfo<SignUpRouteArgs> {
-  SignUpRoute({_i2.Key? key})
-      : super(name, path: '/', args: SignUpRouteArgs(key: key));
+class SignUpView extends _i1.PageRouteInfo<SignUpViewArgs> {
+  SignUpView({_i2.Key? key})
+      : super(name, path: '/', args: SignUpViewArgs(key: key));
 
-  static const String name = 'SignUpRoute';
+  static const String name = 'SignUpView';
 }
 
-class SignUpRouteArgs {
-  const SignUpRouteArgs({this.key});
+class SignUpViewArgs {
+  const SignUpViewArgs({this.key});
 
   final _i2.Key? key;
 }
 
-class LoginRoute extends _i1.PageRouteInfo<LoginRouteArgs> {
-  LoginRoute({_i2.Key? key})
-      : super(name, path: '/login-page', args: LoginRouteArgs(key: key));
+class LoginView extends _i1.PageRouteInfo<LoginViewArgs> {
+  LoginView({_i2.Key? key})
+      : super(name, path: '/login-view', args: LoginViewArgs(key: key));
 
-  static const String name = 'LoginRoute';
+  static const String name = 'LoginView';
 }
 
-class LoginRouteArgs {
-  const LoginRouteArgs({this.key});
+class LoginViewArgs {
+  const LoginViewArgs({this.key});
 
   final _i2.Key? key;
 }
@@ -363,11 +355,4 @@ class ListOrganizationRouteArgs {
   const ListOrganizationRouteArgs({this.key});
 
   final _i2.Key? key;
-}
-
-class BusinessOwnerViewRoute extends _i1.PageRouteInfo {
-  const BusinessOwnerViewRoute()
-      : super(name, path: '/business-owner-view-page');
-
-  static const String name = 'BusinessOwnerViewRoute';
 }

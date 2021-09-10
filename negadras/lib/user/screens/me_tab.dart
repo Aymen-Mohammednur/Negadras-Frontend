@@ -85,23 +85,6 @@ class MePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () => {
-                    context.router.popUntilRoot(),
-                    context.router.push(LoginRoute()),
-                  },
-                  child: Card(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        const ListTile(
-                          leading: Icon(Icons.logout),
-                          title: Text('Logout'),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
               ],
             ),
           ],

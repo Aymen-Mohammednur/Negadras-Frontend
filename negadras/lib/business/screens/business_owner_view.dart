@@ -5,14 +5,14 @@ import 'package:negadras/business/screens/my_business.dart';
 import 'package:negadras/business/screens/widgets.dart';
 import 'package:negadras/user/screens/me_tab.dart';
 
-class BusinessOwnerViewPage extends StatefulWidget {
-  const BusinessOwnerViewPage({Key? key}) : super(key: key);
+class App extends StatefulWidget {
+  const App({Key? key}) : super(key: key);
 
   @override
-  _BusinessOwnerViewPage createState() => _BusinessOwnerViewPage();
+  _AppState createState() => _AppState();
 }
 
-class _BusinessOwnerViewPage extends State<BusinessOwnerViewPage> {
+class _AppState extends State<App> {
   Widget businessType() => GridView.count(
         crossAxisCount: 3,
         children: List.generate(

@@ -16,32 +16,34 @@ class LoadUser extends UserEvent {
 
 class UpdateUsername extends UserEvent {
   final String username;
+  final String id;
 
-  const UpdateUsername({required this.username});
+  const UpdateUsername({required this.id, required this.username});
 
   @override
   // List<Object> get props => [user];
 
   @override
-  String toString() => 'Username Updated {username: $username}';
+  String toString() => 'username Updated {username: $username}';
 }
 
 class UpdatePassword extends UserEvent {
+  final String id;
   final String password;
 
-  const UpdatePassword({required this.password});
+  const UpdatePassword({required this.id, required this.password});
 
   @override
   // List<Object> get props => [userId];
 
   @override
-  String toString() => 'Password Updated';
+  String toString() => 'password Updated';
 }
 
 class DeleteUser extends UserEvent {
   final String userid;
 
-  const DeleteUser( {required this.userid});
+  const DeleteUser(this.userid);
 
   @override
   List<Object> get props => [userid];
