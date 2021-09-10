@@ -8,14 +8,14 @@ import 'package:negadras/auth/signup/bloc/sign_up_bloc.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:negadras/routes/router.gr.dart';
 
-class SignUpView extends StatefulWidget {
-  SignUpView({Key? key}) : super(key: key);
+class SignUpPage extends StatefulWidget {
+  SignUpPage({Key? key}) : super(key: key);
 
   @override
-  _SignUpViewState createState() => _SignUpViewState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _SignUpViewState extends State<SignUpView> {
+class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController firstNameController = TextEditingController();

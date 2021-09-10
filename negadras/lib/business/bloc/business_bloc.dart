@@ -105,7 +105,7 @@ class BusinessBloc extends Bloc<BusinessEvent, BusinessState> {
         // //Granted a working repo and data provider
         // final businessList = await businessRepository.fetchFavorites(userId);
 
-        yield BusinessFetchResultState(businessList);
+        yield BusinessFetchResultState(businessList, "");
       } catch (e) {
         yield BusinessOperationFailure();
       }
