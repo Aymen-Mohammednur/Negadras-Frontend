@@ -19,6 +19,8 @@ class _State extends State<DeleteAccountPage> {
 
   TextEditingController passwordController = TextEditingController();
 
+  late String _typedPassword;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -85,11 +87,17 @@ class _State extends State<DeleteAccountPage> {
         return TextFormField(
           controller: passwordController,
           obscureText: true,
-          decoration:
-              InputDecoration(icon: Icon(Icons.security), hintText: 'Password'),
-          validator: (value) => state.isValidPassword ? null : 'Worng Password',
+          decoration: InputDecoration(
+              icon: Icon(Icons.security),
+              hintText: 'Confirm your password to delete account'),
+          // validator: (value) => state.isValidPassword ? null : 'Worng Password',
           // onChanged: (value) =>
           //     context.read<UserBloc>().add(DeleteUser( userid: "id form session")),
+          onSaved: (value) {
+            setState(() {
+              this._typedPassword = value as String;
+            });
+          },
         );
       },
     );
@@ -102,10 +110,19 @@ class _State extends State<DeleteAccountPage> {
             ? CircularProgressIndicator()
             : ElevatedButton(
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    _formKey.currentState!.save();
-                    context.read<UserBloc>().add(UserSubmitted());
-                    context.router.push(HomeRoute());
+                  // if (_formKey.currentState!.validate()) {
+                  //   _formKey.currentState!.save();
+                  //   context.read<UserBloc>().add(UserSubmitted());
+                  //   context.router.push(HomeRoute());
+                  // }
+
+                  final form = _formKey.currentState;
+                  if (form != null && form.validate()) {
+                    form.save();
+                    String pass = this._typedPassword;
+                    BlocProvider.of<UserBloc>(context).add(DeleteUser(pass));
+                    context.router.pushAndPopUntil(SignUpRoute(),
+                        predicate: (route) => false);
                   }
                 },
                 style: ButtonStyle(

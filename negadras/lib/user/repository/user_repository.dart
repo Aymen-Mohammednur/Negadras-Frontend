@@ -13,18 +13,20 @@ class UserRepository {
     return this.dataProvider.updateUsername(id as String, username);
   }
 
-  Future<User> changePassword(String password) async {
+  Future<User> changePassword(String oldPassword, String newPassword) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final id = await prefs.getString("user_id");
 
-    return this.dataProvider.changePassword(id as String, password);
+    return this.dataProvider.changePassword(id as String, oldPassword, newPassword);
   }
 
   Future<User> fetchOne(String id) async {
     return this.dataProvider.fetchOne(id);
   }
 
-  Future<void> delete(String id) async {
-    this.dataProvider.delete(id);
+  Future<void> delete(String password) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final id = await prefs.getString("user_id");
+    this.dataProvider.delete(id as String, password);
   }
 }

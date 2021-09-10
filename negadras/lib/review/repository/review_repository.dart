@@ -6,6 +6,7 @@ class ReviewRepository {
   ReviewRepository(this.dataProvider);
 
   Future<Review> create(Review review) async {
+    print("Inside repository");
     return this.dataProvider.create(review);
   }
 
@@ -13,12 +14,12 @@ class ReviewRepository {
     return this.dataProvider.update(id, review);
   }
 
-  Future<List<Review>> fetchAll() async {
-    return this.dataProvider.fetchAll();
+  Future<List<Review>> fetchAll(String businessId) async {
+    return this.dataProvider.fetchAll(businessId);
   }
 
-  Future<Review> fetchOne(String id) async {
-    return this.dataProvider.fetchOne(id);
+  Future<Review> fetchOne(String businessId, String username) async {
+    return this.dataProvider.fetchOne(businessId, username);
   }
 
   Future<void> delete(String id) async {
