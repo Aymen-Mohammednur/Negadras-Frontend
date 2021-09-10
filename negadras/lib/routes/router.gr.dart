@@ -16,6 +16,8 @@ import '../business/screens/filter_business.dart' as _i4;
 import '../business/screens/my_business.dart' as _i9;
 import '../business/screens/search_business.dart' as _i5;
 import '../category/screens/home_page.dart' as _i3;
+import '../organization/screens/add_organization.dart' as _i18;
+import '../organization/screens/list_organization_page.dart' as _i19;
 import '../review/screens/user_view.dart' as _i10;
 import '../user/screens/account_management.dart' as _i8;
 import '../user/screens/changepassword.dart' as _i15;
@@ -39,9 +41,12 @@ class AppRouter extends _i1.RootStackRouter {
     FilterBusinessRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (data) {
-          final args = data.argsAs<FilterBusinessRouteArgs>();
+          final args = data.argsAs<FilterBusinessRouteArgs>(
+              orElse: () => const FilterBusinessRouteArgs());
           return _i4.FilterBusinessPage(
-              key: args.key, categoryId: args.categoryId);
+              key: args.key,
+              categoryId: args.categoryId,
+              queryParameter: args.queryParameter);
         }),
     SearchBusinessRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
@@ -95,13 +100,17 @@ class AppRouter extends _i1.RootStackRouter {
         }),
     ChangeUsernameRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
-        builder: (_) {
-          return _i14.ChangeUsernamePage();
+        builder: (data) {
+          final args = data.argsAs<ChangeUsernameRouteArgs>(
+              orElse: () => const ChangeUsernameRouteArgs());
+          return _i14.ChangeUsernamePage(key: args.key);
         }),
     ChangePasswordRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
-        builder: (_) {
-          return _i15.ChangePasswordPage();
+        builder: (data) {
+          final args = data.argsAs<ChangePasswordRouteArgs>(
+              orElse: () => const ChangePasswordRouteArgs());
+          return _i15.ChangePasswordPage(key: args.key);
         }),
     AddBusinessRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
@@ -112,6 +121,20 @@ class AppRouter extends _i1.RootStackRouter {
         routeData: routeData,
         builder: (_) {
           return const _i17.EditBusinessPage();
+        }),
+    AddOrganizationRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+        routeData: routeData,
+        builder: (data) {
+          final args = data.argsAs<AddOrganizationRouteArgs>(
+              orElse: () => const AddOrganizationRouteArgs());
+          return _i18.AddOrganizationPage(key: args.key);
+        }),
+    ListOrganizationRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+        routeData: routeData,
+        builder: (data) {
+          final args = data.argsAs<ListOrganizationRouteArgs>(
+              orElse: () => const ListOrganizationRouteArgs());
+          return _i19.ListOrganizationPage(key: args.key);
         })
   };
 
@@ -136,7 +159,11 @@ class AppRouter extends _i1.RootStackRouter {
         _i1.RouteConfig(ChangePasswordRoute.name,
             path: '/change-password-page'),
         _i1.RouteConfig(AddBusinessRoute.name, path: '/add-business-page'),
-        _i1.RouteConfig(EditBusinessRoute.name, path: '/edit-business-page')
+        _i1.RouteConfig(EditBusinessRoute.name, path: '/edit-business-page'),
+        _i1.RouteConfig(AddOrganizationRoute.name,
+            path: '/add-organization-page'),
+        _i1.RouteConfig(ListOrganizationRoute.name,
+            path: '/list-organization-page')
       ];
 }
 
@@ -154,20 +181,27 @@ class HomeRouteArgs {
 }
 
 class FilterBusinessRoute extends _i1.PageRouteInfo<FilterBusinessRouteArgs> {
-  FilterBusinessRoute({_i2.Key? key, required String categoryId})
+  FilterBusinessRoute(
+      {_i2.Key? key, String? categoryId, String? queryParameter})
       : super(name,
             path: '/filter-business-page',
-            args: FilterBusinessRouteArgs(key: key, categoryId: categoryId));
+            args: FilterBusinessRouteArgs(
+                key: key,
+                categoryId: categoryId,
+                queryParameter: queryParameter));
 
   static const String name = 'FilterBusinessRoute';
 }
 
 class FilterBusinessRouteArgs {
-  const FilterBusinessRouteArgs({this.key, required this.categoryId});
+  const FilterBusinessRouteArgs(
+      {this.key, this.categoryId, this.queryParameter});
 
   final _i2.Key? key;
 
-  final String categoryId;
+  final String? categoryId;
+
+  final String? queryParameter;
 }
 
 class SearchBusinessRoute extends _i1.PageRouteInfo {
@@ -250,16 +284,34 @@ class DeleteAccountRoute extends _i1.PageRouteInfo {
   static const String name = 'DeleteAccountRoute';
 }
 
-class ChangeUsernameRoute extends _i1.PageRouteInfo {
-  const ChangeUsernameRoute() : super(name, path: '/change-username-page');
+class ChangeUsernameRoute extends _i1.PageRouteInfo<ChangeUsernameRouteArgs> {
+  ChangeUsernameRoute({_i2.Key? key})
+      : super(name,
+            path: '/change-username-page',
+            args: ChangeUsernameRouteArgs(key: key));
 
   static const String name = 'ChangeUsernameRoute';
 }
 
-class ChangePasswordRoute extends _i1.PageRouteInfo {
-  const ChangePasswordRoute() : super(name, path: '/change-password-page');
+class ChangeUsernameRouteArgs {
+  const ChangeUsernameRouteArgs({this.key});
+
+  final _i2.Key? key;
+}
+
+class ChangePasswordRoute extends _i1.PageRouteInfo<ChangePasswordRouteArgs> {
+  ChangePasswordRoute({_i2.Key? key})
+      : super(name,
+            path: '/change-password-page',
+            args: ChangePasswordRouteArgs(key: key));
 
   static const String name = 'ChangePasswordRoute';
+}
+
+class ChangePasswordRouteArgs {
+  const ChangePasswordRouteArgs({this.key});
+
+  final _i2.Key? key;
 }
 
 class AddBusinessRoute extends _i1.PageRouteInfo {
@@ -272,4 +324,35 @@ class EditBusinessRoute extends _i1.PageRouteInfo {
   const EditBusinessRoute() : super(name, path: '/edit-business-page');
 
   static const String name = 'EditBusinessRoute';
+}
+
+class AddOrganizationRoute extends _i1.PageRouteInfo<AddOrganizationRouteArgs> {
+  AddOrganizationRoute({_i2.Key? key})
+      : super(name,
+            path: '/add-organization-page',
+            args: AddOrganizationRouteArgs(key: key));
+
+  static const String name = 'AddOrganizationRoute';
+}
+
+class AddOrganizationRouteArgs {
+  const AddOrganizationRouteArgs({this.key});
+
+  final _i2.Key? key;
+}
+
+class ListOrganizationRoute
+    extends _i1.PageRouteInfo<ListOrganizationRouteArgs> {
+  ListOrganizationRoute({_i2.Key? key})
+      : super(name,
+            path: '/list-organization-page',
+            args: ListOrganizationRouteArgs(key: key));
+
+  static const String name = 'ListOrganizationRoute';
+}
+
+class ListOrganizationRouteArgs {
+  const ListOrganizationRouteArgs({this.key});
+
+  final _i2.Key? key;
 }

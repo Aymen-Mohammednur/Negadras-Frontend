@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:negadras/business/repository/buisness_repository.dart';
 import 'package:negadras/business/screens/widgets/label.dart';
 import 'package:negadras/utils/bottom_nav_bar.dart';
+import 'package:negadras/business/bloc/business_bloc.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:negadras/routes/router.gr.dart';
+import 'package:negadras/business/models/business.dart';
 
 class AddBusinessPage extends StatefulWidget {
   @override
@@ -8,9 +14,23 @@ class AddBusinessPage extends StatefulWidget {
 }
 
 class _AddBusinessPageState extends State<AddBusinessPage> {
-  String _name = "";
+  Map<String, String> categories = {
+    "Restaurant": "61374589554605d2f68d39f1",
+    "Cafe": "6137460f4a711f786fa844c7",
+    "Construction": "613746764a711f786fa844c9",
+    "Bars": "613746834a711f786fa844cb",
+    "Beauty Salons": "6137468a4a711f786fa844cd",
+    "Technology": "613746a64a711f786fa844cf",
+    "Hotels": "613746e34a711f786fa844d3",
+    "Entertainment": "613746f64a711f786fa844d5",
+    "Other": "613747124a711f786fa844d7",
+  };
 
-  String? _type;
+  // final BusinessRepository businessRepository;
+
+  late String _name;
+
+  String? _category;
 
   String? _location;
 
@@ -22,65 +42,68 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
 
   String? _organization;
 
+  final Map<String, dynamic> _business = {};
+
   bool ischecked = false;
   late bool checkvalue;
 
-  final List<String> _types = ['Restaurant', 'Hotel', 'Shop', 'Cafe', 'Other'];
+  final List<String> _categories = [
+    'Restaurant',
+    'Cafe',
+    'Construction',
+    'Bars',
+    'Beauty Salons',
+    'Technology',
+    'Hotels',
+    'Entertainment',
+    'Others'
+  ];
 
-  String _currentType = "Restaurant";
+  String _currentCategory = "Restaurant";
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  Widget _buildName(name) {
+  Widget _buildName() {
     return TextFormField(
       decoration: InputDecoration(labelText: "Name"),
-      validator: (String? value) {
-        if (value!.isEmpty) {
-          return 'Name is required';
+      validator: (value) {
+        if (value != null && value.isEmpty) {
+          return 'Please enter business name';
         }
         return null;
       },
-      onSaved: (String? value) {
-        name = value!;
+      onSaved: (value) {
+        setState(() {
+          this._business["name"] = value;
+        });
       },
     );
   }
 
-  Widget _buildType() {
+  Widget _buildCategory() {
     return DropdownButtonFormField(
-      // hint: Text("Please choose"),
-
-      // items: _types
-      //     .map((String type) =>
-      //         DropdownMenuItem<String>(value: type, child: Text(type)))
-      //     .toList(),
-
-      //   items: _types
-      // .map<DropdownMenuItem<String>> ((String value)) {
-      //   return DropdownMenuItem<String>(
-      //       value: value,
-      //       child: Text(value),
-      //   );
-      // }
-
-      // .toList(),
       hint: Text("Please choose"),
 
-      value: _currentType,
+      value: _currentCategory,
 
-      items: _types.map<DropdownMenuItem<String>>((String value) {
+      items: _categories.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(value),
         );
       }).toList(),
 
-      onChanged: (String? newValue) {
+      onChanged: (newValue) {
         setState(() {
-          _currentType = newValue!;
+          _currentCategory = newValue.toString();
         });
       },
 
+      onSaved: (value) {
+        setState(() {
+          this._business["categoryId"] = categories[_currentCategory];
+        });
+      },
       // onSaved: (String? value) {
       //   _currentType = value!;
       // },
@@ -91,8 +114,14 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
     return TextFormField(
       decoration: InputDecoration(labelText: "Website"),
       keyboardType: TextInputType.url,
-      onSaved: (String? value) {
-        _website = value!;
+      onSaved: (value) {
+        setState(() {
+          if (value!.isNotEmpty) {
+            this._business["website"] = value;
+          } else {
+            this._business["website"] = null;
+          }
+        });
       },
     );
   }
@@ -101,8 +130,14 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
     return TextFormField(
       decoration: InputDecoration(labelText: "Phone Number"),
       keyboardType: TextInputType.phone,
-      onSaved: (String? value) {
-        _phoneNumber = value!;
+      onSaved: (value) {
+        setState(() {
+          if (value!.isNotEmpty) {
+            this._business["phoneNumber"] = value;
+          } else {
+            this._business["phoneNumber"] = null;
+          }
+        });
       },
     );
   }
@@ -110,40 +145,62 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
   Widget _buildEmail() {
     return TextFormField(
       decoration: InputDecoration(labelText: "Email"),
-      validator: (String? value) {
-        if (value!.isEmpty) {
-          return 'Name is required';
-        }
-
-        if (!RegExp(
-                r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
-            .hasMatch(value)) {
-          return 'Please enter a valid email address';
+      validator: (value) {
+        if (value!.isNotEmpty) {
+          if (!RegExp(
+                  r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+              .hasMatch(value)) {
+            return 'Please enter a valid email address';
+          }
         }
       },
-      onSaved: (String? value) {
-        _email = value!;
+      onSaved: (value) {
+        setState(() {
+          if (value!.isNotEmpty) {
+            this._business["email"] = value;
+          } else {
+            this._business["email"] = null;
+          }
+        });
       },
     );
   }
 
   Widget _buildCheckboxLocation() {
-    return CheckboxListTile(
-        title: const Text('Use current location'),
-        controlAffinity: ListTileControlAffinity.leading,
-        value: ischecked,
-        onChanged: (bool? _checkvalue) {
-          if (_checkvalue != null) {
-            setState(() {
-              ischecked = checkvalue;
-            });
-          }
+    // return CheckboxListTile(
+    //     title: const Text('Use current location'),
+    //     controlAffinity: ListTileControlAffinity.leading,
+    //     value: ischecked,
+    //     onChanged: (bool? _checkvalue) {
+    //       if (_checkvalue != null) {
+    //         setState(() {
+    //           ischecked = checkvalue;
+    //         });
+    //       }
+    //     });
+    return TextFormField(
+      decoration: InputDecoration(labelText: "Location"),
+      keyboardType: TextInputType.phone,
+      validator: (value) {
+        if (value != null && value.isEmpty) {
+          return 'Location is required';
+        }
+      },
+      onSaved: (value) {
+        setState(() {
+          this._business["location"] = value;
         });
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    final businessBloc = BlocProvider.of<BusinessBloc>(context);
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Add New Business"),
+      ),
       bottomNavigationBar: bottomNav(context),
       body: SingleChildScrollView(
         child: Container(
@@ -153,35 +210,54 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _buildName(_name),
+                _buildName(),
                 SizedBox(height: 20),
-                _buildType(),
+                _buildCategory(),
                 _buildCheckboxLocation(),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text('Open Maps'),
+                // ElevatedButton(
+                //   onPressed: () {},
+                //   child: Text('Open Maps'),
+                // ),
+                SizedBox(height: 20),
+                Label(
+                  label: 'Additional Information(Optional)',
+                  fontWeight: FontWeight.bold,
                 ),
-                Label(label: 'Contact Information(Optional)'),
+
+                // Label(label: 'Contact Information(Optional)'),
                 _buildWebsite(),
                 _buildPhoneNumber(),
                 _buildEmail(),
-                Label(label: 'Additional Information(Optional)'),
-                Row(
-                  children: [
-                    Label(label: 'Upload Image'),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Icon(Icons.upload_rounded),
-                    ),
-                  ],
-                ),
+                // Row(
+                //   children: [
+                //     Label(label: 'Upload Image'),
+                //     ElevatedButton(
+                //       onPressed: () {},
+                //       child: Icon(Icons.upload_rounded),
+                //     ),
+                //   ],
+                // ),
                 SizedBox(height: 100),
                 ElevatedButton(
                   onPressed: () {
                     final form = _formKey.currentState;
                     if (form != null && form.validate()) {
                       form.save();
-                      print(_name);
+                      print(_business);
+                      final BusinessEvent event = AddBusiness(
+                        Business(
+                          id: "",
+                          name: this._business["name"],
+                          location: this._business["location"],
+                          categoryId: this._business["categoryId"],
+                          website: this._business["website"],
+                          phoneNumber: this._business["phoneNumber"],
+                          email: this._business["email"],
+                        ),
+                      );
+                      businessBloc.add(event);
+                      // print(event);
+                      // context.router.popAndPush(HomeRoute());
                     }
                   },
                   child: Text(
@@ -190,7 +266,10 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    businessBloc.add(NormalBusinessEvent());
+                    context.router.pop();
+                  },
                   child: Text(
                     "Cancel",
                     style: TextStyle(color: Colors.white, fontSize: 16),

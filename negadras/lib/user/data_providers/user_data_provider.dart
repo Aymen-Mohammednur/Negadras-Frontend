@@ -3,7 +3,10 @@ import 'package:http/http.dart' as http;
 import 'package:negadras/user/models/models.dart';
 
 class UserDataProvider {
-  static final String _baseUrl = "http://localhost/3000/User";
+  // static final String _baseUrl = "http://localhost/3000/api/user";
+
+  // FOR EMULATOR
+  static final String _baseUrl = "http://10.0.2.2:3000/api/user";
 
   Future<User> fetchOne(String id) async {
     final response = await http.get(Uri.parse("$_baseUrl/$id"));
@@ -16,12 +19,9 @@ class UserDataProvider {
   }
 
   Future<User> updateUsername(String id, String username) async {
-    final response = await http.patch(Uri.parse("$_baseUrl/$id"),
+    final response = await http.patch(Uri.parse("$_baseUrl/username/$id"),
         headers: <String, String>{"Content-Type": "application/json"},
         body: jsonEncode({
-          // "firstName": user.firstName,
-          // "lastName": user.lastName,
-          "id": id,
           "username": username,
           // "role": user.role,
         }));
@@ -34,10 +34,9 @@ class UserDataProvider {
   }
 
   Future<User> changePassword(String id, String password) async {
-    final response = await http.patch(Uri.parse("$_baseUrl/$id"),
+    final response = await http.patch(Uri.parse("$_baseUrl/password/$id"),
         headers: <String, String>{"Content-Type": "application/json"},
         body: jsonEncode({
-          "id": id,
           "password": password,
         }));
 

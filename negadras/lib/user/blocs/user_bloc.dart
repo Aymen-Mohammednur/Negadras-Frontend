@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:negadras/auth/form_submission_status.dart';
+import 'package:negadras/user/form_submission_status.dart';
 
 import 'package:negadras/user/repository/user_repository.dart';
 part 'user_event.dart';
@@ -28,7 +28,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     }
     if (event is UpdatePassword) {
       try {
-        await userRepository.updateUsername(event.id, event.password);
+        await userRepository.changePassword(event.id, event.password);
         yield state.copyWith(formStatus: SubmissionSuccess());
       } catch (e) {
         yield state.copyWith(formStatus: SubmissionFailed(e as Exception));

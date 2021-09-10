@@ -82,7 +82,7 @@ class _SignUpViewState extends State<SignUpView> {
                 _firstnameField(),
                 _lastnameField(),
                 _usernameField(),
-                _emailField(),
+                // _emailField(),
                 _passwordField(),
                 _confirmPasswordField(),
                 SizedBox(

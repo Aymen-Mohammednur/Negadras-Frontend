@@ -10,7 +10,7 @@ void main() {
       final firstNameFinder = find.text('First name');
       final lastNameFinder = find.text('Last name');
       final usernameFinder = find.text('Username');
-      final emailFinder = find.text('Email');
+      // final emailFinder = find.text('Email');
       final passwordFinder = find.text('Password');
       final cpasswordFinder = find.text('Confirm Password');
       final singupFinder = find.text("Sign Up");
@@ -20,7 +20,7 @@ void main() {
       expect(firstNameFinder, findsOneWidget);
       expect(lastNameFinder, findsOneWidget);
       expect(usernameFinder, findsOneWidget);
-      expect(emailFinder, findsOneWidget);
+      // expect(emailFinder, findsOneWidget);
       expect(passwordFinder, findsOneWidget);
       expect(cpasswordFinder, findsOneWidget);
       expect(singupFinder, findsOneWidget);

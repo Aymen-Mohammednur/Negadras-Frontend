@@ -42,11 +42,11 @@ class FilterBusinessPage extends StatelessWidget {
               ),
               BlocBuilder<BusinessBloc, BusinessState>(
                 builder: (context, businessState) {
-                  print(businessState);
-                  print(" ");
+                  print("Filter class: $businessState");
+                  // print(" ");
+                  print(categoryId);
 
                   if (businessState is BusinessInitialState) {
-                    print(categoryId);
                     businessBloc.add(FilterBusinessEvent(categoryId));
                   }
                   //else if (businessState is BusinessView) {
@@ -76,6 +76,12 @@ class FilterBusinessPage extends StatelessWidget {
                   // }
                   if (businessState is BusinessFetchResultState) {
                     // print(businessState.businessList[0].name);
+                    print(categoryId);
+                    if (businessState.categoryId != categoryId) {
+                      businessState.categoryId = categoryId as String;
+                      businessBloc
+                          .add(FilterBusinessEvent(businessState.categoryId));
+                    }
                     return Expanded(
                       child: ListView.builder(
                         itemCount: businessState.businessList.length,
@@ -99,7 +105,12 @@ class FilterBusinessPage extends StatelessWidget {
                       ),
                     );
                   }
-                  if (businessState is BusinessOperationFailure) {
+                  if (businessState is Failure) {
+                    if (businessState.categoryId != categoryId) {
+                      businessState.categoryId = categoryId as String;
+                      businessBloc
+                          .add(FilterBusinessEvent(businessState.categoryId));
+                    }
                     return Center(
                       // child: Text(businessState.errMsg.toString()),
                       child: Text("Some error occurred"),

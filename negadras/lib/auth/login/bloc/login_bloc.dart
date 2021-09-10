@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:negadras/auth/form_submission_status.dart';
+import 'package:negadras/auth/models/response/loginResponse.dart';
 import 'package:negadras/auth/repository/auth_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
@@ -28,10 +30,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       yield state.copyWith(formStatus: FormSubmitting());
 
       try {
-        await authRepo.login(
+        LoginResponse loginResponse = await authRepo.login(
             username: state.username, password: state.password);
-        yield state.copyWith(formStatus: SubmissionSuccess());
+
+        yield state.copyWith(formStatus: SubmissionSuccess(loginResponse));
       } catch (e) {
+        print("Exception at login event $e");
         yield state.copyWith(formStatus: SubmissionFailed(e as Exception));
       }
     }

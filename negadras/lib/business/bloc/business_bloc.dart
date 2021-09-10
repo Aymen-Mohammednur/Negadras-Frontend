@@ -19,18 +19,21 @@ class BusinessBloc extends Bloc<BusinessEvent, BusinessState> {
   Stream<BusinessState> mapEventToState(
     BusinessEvent event,
   ) async* {
+    if (event is NormalBusinessEvent) {
+      yield BusinessInitialState();
+    }
+
     if (event is FilterBusinessEvent) {
       yield FetchingState();
-
+      final categoryId = event.categoryId;
       try {
-        final categoryId = event.categoryId;
         final businessList =
             await businessRepository.fetchByCategory(categoryId);
         print(businessList[0].name);
-        yield BusinessFetchResultState(businessList);
+        yield BusinessFetchResultState(businessList, categoryId as String);
       } catch (e) {
-        print(e);
-        yield BusinessOperationFailure();
+        print(e.toString());
+        yield Failure(categoryId as String);
       }
 
       //Fake Fetch - Static Data
@@ -51,7 +54,9 @@ class BusinessBloc extends Bloc<BusinessEvent, BusinessState> {
     // }
     if (event is AddBusiness) {
       try {
+        // print("inside bloc");
         await businessRepository.create(event.business);
+
         final business = await businessRepository.fetch();
         yield BusinessOperationSuccess(business);
       } catch (e) {
