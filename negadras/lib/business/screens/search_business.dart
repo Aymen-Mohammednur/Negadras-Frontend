@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:negadras/business/screens/widgets/business_card.dart';
 import 'package:negadras/business/screens/widgets/label.dart';
 import 'package:negadras/business/screens/widgets/search_bar.dart';
@@ -26,9 +27,10 @@ class SearchBusinessPage extends StatelessWidget {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: 10,
+                itemCount: 0,
                 itemBuilder: (context, i) {
                   return BusinessCard(
+                    businessId: 'Kaldi\'s id',
                     businessName: 'Kaldi\'s Coffee',
                     rating: 2.5,
                     locationInfo: '103 Bole Street, Cameroon Ave',

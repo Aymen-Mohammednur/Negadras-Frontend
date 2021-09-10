@@ -28,6 +28,7 @@ class MyBusinessPage extends StatelessWidget {
                 itemCount: 10,
                 itemBuilder: (context, i) {
                   return BusinessCard(
+                    businessId: "kaldi's id",
                     businessName: 'Kaldi\'s Coffee',
                     rating: 2.5,
                     locationInfo: '103 Bole Street, Cameroon Ave',

@@ -246,14 +246,14 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
                       print(_business);
                       final BusinessEvent event = AddBusiness(
                         Business(
-                          id: "",
-                          name: this._business["name"],
-                          location: this._business["location"],
-                          categoryId: this._business["categoryId"],
-                          website: this._business["website"],
-                          phoneNumber: this._business["phoneNumber"],
-                          email: this._business["email"],
-                        ),
+                            id: "",
+                            name: this._business["name"],
+                            location: this._business["location"],
+                            categoryId: this._business["categoryId"],
+                            website: this._business["website"],
+                            phoneNumber: this._business["phoneNumber"],
+                            email: this._business["email"],
+                            avgRating: this._business['averageRating']),
                       );
                       businessBloc.add(event);
                       // print(event);

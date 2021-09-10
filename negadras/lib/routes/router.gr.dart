@@ -12,7 +12,7 @@ import '../auth/signup/sign_up_view.dart' as _i11;
 import '../business/screens/add_business.dart' as _i16;
 import '../business/screens/business_owner_view.dart' as _i20;
 import '../business/screens/edit_business.dart' as _i17;
-import '../business/screens/favorites.dart' as _i6;
+import '../business/screens/favorites_page.dart' as _i6;
 import '../business/screens/filter_business.dart' as _i4;
 import '../business/screens/my_business.dart' as _i9;
 import '../business/screens/search_business.dart' as _i5;

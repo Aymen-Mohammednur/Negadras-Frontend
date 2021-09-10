@@ -37,9 +37,11 @@ class BusinessDataProvider {
     }
   }
 
-  Future<List<Business>> fetchByCategory(String? categoryId) async {
+  Future<List<Business>> fetchByCategory(
+      String? categoryId, String? userId) async {
     print("Inside business data provider");
-    final response = await http.get(Uri.parse("$_baseUrl/filter/$categoryId"));
+    final response = await http
+        .get(Uri.parse("$_baseUrl/filter/$categoryId?userId=$userId"));
     // print(response.body);
     if (response.statusCode == 200) {
       final business = jsonDecode(response.body) as List;
@@ -87,6 +89,23 @@ class BusinessDataProvider {
     final response = await http.delete(Uri.parse("$_baseUrl/$id"));
     if (response.statusCode != 204) {
       throw Exception("Field to delete the Business");
+    }
+  }
+
+  Future<void> addToFavorites(String businessId, String userId) async {
+    String query = businessId + userId;
+    final response = await http.post(Uri.parse("$_baseUrl/Favorites/?$query"));
+    if (response.statusCode != 204) {
+      throw Exception("Failed to add business to favorites");
+    }
+  }
+
+  Future<void> removeFromFavorites(String businessId, String userId) async {
+    String query = businessId + userId;
+    final response =
+        await http.delete(Uri.parse("$_baseUrl/Favorites/?$query"));
+    if (response.statusCode != 204) {
+      throw Exception("Failed to delete business to favorites");
     }
   }
 }
