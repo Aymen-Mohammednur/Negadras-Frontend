@@ -19,6 +19,8 @@ class FilterBusinessEvent extends BusinessEvent {
   FilterBusinessEvent(this.categoryId);
 }
 
+class NormalBusinessEvent extends BusinessEvent {}
+
 class AddBusiness extends BusinessEvent {
   final Business business;
 

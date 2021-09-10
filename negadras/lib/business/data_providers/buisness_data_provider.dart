@@ -20,7 +20,7 @@ class BusinessDataProvider {
           "email": business.email,
         }));
 
-    print(response.body);
+    // print(response.body);
     if (response.statusCode == 201) {
       return Business.fromJson(jsonDecode(response.body));
     } else {
