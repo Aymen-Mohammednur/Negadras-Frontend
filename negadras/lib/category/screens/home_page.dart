@@ -58,6 +58,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Negadras"),
+        centerTitle: true,
       ),
       body: BlocBuilder<CategoryBloc, CategoryState>(
         builder: (context, state) {
@@ -103,10 +104,11 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          context.pushRoute(AddBusinessRoute());
+          context.pushRoute(BusinessOwnerViewRoute());
         },
         tooltip: 'Increment',
         child: Icon(Icons.add),
+        backgroundColor: Colors.green.shade900,
       ),
       bottomNavigationBar: bottomNav(context),
     );

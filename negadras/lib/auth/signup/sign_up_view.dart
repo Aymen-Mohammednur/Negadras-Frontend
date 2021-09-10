@@ -203,7 +203,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     context.read<SignUpBloc>().add(SignUpSubmitted());
-                    context.router.push(LoginView());
+                    context.router.push(LoginRoute());
                   }
                 },
                 style: ButtonStyle(
@@ -222,7 +222,7 @@ class _SignUpPageState extends State<SignUpPage> {
         padding: EdgeInsets.only(bottom: 30),
         child: TextButton(
           onPressed: () {
-            context.router.push(LoginView());
+            context.router.push(LoginRoute());
           },
           child: Text(
             'Already have an account? Sign in.',

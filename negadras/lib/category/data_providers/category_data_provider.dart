@@ -1,12 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:negadras/auth/constants/string.dart';
 import 'package:negadras/category/models/category.dart';
 
 class CategoryDataProvider {
-  // FOR ACTUAL DEVICE
-  //static final String _baseUrl = "http://localhost:3000/api/category";
-  // FOR EMULATOR
-  static final String _baseUrl = "http://10.0.2.2:3000/api/category";
+  static final String _baseUrl = "${StringConstants.BASE_URL_EMULATOR}/category";
 
   Future<Category> create(Category category) async {
     final http.Response response = await http.post(Uri.parse(_baseUrl),

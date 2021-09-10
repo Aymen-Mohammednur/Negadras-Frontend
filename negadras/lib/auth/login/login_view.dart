@@ -12,14 +12,14 @@ import 'package:auto_route/auto_route.dart';
 import 'package:negadras/routes/router.gr.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginView extends StatefulWidget {
-  LoginView({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  LoginPage({Key? key}) : super(key: key);
 
   @override
-  _LoginViewState createState() => _LoginViewState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
@@ -164,7 +164,7 @@ class _LoginViewState extends State<LoginView> {
         padding: EdgeInsets.only(bottom: 30),
         child: TextButton(
           onPressed: () {
-            context.router.push(SignUpView());
+            context.router.push(SignUpRoute());
           },
           child: Text(
             'Don\'t have an account? Sign Up.',
