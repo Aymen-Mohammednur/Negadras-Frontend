@@ -22,7 +22,7 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   final _formKey = GlobalKey<FormState>();
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-  
+
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -30,7 +30,8 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: RepositoryProvider(
-            create: (context) => AuthRepository(AuthDataProvider(http.Client())),
+            create: (context) =>
+                AuthRepository(AuthDataProvider(http.Client())),
             child: Scaffold(
               body: BlocProvider(
                 create: (context) =>
@@ -48,20 +49,20 @@ class _LoginViewState extends State<LoginView> {
   }
 
   Widget _loginForm() {
-
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) async {
-
         if (state.formStatus is SubmissionFailed) {
           _showSnackBar(context, "Username or Password is wrong");
-        }else if (state.formStatus is SubmissionSuccess){
-          LoginResponse loginResponse = (state.formStatus as SubmissionSuccess).response as LoginResponse;
+        } else if (state.formStatus is SubmissionSuccess) {
+          LoginResponse loginResponse =
+              (state.formStatus as SubmissionSuccess).response as LoginResponse;
           SharedPreferences prefs = await _prefs;
 
-          await prefs.setString("user_id",loginResponse.id);
-          await prefs.setString("token",loginResponse.token);
+          await prefs.setString("user_id", loginResponse.id);
+          await prefs.setString("token", loginResponse.token);
 
-          context.router.pushAndPopUntil(HomeRoute(),predicate: (route)=>false);
+          context.router
+              .pushAndPopUntil(HomeRoute(), predicate: (route) => false);
         }
       },
       child: Form(
@@ -133,9 +134,9 @@ class _LoginViewState extends State<LoginView> {
   Widget _loginButton() {
     return BlocBuilder<LoginBloc, LoginState>(
       builder: (context, state) {
-        if(state.formStatus is FormSubmitting){
+        if (state.formStatus is FormSubmitting) {
           return CircularProgressIndicator();
-        }else{
+        } else {
           return ElevatedButton(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
@@ -147,13 +148,12 @@ class _LoginViewState extends State<LoginView> {
               style: ButtonStyle(
                   shadowColor: MaterialStateProperty.all(Colors.grey),
                   backgroundColor:
-                  MaterialStateProperty.all<Color>(Colors.black87)),
+                      MaterialStateProperty.all<Color>(Colors.black87)),
               child: Text(
                 "Login",
                 style: TextStyle(color: Colors.white),
               ));
         }
-
       },
     );
   }

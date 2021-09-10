@@ -58,9 +58,7 @@ class _HomePageState extends State<HomePage> {
         builder: (context, state) {
           print(state);
 
-
           if (state is CategoryOperationFailed) {
-
             return Center(
               child: Text("Could not do category operation"),
             );

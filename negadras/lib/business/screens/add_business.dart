@@ -253,6 +253,7 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
                           website: this._business["website"],
                           phoneNumber: this._business["phoneNumber"],
                           email: this._business["email"],
+                          favorite: false,
                         ),
                       );
                       businessBloc.add(event);

@@ -14,7 +14,7 @@ class Business {
       required this.name,
       required this.categoryId,
       required this.location,
-      required this.favorite,
+      this.favorite,
       this.phoneNumber,
       this.website,
       this.email,

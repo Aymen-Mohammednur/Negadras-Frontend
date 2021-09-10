@@ -12,16 +12,14 @@ import 'package:negadras/category/blocs/category_bloc.dart';
 import 'package:negadras/organization/bloc/organization_bloc.dart';
 import 'package:negadras/organization/data_providers/organization_data_provider.dart';
 import 'package:negadras/organization/repository/organization_repository.dart';
-import 'package:negadras/routes/router.gr.dart';
-
 import 'package:negadras/category/repository/category_repository.dart';
 import 'package:negadras/category/data_providers/category_data_provider.dart';
 import 'package:negadras/business/repository/buisness_repository.dart';
 import 'package:negadras/business/data_providers/buisness_data_provider.dart';
+import 'package:negadras/routes/router.gr.dart';
 
 class App extends StatelessWidget {
   final _appRouter = AppRouter();
-
 
   @override
   Widget build(BuildContext context) {

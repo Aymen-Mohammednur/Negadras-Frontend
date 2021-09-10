@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:negadras/utils/bottom_nav_bar.dart';
-import 'package:negadras/business/screens/widgets/drop_business.dart';
 // import 'package:negadras/buisness/screens/widgets/form.dart';
 import 'package:negadras/business/bloc/business_bloc.dart';
 import 'package:auto_route/auto_route.dart';
@@ -80,7 +79,8 @@ class _EditFormState extends State<EditForm> {
       location: "Test",
       website: "dfdsf",
       phoneNumber: "sdf",
-      email: "fds@gamil.com");
+      email: "fds@gamil.com",
+      favorite: false);
 
   final Map<String, dynamic> _business = {};
 

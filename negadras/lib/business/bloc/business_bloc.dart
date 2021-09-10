@@ -38,6 +38,7 @@ class BusinessBloc extends Bloc<BusinessEvent, BusinessState> {
     }
 
     if (event is ShowFavoritesEvent) {
+      final favorites = false;
       yield FetchingState();
       try {
         //Fake list
@@ -46,47 +47,56 @@ class BusinessBloc extends Bloc<BusinessEvent, BusinessState> {
               id: "id",
               name: "Negadras",
               categoryId: "categoryId",
-              location: "5 Kilo, Gulele Zone"),
+              location: "5 Kilo, Gulele Zone",
+              favorite: true),
           Business(
               id: "id",
               name: "Friendship City Center",
               categoryId: "categoryId",
-              location: "Bole, Cameroon Avenue"),
+              location: "Bole, Cameroon Avenue",
+              favorite: true),
           Business(
               id: "id",
               name: "Edna Mall",
               categoryId: "categoryId",
-              location: "Bole Zone"),
+              location: "Bole Zone",
+              favorite: true),
           Business(
               id: "id",
               name: "Capital Hotel",
               categoryId: "categoryId",
-              location: "Hayahulet"),
+              location: "Hayahulet",
+              favorite: true),
           Business(
               id: "id",
               name: "Enat Wetet",
               categoryId: "categoryId",
-              location: "5 Kilo, Anbessa Gebi"),
+              location: "5 Kilo, Anbessa Gebi",
+              favorite: true),
           Business(
               id: "id",
               name: "Kebele 19",
               categoryId: "categoryId",
-              location: "Bole Street, Mamo Kacha"),
+              location: "Bole Street, Mamo Kacha",
+              favorite: true),
           Business(
               id: "id",
               name: "Kerim Suk",
               categoryId: "categoryId",
-              location: "Bole Street, Rwanda Avenue"),
+              location: "Bole Street, Rwanda Avenue",
+              favorite: true),
           Business(
               id: "id",
               name: "MHS Sports",
               categoryId: "categoryId",
-              location: "Bole Michael, Riverside"),
+              location: "Bole Michael, Riverside",
+              favorite: true),
           Business(
               id: "id",
               name: "5k Lounge",
               categoryId: "categoryId",
-              location: "5 Kilo, Campus")
+              location: "5 Kilo, Campus",
+              favorite: true)
         ];
 
         // //Granted a working repo and data provider

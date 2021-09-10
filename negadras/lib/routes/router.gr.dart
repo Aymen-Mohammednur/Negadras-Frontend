@@ -5,13 +5,14 @@
 // **************************************************************************
 
 import 'package:auto_route/auto_route.dart' as _i1;
+import 'package:flutter/cupertino.dart' as _i20;
 import 'package:flutter/material.dart' as _i2;
 
 import '../auth/login/login_view.dart' as _i12;
 import '../auth/signup/sign_up_view.dart' as _i11;
 import '../business/screens/add_business.dart' as _i16;
 import '../business/screens/edit_business.dart' as _i17;
-import '../business/screens/favorites.dart' as _i6;
+import '../business/screens/favorites_page.dart' as _i6;
 import '../business/screens/filter_business.dart' as _i4;
 import '../business/screens/my_business.dart' as _i9;
 import '../business/screens/search_business.dart' as _i5;
@@ -168,7 +169,7 @@ class AppRouter extends _i1.RootStackRouter {
 }
 
 class HomeRoute extends _i1.PageRouteInfo<HomeRouteArgs> {
-  HomeRoute({_i2.Key? key})
+  HomeRoute({_i20.Key? key})
       : super(name, path: '/home-page', args: HomeRouteArgs(key: key));
 
   static const String name = 'HomeRoute';
@@ -177,12 +178,12 @@ class HomeRoute extends _i1.PageRouteInfo<HomeRouteArgs> {
 class HomeRouteArgs {
   const HomeRouteArgs({this.key});
 
-  final _i2.Key? key;
+  final _i20.Key? key;
 }
 
 class FilterBusinessRoute extends _i1.PageRouteInfo<FilterBusinessRouteArgs> {
   FilterBusinessRoute(
-      {_i2.Key? key, String? categoryId, String? queryParameter})
+      {_i20.Key? key, String? categoryId, String? queryParameter})
       : super(name,
             path: '/filter-business-page',
             args: FilterBusinessRouteArgs(
@@ -197,7 +198,7 @@ class FilterBusinessRouteArgs {
   const FilterBusinessRouteArgs(
       {this.key, this.categoryId, this.queryParameter});
 
-  final _i2.Key? key;
+  final _i20.Key? key;
 
   final String? categoryId;
 
@@ -236,7 +237,7 @@ class MyBusinessRoute extends _i1.PageRouteInfo {
 }
 
 class UserViewRoute extends _i1.PageRouteInfo<UserViewRouteArgs> {
-  UserViewRoute({_i2.Key? key, required String businessId})
+  UserViewRoute({_i20.Key? key, required String businessId})
       : super(name,
             path: '/user-view-page',
             args: UserViewRouteArgs(key: key, businessId: businessId));
@@ -247,13 +248,13 @@ class UserViewRoute extends _i1.PageRouteInfo<UserViewRouteArgs> {
 class UserViewRouteArgs {
   const UserViewRouteArgs({this.key, required this.businessId});
 
-  final _i2.Key? key;
+  final _i20.Key? key;
 
   final String businessId;
 }
 
 class SignUpView extends _i1.PageRouteInfo<SignUpViewArgs> {
-  SignUpView({_i2.Key? key})
+  SignUpView({_i20.Key? key})
       : super(name, path: '/', args: SignUpViewArgs(key: key));
 
   static const String name = 'SignUpView';
@@ -262,11 +263,11 @@ class SignUpView extends _i1.PageRouteInfo<SignUpViewArgs> {
 class SignUpViewArgs {
   const SignUpViewArgs({this.key});
 
-  final _i2.Key? key;
+  final _i20.Key? key;
 }
 
 class LoginView extends _i1.PageRouteInfo<LoginViewArgs> {
-  LoginView({_i2.Key? key})
+  LoginView({_i20.Key? key})
       : super(name, path: '/login-view', args: LoginViewArgs(key: key));
 
   static const String name = 'LoginView';
@@ -275,7 +276,7 @@ class LoginView extends _i1.PageRouteInfo<LoginViewArgs> {
 class LoginViewArgs {
   const LoginViewArgs({this.key});
 
-  final _i2.Key? key;
+  final _i20.Key? key;
 }
 
 class DeleteAccountRoute extends _i1.PageRouteInfo {
@@ -285,7 +286,7 @@ class DeleteAccountRoute extends _i1.PageRouteInfo {
 }
 
 class ChangeUsernameRoute extends _i1.PageRouteInfo<ChangeUsernameRouteArgs> {
-  ChangeUsernameRoute({_i2.Key? key})
+  ChangeUsernameRoute({_i20.Key? key})
       : super(name,
             path: '/change-username-page',
             args: ChangeUsernameRouteArgs(key: key));
@@ -296,11 +297,11 @@ class ChangeUsernameRoute extends _i1.PageRouteInfo<ChangeUsernameRouteArgs> {
 class ChangeUsernameRouteArgs {
   const ChangeUsernameRouteArgs({this.key});
 
-  final _i2.Key? key;
+  final _i20.Key? key;
 }
 
 class ChangePasswordRoute extends _i1.PageRouteInfo<ChangePasswordRouteArgs> {
-  ChangePasswordRoute({_i2.Key? key})
+  ChangePasswordRoute({_i20.Key? key})
       : super(name,
             path: '/change-password-page',
             args: ChangePasswordRouteArgs(key: key));
@@ -311,7 +312,7 @@ class ChangePasswordRoute extends _i1.PageRouteInfo<ChangePasswordRouteArgs> {
 class ChangePasswordRouteArgs {
   const ChangePasswordRouteArgs({this.key});
 
-  final _i2.Key? key;
+  final _i20.Key? key;
 }
 
 class AddBusinessRoute extends _i1.PageRouteInfo {
@@ -327,7 +328,7 @@ class EditBusinessRoute extends _i1.PageRouteInfo {
 }
 
 class AddOrganizationRoute extends _i1.PageRouteInfo<AddOrganizationRouteArgs> {
-  AddOrganizationRoute({_i2.Key? key})
+  AddOrganizationRoute({_i20.Key? key})
       : super(name,
             path: '/add-organization-page',
             args: AddOrganizationRouteArgs(key: key));
@@ -338,12 +339,12 @@ class AddOrganizationRoute extends _i1.PageRouteInfo<AddOrganizationRouteArgs> {
 class AddOrganizationRouteArgs {
   const AddOrganizationRouteArgs({this.key});
 
-  final _i2.Key? key;
+  final _i20.Key? key;
 }
 
 class ListOrganizationRoute
     extends _i1.PageRouteInfo<ListOrganizationRouteArgs> {
-  ListOrganizationRoute({_i2.Key? key})
+  ListOrganizationRoute({_i20.Key? key})
       : super(name,
             path: '/list-organization-page',
             args: ListOrganizationRouteArgs(key: key));
@@ -354,5 +355,5 @@ class ListOrganizationRoute
 class ListOrganizationRouteArgs {
   const ListOrganizationRouteArgs({this.key});
 
-  final _i2.Key? key;
+  final _i20.Key? key;
 }
