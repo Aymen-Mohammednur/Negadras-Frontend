@@ -51,8 +51,8 @@ class _ChangeUsernameState extends State<ChangeUsernamePage> {
       listener: (context, state) {
         final formStatus = state.formStatus;
         if (formStatus is SubmissionFailed) {
-          // _showSnackBar(context, formStatus.exception.toString());
-          _showSnackBar(context, "Some error occured");
+          _showSnackBar(context, formStatus.exception.toString());
+          // _showSnackBar(context, "Some error occured");
         }
       },
       child: Form(

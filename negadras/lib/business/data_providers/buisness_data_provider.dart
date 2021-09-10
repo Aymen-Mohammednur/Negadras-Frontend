@@ -4,7 +4,8 @@ import 'package:negadras/auth/constants/string.dart';
 import 'package:negadras/business/models/models.dart';
 
 class BusinessDataProvider {
-  static final String _baseUrl = "${StringConstants.BASE_URL_EMULATOR}/user";
+  static final String _baseUrl =
+      "${StringConstants.BASE_URL_EMULATOR}/business";
 
   Future<Business> create(Business business) async {
     final http.Response response = await http.post(Uri.parse(_baseUrl),
@@ -28,7 +29,7 @@ class BusinessDataProvider {
 
   Future<List<Business>> fetch() async {
     final response = await http.get(Uri.parse(_baseUrl));
-
+    print(response.body);
     if (response.statusCode == 200) {
       final business = jsonDecode(response.body) as List;
       return business.map((b) => Business.fromJson(b)).toList();

@@ -68,7 +68,7 @@ class AccountManagementPage extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () => {},
+                onTap: () => {context.router.push(DeleteAccountRoute())},
                 child: Card(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -81,7 +81,6 @@ class AccountManagementPage extends StatelessWidget {
                   ),
                 ),
               ),
-              
             ],
           ),
         ],

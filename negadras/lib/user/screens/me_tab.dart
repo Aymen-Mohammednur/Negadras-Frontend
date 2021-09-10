@@ -87,8 +87,10 @@ class MePage extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () => {
-                    context.router.popUntilRoot(),
-                    context.router.push(LoginRoute()),
+                    // context.router.popUntilRoot(),
+                    // context.router.push(LoginRoute()),
+                    context.router.pushAndPopUntil(LoginRoute(),
+                        predicate: (route) => false),
                   },
                   child: Card(
                     child: Column(

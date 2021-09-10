@@ -26,7 +26,7 @@ class UserDataProvider {
           "username": username,
           // "role": user.role,
         }));
-
+    print(response.body);
     if (response.statusCode == 200) {
       return User.fromJson(jsonDecode(response.body));
     } else {
@@ -34,12 +34,13 @@ class UserDataProvider {
     }
   }
 
-  Future<User> changePassword(String id, String password) async {
+  Future<User> changePassword(
+      String id, String oldPassword, String newPassword) async {
     final response = await http.patch(Uri.parse("$_baseUrl/password/$id"),
         headers: <String, String>{"Content-Type": "application/json"},
-        body: jsonEncode({
-          "password": password,
-        }));
+        body: jsonEncode(
+          {"oldPassword": oldPassword, "newPassword": newPassword},
+        ));
 
     if (response.statusCode == 200) {
       return User.fromJson(jsonDecode(response.body));
@@ -48,8 +49,14 @@ class UserDataProvider {
     }
   }
 
-  Future<void> delete(String id) async {
-    final response = await http.delete(Uri.parse("$_baseUrl/$id"));
+  Future<void> delete(String id, String password) async {
+    final response = await http.delete(Uri.parse("$_baseUrl/$id"),
+        headers: <String, String>{"Content-Type": "application/json"},
+        body: jsonEncode({
+          "password": password
+          // "role": user.role,
+        }));
+    
     if (response.statusCode != 204) {
       throw Exception("Field to delete the user");
     }

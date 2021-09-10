@@ -21,11 +21,13 @@ class _ChangePasswordState extends State<ChangePasswordPage> {
   final _formKey = GlobalKey<FormState>();
 
   late String newPassword;
-  String passedId = "6134db2369ba186847c14dba";
+  // String passedId = "6134db2369ba186847c14dba";
 
   TextEditingController newPasswordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  late String oldPassword;
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +55,12 @@ class _ChangePasswordState extends State<ChangePasswordPage> {
       listener: (context, state) {
         final formStatus = state.formStatus;
         if (formStatus is SubmissionFailed) {
-          // _showSnackBar(context, formStatus.exception.toString());
-          _showSnackBar(context, "Some error occured");
+          _showSnackBar(context, formStatus.exception.toString());
+          // _showSnackBar(context, "Some error occured");
+        }
+
+        if (formStatus is SubmissionSuccess) {
+          _showSnackBar(context, "Username successfully changed");
         }
       },
       child: Form(
@@ -102,6 +108,11 @@ class _ChangePasswordState extends State<ChangePasswordPage> {
           //     state.isValidPassword ? null : 'Password is too short',
           // onChanged: (value) => context.read<UserBloc>().add(UpdatePassword(
           //     id: "to be received from session", password: value)),
+          onChanged: (value) {
+            setState(() {
+              this.oldPassword = value;
+            });
+          },
         );
       },
     );
@@ -156,10 +167,10 @@ class _ChangePasswordState extends State<ChangePasswordPage> {
                   final form = _formKey.currentState;
                   if (form != null && form.validate()) {
                     form.save();
-                    BlocProvider.of<UserBloc>(context)
-                        .add(UpdatePassword(password: newPassword));
+                    BlocProvider.of<UserBloc>(context).add(UpdatePassword(
+                        oldPassword: oldPassword, newPassword: newPassword));
                     context.router.pop();
-                    _showSnackBar(context, "Success");
+                    // _showSnackBar(context, "Success");
                   }
                   // if (_formKey.currentState!.validate()) {
                   //   _formKey.currentState!.save();
