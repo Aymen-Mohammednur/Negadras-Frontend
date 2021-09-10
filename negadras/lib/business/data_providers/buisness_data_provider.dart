@@ -13,9 +13,11 @@ class BusinessDataProvider {
           "name": business.name,
           "categoryId": business.categoryId,
           "location": business.location,
+          "averageRating": business.avgRating,
           "phoneNumber": business.phoneNumber,
           "website": business.website,
           "email": business.email,
+          "isFavorite": business.isFavorite,
         }));
 
     // print(response.body);
@@ -40,8 +42,8 @@ class BusinessDataProvider {
   Future<List<Business>> fetchByCategory(
       String? categoryId, String? userId) async {
     print("Inside business data provider");
-    final response = await http
-        .get(Uri.parse("$_baseUrl/filter/$categoryId?userId=$userId"));
+    final response =
+        await http.get(Uri.parse("$_baseUrl/filter/$categoryId/$userId"));
     // print(response.body);
     if (response.statusCode == 200) {
       final business = jsonDecode(response.body) as List;
@@ -71,9 +73,11 @@ class BusinessDataProvider {
           "name": business.name,
           "categoryId": business.categoryId,
           "location": business.location,
+          "averageRating": business.avgRating,
           "phoneNumber": business.phoneNumber,
           "website": business.website,
           "email": business.email,
+          "isFavorite": business.isFavorite,
         }));
 
     print(response.body);
