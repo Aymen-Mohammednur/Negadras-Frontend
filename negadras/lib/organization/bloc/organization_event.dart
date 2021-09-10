@@ -1,27 +1,48 @@
 part of 'organization_bloc.dart';
 
-@immutable
-abstract class OrganizationEvent extends Equatable {}
-
-class OrganizationNameChanged extends OrganizationEvent {
-  final String organizationName;
-
-  OrganizationNameChanged({required this.organizationName});
-
-  @override
-  List<Object> get props => [organizationName];
-
-  @override
-  String toString() => 'Org Created {org: $organizationName}';
+abstract class OrganizationEvent extends Equatable {
+  const OrganizationEvent();
 }
 
-class OrganizationSubmitted extends OrganizationEvent {
+class OrganizationLoad extends OrganizationEvent {
+  const OrganizationLoad();
+
+  @override
+  List<Object> get props => [];
+}
+
+class OrganizationCreate extends OrganizationEvent {
   final Organization organization;
-  OrganizationSubmitted(this.organization);
+
+  const OrganizationCreate(this.organization);
 
   @override
   List<Object> get props => [organization];
 
   @override
-  String toString() => 'Org Created {org: $organization}';
+  String toString() => 'Organization Created {Organization: $organization}';
+}
+
+class OrganizationUpdate extends OrganizationEvent {
+  final Organization organization;
+
+  const OrganizationUpdate(this.organization);
+
+  @override
+  List<Object> get props => [Organization];
+
+  @override
+  String toString() => 'Organization Updated {Organization: $organization}';
+}
+
+class OrganizationDelete extends OrganizationEvent {
+  final String organizationId;
+
+  const OrganizationDelete(this.organizationId);
+
+  @override
+  List<Object> get props => [organizationId];
+
+  @override
+  toString() => 'Organization Deleted {Organization Id: $organizationId}';
 }

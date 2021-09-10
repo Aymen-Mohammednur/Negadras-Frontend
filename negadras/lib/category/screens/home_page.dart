@@ -104,7 +104,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          context.pushRoute(BusinessOwnerViewRoute());
+          context.router.push(ListOrganizationRoute());
         },
         tooltip: 'Increment',
         child: Icon(Icons.add),

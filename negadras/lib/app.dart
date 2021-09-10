@@ -31,8 +31,9 @@ class App extends StatelessWidget {
     final categoryRepository = CategoryRepository(CategoryDataProvider());
     final businessRepository = BusinessRepository(BusinessDataProvider());
     final authRepository = AuthRepository(AuthDataProvider(http.Client()));
-    final orgRepository = OrganizationRepository(OrganizationDataProvider());
     final reviewRepository = ReviewRepository(ReviewDataProvider());
+    final organizationRepository =
+        OrganizationRepository(OrganizationDataProvider());
 
     return MultiBlocProvider(
       providers: [
@@ -46,11 +47,15 @@ class App extends StatelessWidget {
                   businessRepository: businessRepository,
                 )),
         BlocProvider(
-            create: (context) => OrganizationBloc(orgRepo: orgRepository)),
+            create: (context) => OrganizationBloc(
+                organizationRepository: organizationRepository)..add(OrganizationLoad())),
         BlocProvider(create: (context) => LoginBloc(authRepo: authRepository)),
         BlocProvider(create: (context) => SignUpBloc(authRepo: authRepository)),
-        BlocProvider<ReviewBloc>(create: (context) => ReviewBloc(reviewRepository)),
-        BlocProvider<UserReviewBloc>(create: (context) => UserReviewBloc(reviewRepository)),
+        BlocProvider<ReviewBloc>(
+            create: (context) => ReviewBloc(reviewRepository)),
+        BlocProvider<UserReviewBloc>(
+            create: (context) => UserReviewBloc(reviewRepository)),
+        // BlocProvider<OrganizationBloc>(create: (context) => OrganizationBloc(organizationRepository: organizationRepository));
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
