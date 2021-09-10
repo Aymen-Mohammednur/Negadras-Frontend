@@ -1,58 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:negadras/business/screens/favorites_page.dart';
-import 'package:negadras/business/screens/my_business.dart';
-import 'package:negadras/business/screens/widgets.dart';
-import 'package:negadras/review/blocs/review_bloc.dart';
+// import 'package:negadras/business/screens/favorites.dart';
+// import 'package:negadras/business/screens/my_business.dart';
+import 'package:negadras/review/screens/widgets.dart';
+import 'package:negadras/review/blocs/blocs.dart';
 import 'package:negadras/review/screens/widgets/widgets.dart';
 import 'package:negadras/user/screens/me_tab.dart';
 import 'package:negadras/utils/bottom_nav_bar.dart';
 // import 'package:negadras/review/scre'
 
 class UserViewPage extends StatefulWidget {
-  final String businessId;
-  const UserViewPage({Key? key, required this.businessId}) : super(key: key);
+  const UserViewPage({Key? key}) : super(key: key);
+  
+  // const UserViewPage(this.businessId, this.userId, {Key? key}) : super(key: key);
+  // final String businessId;
+  // final String userId;
 
   @override
-  UserViewPageState createState() => UserViewPageState();
+  UserViewPageState createState(){
+    UserViewPageState s = UserViewPageState();
+    s.businessId = "6139de58b8c03ed2137941fc";
+    s.userId = "6134db2369ba186847c14dba";
+    return s;
+  }
 }
 
 class UserViewPageState extends State<UserViewPage> {
+  late String businessId;
+  late String userId;
   bool _floatingActionIsVisible = false;
   @override
   Widget build(BuildContext context) {
     var _scrollController = ScrollController();
-    return BlocProvider(
-      create: (context) => ReviewBloc(),
-      child: Scaffold(
+    BlocProvider.of<ReviewBloc>(context).add(PageOpen( businessId, userId ));
+    return Scaffold(
         appBar: AppBar(
           title: Text("Business Details"),
         ),
-        body: Center(
-          child: NotificationListener(
+        body: NotificationListener(
             child: ListView(
-              controller: _scrollController,
-              // crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                    imageStackWidget(),
-                    buttonPanelWidget([
-                      IconTextPair().call(),
-                      // IconTextPair().map(),
-                      IconTextPair().website(),
-                      IconTextPair().claim()
-                    ]),
-                    BlocBuilder<ReviewBloc, ReviewState>(
-                      builder: (context, state) => UserReviewPrompt(context),
-                    ),
-                  ] +
-                  userReviewList(1),
+                shrinkWrap: true,
+                controller: _scrollController,
+                children: [
+                      imageStackWidget(),
+                      buttonPanelWidget([
+                        IconTextPair().call(),
+                        IconTextPair().website(),
+                        IconTextPair().claim()
+                      ]),
+                      BlocBuilder<UserReviewBloc, UserReviewState>(
+                        builder: (context, state) => UserReviewPromptClass(context, businessId, userId).UserReviewPrompt(),
+                      ),
+                    ] +
+                    [BlocBuilder<ReviewBloc, ReviewState>(builder: (context, state) => handleUserReviewState(state),),],
             ),
             onNotification: (ping) {
               return scrollToTopWidgetMaker(ping, _scrollController);
             },
           ),
-        ),
         bottomNavigationBar: bottomNav(context),
         floatingActionButton: Visibility(
           visible: _floatingActionIsVisible,
@@ -67,7 +73,6 @@ class UserViewPageState extends State<UserViewPage> {
             child: Icon(Icons.arrow_circle_up_rounded),
           ),
         ),
-      ),
     );
   }
 
