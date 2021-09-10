@@ -10,6 +10,7 @@ import 'package:negadras/business/screens/my_business.dart';
 import 'package:negadras/business/screens/search_business.dart';
 import 'package:negadras/category/screens/home_page.dart';
 import 'package:negadras/organization/screens/add_organization.dart';
+import 'package:negadras/organization/screens/edit_organization.dart';
 import 'package:negadras/organization/screens/list_organization_page.dart';
 import 'package:negadras/review/screens/user_view.dart';
 import 'package:negadras/user/screens/account_management.dart';
@@ -38,7 +39,8 @@ import 'package:negadras/user/screens/me_tab.dart';
     AutoRoute(page: EditBusinessPage),
     AutoRoute(page: AddOrganizationPage),
     AutoRoute(page: ListOrganizationPage),
-    AutoRoute(page: BusinessOwnerViewPage)
+    AutoRoute(page: BusinessOwnerViewPage),
+    AutoRoute(page: EditOrganizationPage)
   ],
 )
 class $AppRouter {}

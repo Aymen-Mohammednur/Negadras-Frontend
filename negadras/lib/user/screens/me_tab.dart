@@ -10,7 +10,8 @@ class MePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: bottomNav(context),
+        // bottomNavigationBar: bottomNav(context, 2),
+        bottomNavigationBar: ownerBottomNav(context, 3),
         body: SafeArea(
             child: Column(
           children: [

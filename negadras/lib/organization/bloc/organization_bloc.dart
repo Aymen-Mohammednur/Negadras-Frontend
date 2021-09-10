@@ -12,27 +12,60 @@ part 'organization_event.dart';
 part 'organization_state.dart';
 
 class OrganizationBloc extends Bloc<OrganizationEvent, OrganizationState> {
-  final OrganizationRepository orgRepo;
-  OrganizationBloc({required this.orgRepo}) : super(OrganizationState());
+  final OrganizationRepository organizationRepository;
+  OrganizationBloc({required this.organizationRepository})
+      : super(OrganizationLoading());
 
   @override
   Stream<OrganizationState> mapEventToState(
     OrganizationEvent event,
   ) async* {
-    // Username updated
-    if (event is OrganizationNameChanged) {
-      yield state.copyWith(organizationName: event.organizationName);
-
-      // Form Submitted
-    } else if (event is OrganizationSubmitted) {
-      yield state.copyWith(formStatus: FormSubmitting());
-
+    if (event is OrganizationLoad) {
+      yield OrganizationLoading();
       try {
-        await orgRepo.create(event.organization);
-        yield state.copyWith(
-            formStatus: SubmissionSuccess(), organization: event.organization);
+        print("Inside org loading");
+        final organizations = await organizationRepository.fetchByUserId();
+        var a = organizations.length;
+        print("Organization lenght: $a");
+        if (organizations.length == 0) {
+          yield NoOrganizationsState();
+        } else {
+          yield OrganizationOperationSuccess(organizations);
+        }
       } catch (e) {
-        yield state.copyWith(formStatus: SubmissionFailed(e as Exception));
+        print(e);
+        yield OrganizationOperationFailure();
+      }
+    }
+
+    if (event is OrganizationCreate) {
+      try {
+        await organizationRepository.create(event.organization);
+        final organizations = await organizationRepository.fetchByUserId();
+        yield OrganizationOperationSuccess(organizations);
+      } catch (e) {
+        yield OrganizationOperationFailure();
+      }
+    }
+
+    if (event is OrganizationUpdate) {
+      try {
+        await organizationRepository.update(
+            event.organization.id, event.organization);
+        final organizations = await organizationRepository.fetchByUserId();
+        yield OrganizationOperationSuccess(organizations);
+      } catch (e) {
+        yield OrganizationOperationFailure();
+      }
+    }
+
+    if (event is OrganizationDelete) {
+      try {
+        await organizationRepository.delete(event.organizationId);
+        final organizations = await organizationRepository.fetchByUserId();
+        yield OrganizationOperationSuccess(organizations);
+      } catch (_) {
+        yield OrganizationOperationFailure();
       }
     }
   }

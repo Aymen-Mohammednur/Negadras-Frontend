@@ -26,7 +26,8 @@ class FilterBusinessPage extends StatelessWidget {
         appBar: AppBar(
           title: Text("Filter"),
         ),
-        bottomNavigationBar: bottomNav(context),
+        // bottomNavigationBar: bottomNav(context, 0),
+        bottomNavigationBar: ownerBottomNav(context, 0),
         body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
