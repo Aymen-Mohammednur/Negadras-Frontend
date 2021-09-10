@@ -93,12 +93,14 @@ class FilterBusinessPage extends StatelessWidget {
                                       businessState.businessList[i].id));
                             },
                             child: BusinessCard(
+                              businessId: businessState.businessList[i].id,
                               businessName: businessState.businessList[i].name,
-                              rating:
-                                  4, //Get the review repo and pass the business id
+                              rating: businessState.businessList[i].avgRating,
                               locationInfo:
                                   businessState.businessList[i].location,
                               imagePath: 'assets/images/macbook.jpg',
+                              isFavorite: businessState
+                                  .businessList[i].isFavorite as bool,
                             ),
                           );
                         },

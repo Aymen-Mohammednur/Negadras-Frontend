@@ -78,6 +78,7 @@ class _EditFormState extends State<EditForm> {
       name: "Hey",
       categoryId: "6137468a4a711f786fa844cd",
       location: "Test",
+      avgRating: 3,
       website: "dfdsf",
       phoneNumber: "sdf",
       email: "fds@gamil.com");
@@ -276,14 +277,14 @@ class _EditFormState extends State<EditForm> {
                       print(_business);
                       final BusinessEvent event = UpdateBusiness(
                         Business(
-                          id: "613a0e7375cc773d183d881e",
-                          name: this._business["name"],
-                          location: this._business["location"],
-                          categoryId: this._business["categoryId"],
-                          website: this._business["website"],
-                          phoneNumber: this._business["phoneNumber"],
-                          email: this._business["email"],
-                        ),
+                            id: "613a0e7375cc773d183d881e",
+                            name: this._business["name"],
+                            location: this._business["location"],
+                            categoryId: this._business["categoryId"],
+                            website: this._business["website"],
+                            phoneNumber: this._business["phoneNumber"],
+                            email: this._business["email"],
+                            avgRating: this._business['averageRating']),
                       );
                       businessBloc.add(event);
                       // print(event);

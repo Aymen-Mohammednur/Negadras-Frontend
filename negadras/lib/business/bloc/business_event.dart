@@ -33,8 +33,6 @@ class AddBusiness extends BusinessEvent {
   String toString() => 'Business Created {course: $business}';
 }
 
-class AddBusinessToFavoritesEvent extends BusinessEvent {}
-
 class UpdateBusiness extends BusinessEvent {
   final Business business;
 
@@ -57,4 +55,18 @@ class DeleteBusiness extends BusinessEvent {
 
   @override
   toString() => 'Business Deleted {business Id: $id}';
+}
+
+class AddBusinessToFavoritesEvent extends BusinessEvent {}
+
+class ShowFavoritesEvent extends BusinessEvent {}
+
+class AddToFavoritesEvent extends BusinessEvent {
+  final String businessId;
+  AddToFavoritesEvent(this.businessId);
+}
+
+class RemoveFromFavoritesEvent extends BusinessEvent {
+  final String businessId;
+  RemoveFromFavoritesEvent(this.businessId);
 }

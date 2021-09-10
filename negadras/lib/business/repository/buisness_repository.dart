@@ -1,5 +1,6 @@
 import 'package:negadras/business/data_providers/buisness_data_provider.dart';
 import 'package:negadras/business/models/business.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BusinessRepository {
   final BusinessDataProvider dataProvider;
@@ -24,10 +25,29 @@ class BusinessRepository {
 
   Future<List<Business>> fetchByCategory(String? categoryId) async {
     print("Inside business repo");
-    return this.dataProvider.fetchByCategory(categoryId);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    final userId = await prefs.getString("user_id");
+    return this.dataProvider.fetchByCategory(categoryId, userId);
   }
 
   Future<void> delete(String id) async {
     this.dataProvider.delete(id);
+  }
+
+  Future<void> addToFavorites(
+    String businessId,
+  ) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    final userId = await prefs.getString("user_id") as String;
+    this.dataProvider.addToFavorites(businessId, userId);
+  }
+
+  Future<void> removeFromFavorites(String businessId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    final userId = await prefs.getString("user_id") as String;
+    this.dataProvider.removeFromFavorites(businessId, userId);
   }
 }
