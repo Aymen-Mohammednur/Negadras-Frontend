@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:negadras/auth/Constants/constants.dart';
+import 'package:negadras/auth/constants/constants.dart';
 import 'package:negadras/auth/models/models.dart';
 import 'package:http/http.dart' as http;
 import 'package:negadras/auth/models/response/loginResponse.dart';
@@ -7,7 +7,7 @@ import 'package:negadras/auth/models/response/registerResponse.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthDataProvider {
-  static final String _baseUrl = "${StringConstants.BASE_URL_DEVICE}/auth";
+  static final String _baseUrl = "${StringConstants.BASE_URL_EMULATOR}/auth";
 
   http.Client client;
 

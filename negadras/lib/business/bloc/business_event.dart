@@ -21,6 +21,8 @@ class FilterBusinessEvent extends BusinessEvent {
 
 class ShowFavoritesEvent extends BusinessEvent {}
 
+class NormalBusinessEvent extends BusinessEvent {}
+
 class AddBusiness extends BusinessEvent {
   final Business business;
 

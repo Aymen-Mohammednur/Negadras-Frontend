@@ -8,6 +8,7 @@ import 'package:negadras/routes/router.gr.dart';
 import 'package:negadras/utils/bottom_nav_bar.dart';
 import 'package:negadras/category/blocs/category_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:negadras/business/screens/widgets/search_bar.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -27,6 +28,7 @@ class _HomePageState extends State<HomePage> {
                 onTap: () {
                   // bloc.add(CategoryFilter(
                   //     categoryId: categories.elementAt(index).id));
+
                   context.router.push(FilterBusinessRoute(
                       categoryId: categories.elementAt(index).id));
                 },
@@ -54,6 +56,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final categoryBloc = BlocProvider.of<CategoryBloc>(context);
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Negadras"),
+        centerTitle: true,
+      ),
       body: BlocBuilder<CategoryBloc, CategoryState>(
         builder: (context, state) {
           print(state);
@@ -71,7 +77,7 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  searchBar(),
+                  const SearchBar(),
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0, top: 8.0),
                     child: Text("What are you looking for...",
@@ -98,10 +104,11 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          context.pushRoute(EditBusinessRoute());
+          context.pushRoute(BusinessOwnerViewRoute());
         },
         tooltip: 'Increment',
         child: Icon(Icons.add),
+        backgroundColor: Colors.green.shade900,
       ),
       bottomNavigationBar: bottomNav(context),
     );

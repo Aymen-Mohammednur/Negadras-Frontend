@@ -1,12 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:negadras/auth/constants/string.dart';
 import 'package:negadras/business/models/models.dart';
 
 class BusinessDataProvider {
-  // FOR ACTUAL DEVICE
-  //static final String _baseUrl = "http://localhost:3000/api/category";
-  // FOR EMULATOR
-  static final String _baseUrl = "http://10.0.2.2:3000/api/business";
+  static final String _baseUrl = "${StringConstants.BASE_URL_EMULATOR}/user";
 
   Future<Business> create(Business business) async {
     final http.Response response = await http.post(Uri.parse(_baseUrl),
@@ -20,7 +18,7 @@ class BusinessDataProvider {
           "email": business.email,
         }));
 
-    print(response.body);
+    // print(response.body);
     if (response.statusCode == 201) {
       return Business.fromJson(jsonDecode(response.body));
     } else {

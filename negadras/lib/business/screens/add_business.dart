@@ -268,6 +268,7 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
                 ),
                 ElevatedButton(
                   onPressed: () {
+                    businessBloc.add(NormalBusinessEvent());
                     context.router.pop();
                   },
                   child: Text(

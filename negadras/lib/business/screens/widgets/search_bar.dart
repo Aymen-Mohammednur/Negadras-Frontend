@@ -17,6 +17,13 @@ class SearchBar extends StatelessWidget {
             child: SizedBox(
               width: MediaQuery.of(context).size.width * .85,
               child: TextField(
+                onTap: () {
+                  FocusScopeNode currentFocus = FocusScope.of(context);
+
+                  if (!currentFocus.hasPrimaryFocus) {
+                    currentFocus.unfocus();
+                  }
+                },
                 decoration: InputDecoration(
                     border: InputBorder.none, hintText: 'Enter a search term'),
               ),
@@ -24,7 +31,9 @@ class SearchBar extends StatelessWidget {
           ),
           GestureDetector(
             child: Icon(Icons.search),
-            onTap: () => print("working"),
+            onTap: () {
+              // print("ontap");
+            },
           )
         ],
       ),
