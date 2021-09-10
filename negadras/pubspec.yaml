@@ -35,6 +35,8 @@ dependencies:
   auto_route: ^2.3.0
   bottom_navy_bar: ^6.0.0
   shared_preferences: ^2.0.7
+  google_fonts: ^2.1.0
+  
 
 dev_dependencies:
   auto_route_generator: ^2.1.0
@@ -74,6 +76,7 @@ flutter_native_splash:
   # The image parameter allows you to specify an image used in the splash screen.  It must be a 
   # png file and should be sized for 4x pixel density.
   image: assets/images/logo2.png
+
 
   # The color_dark, background_image_dark, and image_dark are parameters that set the background
   # and image when the device is in dark mode. If they are not specified, the app will use the
@@ -139,6 +142,7 @@ flutter:
   assets:
     - assets/images/
     - images/placeholder-1.jpg
+    - images/icons8-person-24.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
