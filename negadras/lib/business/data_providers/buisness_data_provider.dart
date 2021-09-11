@@ -167,8 +167,8 @@ class BusinessDataProvider {
   Future<List<Business>> fetchFavorites(String userId) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("token") as String;
-
-    final response = await http.get(Uri.parse("$_baseUrl/favorites/$userId"),headers: <String, String>{"Content-Type": "application/json", "access-token":token});
+    final response = await http.get(Uri.parse("$_baseUrl/favorites/$userId"),
+        headers: <String, String>{"Content-Type": "application/json", "access-token":token});
     if (response.statusCode == 200) {
       final business = jsonDecode(response.body) as List;
       return business.map((b) => Business.fromJson(b)).toList();
