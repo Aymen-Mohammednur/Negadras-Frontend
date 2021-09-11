@@ -23,18 +23,25 @@ class _State extends State<DeleteAccountPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: RepositoryProvider(
+    return SafeArea(
+        child: RepositoryProvider(
             create: (context) =>
                 UserRepository(dataProvider: UserDataProvider()),
             child: Scaffold(
+              backgroundColor: Color.fromRGBO(20, 40, 65, 1),
               body: BlocProvider(
                 create: (context) =>
                     UserBloc(userRepository: context.read<UserRepository>()),
-                child: Stack(
-                  alignment: Alignment.bottomCenter,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    SizedBox(
+                      height: 130,
+                    ),
                     _label(),
+                    SizedBox(
+                      height: 50,
+                    ),
                     _deleteAccount(),
                   ],
                 ),
@@ -57,10 +64,9 @@ class _State extends State<DeleteAccountPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _label(),
                 _passwordField(),
                 SizedBox(
-                  height: 10,
+                  height: 40,
                 ),
                 _submitButton(),
               ],
@@ -76,7 +82,8 @@ class _State extends State<DeleteAccountPage> {
           padding: EdgeInsets.only(top: 20),
           child: Text(
             'Delete Account',
-            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 30),
+            style: TextStyle(
+                fontWeight: FontWeight.w500, fontSize: 30, color: Colors.white),
           )),
     );
   }
@@ -86,10 +93,14 @@ class _State extends State<DeleteAccountPage> {
       builder: (context, state) {
         return TextFormField(
           controller: passwordController,
+          style: TextStyle(color: Colors.white),
           obscureText: true,
           decoration: InputDecoration(
-              icon: Icon(Icons.security),
-              hintText: 'Confirm your password to delete account'),
+              icon: ImageIcon(
+                  AssetImage("assets/images/icons8-password-24.png"),
+                  color: Colors.amber.shade200),
+              hintText: 'Confirm your password to delete account',
+              hintStyle: TextStyle(fontSize: 17, color: Colors.white)),
           // validator: (value) => state.isValidPassword ? null : 'Worng Password',
           // onChanged: (value) =>
           //     context.read<UserBloc>().add(DeleteUser( userid: "id form session")),
@@ -125,13 +136,13 @@ class _State extends State<DeleteAccountPage> {
                         predicate: (route) => false);
                   }
                 },
-                style: ButtonStyle(
-                    shadowColor: MaterialStateProperty.all(Colors.grey),
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.black87)),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.amberAccent,
+                  minimumSize: Size(200, 48),
+                ),
                 child: Text(
                   "Delete Account",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.white, fontSize: 20),
                 ));
       },
     );

@@ -19,7 +19,7 @@ class _ChangeUsernameState extends State<ChangeUsernamePage> {
   final _formKey = GlobalKey<FormState>();
 
   late String newUsername;
-  
+
   String passedId = "6134db2369ba186847c14dba";
 
   TextEditingController newUsernameController = TextEditingController();
@@ -27,18 +27,25 @@ class _ChangeUsernameState extends State<ChangeUsernamePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: RepositoryProvider(
+    return SafeArea(
+        child: RepositoryProvider(
             create: (context) =>
                 UserRepository(dataProvider: UserDataProvider()),
             child: Scaffold(
+              backgroundColor: Color.fromRGBO(20, 40, 65, 1),
               body: BlocProvider(
                 create: (context) =>
                     UserBloc(userRepository: context.read<UserRepository>()),
-                child: Stack(
-                  alignment: Alignment.bottomCenter,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    SizedBox(
+                      height: 130,
+                    ),
                     _label(),
+                    SizedBox(
+                      height: 50,
+                    ),
                     _changeUsernameForm(),
                   ],
                 ),
@@ -62,7 +69,6 @@ class _ChangeUsernameState extends State<ChangeUsernamePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _label(),
                 _usernameField(),
                 _newUsernameField(),
                 SizedBox(
@@ -82,7 +88,8 @@ class _ChangeUsernameState extends State<ChangeUsernamePage> {
           padding: EdgeInsets.only(top: 20),
           child: Text(
             'Change your Username',
-            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 30),
+            style: TextStyle(
+                fontWeight: FontWeight.w500, fontSize: 30, color: Colors.white),
           )),
     );
   }
@@ -92,8 +99,14 @@ class _ChangeUsernameState extends State<ChangeUsernamePage> {
       builder: (context, state) {
         return TextFormField(
           controller: newUsernameController,
+          style: TextStyle(color: Colors.white),
           decoration: InputDecoration(
-              icon: Icon(Icons.person), hintText: 'New Username'),
+              icon: ImageIcon(
+                AssetImage("assets/images/icons8-person-24.png"),
+                color: Colors.amber.shade200,
+              ),
+              hintText: 'New Username',
+              hintStyle: TextStyle(fontSize: 20, color: Colors.white)),
           // validator: (value) =>
           //     state.isValidUsername ? null : 'Username is too short',
           // onChanged: (value) => context.read<UserBloc>().add(UpdateUsername(
@@ -113,8 +126,14 @@ class _ChangeUsernameState extends State<ChangeUsernamePage> {
       builder: (context, state) {
         return TextFormField(
           controller: usernameController,
+          style: TextStyle(color: Colors.white),
           decoration: InputDecoration(
-              icon: Icon(Icons.person), hintText: 'Current Username'),
+              icon: ImageIcon(
+                AssetImage("assets/images/icons8-person-24.png"),
+                color: Colors.amber.shade200,
+              ),
+              hintText: 'Current Username',
+              hintStyle: TextStyle(fontSize: 20, color: Colors.white)),
           // validator: (value) =>
           //     state.isValidUsername ? null : 'Username is too short',
           // onChanged: (value) => context.read<UserBloc>().add(UpdateUsername(
@@ -139,8 +158,8 @@ class _ChangeUsernameState extends State<ChangeUsernamePage> {
                   final form = _formKey.currentState;
                   if (form != null && form.validate()) {
                     form.save();
-                    BlocProvider.of<UserBloc>(context).add(
-                        UpdateUsername(username: newUsername));
+                    BlocProvider.of<UserBloc>(context)
+                        .add(UpdateUsername(username: newUsername));
                   }
                   // if (_formKey.currentState!.validate()) {
                   //   _formKey.currentState!.save();
@@ -148,13 +167,13 @@ class _ChangeUsernameState extends State<ChangeUsernamePage> {
                   //   // context.router.push(HomeRoute());
                   // }
                 },
-                style: ButtonStyle(
-                    shadowColor: MaterialStateProperty.all(Colors.grey),
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.black87)),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.amberAccent,
+                  minimumSize: Size(200, 48),
+                ),
                 child: Text(
                   "Change Username",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.white, fontSize: 20),
                 ));
       },
     );
