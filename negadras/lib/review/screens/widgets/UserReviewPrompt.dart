@@ -126,8 +126,14 @@ class UserReviewPromptClass {
         padding: EdgeInsets.all(14),
         child: TextFormField(
           controller: bloc.reviewController,
+
           decoration: InputDecoration(
+              // focusColor: Colors.amberAccent,
+              // fillColor: Colors.amberAccent,
+              // hoverColor: Colors.amberAccent,
               labelText: "Describe your experience... (Optional)"),
+          cursorColor: Colors.amberAccent,
+
           initialValue: null,
           keyboardType: TextInputType.multiline,
           minLines: 1, //Normal textInputField will be displayed
@@ -157,9 +163,12 @@ class UserReviewPromptClass {
         },
         child: Text("Continue"),
         style: ButtonStyle(
-          backgroundColor: MaterialStateColor.resolveWith((states) => Colors.blueGrey[400]!),
-          foregroundColor: MaterialStateColor.resolveWith((states) => Colors.lightBlue[50]!),
-          shadowColor: MaterialStateColor.resolveWith((states) => Colors.blueGrey[200]!),
+          backgroundColor:
+              MaterialStateColor.resolveWith((states) => Colors.blueGrey[400]!),
+          foregroundColor:
+              MaterialStateColor.resolveWith((states) => Colors.lightBlue[50]!),
+          shadowColor:
+              MaterialStateColor.resolveWith((states) => Colors.blueGrey[200]!),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),

@@ -21,7 +21,10 @@ class UserViewPage extends StatefulWidget {
   // final String businessId;
   // final String userId;
 
-  const UserViewPage(this.businessId,this.businessName,this.businessPhone,this.businessWeb, {Key? key}) : super(key: key);
+  const UserViewPage(
+      this.businessId, this.businessName, this.businessPhone, this.businessWeb,
+      {Key? key})
+      : super(key: key);
   final String businessId;
   // final String userId;
   final String businessName;
@@ -59,7 +62,12 @@ class UserViewPageState extends State<UserViewPage> {
     DataBloc bloc = BlocProvider.of<DataBloc>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Business Details"),
+        iconTheme: IconThemeData(
+          color: Colors.amberAccent, //change your color here
+        ),
+        title: Text("Business Details",
+            style: TextStyle(color: Colors.amberAccent)),
+        backgroundColor: Color.fromRGBO(20, 40, 65, 1),
       ),
       body: NotificationListener(
         child: ListView(
@@ -74,16 +82,28 @@ class UserViewPageState extends State<UserViewPage> {
                   IconTextPair().website(todo: () {
                     launch("https://$businessUrl");
                   }),
-                  // IconTextPair().claim()
-                  IconButton(
-                      onPressed: () {
-                        UserDataProvider userDataProvider = UserDataProvider();
-                        UserRepository userRepository =
-                            UserRepository(dataProvider: userDataProvider);
-                        userRepository.makeClaim(bloc.state.userId, widget.businessId);
-                        print("CLAIMEDDDDDDDDDDD");
-                      },
-                      icon: Icon(Icons.add_circle))
+                  IconTextPair().claim(todo: () {
+                    UserDataProvider userDataProvider = UserDataProvider();
+                    UserRepository userRepository =
+                        UserRepository(dataProvider: userDataProvider);
+                    userRepository.makeClaim(
+                        bloc.state.userId, widget.businessId);
+                    print("CLAIMEDDDDDDDDDDD");
+                  })
+                  // IconButton(
+                  //   onPressed: () {
+                  //     UserDataProvider userDataProvider = UserDataProvider();
+                  //     UserRepository userRepository =
+                  //         UserRepository(dataProvider: userDataProvider);
+                  //     userRepository.makeClaim(
+                  //         bloc.state.userId, widget.businessId);
+                  //     print("CLAIMEDDDDDDDDDDD");
+                  //   },
+                  //   icon: Icon(
+                  //     Icons.add_circle,
+                  //     size: 30,
+                  //   ),
+                  // )
                 ]),
                 BlocBuilder<UserReviewBloc, UserReviewState>(
                   builder: (context, state) =>
