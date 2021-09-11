@@ -31,21 +31,27 @@ class _ChangePasswordState extends State<ChangePasswordPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: RepositoryProvider(
+    return SafeArea(
+        child: RepositoryProvider(
             create: (context) =>
                 UserRepository(dataProvider: UserDataProvider()),
             child: Scaffold(
+              backgroundColor: Color.fromRGBO(20, 40, 65, 1),
               body: BlocProvider(
                 create: (context) =>
                     UserBloc(userRepository: context.read<UserRepository>()),
-                child: Stack(
-                  alignment: Alignment.bottomCenter,
-                  children: [
-                    _label(),
-                    _changePasswordForm(),
-                  ],
-                ),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 130,
+                      ),
+                      _label(),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      _changePasswordForm(),
+                    ]),
               ),
             )));
   }
@@ -70,12 +76,11 @@ class _ChangePasswordState extends State<ChangePasswordPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _label(),
                 _passwordField(),
                 _newPasswordField(),
                 _confirmPasswordField(),
                 SizedBox(
-                  height: 10,
+                  height: 40,
                 ),
                 _submitButton(),
               ],
@@ -91,7 +96,8 @@ class _ChangePasswordState extends State<ChangePasswordPage> {
           padding: EdgeInsets.only(top: 20),
           child: Text(
             'Change your Password',
-            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 30),
+            style: TextStyle(
+                fontWeight: FontWeight.w500, fontSize: 30, color: Colors.white),
           )),
     );
   }
@@ -101,9 +107,14 @@ class _ChangePasswordState extends State<ChangePasswordPage> {
       builder: (context, state) {
         return TextFormField(
           controller: passwordController,
+          style: TextStyle(color: Colors.white),
           obscureText: true,
           decoration: InputDecoration(
-              icon: Icon(Icons.security), hintText: 'Current Password'),
+              icon: ImageIcon(
+                  AssetImage("assets/images/icons8-password-24.png"),
+                  color: Colors.amber.shade200),
+              hintText: 'Current Password',
+              hintStyle: TextStyle(fontSize: 20, color: Colors.white)),
           // validator: (value) =>
           //     state.isValidPassword ? null : 'Password is too short',
           // onChanged: (value) => context.read<UserBloc>().add(UpdatePassword(
@@ -123,9 +134,14 @@ class _ChangePasswordState extends State<ChangePasswordPage> {
       builder: (context, state) {
         return TextFormField(
           controller: newPasswordController,
+          style: TextStyle(color: Colors.white),
           obscureText: true,
           decoration: InputDecoration(
-              icon: Icon(Icons.security), hintText: 'New Password'),
+              icon: ImageIcon(
+                  AssetImage("assets/images/icons8-password-24.png"),
+                  color: Colors.amber.shade200),
+              hintText: 'New Password',
+              hintStyle: TextStyle(fontSize: 20, color: Colors.white)),
           // validator: (value) =>
           //     state.isValidPassword ? null : 'Password is too short',
           // onChanged: (value) => context.read<UserBloc>().add(UpdatePassword(
@@ -140,9 +156,14 @@ class _ChangePasswordState extends State<ChangePasswordPage> {
       builder: (context, state) {
         return TextFormField(
           controller: confirmPasswordController,
+          style: TextStyle(color: Colors.white),
           obscureText: true,
           decoration: InputDecoration(
-              icon: Icon(Icons.security), hintText: 'Confirm New Password'),
+              icon: ImageIcon(
+                  AssetImage("assets/images/icons8-password-24.png"),
+                  color: Colors.amber.shade200),
+              hintText: 'Confirm New Password',
+              hintStyle: TextStyle(fontSize: 20, color: Colors.white)),
           // validator: (value) =>
           //     state.isValidConfirmPassword ? null : 'Password does not match',
           // onChanged: (value) => context.read<UserBloc>().add(UpdatePassword(
@@ -178,13 +199,13 @@ class _ChangePasswordState extends State<ChangePasswordPage> {
                   //   context.router.push(HomeRoute());
                   // }
                 },
-                style: ButtonStyle(
-                    shadowColor: MaterialStateProperty.all(Colors.grey),
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.black87)),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.amberAccent,
+                  minimumSize: Size(200, 48),
+                ),
                 child: Text(
                   "Change Password",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.white, fontSize: 20),
                 ));
       },
     );

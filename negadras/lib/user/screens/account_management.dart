@@ -10,6 +10,7 @@ class AccountManagementPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(20, 40, 65, 1),
       // bottomNavigationBar: bottomNav(context, 2),
       bottomNavigationBar: ownerBottomNav(context, 3),
       body: SafeArea(
@@ -26,7 +27,7 @@ class AccountManagementPage extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: Colors.red,
                   image: DecorationImage(
-                      image: AssetImage('assets/images/hacker.jpeg'),
+                      image: AssetImage('assets/images/avatar.png'),
                       fit: BoxFit.fill),
                 ),
               ),
@@ -34,7 +35,8 @@ class AccountManagementPage extends StatelessWidget {
                   child: Label(
                 label: "Account Management",
                 fontStyle: FontStyle.normal,
-                fontSize: 15.0,
+                fontSize: 22.0,
+                fontColor: Colors.amberAccent,
               ))
             ],
           ),
@@ -43,12 +45,20 @@ class AccountManagementPage extends StatelessWidget {
               GestureDetector(
                 onTap: () => {context.router.push(ChangeUsernameRoute())},
                 child: Card(
+                  color: Color.fromRGBO(20, 40, 65, 1),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       const ListTile(
-                        leading: Icon(Icons.person),
-                        title: Text('Change Username'),
+                        leading: ImageIcon(
+                          AssetImage("assets/images/icons8-person-24.png"),
+                          color: Colors.amberAccent,
+                        ),
+                        title: Text(
+                          'Change Username',
+                          style: TextStyle(
+                              fontSize: 20, color: Colors.amberAccent),
+                        ),
                       ),
                     ],
                   ),
@@ -57,12 +67,20 @@ class AccountManagementPage extends StatelessWidget {
               GestureDetector(
                 onTap: () => {context.router.push(ChangePasswordRoute())},
                 child: Card(
+                  color: Color.fromRGBO(20, 40, 65, 1),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       const ListTile(
-                        leading: Icon(Icons.pin_drop_outlined),
-                        title: Text('Change Password'),
+                        leading: ImageIcon(
+                          AssetImage("assets/images/icons8-password-24.png"),
+                          color: Colors.amberAccent,
+                        ),
+                        title: Text(
+                          'Change Password',
+                          style: TextStyle(
+                              fontSize: 20, color: Colors.amberAccent),
+                        ),
                       ),
                     ],
                   ),
@@ -71,12 +89,20 @@ class AccountManagementPage extends StatelessWidget {
               GestureDetector(
                 onTap: () => {context.router.push(DeleteAccountRoute())},
                 child: Card(
+                  color: Color.fromRGBO(20, 40, 65, 1),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       const ListTile(
-                        leading: Icon(Icons.home_filled),
-                        title: Text('Delete Account'),
+                        leading: ImageIcon(
+                          AssetImage("assets/images/icons8-delete-64.png"),
+                          color: Colors.amberAccent,
+                        ),
+                        title: Text(
+                          'Delete Account',
+                          style: TextStyle(
+                              fontSize: 20, color: Colors.amberAccent),
+                        ),
                       ),
                     ],
                   ),

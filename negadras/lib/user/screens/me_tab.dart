@@ -35,7 +35,7 @@ class MePage extends StatelessWidget {
                     child: Label(
                   label: "Firstname Secondname",
                   fontStyle: FontStyle.normal,
-                  fontSize: 20.0,
+                  fontSize: 22.0,
                   fontColor: Colors.amberAccent,
                 ))
               ],
@@ -59,7 +59,8 @@ class MePage extends StatelessWidget {
                           ),
                           title: Text(
                             'Account Management',
-                            style: TextStyle(color: Colors.amberAccent),
+                            style: TextStyle(
+                                fontSize: 20, color: Colors.amberAccent),
                           ),
                         ),
                       ],
@@ -87,7 +88,8 @@ class MePage extends StatelessWidget {
                             color: Colors.amberAccent,
                           ),
                           title: Text('Favorite Places',
-                              style: TextStyle(color: Colors.amberAccent)),
+                              style: TextStyle(
+                                  fontSize: 20, color: Colors.amberAccent)),
                         ),
                       ),
                       shape: RoundedRectangleBorder(
@@ -128,7 +130,8 @@ class MePage extends StatelessWidget {
                             color: Colors.amberAccent,
                           ),
                           title: Text('Logout',
-                              style: TextStyle(color: Colors.amberAccent)),
+                              style: TextStyle(
+                                  fontSize: 20, color: Colors.amberAccent)),
                         ),
                       ],
                     ),
