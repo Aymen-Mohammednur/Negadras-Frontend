@@ -10,9 +10,11 @@ Widget ownerBottomNav(BuildContext context, int i) {
   // SharedPreferences pref = await SharedPreferences.getInstance();
   // String? role = pref.getString("role");
   DataBloc bloc = BlocProvider.of<DataBloc>(context);
-  String ID = bloc.state.userId;
-
-  if (bloc.state.role == "Owner") {
+  // String ID = bloc.state.userId;
+  print("BOTTTOM NAV ID AND ROLEEEEEEEEEEEEEEEEEEEE");
+  print(bloc.state.role);
+  print(bloc.state.userId);
+  if (bloc.state.role == "NormalUser") {
     Map<String, int> pageIndex = {"/": 0, "/favorites-page": 1, "/me-page": 2};
     String routeName = context.routeData.path;
     int currentIndex = pageIndex[routeName] ?? 0;
@@ -38,17 +40,29 @@ Widget ownerBottomNav(BuildContext context, int i) {
 
       items: [
         BottomNavyBarItem(
-            icon: Icon(Icons.home),
+            icon: ImageIcon(
+              AssetImage("assets/images/icons8-binoculars-24.png"),
+              color: Color.fromRGBO(20, 40, 65, 1),
+              // size: 5,
+            ),
             title: Text("Discover"),
             activeColor: Color.fromRGBO(20, 40, 65, 1),
             inactiveColor: Colors.black),
         BottomNavyBarItem(
-            icon: Icon(Icons.favorite),
+            icon: ImageIcon(
+              AssetImage("assets/images/icons8-heart-24.png"),
+              color: Color.fromRGBO(20, 40, 65, 1),
+              // size: 5,
+            ),
             title: Text("Favorites"),
             activeColor: Color.fromRGBO(20, 40, 65, 1),
             inactiveColor: Colors.black),
         BottomNavyBarItem(
-            icon: Icon(Icons.manage_accounts),
+            icon: ImageIcon(
+              AssetImage("assets/images/icons8-edit-account-50.png"),
+              color: Color.fromRGBO(20, 40, 65, 1),
+              // size: 5,
+            ),
             title: Text("Me"),
             activeColor: Color.fromRGBO(20, 40, 65, 1),
             inactiveColor: Colors.black)
