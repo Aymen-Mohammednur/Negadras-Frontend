@@ -15,8 +15,8 @@ class AddBusinessPage extends StatefulWidget {
 
 class _AddBusinessPageState extends State<AddBusinessPage> {
   Map<String, String> categories = {
-    "Restaurant": "61374589554605d2f68d39f1",
-    "Cafe": "6137460f4a711f786fa844c7",
+    "Restaurant": "613c1d3652cbaed01feca461",
+    "Cafe": "613c1d4e52cbaed01feca463",
     "Construction": "613746764a711f786fa844c9",
     "Bars": "613746834a711f786fa844cb",
     "Beauty Salons": "6137468a4a711f786fa844cd",

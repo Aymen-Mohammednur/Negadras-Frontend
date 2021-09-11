@@ -27,12 +27,15 @@ class BusinessBloc extends Bloc<BusinessEvent, BusinessState> {
       yield FetchingState();
       final categoryId = event.categoryId;
       try {
+        print("About to fetch businesses under a category");
         final businessList =
             await businessRepository.fetchByCategory(categoryId);
-        print(businessList[0].name);
+        print("finished fetching categories");
+        print("Result to check favorite here: ${businessList[0].isFavorite} ${businessList[1].isFavorite}");
         yield BusinessFetchResultState(businessList, categoryId as String);
       } catch (e) {
         print(e.toString());
+        print("Unfortunately got error on the way");
         yield Failure(categoryId as String);
       }
 
@@ -86,76 +89,76 @@ class BusinessBloc extends Bloc<BusinessEvent, BusinessState> {
       yield FetchingState();
       try {
         //Fake list
-        final businessList = [
-          Business(
-              id: "id",
-              name: "Negadras",
-              categoryId: "categoryId",
-              location: "5 Kilo, Gulele Zone",
-              isFavorite: true,
-              avgRating: 2),
-          Business(
-              id: "id",
-              name: "Friendship City Center",
-              categoryId: "categoryId",
-              location: "Bole, Cameroon Avenue",
-              isFavorite: true,
-              avgRating: 4),
-          Business(
-              id: "id",
-              name: "Edna Mall",
-              categoryId: "categoryId",
-              location: "Bole Zone",
-              isFavorite: true,
-              avgRating: 1.5),
-          Business(
-              id: "id",
-              name: "Capital Hotel",
-              categoryId: "categoryId",
-              location: "Hayahulet",
-              isFavorite: true,
-              avgRating: 4.5),
-          Business(
-              id: "id",
-              name: "Enat Wetet",
-              categoryId: "categoryId",
-              location: "5 Kilo, Anbessa Gebi",
-              isFavorite: true,
-              avgRating: 3),
-          Business(
-              id: "id",
-              name: "Kebele 19",
-              categoryId: "categoryId",
-              location: "Bole Street, Mamo Kacha",
-              isFavorite: true,
-              avgRating: 3.5),
-          Business(
-              id: "id",
-              name: "Kerim Suk",
-              categoryId: "categoryId",
-              location: "Bole Street, Rwanda Avenue",
-              isFavorite: true,
-              avgRating: 3),
-          Business(
-              id: "id",
-              name: "MHS Sports",
-              categoryId: "categoryId",
-              location: "Bole Michael, Riverside",
-              isFavorite: true,
-              avgRating: 2.5),
-          Business(
-              id: "id",
-              name: "5k Lounge",
-              categoryId: "categoryId",
-              location: "5 Kilo, Campus",
-              isFavorite: true,
-              avgRating: 0)
-        ];
+        // final businessList = [
+        //   Business(
+        //       id: "id",
+        //       name: "Negadras",
+        //       categoryId: "categoryId",
+        //       location: "5 Kilo, Gulele Zone",
+        //       isFavorite: true,
+        //       avgRating: 2),
+        //   Business(
+        //       id: "id",
+        //       name: "Friendship City Center",
+        //       categoryId: "categoryId",
+        //       location: "Bole, Cameroon Avenue",
+        //       isFavorite: true,
+        //       avgRating: 4),
+        //   Business(
+        //       id: "id",
+        //       name: "Edna Mall",
+        //       categoryId: "categoryId",
+        //       location: "Bole Zone",
+        //       isFavorite: true,
+        //       avgRating: 1.5),
+        //   Business(
+        //       id: "id",
+        //       name: "Capital Hotel",
+        //       categoryId: "categoryId",
+        //       location: "Hayahulet",
+        //       isFavorite: true,
+        //       avgRating: 4.5),
+        //   Business(
+        //       id: "id",
+        //       name: "Enat Wetet",
+        //       categoryId: "categoryId",
+        //       location: "5 Kilo, Anbessa Gebi",
+        //       isFavorite: true,
+        //       avgRating: 3),
+        //   Business(
+        //       id: "id",
+        //       name: "Kebele 19",
+        //       categoryId: "categoryId",
+        //       location: "Bole Street, Mamo Kacha",
+        //       isFavorite: true,
+        //       avgRating: 3.5),
+        //   Business(
+        //       id: "id",
+        //       name: "Kerim Suk",
+        //       categoryId: "categoryId",
+        //       location: "Bole Street, Rwanda Avenue",
+        //       isFavorite: true,
+        //       avgRating: 3),
+        //   Business(
+        //       id: "id",
+        //       name: "MHS Sports",
+        //       categoryId: "categoryId",
+        //       location: "Bole Michael, Riverside",
+        //       isFavorite: true,
+        //       avgRating: 2.5),
+        //   Business(
+        //       id: "id",
+        //       name: "5k Lounge",
+        //       categoryId: "categoryId",
+        //       location: "5 Kilo, Campus",
+        //       isFavorite: true,
+        //       avgRating: 0)
+        // ];
 
         // //Granted a working repo and data provider
-        // final businessList = await businessRepository.fetchFavorites(userId);
+        final businessList = await businessRepository.fetchFavorites();
 
-        yield BusinessFetchResultState(businessList, "");
+        yield BusinessFetchResultState(businessList as List<Business>, "");
       } catch (e) {
         yield BusinessOperationFailure();
       }

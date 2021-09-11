@@ -3,7 +3,7 @@ class Business {
   final String name;
   final String categoryId;
   final String location;
-  final double avgRating;
+  final double? avgRating;
   final String? phoneNumber;
   final String? website;
   final String? email;
