@@ -4,7 +4,7 @@ import 'package:negadras/auth/constants/string.dart';
 import 'package:negadras/category/models/category.dart';
 
 class CategoryDataProvider {
-  static final String _baseUrl = "${StringConstants.BASE_URL_EMULATOR}/category";
+  static final String _baseUrl = "${StringConstants.BASE_URL_DEVICE}/category";
 
   Future<Category> create(Category category) async {
     final http.Response response = await http.post(Uri.parse(_baseUrl),

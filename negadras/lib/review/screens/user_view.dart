@@ -21,9 +21,12 @@ class UserViewPage extends StatefulWidget {
   // final String businessId;
   // final String userId;
 
-  const UserViewPage(this.businessId, {Key? key}) : super(key: key);
+  const UserViewPage(this.businessId,this.businessName,this.businessPhone,this.businessWeb, {Key? key}) : super(key: key);
   final String businessId;
-  final String userId = "";
+  // final String userId;
+  final String businessName;
+  final String businessPhone;
+  final String businessWeb;
 
   @override
   UserViewPageState createState() => UserViewPageState();

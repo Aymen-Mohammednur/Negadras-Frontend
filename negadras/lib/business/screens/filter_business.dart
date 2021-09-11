@@ -112,7 +112,11 @@ class _FilterBusinessPageState extends State<FilterBusinessPage> {
                               //         businessState.businessList[i].id));
                               context.router.push(UserViewRoute(
                                   businessId:
-                                      businessState.businessList[i].id));
+                                      businessState.businessList[i].id,
+                                businessName:businessState.businessList[i].name,
+                                businessPhone:businessState.businessList[i].phoneNumber as String,
+                                businessWeb:businessState.businessList[i].website as String
+                              ));
                             },
                             child: BusinessCard(
                               categoryId: businessState.businessList[i].categoryId,

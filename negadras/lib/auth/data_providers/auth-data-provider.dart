@@ -7,7 +7,7 @@ import 'package:negadras/auth/models/response/registerResponse.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthDataProvider {
-  static final String _baseUrl = "${StringConstants.BASE_URL_EMULATOR}/auth";
+  static final String _baseUrl = "${StringConstants.BASE_URL_DEVICE}/auth";
 
   http.Client client;
 
