@@ -5,10 +5,10 @@ import 'package:negadras/business/models/models.dart';
 
 class BusinessDataProvider {
   static final String _baseUrl =
-      "${StringConstants.BASE_URL_DEVICE}/business";
+      "${StringConstants.BASE_URL_EMULATOR}/business";
 
   static final String _baseUrlFav =
-      "${StringConstants.BASE_URL_DEVICE}/favorite";
+      "${StringConstants.BASE_URL_EMULATOR}/favorite";
 
   Future<Business> create(Business business) async {
     final http.Response response = await http.post(Uri.parse(_baseUrl),
@@ -24,7 +24,7 @@ class BusinessDataProvider {
           "isFavorite": business.isFavorite,
         }));
 
-    // print(response.body);
+    print(response.body);
     if (response.statusCode == 201) {
       return Business.fromJson(jsonDecode(response.body));
     } else {
@@ -105,7 +105,8 @@ class BusinessDataProvider {
     final response = await http.get(Uri.parse(
         "$_baseUrl/search/$categoryId/$userId?queryParameter=$queryParameter"));
     print("RESPONSEEEEEEEEEEEEEEE");
-    print("$_baseUrl/search/$categoryId/$userId?queryParameter=$queryParameter");
+    print(
+        "$_baseUrl/search/$categoryId/$userId?queryParameter=$queryParameter");
     print(response.body);
     if (response.statusCode == 200) {
       final business = jsonDecode(response.body) as List;

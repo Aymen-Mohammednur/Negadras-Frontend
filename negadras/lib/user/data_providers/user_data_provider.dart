@@ -7,7 +7,7 @@ class UserDataProvider {
   // static final String _baseUrl = "http://localhost/3000/api/user";
 
   // FOR EMULATOR
-  static final String _baseUrl = "${StringConstants.BASE_URL_DEVICE}/user";
+  static final String _baseUrl = "${StringConstants.BASE_URL_EMULATOR}/user";
 
   Future<User> fetchOne(String id) async {
     final response = await http.get(Uri.parse("$_baseUrl/$id"));
@@ -56,7 +56,7 @@ class UserDataProvider {
           "password": password
           // "role": user.role,
         }));
-    
+
     if (response.statusCode != 204) {
       throw Exception("Field to delete the user");
     }
@@ -70,7 +70,7 @@ class UserDataProvider {
           "businessId": businessId
           // "role": user.role,
         }));
-    
+
     if (response.statusCode == 404) {
       throw Exception("Field to clai the user");
     }

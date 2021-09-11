@@ -19,6 +19,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     LoginEvent event,
   ) async* {
     // Username updated
+    if (event is InitialLogin) {
+      yield LoginState();
+    }
+
     if (event is LoginUsernameChanged) {
       yield state.copyWith(username: event.username);
       // Password updated

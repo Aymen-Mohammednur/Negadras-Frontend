@@ -15,8 +15,8 @@ class AddBusinessPage extends StatefulWidget {
 
 class _AddBusinessPageState extends State<AddBusinessPage> {
   Map<String, String> categories = {
-    "Restaurant": "613c1d3652cbaed01feca461",
-    "Cafe": "613c1d4e52cbaed01feca463",
+    "Restaurant": "61374589554605d2f68d39f1",
+    "Cafe": "6137460f4a711f786fa844c7",
     "Construction": "613746764a711f786fa844c9",
     "Bars": "613746834a711f786fa844cb",
     "Beauty Salons": "6137468a4a711f786fa844cd",
@@ -56,7 +56,7 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
     'Technology',
     'Hotels',
     'Entertainment',
-    'Others'
+    'Other'
   ];
 
   String _currentCategory = "Restaurant";
@@ -252,12 +252,11 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
                             categoryId: this._business["categoryId"],
                             website: this._business["website"],
                             phoneNumber: this._business["phoneNumber"],
-                            email: this._business["email"],
-                            avgRating: this._business['averageRating']),
+                            email: this._business["email"]),
                       );
                       businessBloc.add(event);
                       // print(event);
-                      // context.router.popAndPush(HomeRoute());
+                      context.router.popAndPush(HomeRoute());
                     }
                   },
                   child: Text(

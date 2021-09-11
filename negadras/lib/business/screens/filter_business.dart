@@ -15,8 +15,10 @@ import 'package:negadras/auth/repository/auth_repository.dart';
 
 class FilterBusinessPage extends StatefulWidget {
   String? categoryId;
+  String? categoryName;
   final String? queryParameter;
-  FilterBusinessPage({Key? key, this.categoryId, this.queryParameter})
+  FilterBusinessPage(
+      {Key? key, this.categoryId, this.queryParameter, this.categoryName})
       : super(key: key);
 
   @override
@@ -53,7 +55,7 @@ class _FilterBusinessPageState extends State<FilterBusinessPage> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
                 child: Label(
-                  label: "${widget.categoryId} near you",
+                  label: "${widget.categoryName} near you",
                   fontStyle: FontStyle.italic,
                 ),
               ),
@@ -111,15 +113,25 @@ class _FilterBusinessPageState extends State<FilterBusinessPage> {
                               //     businessId:
                               //         businessState.businessList[i].id));
                               context.router.push(UserViewRoute(
-                                  businessId:
-                                      businessState.businessList[i].id,
-                                businessName:businessState.businessList[i].name,
-                                businessPhone:businessState.businessList[i].phoneNumber as String,
-                                businessWeb:businessState.businessList[i].website as String
-                              ));
+                                  businessId: businessState.businessList[i].id,
+                                  businessName:
+                                      businessState.businessList[i].name,
+                                  businessPhone: businessState
+                                              .businessList[i].phoneNumber !=
+                                          null
+                                      ? businessState
+                                          .businessList[i].phoneNumber as String
+                                      : "00000000000",
+                                  businessWeb: businessState
+                                              .businessList[i].website !=
+                                          null
+                                      ? businessState.businessList[i].website
+                                          as String
+                                      : "www.notavailable.com"));
                             },
                             child: BusinessCard(
-                              categoryId: businessState.businessList[i].categoryId,
+                              categoryId:
+                                  businessState.businessList[i].categoryId,
                               isOwner:
                                   businessState.businessList[i].isOwner as bool,
                               from: (_isFavorite) {

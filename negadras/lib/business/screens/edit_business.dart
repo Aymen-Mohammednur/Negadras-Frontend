@@ -106,7 +106,7 @@ class _EditFormState extends State<EditForm> {
     'Technology',
     'Hotels',
     'Entertainment',
-    'Others'
+    'Other'
   ];
 
   String _currentCategory = "Restaurant";
@@ -147,12 +147,17 @@ class _EditFormState extends State<EditForm> {
       onChanged: (newValue) {
         setState(() {
           _currentCategory = newValue.toString();
+          print("ON CHANGEDDDDD");
+          print(_currentCategory);
         });
       },
 
       onSaved: (value) {
         setState(() {
           this._business["categoryId"] = categories[_currentCategory];
+          print("ON SAVEDDDDDD");
+          print(_currentCategory);
+          print(categories[_currentCategory]);
         });
       },
       // onSaved: (String? value) {

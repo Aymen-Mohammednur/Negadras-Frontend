@@ -8,6 +8,7 @@ class BusinessRepository {
 
   Future<Business> create(Business business) async {
     // print("inside repo");
+    print("INSIDE BUSINESS REPO");
     return this.dataProvider.create(business);
   }
 
@@ -19,11 +20,12 @@ class BusinessRepository {
     return this.dataProvider.fetch();
   }
 
-  Future<List<Business>> fetchForSearch(String queryParameter, String? categoryId) async {
+  Future<List<Business>> fetchForSearch(
+      String queryParameter, String? categoryId) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     final userId = await prefs.getString("user_id");
-    return this.dataProvider.fetchForSearch(queryParameter,categoryId, userId);
+    return this.dataProvider.fetchForSearch(queryParameter, categoryId, userId);
   }
 
   Future<Business> fetchOne(String id) async {
@@ -42,7 +44,7 @@ class BusinessRepository {
     this.dataProvider.delete(id);
   }
 
-  Future<List<Business>> fetchFavorites() async{
+  Future<List<Business>> fetchFavorites() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     final userId = await prefs.getString("user_id") as String;

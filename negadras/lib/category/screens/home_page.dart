@@ -30,7 +30,8 @@ class _HomePageState extends State<HomePage> {
                   //     categoryId: categories.elementAt(index).id));
 
                   context.router.push(FilterBusinessRoute(
-                      categoryId: categories.elementAt(index).id));
+                      categoryId: categories.elementAt(index).id,
+                      categoryName: categories.elementAt(index).name));
                 },
                 onDoubleTap: () => setText(""),
                 child: _businessTypeContainer(index, categories));
@@ -41,7 +42,11 @@ class _HomePageState extends State<HomePage> {
   Container _businessTypeContainer(int index, Iterable categories) {
     return Container(
         decoration: gridItemDecoration(),
-        child: Center(child: Text('${categories.elementAt(index).name}')),
+        child: Center(
+            child: Text(
+          '${categories.elementAt(index).name}',
+          style: TextStyle(color: Colors.amberAccent),
+        )),
         margin: EdgeInsets.all(10));
   }
 
@@ -56,6 +61,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final categoryBloc = BlocProvider.of<CategoryBloc>(context);
     return Scaffold(
+      backgroundColor: Color.fromRGBO(20, 40, 65, 1),
       appBar: AppBar(
         backgroundColor: Colors.green.shade900,
         title: Text("Negadras"),

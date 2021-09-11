@@ -51,7 +51,8 @@ class AppRouter extends _i1.RootStackRouter {
           return _i4.FilterBusinessPage(
               key: args.key,
               categoryId: args.categoryId,
-              queryParameter: args.queryParameter);
+              queryParameter: args.queryParameter,
+              categoryName: args.categoryName);
         }),
     SearchBusinessRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
@@ -206,26 +207,32 @@ class HomeRouteArgs {
 
 class FilterBusinessRoute extends _i1.PageRouteInfo<FilterBusinessRouteArgs> {
   FilterBusinessRoute(
-      {_i22.Key? key, String? categoryId, String? queryParameter})
+      {_i22.Key? key,
+      String? categoryId,
+      String? queryParameter,
+      String? categoryName})
       : super(name,
             path: '/filter-business-page',
             args: FilterBusinessRouteArgs(
                 key: key,
                 categoryId: categoryId,
-                queryParameter: queryParameter));
+                queryParameter: queryParameter,
+                categoryName: categoryName));
 
   static const String name = 'FilterBusinessRoute';
 }
 
 class FilterBusinessRouteArgs {
   const FilterBusinessRouteArgs(
-      {this.key, this.categoryId, this.queryParameter});
+      {this.key, this.categoryId, this.queryParameter, this.categoryName});
 
   final _i22.Key? key;
 
   final String? categoryId;
 
   final String? queryParameter;
+
+  final String? categoryName;
 }
 
 class SearchBusinessRoute extends _i1.PageRouteInfo {
