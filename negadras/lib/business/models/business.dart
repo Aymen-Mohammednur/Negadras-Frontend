@@ -16,7 +16,7 @@ class Business {
       required this.name,
       required this.categoryId,
       required this.location,
-      required this.avgRating,
+      this.avgRating,
       this.phoneNumber,
       this.website,
       this.email,
