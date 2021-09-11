@@ -32,6 +32,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
   Widget build(BuildContext context) {
     final favoriteBloc = BlocProvider.of<FavoriteBloc>(context);
     return Scaffold(
+      backgroundColor: Color.fromRGBO(20, 40, 65, 1),
       // bottomNavigationBar: bottomNav(context, 1),
       bottomNavigationBar: ownerBottomNav(context, 1),
       body: SafeArea(
@@ -40,11 +41,18 @@ class _FavoritesPageState extends State<FavoritesPage> {
           children: [
             Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
-              child: Label(
-                label: "Favorites",
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20),
+              // child: Label(
+              //   label: "Favorites",
+              //   fontWeight: FontWeight.bold,
+              //   fontSize: 20,
+              // ),
+              child: Text(
+                'Favorites',
+                style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 30,
+                    color: Colors.amberAccent),
               ),
             ),
             Expanded(
@@ -56,7 +64,13 @@ class _FavoritesPageState extends State<FavoritesPage> {
 
                   if (state is NoFavoriteState) {
                     return Center(
-                      child: Text("You have no favorite businesses"),
+                      child: Text(
+                        "You have no favorite businesses",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 30,
+                            color: Colors.amberAccent),
+                      ),
                     );
                   }
 
@@ -93,13 +107,19 @@ class _FavoritesPageState extends State<FavoritesPage> {
                   if (state is FavoriteFailure) {
                     // businessBloc.add(NormalBusinessEvent());
                     return Center(
-                      child: Text("Failed to retrieve Favorites"),
+                      child: Text(
+                        "Failed to retrieve Favorites",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20,
+                            color: Colors.amberAccent),
+                      ),
                     );
                   }
 
                   return Center(
                     child: CircularProgressIndicator(
-                      color: Colors.black,
+                      color: Colors.amberAccent,
                     ),
                   );
                 },

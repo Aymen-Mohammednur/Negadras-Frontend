@@ -226,7 +226,9 @@ class _SignUpPageState extends State<SignUpPage> {
     return BlocBuilder<SignUpBloc, SignUpState>(
       builder: (context, state) {
         return state.formStatus is FormSubmitting
-            ? CircularProgressIndicator()
+            ? CircularProgressIndicator(
+                color: Colors.amberAccent,
+              )
             : ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
@@ -242,7 +244,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 //     backgroundColor: MaterialStateProperty.all(Colors.black87)),
                 child: Text(
                   "Sign Up",
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(color: Colors.black, fontSize: 20),
                 ));
       },
     );

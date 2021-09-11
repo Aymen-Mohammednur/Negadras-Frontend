@@ -41,7 +41,14 @@ class _HomePageState extends State<HomePage> {
   Container _businessTypeContainer(int index, Iterable categories) {
     return Container(
         decoration: gridItemDecoration(),
-        child: Center(child: Text('${categories.elementAt(index).name}')),
+        child: Center(
+            child: Text(
+          '${categories.elementAt(index).name}',
+          style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 18,
+              color: Colors.amberAccent),
+        )),
         margin: EdgeInsets.all(10));
   }
 
@@ -56,9 +63,17 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final categoryBloc = BlocProvider.of<CategoryBloc>(context);
     return Scaffold(
+      backgroundColor: Color.fromRGBO(20, 40, 65, 1),
+
       appBar: AppBar(
-        backgroundColor: Colors.green.shade900,
-        title: Text("Negadras"),
+        backgroundColor: Color.fromRGBO(20, 40, 65, 1),
+        title: Text(
+          "Negadras",
+          style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 30,
+              color: Colors.amberAccent),
+        ),
         centerTitle: true,
       ),
       body: BlocBuilder<CategoryBloc, CategoryState>(
@@ -67,7 +82,13 @@ class _HomePageState extends State<HomePage> {
 
           if (state is CategoryOperationFailed) {
             return Center(
-              child: Text("Could not do category operation"),
+              child: Text(
+                "Could not do category operation",
+                style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 30,
+                    color: Colors.amberAccent),
+              ),
             );
           }
 
@@ -81,8 +102,13 @@ class _HomePageState extends State<HomePage> {
                   // const SearchBar(),
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0, top: 8.0),
-                    child: Text("What are you looking for...",
-                        style: normalText()),
+                    child: Text(
+                      "What are you looking for...",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 25,
+                          color: Colors.amberAccent),
+                    ),
                   ),
                   Expanded(
                       flex: 3,
@@ -98,7 +124,7 @@ class _HomePageState extends State<HomePage> {
 
           return Center(
             child: CircularProgressIndicator(
-              color: Colors.black,
+              color: Colors.amberAccent,
             ),
           );
         },
@@ -107,7 +133,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           context.router.push(ListOrganizationRoute());
         },
-        tooltip: 'Increment',
+        tooltip: 'Add Business',
         child: Icon(Icons.add),
         backgroundColor: Colors.green.shade900,
       ),

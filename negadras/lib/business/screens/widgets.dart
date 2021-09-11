@@ -45,6 +45,7 @@ BoxDecoration listItemDecoration() {
 BoxDecoration gridItemDecoration() {
   return BoxDecoration(
     border: Border.all(),
+    color: Colors.black26,
     borderRadius: BorderRadius.all(Radius.circular(10)),
   );
 }

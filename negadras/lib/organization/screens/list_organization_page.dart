@@ -106,8 +106,16 @@ class _ListOrganizationPageState extends State<ListOrganizationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(20, 40, 65, 1),
       appBar: AppBar(
-        title: Text("Your Organizations"),
+        backgroundColor: Color.fromRGBO(20, 40, 65, 1),
+        title: Text(
+          "Your Organizations",
+          style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 30,
+              color: Colors.amberAccent),
+        ),
         centerTitle: true,
       ),
       // bottomNavigationBar: bottomNav(context, 0),
@@ -116,13 +124,25 @@ class _ListOrganizationPageState extends State<ListOrganizationPage> {
         builder: (context, orgState) {
           print(orgState);
           if (orgState is OrganizationOperationFailure) {
-            return Center(child: Text("Could not fetch organizations."));
+            return Center(
+                child: Text(
+              "Could not fetch organizations.",
+              style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 20,
+                  color: Colors.amberAccent),
+            ));
           }
 
           if (orgState is NoOrganizationsState) {
             return Center(
                 child: Text(
-                    "You have no organizations. Click the '+' button to add one."));
+              "You have no organizations. Click the '+' button to add one.",
+              style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 30,
+                  color: Colors.amberAccent),
+            ));
           }
           if (orgState is OrganizationOperationSuccess) {
             return Center(
@@ -140,7 +160,7 @@ class _ListOrganizationPageState extends State<ListOrganizationPage> {
           }
           return Center(
               child: CircularProgressIndicator(
-            color: Colors.black,
+            color: Colors.amberAccent,
           ));
         },
       ),
@@ -148,8 +168,11 @@ class _ListOrganizationPageState extends State<ListOrganizationPage> {
         onPressed: () {
           context.router.popAndPush(AddOrganizationRoute());
         },
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+        tooltip: 'Add Organization',
+        child: Icon(
+          Icons.add,
+          color: Colors.amberAccent,
+        ),
         backgroundColor: Colors.green.shade900,
       ),
     );

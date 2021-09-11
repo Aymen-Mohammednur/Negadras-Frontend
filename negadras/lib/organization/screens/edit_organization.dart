@@ -27,8 +27,9 @@ class _EditOrganizationPageState extends State<EditOrganizationPage> {
   Widget build(BuildContext context) {
     // print(organization);
     return Scaffold(
+      backgroundColor: Color.fromRGBO(20, 40, 65, 1),
       appBar: AppBar(
-        title: Text("Edit Organization"),
+        title: Text(""), //Text("Edit Organization"),
         centerTitle: true,
       ),
       body: Stack(
@@ -72,10 +73,13 @@ class _EditOrganizationPageState extends State<EditOrganizationPage> {
     return SafeArea(
       child: Container(
           alignment: Alignment.topCenter,
-          padding: EdgeInsets.only(top: 20),
+          padding: EdgeInsets.only(top: 70),
           child: Text(
             'Edit this Organization',
-            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 30),
+            style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 30,
+                color: Colors.amberAccent),
           )),
     );
   }
@@ -87,7 +91,13 @@ class _EditOrganizationPageState extends State<EditOrganizationPage> {
           initialValue: widget.organization.name,
           // controller: organizationNameController,
           decoration: InputDecoration(
-              icon: Icon(Icons.account_balance), hintText: 'Organization Name'),
+            icon: Icon(
+              Icons.account_balance,
+              color: Colors.amber.shade200,
+            ),
+            hintText: 'Organization Name',
+            hintStyle: TextStyle(fontSize: 20, color: Colors.white),
+          ),
           validator: (value) {
             if (value!.isEmpty) {
               return "Name is required";
@@ -132,12 +142,16 @@ class _EditOrganizationPageState extends State<EditOrganizationPage> {
           context.router.popAndPush(ListOrganizationRoute());
         }
       },
-      style: ButtonStyle(
-          shadowColor: MaterialStateProperty.all(Colors.limeAccent),
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.teal)),
+      style: ElevatedButton.styleFrom(
+        primary: Colors.amberAccent,
+        minimumSize: Size(200, 48),
+      ),
+      // style: ButtonStyle(
+      //     shadowColor: MaterialStateProperty.all(Colors.limeAccent),
+      //     backgroundColor: MaterialStateProperty.all<Color>(Colors.teal)),
       child: Text(
         "Edit Organization",
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(color: Colors.white, fontSize: 20),
       ),
     );
   }

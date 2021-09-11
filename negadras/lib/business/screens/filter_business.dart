@@ -39,8 +39,16 @@ class _FilterBusinessPageState extends State<FilterBusinessPage> {
   Widget build(BuildContext context) {
     final businessBloc = BlocProvider.of<BusinessBloc>(context);
     return Scaffold(
+        backgroundColor: Color.fromRGBO(20, 40, 65, 1),
         appBar: AppBar(
-          title: Text("Filter"),
+          backgroundColor: Color.fromRGBO(20, 40, 65, 1),
+          title: Text(
+            "Filter",
+            style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 25,
+                color: Colors.amberAccent),
+          ),
         ),
         // bottomNavigationBar: bottomNav(context, 0),
         bottomNavigationBar: ownerBottomNav(context, 0),
@@ -52,9 +60,18 @@ class _FilterBusinessPageState extends State<FilterBusinessPage> {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
-                child: Label(
-                  label: "${widget.categoryId} near you",
-                  fontStyle: FontStyle.italic,
+                // child: Label(
+                //   label: "${widget.categoryId} near you",
+                //   fontStyle: FontStyle.italic,
+                // ),
+
+                child: Text(
+                  "${widget.categoryId} near you",
+                  style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                      color: Colors.amberAccent),
                 ),
               ),
               BlocBuilder<BusinessBloc, BusinessState>(
@@ -143,15 +160,24 @@ class _FilterBusinessPageState extends State<FilterBusinessPage> {
                       businessBloc
                           .add(FilterBusinessEvent(businessState.categoryId));
                     }
-                    return Center(
-                      // child: Text(businessState.errMsg.toString()),
-                      child: Text("Failed to Fetch Businesses"),
+                    return Expanded(
+                      child: Center(
+                        // child: Text(businessState.errMsg.toString()),
+                        child: Text(
+                          "Failed to Fetch Businesses",
+                          style: TextStyle(
+                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                              color: Colors.amberAccent),
+                        ),
+                      ),
                     );
                   }
                   return Expanded(
                     child: Center(
                         child: CircularProgressIndicator(
-                      color: Colors.black,
+                      color: Colors.amberAccent,
                     )),
                   );
                 },

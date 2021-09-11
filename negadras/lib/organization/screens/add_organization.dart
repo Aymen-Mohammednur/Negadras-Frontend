@@ -24,14 +24,20 @@ class _AddOrganizationPageState extends State<AddOrganizationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(20, 40, 65, 1),
       appBar: AppBar(
-        title: Text("Add an Organization"),
+        backgroundColor: Color.fromRGBO(20, 40, 65, 1),
+        title: Text("Add an Organization",
+            style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 30,
+                color: Colors.amberAccent)),
         centerTitle: true,
       ),
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: [
-          _label(),
+          // _label(),
           _addOrganizationForm(),
         ],
       ),
@@ -52,8 +58,11 @@ class _AddOrganizationPageState extends State<AddOrganizationPage> {
         child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 40),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                SizedBox(
+                  height: 100,
+                ),
                 _orgnameField(),
                 SizedBox(
                   height: 10,
@@ -69,72 +78,93 @@ class _AddOrganizationPageState extends State<AddOrganizationPage> {
     return SafeArea(
       child: Container(
           alignment: Alignment.topCenter,
-          padding: EdgeInsets.only(top: 20),
+          padding: EdgeInsets.only(top: 70),
           child: Text(
             'Add Organization',
-            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 30),
+            style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 30,
+                color: Colors.amberAccent),
           )),
     );
   }
 
   Widget _orgnameField() {
-    return BlocBuilder<OrganizationBloc, OrganizationState>(
-      builder: (context, state) {
-        return TextFormField(
-          controller: organizationNameController,
-          decoration: InputDecoration(
-              icon: Icon(Icons.account_balance),
-              hintText: 'Organization Name '),
-          validator: (value) {
-            if (value!.isEmpty) {
-              return "Name is required";
-            }
-            return null;
-          },
-          // onChanged: (value) => context
-          //     .read<OrganizationBloc>()
-          //     .add(OrganizationNameChanged(organizationName: value)),
-          onSaved: (value) {
-            setState(() {
-              this._organization = value!;
-            });
-          },
-        );
-      },
+    return Align(
+      child: BlocBuilder<OrganizationBloc, OrganizationState>(
+        builder: (context, state) {
+          return TextFormField(
+            controller: organizationNameController,
+            decoration: InputDecoration(
+              icon: Icon(
+                Icons.account_balance,
+                color: Colors.amber.shade200,
+              ),
+              hintText: 'Organization Name ',
+              hintStyle: TextStyle(fontSize: 20, color: Colors.white),
+            ),
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Name is required";
+              }
+              return null;
+            },
+            // onChanged: (value) => context
+            //     .read<OrganizationBloc>()
+            //     .add(OrganizationNameChanged(organizationName: value)),
+            onSaved: (value) {
+              setState(() {
+                this._organization = value!;
+              });
+            },
+          );
+        },
+      ),
     );
   }
 
   Widget _submitButton() {
-    return ElevatedButton(
-      onPressed: () {
-        // if (_formKey.currentState!.validate()) {
-        //   _formKey.currentState!.save();
-        //   final organization =
-        //       Organization(id: '', name: state.organizationName);
-        //   context
-        //       .read<OrganizationBloc>()
-        //       .add(OrganizationSubmitted(organization));
-        //   context.router.push(ListOrganizationRoute());
-        // }
-        final form = _formKey.currentState;
-        if (form != null && form.validate()) {
-          form.save();
-          final OrganizationEvent event = OrganizationCreate(
-            Organization(
-              id: "",
-              name: _organization,
-            ),
-          );
-          BlocProvider.of<OrganizationBloc>(context).add(event);
-          context.router.popAndPush(ListOrganizationRoute());
-        }
-      },
-      style: ButtonStyle(
-          shadowColor: MaterialStateProperty.all(Colors.limeAccent),
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.teal)),
-      child: Text(
-        "Add Organization",
-        style: TextStyle(color: Colors.white),
+    return Align(
+      alignment: Alignment.center,
+      child: ElevatedButton(
+        onPressed: () {
+          // if (_formKey.currentState!.validate()) {
+          //   _formKey.currentState!.save();
+          //   final organization =
+          //       Organization(id: '', name: state.organizationName);
+          //   context
+          //       .read<OrganizationBloc>()
+          //       .add(OrganizationSubmitted(organization));
+          //   context.router.push(ListOrganizationRoute());
+          // }
+          final form = _formKey.currentState;
+          if (form != null && form.validate()) {
+            form.save();
+            final OrganizationEvent event = OrganizationCreate(
+              Organization(
+                id: "",
+                name: _organization,
+              ),
+            );
+            BlocProvider.of<OrganizationBloc>(context).add(event);
+            context.router.popAndPush(ListOrganizationRoute());
+          }
+        },
+        style: ElevatedButton.styleFrom(
+          primary: Colors.amberAccent,
+          minimumSize: Size(50, 45),
+        ),
+
+        // style: ButtonStyle(
+        //     shadowColor: MaterialStateProperty.all(Colors.limeAccent),
+        //     backgroundColor: MaterialStateProperty.all<Color>(Colors.teal)),
+        child: Text(
+          "Add",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 25,
+          ),
+        ),
       ),
     );
   }

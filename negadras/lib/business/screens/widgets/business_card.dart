@@ -41,8 +41,24 @@ class _BusinessCardState extends State<BusinessCard> {
   Widget build(BuildContext context) {
     final businessBloc = BlocProvider.of<BusinessBloc>(context);
     return Container(
+      margin: EdgeInsets.symmetric(vertical: 1, horizontal: 1.5),
+      decoration: new BoxDecoration(
+        color: Colors.black87, //background color of box
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.7),
+            blurRadius: 25.0, // soften the shadow
+            spreadRadius: 5.0, //extend the shadow
+            offset: Offset(
+              15.0, // Move to right 10  horizontally
+              15.0, // Move to bottom 10 Vertically
+            ),
+          )
+        ],
+      ),
       height: 170,
       child: Card(
+        color: Color(16770977),
         elevation: 10,
         child: Row(
           children: <Widget>[
@@ -60,11 +76,13 @@ class _BusinessCardState extends State<BusinessCard> {
                       child: Text(
                         widget.businessName,
                         style: TextStyle(
-                            fontSize: 19, fontWeight: FontWeight.bold),
+                            color: Colors.deepPurple,
+                            fontSize: 19,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                     StarRating(
-                      color: Colors.blue,
+                      color: Colors.amberAccent,
                       rating: widget.rating,
                       onRatingChanged: (rating) => setState(() => {}),
                     ),
@@ -72,7 +90,9 @@ class _BusinessCardState extends State<BusinessCard> {
                       padding: const EdgeInsets.symmetric(vertical: 10.0),
                       child: Text(
                         widget.locationInfo,
-                        style: TextStyle(fontStyle: FontStyle.italic),
+                        style: TextStyle(
+                            fontStyle: FontStyle.italic,
+                            color: Colors.indigoAccent),
                       ),
                     )
                   ],
@@ -92,7 +112,6 @@ class _BusinessCardState extends State<BusinessCard> {
                 widget.from(_isFavorite);
                 setState(() {
                   _isFavorite = !_isFavorite;
-                  
                 });
               },
               child: this._isFavorite

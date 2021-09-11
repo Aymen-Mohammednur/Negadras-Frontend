@@ -244,8 +244,17 @@ class _EditFormState extends State<EditForm> {
   Widget build(BuildContext context) {
     final businessBloc = BlocProvider.of<BusinessBloc>(context);
     return Scaffold(
+      backgroundColor: Color.fromRGBO(20, 40, 65, 1),
+
       appBar: AppBar(
-        title: Text("Edit Business"),
+        backgroundColor: Color.fromRGBO(20, 40, 65, 1),
+        title: Text(
+          "Edit Business",
+          style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 25,
+              color: Colors.amberAccent),
+        ),
       ),
       // bottomNavigationBar: bottomNav(context),
       body: SingleChildScrollView(
@@ -264,6 +273,8 @@ class _EditFormState extends State<EditForm> {
                 Label(
                   label: 'Additional Information(Optional)',
                   fontWeight: FontWeight.bold,
+                  fontColor: Colors.amberAccent,
+                  fontSize: 16,
                 ),
                 _buildWebsite(),
                 _buildPhoneNumber(),
@@ -293,7 +304,10 @@ class _EditFormState extends State<EditForm> {
                   },
                   child: Text(
                     "Edit Business",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        color: Colors.amberAccent),
                   ),
                 ),
                 ElevatedButton(
@@ -302,7 +316,10 @@ class _EditFormState extends State<EditForm> {
                   },
                   child: Text(
                     "Cancel",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        color: Colors.amberAccent),
                   ),
                 )
               ],

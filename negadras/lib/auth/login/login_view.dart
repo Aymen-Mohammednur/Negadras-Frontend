@@ -22,7 +22,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-  
+
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -30,7 +30,8 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: RepositoryProvider(
-            create: (context) => AuthRepository(AuthDataProvider(http.Client())),
+            create: (context) =>
+                AuthRepository(AuthDataProvider(http.Client())),
             child: Scaffold(
               backgroundColor: Color.fromRGBO(20, 40, 65, 1),
               body: BlocProvider(
@@ -49,20 +50,20 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _loginForm() {
-
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) async {
-
         if (state.formStatus is SubmissionFailed) {
           _showSnackBar(context, "Username or Password is wrong");
-        }else if (state.formStatus is SubmissionSuccess){
-          LoginResponse loginResponse = (state.formStatus as SubmissionSuccess).response as LoginResponse;
+        } else if (state.formStatus is SubmissionSuccess) {
+          LoginResponse loginResponse =
+              (state.formStatus as SubmissionSuccess).response as LoginResponse;
           SharedPreferences prefs = await _prefs;
 
-          await prefs.setString("user_id",loginResponse.id);
-          await prefs.setString("token",loginResponse.token);
+          await prefs.setString("user_id", loginResponse.id);
+          await prefs.setString("token", loginResponse.token);
 
-          context.router.pushAndPopUntil(HomeRoute(),predicate: (route)=>false);
+          context.router
+              .pushAndPopUntil(HomeRoute(), predicate: (route) => false);
         }
       },
       child: Form(
@@ -105,8 +106,8 @@ class _LoginPageState extends State<LoginPage> {
         return TextFormField(
           controller: usernameController,
           style: TextStyle(color: Colors.white),
-          decoration:
-              InputDecoration(icon: ImageIcon(
+          decoration: InputDecoration(
+              icon: ImageIcon(
                 AssetImage("assets/images/icons8-person-24.png"),
                 color: Colors.amber.shade200,
               ),
@@ -129,8 +130,8 @@ class _LoginPageState extends State<LoginPage> {
           style: TextStyle(color: Colors.white),
           controller: passwordController,
           obscureText: true,
-          decoration:
-              InputDecoration(icon:ImageIcon(
+          decoration: InputDecoration(
+              icon: ImageIcon(
                   AssetImage("assets/images/icons8-password-24.png"),
                   color: Colors.amber.shade200),
               hintText: 'Password',
@@ -148,9 +149,11 @@ class _LoginPageState extends State<LoginPage> {
   Widget _loginButton() {
     return BlocBuilder<LoginBloc, LoginState>(
       builder: (context, state) {
-        if(state.formStatus is FormSubmitting){
-          return CircularProgressIndicator();
-        }else{
+        if (state.formStatus is FormSubmitting) {
+          return CircularProgressIndicator(
+            color: Colors.amberAccent,
+          );
+        } else {
           return ElevatedButton(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
@@ -160,19 +163,18 @@ class _LoginPageState extends State<LoginPage> {
                 }
               },
               style: ElevatedButton.styleFrom(
-                  primary: Colors.amberAccent,
-                  minimumSize: Size(200, 48),
-                ),
+                primary: Colors.amberAccent,
+                minimumSize: Size(200, 48),
+              ),
               // style: ButtonStyle(
               //     shadowColor: MaterialStateProperty.all(Colors.grey),
               //     backgroundColor:
               //     MaterialStateProperty.all<Color>(Colors.black87)),
               child: Text(
                 "Login",
-                style: TextStyle(color: Colors.white, fontSize: 20),
+                style: TextStyle(color: Colors.black, fontSize: 20),
               ));
         }
-
       },
     );
   }
@@ -185,10 +187,8 @@ class _LoginPageState extends State<LoginPage> {
           onPressed: () {
             context.router.push(SignUpRoute());
           },
-          child: Text(
-            'Don\'t have an account? Sign Up.',
-            style: TextStyle(color: Colors.white)
-          ),
+          child: Text('Don\'t have an account? Sign Up.',
+              style: TextStyle(color: Colors.white)),
         ),
       ),
     );
