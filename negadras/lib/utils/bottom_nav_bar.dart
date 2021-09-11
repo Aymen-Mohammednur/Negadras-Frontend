@@ -16,6 +16,7 @@ Widget bottomNav(BuildContext context, int i) {
   ];
 
   return BottomNavyBar(
+    backgroundColor: Colors.amberAccent,
     // animationDuration: Duration(milliseconds: 500),
     curve: Curves.easeInOut,
     selectedIndex: i,
@@ -30,17 +31,17 @@ Widget bottomNav(BuildContext context, int i) {
       BottomNavyBarItem(
           icon: Icon(Icons.home),
           title: Text("Discover"),
-          activeColor: Colors.green.shade900,
+          activeColor: Color.fromRGBO(20, 40, 65, 1),
           inactiveColor: Colors.black),
       BottomNavyBarItem(
           icon: Icon(Icons.favorite),
           title: Text("Favorites"),
-          activeColor: Colors.green.shade900,
+          activeColor: Color.fromRGBO(20, 40, 65, 1),
           inactiveColor: Colors.black),
       BottomNavyBarItem(
           icon: Icon(Icons.manage_accounts),
           title: Text("Me"),
-          activeColor: Colors.green.shade900,
+          activeColor: Color.fromRGBO(20, 40, 65, 1),
           inactiveColor: Colors.black)
     ],
   );
@@ -65,6 +66,7 @@ Widget ownerBottomNav(BuildContext context, int i) {
   ];
 
   return BottomNavyBar(
+    backgroundColor: Colors.amberAccent,
     // animationDuration: Duration(milliseconds: 500),
     curve: Curves.easeInOut,
     selectedIndex: i,
@@ -77,24 +79,38 @@ Widget ownerBottomNav(BuildContext context, int i) {
 
     items: [
       BottomNavyBarItem(
-          icon: Icon(Icons.home),
+          icon: ImageIcon(
+            AssetImage("assets/images/icons8-home-50.png"),
+            color: Color.fromRGBO(20, 40, 65, 1),
+            size: 10,
+          ),
           title: Text("Discover"),
-          activeColor: Colors.green.shade900,
+          activeColor: Color.fromRGBO(20, 40, 65, 1),
           inactiveColor: Colors.black),
       BottomNavyBarItem(
-          icon: Icon(Icons.favorite),
+          icon: ImageIcon(
+            AssetImage("assets/images/icons8-heart-50(1).png"),
+            color: Color.fromRGBO(20, 40, 65, 1),
+            size: 10,
+          ),
           title: Text("Favorites"),
-          activeColor: Colors.green.shade900,
+          activeColor: Color.fromRGBO(20, 40, 65, 1),
           inactiveColor: Colors.black),
       BottomNavyBarItem(
-          icon: Icon(Icons.account_balance),
+          icon: ImageIcon(
+              AssetImage("assets/images/icons8-organization-64.png"),
+              color: Color.fromRGBO(20, 40, 65, 1)),
           title: Text("Organizations"),
-          activeColor: Colors.green.shade900,
+          activeColor: Color.fromRGBO(20, 40, 65, 1),
           inactiveColor: Colors.black),
       BottomNavyBarItem(
-          icon: Icon(Icons.manage_accounts),
+          icon: ImageIcon(
+            AssetImage("assets/images/icons8-edit-account-50.png"),
+            color: Color.fromRGBO(20, 40, 65, 1),
+            size: 10,
+          ),
           title: Text("Me"),
-          activeColor: Colors.green.shade900,
+          activeColor: Color.fromRGBO(20, 40, 65, 1),
           inactiveColor: Colors.black)
     ],
   );
