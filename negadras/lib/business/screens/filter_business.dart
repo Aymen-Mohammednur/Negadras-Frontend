@@ -13,11 +13,27 @@ import 'package:auto_route/auto_route.dart';
 import 'package:negadras/auth/data_providers/auth-data-provider.dart';
 import 'package:negadras/auth/repository/auth_repository.dart';
 
-class FilterBusinessPage extends StatelessWidget {
+class FilterBusinessPage extends StatefulWidget {
   String? categoryId;
   final String? queryParameter;
   FilterBusinessPage({Key? key, this.categoryId, this.queryParameter})
       : super(key: key);
+
+  @override
+  _FilterBusinessPageState createState() => _FilterBusinessPageState();
+}
+
+class _FilterBusinessPageState extends State<FilterBusinessPage> {
+  @override
+  void initState() {
+    print("In init state");
+    Future.delayed(Duration.zero).then((value) {
+      BusinessBloc businessBloc = BlocProvider.of<BusinessBloc>(context);
+      businessBloc.add(NormalBusinessEvent());
+    });
+    print("before super.init");
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +48,12 @@ class FilterBusinessPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SearchBar(),
+              SearchBar(categoryId: widget.categoryId),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
                 child: Label(
-                  label: "$categoryId near you",
+                  label: "${widget.categoryId} near you",
                   fontStyle: FontStyle.italic,
                 ),
               ),
@@ -45,10 +61,10 @@ class FilterBusinessPage extends StatelessWidget {
                 builder: (context, businessState) {
                   print("Filter class: $businessState");
                   // print(" ");
-                  print(categoryId);
+                  print(widget.categoryId);
 
                   if (businessState is BusinessInitialState) {
-                    businessBloc.add(FilterBusinessEvent(categoryId));
+                    businessBloc.add(FilterBusinessEvent(widget.categoryId));
                   }
                   //else if (businessState is BusinessView) {
                   //   context.pushRoute(
@@ -77,9 +93,9 @@ class FilterBusinessPage extends StatelessWidget {
                   // }
                   if (businessState is BusinessFetchResultState) {
                     // print(businessState.businessList[0].name);
-                    print(categoryId);
-                    if (businessState.categoryId != categoryId) {
-                      businessState.categoryId = categoryId as String;
+                    print(widget.categoryId);
+                    if (businessState.categoryId != widget.categoryId) {
+                      businessState.categoryId = widget.categoryId as String;
                       businessBloc
                           .add(FilterBusinessEvent(businessState.categoryId));
                     }
@@ -94,9 +110,22 @@ class FilterBusinessPage extends StatelessWidget {
                                       businessState.businessList[i].id));
                             },
                             child: BusinessCard(
+                              from: (_isFavorite) {
+                                if (!_isFavorite) {
+                                  businessBloc.add(AddToFavoritesEvent(
+                                      businessState.businessList[i].id));
+                                } else {
+                                  businessBloc.add(RemoveFromFavoritesEvent(
+                                      businessState.businessList[i].id));
+                                }
+                                // businessBloc.add(RemoveFromFavoritesEvent(
+                                //     businessState.businessList[i].id));
+                                // context.router.popAndPush(FilterBusinessRoute(categoryId: businessState.businessList[i].categoryId));
+                              },
                               businessId: businessState.businessList[i].id,
                               businessName: businessState.businessList[i].name,
-                              rating: 2.5,//businessState.businessList[i].avgRating,
+                              rating:
+                                  2.5, //businessState.businessList[i].avgRating,
                               locationInfo:
                                   businessState.businessList[i].location,
                               imagePath: 'assets/images/macbook.jpg',
@@ -109,8 +138,8 @@ class FilterBusinessPage extends StatelessWidget {
                     );
                   }
                   if (businessState is Failure) {
-                    if (businessState.categoryId != categoryId) {
-                      businessState.categoryId = categoryId as String;
+                    if (businessState.categoryId != widget.categoryId) {
+                      businessState.categoryId = widget.categoryId as String;
                       businessBloc
                           .add(FilterBusinessEvent(businessState.categoryId));
                     }

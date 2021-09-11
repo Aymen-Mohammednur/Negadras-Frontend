@@ -29,6 +29,13 @@ class BusinessFetchResultState extends BusinessState {
   BusinessFetchResultState(this.businessList, this.categoryId);
 }
 
+class SearchState extends BusinessState {
+  String queryParameter;
+  String categoryId;
+  final List<Business> businessList;
+  SearchState(this.businessList, this.categoryId, this.queryParameter);
+}
+
 class NormalState extends BusinessState {}
 
 // class StaticFetchState extends BusinessState {}
@@ -45,7 +52,6 @@ class BusinessOperationSuccess extends BusinessState {
 }
 
 class BusinessOperationFailure extends BusinessState {
-
   // final Exception errMsg;
 
   // BusinessOperationFailure(this.errMsg);

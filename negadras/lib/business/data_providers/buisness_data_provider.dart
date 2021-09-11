@@ -5,9 +5,10 @@ import 'package:negadras/business/models/models.dart';
 
 class BusinessDataProvider {
   static final String _baseUrl =
-      "${StringConstants.BASE_URL_DEVICE}/business";
+      "${StringConstants.BASE_URL_EMULATOR}/business";
 
-  static final String _baseUrlFav = "${StringConstants.BASE_URL_DEVICE}/favorite";
+  static final String _baseUrlFav =
+      "${StringConstants.BASE_URL_EMULATOR}/favorite";
 
   Future<Business> create(Business business) async {
     final http.Response response = await http.post(Uri.parse(_baseUrl),
@@ -99,14 +100,26 @@ class BusinessDataProvider {
     }
   }
 
+  Future<List<Business>> fetchForSearch(
+      String queryParameter, String? categoryId, String? userId) async {
+    final response = await http.get(Uri.parse(
+        "$_baseUrl/search/$categoryId/$userId?queryParameter=$queryParameter"));
+    print("RESPONSEEEEEEEEEEEEEEE");
+    print("$_baseUrl/search/$categoryId/$userId?queryParameter=$queryParameter");
+    print(response.body);
+    if (response.statusCode == 200) {
+      final business = jsonDecode(response.body) as List;
+      return business.map((b) => Business.fromJson(b)).toList();
+    } else {
+      throw Exception("Failed to get business");
+    }
+  }
+
   Future<void> addToFavorites(String businessId, String userId) async {
     // String query = businessId + userId;
     final response = await http.post(Uri.parse("$_baseUrlFav/"),
         headers: <String, String>{"Content-Type": "application/json"},
-        body:jsonEncode({
-          "userId":userId,
-          "businessId":businessId
-        }));
+        body: jsonEncode({"userId": userId, "businessId": businessId}));
     print("ADDED: $response.body");
     if (response.statusCode != 201) {
       throw Exception("Failed to add business to favorites");
@@ -116,10 +129,7 @@ class BusinessDataProvider {
   Future<void> removeFromFavorites(String businessId, String userId) async {
     final response = await http.delete(Uri.parse("$_baseUrlFav/"),
         headers: <String, String>{"Content-Type": "application/json"},
-        body:jsonEncode({
-      "userId":userId,
-      "businessId":businessId
-    }));
+        body: jsonEncode({"userId": userId, "businessId": businessId}));
     print("DELETE: $response.body");
     if (response.statusCode != 204) {
       throw Exception("Failed to delete business to favorites");
@@ -127,8 +137,7 @@ class BusinessDataProvider {
   }
 
   Future<List<Business>> fetchFavorites(String userId) async {
-    final response =
-        await http.get(Uri.parse("$_baseUrl/favorites/$userId"));
+    final response = await http.get(Uri.parse("$_baseUrl/favorites/$userId"));
     if (response.statusCode == 200) {
       final business = jsonDecode(response.body) as List;
       return business.map((b) => Business.fromJson(b)).toList();

@@ -65,8 +65,8 @@ class ReviewDataProvider {
     }
   }
 
-  Future<void> delete(String id) async {
-    final response = await http.delete(Uri.parse("$_baseUrl/$id"));
+  Future<void> delete(String businessId, String userId) async {
+    final response = await http.delete(Uri.parse("$_baseUrl/$businessId/$userId"));
     if (response.statusCode != 204) {
       throw Exception("Field to delete the review");
     }

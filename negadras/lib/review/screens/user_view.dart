@@ -21,7 +21,7 @@ class UserViewPage extends StatefulWidget {
   UserViewPageState createState() {
     UserViewPageState s = UserViewPageState();
     s.businessId = "6139de58b8c03ed2137941fc";
-    s.userId = "6134db2369ba186847c14dba";
+    s.userId = "";
     return s;
   }
 }
@@ -57,7 +57,7 @@ class UserViewPageState extends State<UserViewPage> {
               ] +
               [
                 BlocBuilder<ReviewBloc, ReviewState>(
-                  builder: (context, state) => handleUserReviewState(state),
+                  builder: (context, state) => handleReviewState(state),
                 ),
               ],
         ),

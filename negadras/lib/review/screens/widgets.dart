@@ -53,21 +53,6 @@ BoxDecoration gridItemDecoration() {
 }
 
 Widget searchBar() {
-  // return Row(
-  //   children: [
-  //     // SizedBox(
-  //     //   width: 200,
-  //     //   child: Expanded(child: TextField(),)
-  //     // ),
-  //     Expanded(
-  //       child: TextField(),
-  //     ),
-  //     Icon(
-  //       Icons.search,
-  //       color: Colors.black,
-  //     ),
-  //   ],
-  // );
   return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
@@ -112,10 +97,7 @@ Widget imageStackWidget() {
   );
 }
 
-Widget iconPair(
-    {required IconData icon,
-    required String displayString,
-    Function()? action}) {
+Widget iconPair({required IconData icon,required String displayString,Function()? action}) {
   return GestureDetector(
     onTap: action ?? () {},
     child: Column(
@@ -183,13 +165,26 @@ _allReviews(List r) {
 }
 
 Widget reviewBox(review, i) {
-  var businessOwnerButtons = (i > 0
+  var userReviewButtons = (i > 0
       ? [
-          Icon(Icons.reply_outlined),
-          Icon(Icons.flag),
+          IconButton (
+          icon: const Icon(Icons.delete),
+          tooltip: 'Delete your review',
+          onPressed: (
+            
+          ) {},
+        ),
+          IconButton (
+          icon: const Icon(Icons.edit),
+          tooltip: 'Edit your review',
+          onPressed: () {
+
+          },
+        ),
         ]
       : [Container()]);
-  String name = (i == 3 ? "Your Review" : review.username);
+  
+  String name = (i == 2 ? "Your Review" : review.username);
   String content = review.reviewText;
   String rating = review.rating.toString();
   // String? ownerReply = review["reply"];
@@ -224,8 +219,7 @@ Widget reviewBox(review, i) {
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: businessOwnerButtons,
+              children: userReviewButtons,
             ),
           ),
         ],
@@ -244,19 +238,16 @@ Widget businessReviewList(reviewList) {
 }
 
 
-Widget handleUserReviewState(state) {
+Widget handleReviewState(state) {
 
   if (state is PageOpen) {
     return Container(
-      child: Center(child: Text("Loading Reviews")),
+      child: Center(child: Text("Loading Reviews...")),
     );
   } else if (state is ReviewPageLoaded) {
-    print(
-        "reviewlist yielded: ========================= ${state.reviewList.length}");
     return _allReviews(state.reviewList);
   } else {
-    print("Error causeing stats: ${state}");
-    return Container(child: Text("Connection Error"));
+    return Container(child: Text("Loading Reviews..."));
   }
 }
 
