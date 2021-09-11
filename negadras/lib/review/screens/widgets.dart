@@ -112,12 +112,15 @@ Widget imageStackWidget() {
   );
 }
 
-Widget iconPair(IconData icon, String displayString) {
-  return Column(
-    children: [
-      Icon(icon, size: 40),
-      Text(displayString),
-    ],
+Widget iconPair({required IconData icon, required String displayString, Function()? action}) {
+  return GestureDetector(
+    onTap: action ?? (){},
+    child: Column(
+      children: [
+        Icon(icon, size: 40),
+        Text(displayString),
+      ],
+    ),
   );
 }
 
@@ -258,12 +261,12 @@ Widget handleUserReviewState(state){
 }
 
 class IconTextPair {
-  Widget claim({String s = "Claim"}) => iconPair(Icons.add_circle, s);
-  Widget edit({String s = "Edit"}) => iconPair(Icons.edit, s);
-  Widget drop({String s = "Drop"}) => iconPair(Icons.delete, s);
-  Widget review({String s = "Reviews"}) => iconPair(Icons.reviews, s);
-  Widget website({String s = "Website"}) => iconPair(Icons.language, s);
-  Widget map({String s = "Open Maps"}) => iconPair(Icons.location_on, s);
-  Widget call({String s = "Call"}) => iconPair(Icons.phone, s);
-  Widget stats({String s = "Statistics"}) => iconPair(Icons.signal_cellular_alt, s);
+  Widget claim({String s = "Claim", Function()? todo}) => iconPair(icon:Icons.add_circle,displayString: s, action: todo);
+  Widget edit({String s = "Edit", Function()? todo}) => iconPair(icon:Icons.edit,displayString: s, action: todo);
+  Widget drop({String s = "Drop", Function()? todo}) => iconPair(icon:Icons.delete,displayString: s, action: todo);
+  Widget review({String s = "Reviews", Function()? todo}) => iconPair(icon:Icons.reviews,displayString: s, action: todo);
+  Widget website({String s = "Website", Function()? todo}) => iconPair(icon:Icons.language,displayString: s, action: todo);
+  Widget map({String s = "Open Maps", Function()? todo}) => iconPair(icon:Icons.location_on,displayString: s, action: todo);
+  Widget call({String s = "Call", Function()? todo}) => iconPair(icon:Icons.phone,displayString: s, action: todo);
+  Widget stats({String s = "Statistics", Function()? todo}) => iconPair(icon:Icons.signal_cellular_alt,displayString: s, action: todo);
 }
