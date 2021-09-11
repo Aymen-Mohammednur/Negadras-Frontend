@@ -28,15 +28,16 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: RepositoryProvider(
+    return SafeArea(
+        child: RepositoryProvider(
             create: (context) => AuthRepository(AuthDataProvider(http.Client())),
             child: Scaffold(
+              backgroundColor: Color.fromRGBO(20, 40, 65, 1),
               body: BlocProvider(
                 create: (context) =>
                     LoginBloc(authRepo: context.read<AuthRepository>()),
-                child: Stack(
-                  alignment: Alignment.bottomCenter,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     _label(),
                     _loginForm(),
@@ -69,12 +70,12 @@ class _LoginPageState extends State<LoginPage> {
         child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 40),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _usernameField(),
                 _passwordField(),
                 SizedBox(
-                  height: 10,
+                  height: 30,
                 ),
                 _loginButton(),
               ],
@@ -90,7 +91,10 @@ class _LoginPageState extends State<LoginPage> {
           padding: EdgeInsets.only(top: 20),
           child: Text(
             'Sign In to Negadras',
-            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 30),
+            style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 30,
+                color: Colors.amberAccent),
           )),
     );
   }
@@ -100,8 +104,14 @@ class _LoginPageState extends State<LoginPage> {
       builder: (context, state) {
         return TextFormField(
           controller: usernameController,
+          style: TextStyle(color: Colors.white),
           decoration:
-              InputDecoration(icon: Icon(Icons.person), hintText: 'Username'),
+              InputDecoration(icon: ImageIcon(
+                AssetImage("assets/images/icons8-person-24.png"),
+                color: Colors.amber.shade200,
+              ),
+              hintText: 'Username',
+              hintStyle: TextStyle(fontSize: 20, color: Colors.white)),
           validator: (value) =>
               state.isValidUsername ? null : 'Username is too short',
           onChanged: (value) => context
@@ -116,10 +126,15 @@ class _LoginPageState extends State<LoginPage> {
     return BlocBuilder<LoginBloc, LoginState>(
       builder: (context, state) {
         return TextFormField(
+          style: TextStyle(color: Colors.white),
           controller: passwordController,
           obscureText: true,
           decoration:
-              InputDecoration(icon: Icon(Icons.security), hintText: 'Password'),
+              InputDecoration(icon:ImageIcon(
+                  AssetImage("assets/images/icons8-password-24.png"),
+                  color: Colors.amber.shade200),
+              hintText: 'Password',
+              hintStyle: TextStyle(fontSize: 20, color: Colors.white)),
           validator: (value) =>
               state.isValidPassword ? null : 'Password is too short',
           onChanged: (value) => context
@@ -144,13 +159,17 @@ class _LoginPageState extends State<LoginPage> {
                   context.read<LoginBloc>().add(LoginSubmitted());
                 }
               },
-              style: ButtonStyle(
-                  shadowColor: MaterialStateProperty.all(Colors.grey),
-                  backgroundColor:
-                  MaterialStateProperty.all<Color>(Colors.black87)),
+              style: ElevatedButton.styleFrom(
+                  primary: Colors.amberAccent,
+                  minimumSize: Size(200, 48),
+                ),
+              // style: ButtonStyle(
+              //     shadowColor: MaterialStateProperty.all(Colors.grey),
+              //     backgroundColor:
+              //     MaterialStateProperty.all<Color>(Colors.black87)),
               child: Text(
                 "Login",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.white, fontSize: 20),
               ));
         }
 
@@ -168,6 +187,7 @@ class _LoginPageState extends State<LoginPage> {
           },
           child: Text(
             'Don\'t have an account? Sign Up.',
+            style: TextStyle(color: Colors.white)
           ),
         ),
       ),

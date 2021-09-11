@@ -22,7 +22,7 @@ class ReviewRepository {
     return this.dataProvider.fetchOne(businessId, username);
   }
 
-  Future<void> delete(String id) async {
-    this.dataProvider.delete(id);
+  Future<void> delete(String businessId, String userId) async {
+    this.dataProvider.delete(businessId, userId);
   }
 }

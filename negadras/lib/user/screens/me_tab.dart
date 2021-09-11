@@ -10,6 +10,7 @@ class MePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color.fromRGBO(20, 40, 65, 1),
         // bottomNavigationBar: bottomNav(context, 2),
         bottomNavigationBar: ownerBottomNav(context, 3),
         body: SafeArea(
@@ -26,7 +27,7 @@ class MePage extends StatelessWidget {
                     shape: BoxShape.circle,
                     color: Colors.red,
                     image: DecorationImage(
-                        image: AssetImage('assets/images/hacker.jpeg'),
+                        image: AssetImage('assets/images/avatar.png'),
                         fit: BoxFit.fill),
                   ),
                 ),
@@ -34,26 +35,40 @@ class MePage extends StatelessWidget {
                     child: Label(
                   label: "Firstname Secondname",
                   fontStyle: FontStyle.normal,
-                  fontSize: 15.0,
+                  fontSize: 20.0,
+                  fontColor: Colors.amberAccent,
                 ))
               ],
             ),
             Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 GestureDetector(
                   onTap: () => {
                     context.router.push(AccountManagementRoute()),
                   },
                   child: Card(
+                    color: Color.fromRGBO(20, 40, 65, 1),
                     child: Column(
-                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         const ListTile(
-                          leading: Icon(Icons.person),
-                          title: Text('Account Management'),
+                          leading: ImageIcon(
+                            AssetImage("assets/images/icons8-person-24.png"),
+                            color: Colors.amberAccent,
+                          ),
+                          title: Text(
+                            'Account Management',
+                            style: TextStyle(color: Colors.amberAccent),
+                          ),
                         ),
                       ],
                     ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        side: BorderSide(
+                            color: Colors.amberAccent.withOpacity(0.7),
+                            width: 100)),
                   ),
                 ),
                 GestureDetector(
@@ -61,31 +76,40 @@ class MePage extends StatelessWidget {
                     context.router.push(FavoritesRoute()),
                   },
                   child: Card(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        const ListTile(
-                          leading: Icon(Icons.pin_drop_outlined),
-                          title: Text('Favorite Places'),
+                      child: Container(
+                        // height: 50,
+                        // width: 300,
+                        color: Color.fromRGBO(20, 40, 65, 1),
+                        child: ListTile(
+                          leading: ImageIcon(
+                            AssetImage(
+                                "assets/images/icons8-location-pin-64.png"),
+                            color: Colors.amberAccent,
+                          ),
+                          title: Text('Favorite Places',
+                              style: TextStyle(color: Colors.amberAccent)),
                         ),
-                      ],
-                    ),
-                  ),
+                      ),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          side: BorderSide(
+                              color: Colors.amberAccent.withOpacity(0.7),
+                              width: 100))),
                 ),
-                GestureDetector(
-                  onTap: () => {},
-                  child: Card(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        const ListTile(
-                          leading: Icon(Icons.home_filled),
-                          title: Text('Claim A Business'),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                // GestureDetector(
+                //   onTap: () => {},
+                //   child: Card(
+                //     child: Column(
+                //       mainAxisSize: MainAxisSize.min,
+                //       children: <Widget>[
+                //         const ListTile(
+                //           leading: Icon(Icons.home_filled),
+                //           title: Text('Claim A Business'),
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
                 GestureDetector(
                   onTap: () => {
                     // context.router.popUntilRoot(),
@@ -94,12 +118,17 @@ class MePage extends StatelessWidget {
                         predicate: (route) => false),
                   },
                   child: Card(
+                    color: Color.fromRGBO(20, 40, 65, 1),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         const ListTile(
-                          leading: Icon(Icons.logout),
-                          title: Text('Logout'),
+                          leading: ImageIcon(
+                            AssetImage("assets/images/icons8-sign-out-50.png"),
+                            color: Colors.amberAccent,
+                          ),
+                          title: Text('Logout',
+                              style: TextStyle(color: Colors.amberAccent)),
                         ),
                       ],
                     ),

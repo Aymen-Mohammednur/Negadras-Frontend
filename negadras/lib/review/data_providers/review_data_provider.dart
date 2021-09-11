@@ -29,7 +29,8 @@ class ReviewDataProvider {
     final response = await http.get(Uri.parse("$_baseUrl/$businessId"));
     if (response.statusCode == 200) {
       final reviews = jsonDecode(response.body) as List;
-      var a = reviews.map((singleReview) => Review.fromJson(singleReview)).toList();
+      var a =
+          reviews.map((singleReview) => Review.fromJson(singleReview)).toList();
       return a;
     } else {
       throw Exception("Failed to get reviews");
@@ -37,7 +38,8 @@ class ReviewDataProvider {
   }
 
   Future<Review> fetchOne(String businessId, String username) async {
-    final response = await http.get(Uri.parse("$_baseUrl/$businessId/$username"));
+    final response =
+        await http.get(Uri.parse("$_baseUrl/$businessId/$username"));
 
     if (response.statusCode == 200) {
       return Review.fromJson(jsonDecode(response.body));
@@ -63,8 +65,8 @@ class ReviewDataProvider {
     }
   }
 
-  Future<void> delete(String id) async {
-    final response = await http.delete(Uri.parse("$_baseUrl/$id"));
+  Future<void> delete(String businessId, String userId) async {
+    final response = await http.delete(Uri.parse("$_baseUrl/$businessId/$userId"));
     if (response.statusCode != 204) {
       throw Exception("Field to delete the review");
     }

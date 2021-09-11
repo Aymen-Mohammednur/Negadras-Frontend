@@ -53,21 +53,6 @@ BoxDecoration gridItemDecoration() {
 }
 
 Widget searchBar() {
-  // return Row(
-  //   children: [
-  //     // SizedBox(
-  //     //   width: 200,
-  //     //   child: Expanded(child: TextField(),)
-  //     // ),
-  //     Expanded(
-  //       child: TextField(),
-  //     ),
-  //     Icon(
-  //       Icons.search,
-  //       color: Colors.black,
-  //     ),
-  //   ],
-  // );
   return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
@@ -112,12 +97,15 @@ Widget imageStackWidget() {
   );
 }
 
-Widget iconPair(IconData icon, String displayString) {
-  return Column(
-    children: [
-      Icon(icon, size: 40),
-      Text(displayString),
-    ],
+Widget iconPair({required IconData icon,required String displayString,Function()? action}) {
+  return GestureDetector(
+    onTap: action ?? () {},
+    child: Column(
+      children: [
+        Icon(icon, size: 40),
+        Text(displayString),
+      ],
+    ),
   );
 }
 
@@ -166,22 +154,37 @@ Widget _userReviewBox(r) {
   return reviewBox(r, 0);
 }
 
-_allReviews(List r){
+_allReviews(List r) {
   List<Widget> l = [];
-  for (int i = 0; i < r.length; i++){
+  for (int i = 0; i < r.length; i++) {
     l.add(_userReviewBox(r[i]));
   }
-  return Column(children: l,);
+  return Column(
+    children: l,
+  );
 }
 
 Widget reviewBox(review, i) {
-  var businessOwnerButtons = (i > 0
+  var userReviewButtons = (i > 0
       ? [
-          Icon(Icons.reply_outlined),
-          Icon(Icons.flag),
+          IconButton (
+          icon: const Icon(Icons.delete),
+          tooltip: 'Delete your review',
+          onPressed: (
+            
+          ) {},
+        ),
+          IconButton (
+          icon: const Icon(Icons.edit),
+          tooltip: 'Edit your review',
+          onPressed: () {
+
+          },
+        ),
         ]
       : [Container()]);
-  String name = review.username;
+  
+  String name = (i == 2 ? "Your Review" : review.username);
   String content = review.reviewText;
   String rating = review.rating.toString();
   // String? ownerReply = review["reply"];
@@ -216,8 +219,7 @@ Widget reviewBox(review, i) {
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: businessOwnerButtons,
+              children: userReviewButtons,
             ),
           ),
         ],
@@ -235,35 +237,35 @@ Widget businessReviewList(reviewList) {
       });
 }
 
-List<Widget> userReviewList(context) {
-  // var bloc = BlocProvider.of<ReviewBloc>(context);
-  List<Widget> widgetsToReturn = [BlocBuilder<ReviewBloc, ReviewState>(
-                        builder: (context, state) => handleUserReviewState(state),
-                      ),];
-  return widgetsToReturn;
-}
 
-Widget handleUserReviewState(state){
-  if (state is PageOpen){
+Widget handleReviewState(state) {
+
+  if (state is PageOpen) {
     return Container(
-      child: Center(child: Text("Loading Reviews")),
+      child: Center(child: Text("Loading Reviews...")),
     );
-  } else if (state is ReviewPageLoaded){
-    print("reviewlist yielded: ========================= ${state.reviewList.length}");
+  } else if (state is ReviewPageLoaded) {
     return _allReviews(state.reviewList);
   } else {
-    print("Error causeing stats: ${state}");
-    return Container(child: Text("Connection Error"));
+    return Container(child: Text("Loading Reviews..."));
   }
 }
 
 class IconTextPair {
-  Widget claim({String s = "Claim"}) => iconPair(Icons.add_circle, s);
-  Widget edit({String s = "Edit"}) => iconPair(Icons.edit, s);
-  Widget drop({String s = "Drop"}) => iconPair(Icons.delete, s);
-  Widget review({String s = "Reviews"}) => iconPair(Icons.reviews, s);
-  Widget website({String s = "Website"}) => iconPair(Icons.language, s);
-  Widget map({String s = "Open Maps"}) => iconPair(Icons.location_on, s);
-  Widget call({String s = "Call"}) => iconPair(Icons.phone, s);
-  Widget stats({String s = "Statistics"}) => iconPair(Icons.signal_cellular_alt, s);
+  Widget claim({String s = "Claim", Function()? todo}) =>
+      iconPair(icon: Icons.add_circle, displayString: s, action: todo);
+  Widget edit({String s = "Edit", Function()? todo}) =>
+      iconPair(icon: Icons.edit, displayString: s, action: todo);
+  Widget drop({String s = "Drop", Function()? todo}) =>
+      iconPair(icon: Icons.delete, displayString: s, action: todo);
+  Widget review({String s = "Reviews", Function()? todo}) =>
+      iconPair(icon: Icons.reviews, displayString: s, action: todo);
+  Widget website({String s = "Website", Function()? todo}) =>
+      iconPair(icon: Icons.language, displayString: s, action: todo);
+  Widget map({String s = "Open Maps", Function()? todo}) =>
+      iconPair(icon: Icons.location_on, displayString: s, action: todo);
+  Widget call({String s = "Call", Function()? todo}) =>
+      iconPair(icon: Icons.phone, displayString: s, action: todo);
+  Widget stats({String s = "Statistics", Function()? todo}) =>
+      iconPair(icon: Icons.signal_cellular_alt, displayString: s, action: todo);
 }
