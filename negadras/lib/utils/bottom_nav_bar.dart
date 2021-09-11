@@ -80,26 +80,28 @@ Widget ownerBottomNav(BuildContext context, int i) {
     items: [
       BottomNavyBarItem(
           icon: ImageIcon(
-            AssetImage("assets/images/icons8-home-50.png"),
+            AssetImage("assets/images/icons8-binoculars-24.png"),
             color: Color.fromRGBO(20, 40, 65, 1),
-            size: 10,
+            // size: 5,
           ),
           title: Text("Discover"),
           activeColor: Color.fromRGBO(20, 40, 65, 1),
           inactiveColor: Colors.black),
       BottomNavyBarItem(
           icon: ImageIcon(
-            AssetImage("assets/images/icons8-heart-50(1).png"),
+            AssetImage("assets/images/icons8-heart-24.png"),
             color: Color.fromRGBO(20, 40, 65, 1),
-            size: 10,
+            // size: 5,
           ),
           title: Text("Favorites"),
           activeColor: Color.fromRGBO(20, 40, 65, 1),
           inactiveColor: Colors.black),
       BottomNavyBarItem(
           icon: ImageIcon(
-              AssetImage("assets/images/icons8-organization-64.png"),
-              color: Color.fromRGBO(20, 40, 65, 1)),
+            AssetImage("assets/images/icons8-four-squares-24.png"),
+            color: Color.fromRGBO(20, 40, 65, 1),
+            // size: 5
+          ),
           title: Text("Organizations"),
           activeColor: Color.fromRGBO(20, 40, 65, 1),
           inactiveColor: Colors.black),
@@ -107,7 +109,7 @@ Widget ownerBottomNav(BuildContext context, int i) {
           icon: ImageIcon(
             AssetImage("assets/images/icons8-edit-account-50.png"),
             color: Color.fromRGBO(20, 40, 65, 1),
-            size: 10,
+            // size: 5,
           ),
           title: Text("Me"),
           activeColor: Color.fromRGBO(20, 40, 65, 1),
