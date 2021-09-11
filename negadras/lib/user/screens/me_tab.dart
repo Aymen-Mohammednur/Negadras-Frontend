@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:negadras/app.dart';
 import 'package:negadras/routes/router.gr.dart';
 import 'package:negadras/utils/bottom_nav_bar.dart';
 import '../../business/screens/widgets/label.dart';
@@ -9,6 +11,8 @@ class MePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DataBloc bloc = BlocProvider.of<DataBloc>(context);
+
     return Scaffold(
         backgroundColor: Color.fromRGBO(20, 40, 65, 1),
         // bottomNavigationBar: bottomNav(context, 2),
@@ -33,7 +37,7 @@ class MePage extends StatelessWidget {
                 ),
                 Expanded(
                     child: Label(
-                  label: "Firstname Secondname",
+                  label: bloc.state.username,
                   fontStyle: FontStyle.normal,
                   fontSize: 22.0,
                   fontColor: Colors.amberAccent,

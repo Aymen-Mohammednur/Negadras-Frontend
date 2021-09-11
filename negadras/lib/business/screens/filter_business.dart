@@ -113,6 +113,8 @@ class _FilterBusinessPageState extends State<FilterBusinessPage> {
                                       businessState.businessList[i].id));
                             },
                             child: BusinessCard(
+                              isOwner:
+                                  businessState.businessList[i].isOwner as bool,
                               from: (_isFavorite) {
                                 if (!_isFavorite) {
                                   businessBloc.add(AddToFavoritesEvent(

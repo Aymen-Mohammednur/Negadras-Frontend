@@ -44,15 +44,20 @@ class DataEvent extends Equatable {
 }
 
 class DataState extends Equatable {
-  // String userId;
-  // String role;
+  String userId;
+  String role;
+  String username;
+  String token;
+
   // DataState(this.userId, this.role);
-  DataState();
+  DataState(this.role, this.userId, this.username, this.token);
 
   List<Object> get props => [];
 }
 
-class InitialState extends DataState {}
+class InitialState extends DataState {
+  InitialState() : super("", "", "", "");
+}
 
 class App extends StatelessWidget {
   final _appRouter = AppRouter();

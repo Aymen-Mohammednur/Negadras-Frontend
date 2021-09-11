@@ -10,6 +10,7 @@ import 'package:flutter/material.dart' as _i2;
 
 import '../auth/login/login_view.dart' as _i12;
 import '../auth/signup/sign_up_view.dart' as _i11;
+import '../business/models/business.dart' as _i23;
 import '../business/screens/add_business.dart' as _i16;
 import '../business/screens/business_owner_view.dart' as _i20;
 import '../business/screens/edit_business.dart' as _i17;
@@ -18,7 +19,7 @@ import '../business/screens/filter_business.dart' as _i4;
 import '../business/screens/my_business.dart' as _i9;
 import '../business/screens/search_business.dart' as _i5;
 import '../category/screens/home_page.dart' as _i3;
-import '../organization/models/organization_model.dart' as _i23;
+import '../organization/models/organization_model.dart' as _i24;
 import '../organization/screens/add_organization.dart' as _i18;
 import '../organization/screens/edit_organization.dart' as _i21;
 import '../organization/screens/list_organization_page.dart' as _i19;
@@ -123,8 +124,9 @@ class AppRouter extends _i1.RootStackRouter {
         }),
     EditBusinessRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
-        builder: (_) {
-          return const _i17.EditBusinessPage();
+        builder: (data) {
+          final args = data.argsAs<EditBusinessRouteArgs>();
+          return _i17.EditBusinessPage(key: args.key, business: args.business);
         }),
     AddOrganizationRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
@@ -340,10 +342,21 @@ class AddBusinessRoute extends _i1.PageRouteInfo {
   static const String name = 'AddBusinessRoute';
 }
 
-class EditBusinessRoute extends _i1.PageRouteInfo {
-  const EditBusinessRoute() : super(name, path: '/edit-business-page');
+class EditBusinessRoute extends _i1.PageRouteInfo<EditBusinessRouteArgs> {
+  EditBusinessRoute({_i22.Key? key, required _i23.Business business})
+      : super(name,
+            path: '/edit-business-page',
+            args: EditBusinessRouteArgs(key: key, business: business));
 
   static const String name = 'EditBusinessRoute';
+}
+
+class EditBusinessRouteArgs {
+  const EditBusinessRouteArgs({this.key, required this.business});
+
+  final _i22.Key? key;
+
+  final _i23.Business business;
 }
 
 class AddOrganizationRoute extends _i1.PageRouteInfo<AddOrganizationRouteArgs> {
@@ -387,7 +400,7 @@ class BusinessOwnerViewRoute extends _i1.PageRouteInfo {
 class EditOrganizationRoute
     extends _i1.PageRouteInfo<EditOrganizationRouteArgs> {
   EditOrganizationRoute(
-      {_i22.Key? key, required _i23.Organization organization})
+      {_i22.Key? key, required _i24.Organization organization})
       : super(name,
             path: '/edit-organization-page',
             args: EditOrganizationRouteArgs(
@@ -401,5 +414,5 @@ class EditOrganizationRouteArgs {
 
   final _i22.Key? key;
 
-  final _i23.Organization organization;
+  final _i24.Organization organization;
 }

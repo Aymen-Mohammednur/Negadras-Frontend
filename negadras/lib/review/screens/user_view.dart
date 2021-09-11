@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:negadras/app.dart';
 // import 'package:negadras/business/screens/favorites.dart';
 // import 'package:negadras/business/screens/my_business.dart';
 import 'package:negadras/review/screens/widgets.dart';
 import 'package:negadras/review/blocs/blocs.dart';
 import 'package:negadras/review/screens/widgets/widgets.dart';
+import 'package:negadras/user/data_providers/data_providers.dart';
+import 'package:negadras/user/repository/user_repository.dart';
 import 'package:negadras/user/screens/me_tab.dart';
 import 'package:negadras/utils/bottom_nav_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -50,6 +53,7 @@ class UserViewPageState extends State<UserViewPage> {
   Widget build(BuildContext context) {
     var _scrollController = ScrollController();
     BlocProvider.of<ReviewBloc>(context).add(PageOpen(widget.businessId, ""));
+    DataBloc bloc = BlocProvider.of<DataBloc>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Business Details"),
@@ -67,7 +71,16 @@ class UserViewPageState extends State<UserViewPage> {
                   IconTextPair().website(todo: () {
                     launch("https://$businessUrl");
                   }),
-                  IconTextPair().claim()
+                  // IconTextPair().claim()
+                  IconButton(
+                      onPressed: () {
+                        UserDataProvider userDataProvider = UserDataProvider();
+                        UserRepository userRepository =
+                            UserRepository(dataProvider: userDataProvider);
+                        userRepository.makeClaim(bloc.state.userId, widget.businessId);
+                        print("CLAIMEDDDDDDDDDDD");
+                      },
+                      icon: Icon(Icons.add_circle))
                 ]),
                 BlocBuilder<UserReviewBloc, UserReviewState>(
                   builder: (context, state) =>

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
+import 'package:negadras/app.dart';
 import 'package:negadras/auth/data_providers/auth-data-provider.dart';
 import 'package:negadras/auth/models/response/loginResponse.dart';
 import 'package:negadras/auth/repository/auth_repository.dart';
@@ -57,11 +58,21 @@ class _LoginPageState extends State<LoginPage> {
         } else if (state.formStatus is SubmissionSuccess) {
           LoginResponse loginResponse =
               (state.formStatus as SubmissionSuccess).response as LoginResponse;
+
+          DataBloc bloc = BlocProvider.of<DataBloc>(context);
+          bloc.state.username = loginResponse.username;
+          bloc.state.userId = loginResponse.id;
+          bloc.state.role = loginResponse.role as String;
+          bloc.state.token = loginResponse.token;
+
           SharedPreferences prefs = await _prefs;
 
           await prefs.setString("user_id", loginResponse.id);
           await prefs.setString("token", loginResponse.token);
           await prefs.setString("role", loginResponse.role as String);
+          await prefs.setString("username", loginResponse.username);
+
+          print("username: ${prefs.getString("username")}");
 
           context.router
               .pushAndPopUntil(HomeRoute(), predicate: (route) => false);
