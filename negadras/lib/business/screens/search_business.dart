@@ -11,6 +11,7 @@ class SearchBusinessPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(20, 40, 65, 1),
       // bottomNavigationBar: bottomNav(context),
       body: SafeArea(
         child: Column(
@@ -23,6 +24,7 @@ class SearchBusinessPage extends StatelessWidget {
               child: Label(
                 label: "Kaldi's Coffee near you",
                 fontStyle: FontStyle.italic,
+                fontColor: Colors.white,
               ),
             ),
             // Expanded(

@@ -95,6 +95,7 @@ class _AddOrganizationPageState extends State<AddOrganizationPage> {
         builder: (context, state) {
           return TextFormField(
             controller: organizationNameController,
+            style: TextStyle(color: Colors.white), 
             decoration: InputDecoration(
               icon: Icon(
                 Icons.account_balance,

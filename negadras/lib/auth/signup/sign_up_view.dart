@@ -6,6 +6,7 @@ import 'package:negadras/auth/repository/auth_repository.dart';
 import 'package:negadras/auth/form_submission_status.dart';
 import 'package:negadras/auth/signup/bloc/sign_up_bloc.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:negadras/business/models/business.dart';
 import 'package:negadras/routes/router.gr.dart';
 
 class SignUpPage extends StatefulWidget {
