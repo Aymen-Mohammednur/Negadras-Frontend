@@ -27,15 +27,16 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: RepositoryProvider(
+    return SafeArea(
+      child: RepositoryProvider(
         create: (context) => AuthRepository(AuthDataProvider(http.Client())),
         child: Scaffold(
+          backgroundColor: Color.fromRGBO(20, 40, 65, 1),
           body: BlocProvider(
             create: (context) =>
                 SignUpBloc(authRepo: context.read<AuthRepository>()),
-            child: Stack(
-              alignment: Alignment.bottomCenter,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _label(),
                 _signUpForm(),
@@ -70,7 +71,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 _passwordField(),
                 _confirmPasswordField(),
                 SizedBox(
-                  height: 10,
+                  height: 40,
                 ),
                 _signUpButton(),
               ],
@@ -86,7 +87,10 @@ class _SignUpPageState extends State<SignUpPage> {
           padding: EdgeInsets.only(top: 5),
           child: Text(
             'Create Account',
-            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 30),
+            style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 30,
+                color: Colors.amberAccent),
           )),
     );
   }
@@ -96,8 +100,13 @@ class _SignUpPageState extends State<SignUpPage> {
       builder: (context, state) {
         return TextFormField(
           controller: usernameController,
-          decoration:
-              InputDecoration(icon: Icon(Icons.person), hintText: 'Username'),
+          decoration: InputDecoration(
+              icon: ImageIcon(
+                AssetImage("assets/images/icons8-person-24.png"),
+                color: Colors.amber.shade200,
+              ),
+              hintText: 'Username',
+              hintStyle: TextStyle(fontSize: 20, color: Colors.white)),
           validator: (value) =>
               state.isValidUsername ? null : 'Username is too short',
           onChanged: (value) => context
@@ -113,8 +122,11 @@ class _SignUpPageState extends State<SignUpPage> {
       builder: (context, state) {
         return TextFormField(
           controller: firstNameController,
-          decoration:
-              InputDecoration(icon: Icon(Icons.person), hintText: 'First name'),
+          decoration: InputDecoration(
+              icon: ImageIcon(AssetImage("assets/images/icons8-person-24.png"),
+                  color: Colors.amber.shade200),
+              hintText: 'First name',
+              hintStyle: TextStyle(fontSize: 20, color: Colors.white)),
           validator: (value) =>
               state.isValidFirstname ? null : 'First name is too short',
           onChanged: (value) => context
@@ -130,8 +142,11 @@ class _SignUpPageState extends State<SignUpPage> {
       builder: (context, state) {
         return TextFormField(
           controller: lastNameController,
-          decoration:
-              InputDecoration(icon: Icon(Icons.person), hintText: 'Last name'),
+          decoration: InputDecoration(
+              icon: ImageIcon(AssetImage("assets/images/icons8-person-24.png"),
+                  color: Colors.amber.shade200),
+              hintText: 'Last name',
+              hintStyle: TextStyle(fontSize: 20, color: Colors.white)),
           validator: (value) =>
               state.isValidLastname ? null : 'Last name is too short',
           onChanged: (value) => context
@@ -164,8 +179,12 @@ class _SignUpPageState extends State<SignUpPage> {
         return TextFormField(
           controller: passwordController,
           obscureText: true,
-          decoration:
-              InputDecoration(icon: Icon(Icons.security), hintText: 'Password'),
+          decoration: InputDecoration(
+              icon: ImageIcon(
+                  AssetImage("assets/images/icons8-password-24.png"),
+                  color: Colors.amber.shade200),
+              hintText: 'Password',
+              hintStyle: TextStyle(fontSize: 20, color: Colors.white)),
           validator: (value) =>
               state.isValidPassword ? null : 'Password is too short',
           onChanged: (value) => context
@@ -183,7 +202,11 @@ class _SignUpPageState extends State<SignUpPage> {
           controller: confirmPasswordController,
           obscureText: true,
           decoration: InputDecoration(
-              icon: Icon(Icons.security), hintText: 'Confirm Password'),
+              icon: ImageIcon(
+                  AssetImage("assets/images/icons8-password-24.png"),
+                  color: Colors.amber.shade200),
+              hintText: 'Confirm Password',
+              hintStyle: TextStyle(fontSize: 20, color: Colors.white)),
           validator: (value) =>
               state.isValidConfirmPassword ? null : 'Password don\'t match',
           onChanged: (value) => context
@@ -206,11 +229,15 @@ class _SignUpPageState extends State<SignUpPage> {
                     context.router.push(LoginRoute());
                   }
                 },
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.black87)),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.amberAccent,
+                  minimumSize: Size(200, 48),
+                ),
+                // style: ButtonStyle(
+                //     backgroundColor: MaterialStateProperty.all(Colors.black87)),
                 child: Text(
                   "Sign Up",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.white, fontSize: 20),
                 ));
       },
     );
@@ -226,6 +253,7 @@ class _SignUpPageState extends State<SignUpPage> {
           },
           child: Text(
             'Already have an account? Sign in.',
+            style: TextStyle(color: Colors.white),
           ),
         ),
       ),

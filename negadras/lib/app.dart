@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:negadras/auth/data_providers/auth-data-provider.dart';
 import 'package:negadras/auth/login/bloc/login_bloc.dart';
@@ -15,6 +16,7 @@ import 'package:negadras/organization/repository/organization_repository.dart';
 import 'package:negadras/review/blocs/blocs.dart';
 import 'package:negadras/review/repository/review_repository.dart';
 import 'package:negadras/routes/router.gr.dart';
+import 'package:negadras/business/screens/widgets/design.dart';
 
 import 'package:negadras/category/repository/category_repository.dart';
 import 'package:negadras/category/data_providers/category_data_provider.dart';
@@ -60,7 +62,18 @@ class App extends StatelessWidget {
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: Colors.green.shade900,
+          fontFamily: GoogleFonts.josefinSans(
+            fontSize: 50,
+            fontWeight: FontWeight.bold,
+            color: Colors.amberAccent
+          ).fontFamily,
+          
+          elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ButtonStyle(
+                  // backgroundColor: Colors.amber,
+                  )),
+          // primaryColor: Colors.blue.shade900,
+          
         ),
         routerDelegate: AutoRouterDelegate(
           _appRouter,
