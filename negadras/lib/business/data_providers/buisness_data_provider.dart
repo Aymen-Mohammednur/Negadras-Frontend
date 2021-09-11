@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:negadras/auth/constants/string.dart';
 import 'package:negadras/business/models/models.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BusinessDataProvider {
   static final String _baseUrl =
@@ -11,8 +12,11 @@ class BusinessDataProvider {
       "${StringConstants.BASE_URL_EMULATOR}/favorite";
 
   Future<Business> create(Business business) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String token = pref.getString("token") as String;
+
     final http.Response response = await http.post(Uri.parse(_baseUrl),
-        headers: <String, String>{"Content-Type": "application/json"},
+        headers: <String, String>{"Content-Type": "application/json", "access-token":token},
         body: jsonEncode({
           "name": business.name,
           "categoryId": business.categoryId,
@@ -33,7 +37,10 @@ class BusinessDataProvider {
   }
 
   Future<List<Business>> fetch() async {
-    final response = await http.get(Uri.parse(_baseUrl));
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String token = pref.getString("token") as String;
+
+    final response = await http.get(Uri.parse(_baseUrl), headers: <String, String>{"Content-Type": "application/json", "access-token":token});
     print(response.body);
     if (response.statusCode == 200) {
       final business = jsonDecode(response.body) as List;
@@ -45,9 +52,12 @@ class BusinessDataProvider {
 
   Future<List<Business>> fetchByCategory(
       String? categoryId, String? userId) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String token = pref.getString("token") as String;
+
     print("Inside business data provider");
     final response =
-        await http.get(Uri.parse("$_baseUrl/filter/$categoryId/$userId"));
+        await http.get(Uri.parse("$_baseUrl/filter/$categoryId/$userId"), headers: <String, String>{"Content-Type": "application/json", "access-token":token});
     // print(response.body);
     if (response.statusCode == 200) {
       final business = jsonDecode(response.body) as List;
@@ -61,7 +71,10 @@ class BusinessDataProvider {
   }
 
   Future<Business> fetchOne(String id) async {
-    final response = await http.get(Uri.parse("$_baseUrl/$id"));
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String token = pref.getString("token") as String;
+
+    final response = await http.get(Uri.parse("$_baseUrl/$id"), headers: <String, String>{"Content-Type": "application/json", "access-token":token});
 
     if (response.statusCode == 200) {
       return Business.fromJson(jsonDecode(response.body));
@@ -71,8 +84,11 @@ class BusinessDataProvider {
   }
 
   Future<Business> update(String id, Business business) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String token = pref.getString("token") as String;
+
     final response = await http.put(Uri.parse("$_baseUrl/$id"),
-        headers: <String, String>{"Content-Type": "application/json"},
+        headers: <String, String>{"Content-Type": "application/json", "access-token":token},
         body: jsonEncode({
           "name": business.name,
           "categoryId": business.categoryId,
@@ -94,7 +110,10 @@ class BusinessDataProvider {
   }
 
   Future<void> delete(String id) async {
-    final response = await http.delete(Uri.parse("$_baseUrl/$id"));
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String token = pref.getString("token") as String;
+
+    final response = await http.delete(Uri.parse("$_baseUrl/$id"), headers: <String, String>{"Content-Type": "application/json", "access-token":token});
     if (response.statusCode != 204) {
       throw Exception("Field to delete the Business");
     }
@@ -102,8 +121,11 @@ class BusinessDataProvider {
 
   Future<List<Business>> fetchForSearch(
       String queryParameter, String? categoryId, String? userId) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String token = pref.getString("token") as String;
+
     final response = await http.get(Uri.parse(
-        "$_baseUrl/search/$categoryId/$userId?queryParameter=$queryParameter"));
+        "$_baseUrl/search/$categoryId/$userId?queryParameter=$queryParameter"), headers: <String, String>{"Content-Type": "application/json", "access-token":token});
     print("RESPONSEEEEEEEEEEEEEEE");
     print(
         "$_baseUrl/search/$categoryId/$userId?queryParameter=$queryParameter");
@@ -117,9 +139,12 @@ class BusinessDataProvider {
   }
 
   Future<void> addToFavorites(String businessId, String userId) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String token = pref.getString("token") as String;
+
     // String query = businessId + userId;
     final response = await http.post(Uri.parse("$_baseUrlFav/"),
-        headers: <String, String>{"Content-Type": "application/json"},
+        headers: <String, String>{"Content-Type": "application/json", "access-token":token},
         body: jsonEncode({"userId": userId, "businessId": businessId}));
     print("ADDED: $response.body");
     if (response.statusCode != 201) {
@@ -128,8 +153,11 @@ class BusinessDataProvider {
   }
 
   Future<void> removeFromFavorites(String businessId, String userId) async {
-    final response = await http.delete(Uri.parse("$_baseUrlFav/"),
-        headers: <String, String>{"Content-Type": "application/json"},
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String token = pref.getString("token") as String;
+
+    final response = await http.delete(Uri.parse("$_baseUrlFav/",),
+        headers: <String, String>{"Content-Type": "application/json", "access-token":token},
         body: jsonEncode({"userId": userId, "businessId": businessId}));
     print("DELETE: $response.body");
     if (response.statusCode != 204) {
@@ -138,7 +166,10 @@ class BusinessDataProvider {
   }
 
   Future<List<Business>> fetchFavorites(String userId) async {
-    final response = await http.get(Uri.parse("$_baseUrl/favorites/$userId"));
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String token = pref.getString("token") as String;
+
+    final response = await http.get(Uri.parse("$_baseUrl/favorites/$userId"),headers: <String, String>{"Content-Type": "application/json", "access-token":token});
     if (response.statusCode == 200) {
       final business = jsonDecode(response.body) as List;
       return business.map((b) => Business.fromJson(b)).toList();
