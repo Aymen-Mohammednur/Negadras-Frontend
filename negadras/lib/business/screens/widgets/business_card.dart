@@ -1,19 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:negadras/business/bloc/business_bloc.dart';
 import 'package:negadras/business/screens/widgets/circular_avatar.dart';
 import 'package:negadras/business/screens/widgets/star_rating.dart';
 
 class BusinessCard extends StatefulWidget {
+  final String businessId;
   final String businessName;
   final double rating;
   final String locationInfo;
   final String imagePath;
+  bool isFavorite;
   BusinessCard({
     Key? key,
+    required this.businessId,
     required this.businessName,
     required this.rating,
     required this.locationInfo,
     required this.imagePath,
+    this.isFavorite = false,
   }) : super(key: key);
 
   @override
@@ -21,10 +27,9 @@ class BusinessCard extends StatefulWidget {
 }
 
 class _BusinessCardState extends State<BusinessCard> {
-  bool isFavorite = false;
-
   @override
   Widget build(BuildContext context) {
+    final businessBloc = BlocProvider.of<BusinessBloc>(context);
     return Container(
       height: 170,
       child: Card(
@@ -67,10 +72,15 @@ class _BusinessCardState extends State<BusinessCard> {
             Spacer(),
             GestureDetector(
               onTap: () {
-                isFavorite = !isFavorite;
+                widget.isFavorite = !widget.isFavorite;
+                if (widget.isFavorite) {
+                  businessBloc.add(AddToFavoritesEvent(widget.businessId));
+                } else {
+                  businessBloc.add(RemoveFromFavoritesEvent(widget.businessId));
+                }
                 setState(() {});
               },
-              child: isFavorite
+              child: widget.isFavorite
                   ? Icon(
                       Icons.favorite,
                       color: Colors.red,

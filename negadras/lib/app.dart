@@ -13,6 +13,8 @@ import 'package:negadras/category/blocs/category_bloc.dart';
 import 'package:negadras/organization/bloc/organization_bloc.dart';
 import 'package:negadras/organization/data_providers/organization_data_provider.dart';
 import 'package:negadras/organization/repository/organization_repository.dart';
+import 'package:negadras/review/blocs/blocs.dart';
+import 'package:negadras/review/repository/review_repository.dart';
 import 'package:negadras/routes/router.gr.dart';
 import 'package:negadras/business/screens/widgets/design.dart';
 
@@ -20,6 +22,8 @@ import 'package:negadras/category/repository/category_repository.dart';
 import 'package:negadras/category/data_providers/category_data_provider.dart';
 import 'package:negadras/business/repository/buisness_repository.dart';
 import 'package:negadras/business/data_providers/buisness_data_provider.dart';
+
+import 'review/data_providers/data_providers.dart';
 
 class App extends StatelessWidget {
   final _appRouter = AppRouter();
@@ -29,7 +33,9 @@ class App extends StatelessWidget {
     final categoryRepository = CategoryRepository(CategoryDataProvider());
     final businessRepository = BusinessRepository(BusinessDataProvider());
     final authRepository = AuthRepository(AuthDataProvider(http.Client()));
-    final orgRepository = OrganizationRepository(OrganizationDataProvider());
+    final reviewRepository = ReviewRepository(ReviewDataProvider());
+    final organizationRepository =
+        OrganizationRepository(OrganizationDataProvider());
 
     return MultiBlocProvider(
       providers: [
@@ -43,9 +49,15 @@ class App extends StatelessWidget {
                   businessRepository: businessRepository,
                 )),
         BlocProvider(
-            create: (context) => OrganizationBloc(orgRepo: orgRepository)),
+            create: (context) => OrganizationBloc(
+                organizationRepository: organizationRepository)..add(OrganizationLoad())),
         BlocProvider(create: (context) => LoginBloc(authRepo: authRepository)),
         BlocProvider(create: (context) => SignUpBloc(authRepo: authRepository)),
+        BlocProvider<ReviewBloc>(
+            create: (context) => ReviewBloc(reviewRepository)),
+        BlocProvider<UserReviewBloc>(
+            create: (context) => UserReviewBloc(reviewRepository)),
+        // BlocProvider<OrganizationBloc>(create: (context) => OrganizationBloc(organizationRepository: organizationRepository));
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

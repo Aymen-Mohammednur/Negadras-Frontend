@@ -26,7 +26,8 @@ class FilterBusinessPage extends StatelessWidget {
         appBar: AppBar(
           title: Text("Filter"),
         ),
-        bottomNavigationBar: bottomNav(context),
+        // bottomNavigationBar: bottomNav(context, 0),
+        bottomNavigationBar: ownerBottomNav(context, 0),
         body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,12 +94,14 @@ class FilterBusinessPage extends StatelessWidget {
                                       businessState.businessList[i].id));
                             },
                             child: BusinessCard(
+                              businessId: businessState.businessList[i].id,
                               businessName: businessState.businessList[i].name,
-                              rating:
-                                  4, //Get the review repo and pass the business id
+                              rating: businessState.businessList[i].avgRating,
                               locationInfo:
                                   businessState.businessList[i].location,
                               imagePath: 'assets/images/macbook.jpg',
+                              isFavorite: businessState
+                                  .businessList[i].isFavorite as bool,
                             ),
                           );
                         },
@@ -113,7 +116,7 @@ class FilterBusinessPage extends StatelessWidget {
                     }
                     return Center(
                       // child: Text(businessState.errMsg.toString()),
-                      child: Text("Some error occurred"),
+                      child: Text("Failed to Fetch Businesses"),
                     );
                   }
                   return Expanded(

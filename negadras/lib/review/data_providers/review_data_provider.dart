@@ -3,39 +3,41 @@ import 'package:negadras/review/models/review.dart';
 import 'package:http/http.dart' as http;
 
 class ReviewDataProvider {
-  static final String _baseUrl = "http://localhost/3000/review";
+  static final String _baseUrl = "http://192.168.43.80:3000/api/review";
 
   Future<Review> create(Review review) async {
+    print("Inside data provider");
     final http.Response response = await http.post(Uri.parse(_baseUrl),
         headers: <String, String>{"Content-Type": "application/json"},
         body: jsonEncode({
-          "id": review.id,
           "userId": review.userId,
           "businessId": review.businessId,
-          "rating": review.rating,
-          "reviewText": review.reweiwText,
+          "rating": review.rating.toString(),
+          "reviewText": review.reviewText ?? "",
         }));
-
+    print(response.body);
     if (response.statusCode == 201) {
       return Review.fromJson(jsonDecode(response.body));
     } else {
+      print("Http response failed");
       throw Exception("Failed to create review");
     }
   }
 
-  Future<List<Review>> fetchAll() async {
-    final response = await http.get(Uri.parse(_baseUrl));
-
+  // Fetch all reviews for a business
+  Future<List<Review>> fetchAll(String businessId) async {
+    final response = await http.get(Uri.parse("$_baseUrl/$businessId"));
     if (response.statusCode == 200) {
-      final review = jsonDecode(response.body) as List;
-      return review.map((b) => Review.fromJson(b)).toList();
+      final reviews = jsonDecode(response.body) as List;
+      var a = reviews.map((singleReview) => Review.fromJson(singleReview)).toList();
+      return a;
     } else {
       throw Exception("Failed to get reviews");
     }
   }
 
-  Future<Review> fetchOne(String id) async {
-    final response = await http.get(Uri.parse("$_baseUrl/$id"));
+  Future<Review> fetchOne(String businessId, String username) async {
+    final response = await http.get(Uri.parse("$_baseUrl/$businessId/$username"));
 
     if (response.statusCode == 200) {
       return Review.fromJson(jsonDecode(response.body));
@@ -48,11 +50,10 @@ class ReviewDataProvider {
     final response = await http.put(Uri.parse("$_baseUrl/$id"),
         headers: <String, String>{"Content-Type": "application/json"},
         body: jsonEncode({
-          "id": review.id,
           "userId": review.userId,
           "businessId": review.businessId,
           "rating": review.rating,
-          "reviewText": review.reweiwText,
+          "reviewText": review.reviewText,
         }));
 
     if (response.statusCode == 200) {

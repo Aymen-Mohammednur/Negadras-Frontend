@@ -1,23 +1,40 @@
 part of 'widgets.dart';
 
-Widget UserReviewPrompt(BuildContext context) {
-  var bloc = BlocProvider.of<ReviewBloc>(context);
+
+class UserReviewPromptClass{
+  String businessId;
+  String userId;
+  BuildContext context;
+  
+  UserReviewPromptClass(this.context, this.businessId, this.userId);
+  Widget UserReviewPrompt() {
+  UserReviewBloc bloc = BlocProvider.of<UserReviewBloc>(context);
   var state = bloc.state;
-  print("State detected: $state");
-  if (state is HasNotReviewed) {
-    return _ratingPrompt(bloc);
-  } else if (state is Rated) {
-    return _reviewPrompt(bloc);
-    // return nullWidget();
-  } else if (state is ReviewSent) {
-    return _userReview(bloc);
-    // return nullWidget();
-  } else {
-    return nullWidget();
+  if (state is UserReviewInitial) return _ratingPrompt(bloc);
+  else if (state is Rated) return _reviewPrompt(bloc);
+  else if (state is ReviewSent){
+    BlocProvider.of<ReviewBloc>(context).add(PageOpen(businessId, userId));
+    return Container();
   }
+  else {
+    print(state);
+    return Container(child: Text("Unrecognized State"));
+  }
+  
+  // if (state is HasNotReviewed) {
+  //   return _ratingPrompt(bloc);
+  // } else if (state is Rated) {
+  //   return _reviewPrompt(bloc);
+  //   // return nullWidget();
+  // } else if (state is ReviewSent) {
+  //   return _userReview(bloc);
+  //   // return nullWidget();
+  // } else {
+  //   return nullWidget();
+  // }
 }
 
-Widget _ratingPrompt(ReviewBloc bloc) {
+Widget _ratingPrompt(UserReviewBloc bloc) {
   return Padding(
     padding: const EdgeInsets.only(left: 8.0),
     child: Container(
@@ -51,7 +68,9 @@ Widget _ratingPrompt(ReviewBloc bloc) {
                         return GestureDetector(
                           child: Icon(Icons.star_border),
                           onTap: () {
-                            bloc.add(RatingEnter(rating: i+1));
+                            print("Star $i touched");
+                            bloc.add(RatingAdd(i+1));
+                            print("Star $i touch complete");
                           },
                         );
                       },
@@ -65,29 +84,15 @@ Widget _ratingPrompt(ReviewBloc bloc) {
   );
 }
 
-Widget _nextButton(ReviewBloc bloc) => ElevatedButton(
-          onPressed: () {
-            bloc.add(ReviewAdd());
-          },
-          child: Text("Continue"),
-          style: ButtonStyle(
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18.0),
-                // side: BorderSide(color: Colors.red)
-              ),
-            ),
-          ),
-        );
 
-
-
-Widget _reviewPrompt(ReviewBloc bloc) {
+Widget _reviewPrompt(UserReviewBloc bloc) {
   Widget reviewAcceptor = Padding(
       padding: EdgeInsets.all(14),
       child: TextFormField(
         controller: bloc.reviewController,
-        decoration: InputDecoration(labelText: "Describe your experience... (Optional)"),
+        decoration: InputDecoration(
+          labelText: "Describe your experience... (Optional)"),
+          initialValue: null,
         keyboardType: TextInputType.multiline,
         minLines: 1, //Normal textInputField will be displayed
         maxLines: 5, // when user presses enter it will adapt to it
@@ -107,9 +112,27 @@ Widget _reviewPrompt(ReviewBloc bloc) {
 }
 
 
-Widget _userReview(ReviewBloc bloc){
-  String dummyJson = '{"name": "FirstName LastName", "content": "${bloc.review}", "rating": "${bloc.rating}"}';
-  return reviewBox(dummyJson,0);
+Widget _nextButton(UserReviewBloc bloc) => 
+  ElevatedButton(
+    onPressed: () {
+      bloc.add(ReviewAdd(businessId, userId));
+    },
+    child: Text("Continue"),
+    style: ButtonStyle(
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18.0),
+          // side: BorderSide(color: Colors.red)
+        ),
+      ),
+    ),
+  );
+
+
+Widget _userReview(Review reviewObj){
+  // String dummyJson = '{"name": "FirstName LastName", "content": "${bloc.state.review}", "rating": "${bloc.state.rating}"}';
+  return reviewBox(reviewObj,0);
 }
 
 Widget nullWidget() => Container();
+}

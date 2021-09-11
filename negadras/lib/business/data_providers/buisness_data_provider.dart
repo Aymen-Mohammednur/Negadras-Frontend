@@ -4,7 +4,8 @@ import 'package:negadras/auth/constants/string.dart';
 import 'package:negadras/business/models/models.dart';
 
 class BusinessDataProvider {
-  static final String _baseUrl = "${StringConstants.BASE_URL_EMULATOR}/user";
+  static final String _baseUrl =
+      "${StringConstants.BASE_URL_EMULATOR}/business";
 
   Future<Business> create(Business business) async {
     final http.Response response = await http.post(Uri.parse(_baseUrl),
@@ -13,9 +14,11 @@ class BusinessDataProvider {
           "name": business.name,
           "categoryId": business.categoryId,
           "location": business.location,
+          "averageRating": business.avgRating,
           "phoneNumber": business.phoneNumber,
           "website": business.website,
           "email": business.email,
+          "isFavorite": business.isFavorite,
         }));
 
     // print(response.body);
@@ -28,7 +31,7 @@ class BusinessDataProvider {
 
   Future<List<Business>> fetch() async {
     final response = await http.get(Uri.parse(_baseUrl));
-
+    print(response.body);
     if (response.statusCode == 200) {
       final business = jsonDecode(response.body) as List;
       return business.map((b) => Business.fromJson(b)).toList();
@@ -37,9 +40,11 @@ class BusinessDataProvider {
     }
   }
 
-  Future<List<Business>> fetchByCategory(String? categoryId) async {
+  Future<List<Business>> fetchByCategory(
+      String? categoryId, String? userId) async {
     print("Inside business data provider");
-    final response = await http.get(Uri.parse("$_baseUrl/filter/$categoryId"));
+    final response =
+        await http.get(Uri.parse("$_baseUrl/filter/$categoryId/$userId"));
     // print(response.body);
     if (response.statusCode == 200) {
       final business = jsonDecode(response.body) as List;
@@ -69,9 +74,11 @@ class BusinessDataProvider {
           "name": business.name,
           "categoryId": business.categoryId,
           "location": business.location,
+          "averageRating": business.avgRating,
           "phoneNumber": business.phoneNumber,
           "website": business.website,
           "email": business.email,
+          "isFavorite": business.isFavorite,
         }));
 
     print(response.body);
@@ -87,6 +94,23 @@ class BusinessDataProvider {
     final response = await http.delete(Uri.parse("$_baseUrl/$id"));
     if (response.statusCode != 204) {
       throw Exception("Field to delete the Business");
+    }
+  }
+
+  Future<void> addToFavorites(String businessId, String userId) async {
+    String query = businessId + userId;
+    final response = await http.post(Uri.parse("$_baseUrl/Favorites/?$query"));
+    if (response.statusCode != 204) {
+      throw Exception("Failed to add business to favorites");
+    }
+  }
+
+  Future<void> removeFromFavorites(String businessId, String userId) async {
+    String query = businessId + userId;
+    final response =
+        await http.delete(Uri.parse("$_baseUrl/Favorites/?$query"));
+    if (response.statusCode != 204) {
+      throw Exception("Failed to delete business to favorites");
     }
   }
 }

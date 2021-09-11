@@ -8,14 +8,16 @@ import 'package:negadras/organization/models/organization_model.dart';
 import 'package:negadras/organization/repository/organization_repository.dart';
 import 'package:negadras/routes/router.gr.dart';
 
-class AddOrganizationPage extends StatefulWidget {
-  AddOrganizationPage({Key? key}) : super(key: key);
+class EditOrganizationPage extends StatefulWidget {
+  EditOrganizationPage({Key? key, required this.organization})
+      : super(key: key);
+  final Organization organization;
 
   @override
-  _AddOrganizationPageState createState() => _AddOrganizationPageState();
+  _EditOrganizationPageState createState() => _EditOrganizationPageState();
 }
 
-class _AddOrganizationPageState extends State<AddOrganizationPage> {
+class _EditOrganizationPageState extends State<EditOrganizationPage> {
   final _formKey = GlobalKey<FormState>();
   late String _organization;
 
@@ -23,23 +25,24 @@ class _AddOrganizationPageState extends State<AddOrganizationPage> {
 
   @override
   Widget build(BuildContext context) {
+    // print(organization);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add an Organization"),
+        title: Text("Edit Organization"),
         centerTitle: true,
       ),
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: [
           _label(),
-          _addOrganizationForm(),
+          _editOrganizationForm(),
         ],
       ),
     );
     ;
   }
 
-  Widget _addOrganizationForm() {
+  Widget _editOrganizationForm() {
     return BlocListener<OrganizationBloc, OrganizationState>(
       listener: (context, state) {
         // final formStatus = state.formStatus;
@@ -71,7 +74,7 @@ class _AddOrganizationPageState extends State<AddOrganizationPage> {
           alignment: Alignment.topCenter,
           padding: EdgeInsets.only(top: 20),
           child: Text(
-            'Add Organization',
+            'Edit this Organization',
             style: TextStyle(fontWeight: FontWeight.w500, fontSize: 30),
           )),
     );
@@ -81,10 +84,10 @@ class _AddOrganizationPageState extends State<AddOrganizationPage> {
     return BlocBuilder<OrganizationBloc, OrganizationState>(
       builder: (context, state) {
         return TextFormField(
-          controller: organizationNameController,
+          initialValue: widget.organization.name,
+          // controller: organizationNameController,
           decoration: InputDecoration(
-              icon: Icon(Icons.account_balance),
-              hintText: 'Organization Name '),
+              icon: Icon(Icons.account_balance), hintText: 'Organization Name'),
           validator: (value) {
             if (value!.isEmpty) {
               return "Name is required";
@@ -119,9 +122,9 @@ class _AddOrganizationPageState extends State<AddOrganizationPage> {
         final form = _formKey.currentState;
         if (form != null && form.validate()) {
           form.save();
-          final OrganizationEvent event = OrganizationCreate(
+          final OrganizationEvent event = OrganizationUpdate(
             Organization(
-              id: "",
+              id: widget.organization.id,
               name: _organization,
             ),
           );
@@ -133,7 +136,7 @@ class _AddOrganizationPageState extends State<AddOrganizationPage> {
           shadowColor: MaterialStateProperty.all(Colors.limeAccent),
           backgroundColor: MaterialStateProperty.all<Color>(Colors.teal)),
       child: Text(
-        "Add Organization",
+        "Edit Organization",
         style: TextStyle(color: Colors.white),
       ),
     );

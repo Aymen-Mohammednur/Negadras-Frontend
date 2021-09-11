@@ -8,14 +8,13 @@ class OrganizationDataProvider {
   //static final String _baseUrl = "http://localhost:3000/api/organization";
   // FOR EMULATOR
   // static final String _baseUrl = "http://10.0.2.2:3000/api/organization";
-  static final String _baseUrl = "${StringConstants.BASE_URL_EMULATOR}/organization";
+  static final String _baseUrl =
+      "${StringConstants.BASE_URL_EMULATOR}/organization";
 
-  Future<Organization> create(Organization organization) async {
+  Future<Organization> create(String userId, Organization organization) async {
     final http.Response response = await http.post(Uri.parse(_baseUrl),
         headers: <String, String>{"Content-Type": "application/json"},
-        body: jsonEncode({
-          "name": organization.name,
-        }));
+        body: jsonEncode({"name": organization.name, "userId": userId}));
 
     if (response.statusCode == 201) {
       return Organization.fromJson(jsonDecode(response.body));
@@ -24,15 +23,17 @@ class OrganizationDataProvider {
     }
   }
 
-  Future<List<Organization>> fetchAll() async {
+  Future<List<Organization>> fetchByUserId(String userId) async {
     // print("Inside data provider");
-    final response = await http.get(Uri.parse(_baseUrl));
+    final response = await http.get(Uri.parse("$_baseUrl/$userId"));
     // print(response.body);
     // print(response.statusCode);
 
     if (response.statusCode == 200) {
       final organization = jsonDecode(response.body) as List;
       return organization.map((c) => Organization.fromJson(c)).toList();
+    } else if (response.statusCode == 404) {
+      return [];
     } else {
       throw Exception("Failed to get Organization");
     }
@@ -49,10 +50,9 @@ class OrganizationDataProvider {
   }
 
   Future<Organization> update(String id, Organization organization) async {
-    final response = await http.put(Uri.parse("$_baseUrl/$id"),
+    final response = await http.patch(Uri.parse("$_baseUrl/$id"),
         headers: <String, String>{"Content-Type": "application/json"},
         body: jsonEncode({
-          "_id": id,
           "name": organization.name,
         }));
 

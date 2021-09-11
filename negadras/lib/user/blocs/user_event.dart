@@ -27,9 +27,10 @@ class UpdateUsername extends UserEvent {
 }
 
 class UpdatePassword extends UserEvent {
-  final String password;
+  final String newPassword;
+  final String oldPassword;
 
-  const UpdatePassword({required this.password});
+  const UpdatePassword({required this.oldPassword ,required this.newPassword});
 
   @override
   // List<Object> get props => [userId];
@@ -39,16 +40,17 @@ class UpdatePassword extends UserEvent {
 }
 
 class DeleteUser extends UserEvent {
-  final String userid;
+  final String password;
 
-  const DeleteUser(this.userid);
+  const DeleteUser(this.password);
+
+  // @override
+  // List<Object> get props => [userid];
 
   @override
-  List<Object> get props => [userid];
-
-  @override
-  toString() => 'User Deleted {user Id: $userid}';
+  toString() => 'User Deleted';
 }
+
 class UserSubmitted extends UserEvent {
   UserSubmitted();
 }

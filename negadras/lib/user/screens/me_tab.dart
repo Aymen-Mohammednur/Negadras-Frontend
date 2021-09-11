@@ -10,7 +10,8 @@ class MePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: bottomNav(context),
+        // bottomNavigationBar: bottomNav(context, 2),
+        bottomNavigationBar: ownerBottomNav(context, 3),
         body: SafeArea(
             child: Column(
           children: [
@@ -87,8 +88,10 @@ class MePage extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () => {
-                    context.router.popUntilRoot(),
-                    context.router.push(LoginRoute()),
+                    // context.router.popUntilRoot(),
+                    // context.router.push(LoginRoute()),
+                    context.router.pushAndPopUntil(LoginRoute(),
+                        predicate: (route) => false),
                   },
                   child: Card(
                     child: Column(

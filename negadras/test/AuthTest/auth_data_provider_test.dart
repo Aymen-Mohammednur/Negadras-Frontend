@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:negadras/auth/Constants/constants.dart';
+import 'package:negadras/auth/constants/constants.dart';
 import 'package:negadras/auth/data_providers/auth-data-provider.dart';
 import 'package:negadras/auth/models/models.dart';
 import 'package:negadras/auth/models/response/loginResponse.dart';

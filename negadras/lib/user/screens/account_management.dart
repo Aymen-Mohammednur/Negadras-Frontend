@@ -10,7 +10,8 @@ class AccountManagementPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: bottomNav(context),
+      // bottomNavigationBar: bottomNav(context, 2),
+      bottomNavigationBar: ownerBottomNav(context, 3),
       body: SafeArea(
           child: Column(
         children: [
@@ -68,7 +69,7 @@ class AccountManagementPage extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () => {},
+                onTap: () => {context.router.push(DeleteAccountRoute())},
                 child: Card(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -81,7 +82,6 @@ class AccountManagementPage extends StatelessWidget {
                   ),
                 ),
               ),
-              
             ],
           ),
         ],
