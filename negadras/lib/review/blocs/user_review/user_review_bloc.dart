@@ -35,6 +35,19 @@ class UserReviewBloc extends Bloc<UserReviewEvent, UserReviewState> {
       }
     } else if (event is ReviewFoundOnServer) {
       yield ReviewExist(event.review);
+    } else if (event is ReviewReset){
+      yield UserReviewInitial();
+    } else if (event is ReviewDelete){
+      yield TrashingReview();
+        try {
+          await reviewRepository.delete(event.businessId, event.userId);
+          yield UserReviewInitial();
+        } catch (_) {
+          yield UserReviewOperationFaliure();
+        }
+      // delete review here
+      
+      yield UserReviewInitial();
     } else {
       yield UserReviewOperationFaliure();
     }

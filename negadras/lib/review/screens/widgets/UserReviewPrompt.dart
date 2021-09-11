@@ -5,7 +5,11 @@ class UserReviewPromptClass {
   String userId;
   BuildContext context;
 
-  UserReviewPromptClass(this.context, this.businessId, this.userId);
+  UserReviewBloc? bloc;
+
+  UserReviewPromptClass(this.context, this.businessId, this.userId){
+    bloc = BlocProvider.of<UserReviewBloc>(context);
+  }
   Widget UserReviewPrompt() {
     UserReviewBloc bloc = BlocProvider.of<UserReviewBloc>(context);
     var state = bloc.state;
@@ -15,12 +19,78 @@ class UserReviewPromptClass {
       return _reviewPrompt(bloc);
     else if (state is ReviewSent) {
       // BlocProvider.of<ReviewBloc>(context).add(PageOpen(businessId, userId));
-      return reviewBox(state.r, 3);
+      return userReviewBox(state.r, 2);
     } else {
       print(state);
       return Container(child: Text("Unrecognized State"));
     }
+
+    
   }
+
+    Widget userReviewBox(review, i) {
+      var userReviewButtons = (i > 0
+          ? [
+              IconButton (
+              icon: const Icon(Icons.delete),
+              tooltip: 'Delete your review',
+              onPressed: () {
+                bloc!.add(ReviewDelete(businessId, userId));
+              },
+            ),
+              IconButton (
+              icon: const Icon(Icons.edit),
+              tooltip: 'Edit your review',
+              onPressed: () {
+                bloc!.add(ReviewReset());
+              },
+            ),
+            ]
+          : [Container()]);
+      
+      String name = (i == 2 ? "Your Review" : review.username);
+      String content = review.reviewText;
+      String rating = review.rating.toString();
+      // String? ownerReply = review["reply"];
+
+      return Padding(
+        padding: const EdgeInsets.only(top: 3, left: 10, right: 10),
+        child: Container(
+          // decoration: BoxDecoration(border: Border.all()),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Icon(Icons.face),
+                  ),
+                  Text(name),
+                  SizedBox(width: 5),
+                  Text(rating),
+                  Icon(Icons.star),
+                ],
+              ),
+              Container(
+                margin: EdgeInsets.all(10),
+                padding: EdgeInsets.all(10),
+                child: Text(content),
+                decoration: BoxDecoration(
+                  border: Border.all(),
+                ),
+                width: double.infinity,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                child: Row(
+                  children: userReviewButtons,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
 
   Widget _ratingPrompt(UserReviewBloc bloc) {
     return Padding(

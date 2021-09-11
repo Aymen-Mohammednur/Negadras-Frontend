@@ -22,8 +22,11 @@ class ReviewFoundOnServer extends UserReviewEvent {
   late Review review;
   ReviewFoundOnServer(this.review);
 }
+class ReviewReset extends UserReviewEvent{}
 
-// TODO edit this
-// class ReviewDelete extends UserReviewEvent{
-//   ReviewDelete(rating) : super(rating);
-// }
+
+class ReviewDelete extends UserReviewEvent{
+  late String businessId;
+  late String userId;
+  ReviewDelete(this.businessId, this.userId);
+}

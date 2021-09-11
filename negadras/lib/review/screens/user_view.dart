@@ -57,7 +57,7 @@ class UserViewPageState extends State<UserViewPage> {
               ] +
               [
                 BlocBuilder<ReviewBloc, ReviewState>(
-                  builder: (context, state) => handleUserReviewState(state),
+                  builder: (context, state) => handleReviewState(state),
                 ),
               ],
         ),
