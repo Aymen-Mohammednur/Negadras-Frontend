@@ -1,8 +1,8 @@
 body, html {
   margin:0;
   height:100%;
-  background: #003606;
-  background-image: url("img/light-background.png");
+  background:rgb(20, 40, 65);
+  background-image: url("img/negdraslogo.png");
   background-size: 100% 100%;
 }
 
@@ -36,8 +36,8 @@ body, html {
   body {
     margin:0;
     height:100%;
-    background: #003606;
-    background-image: url("img/dark-background.png");
+    background:rgb(20, 40, 65);
+    background-image: url("img/negdraslogo.png");
     background-size: 100% 100%;
   }
 }
