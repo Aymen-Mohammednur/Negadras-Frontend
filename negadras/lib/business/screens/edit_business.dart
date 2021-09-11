@@ -8,38 +8,46 @@ import 'package:negadras/business/models/business.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:negadras/business/screens/widgets/label.dart';
 
-class EditBusinessPage extends StatelessWidget {
-  const EditBusinessPage({Key? key}) : super(key: key);
+class EditBusinessPage extends StatefulWidget {
+  EditBusinessPage({Key? key, required this.business}) : super(key: key);
+  Business business;
 
   @override
+  _EditBusinessPageState createState() => _EditBusinessPageState();
+}
+
+class _EditBusinessPageState extends State<EditBusinessPage> {
+  @override
   Widget build(BuildContext context) {
-    return EditForm();
+    return EditForm(widget.business);
   }
 }
 
-class BusinessPhoto extends StatelessWidget {
-  const BusinessPhoto({Key? key}) : super(key: key);
+// class BusinessPhoto extends StatelessWidget {
+//   const BusinessPhoto({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('1.jpg'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       child: Column(
+//         children: [
+//           Container(
+//             decoration: BoxDecoration(
+//               image: DecorationImage(
+//                 image: AssetImage('1.jpg'),
+//                 fit: BoxFit.cover,
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 class EditForm extends StatefulWidget {
+  EditForm(this.business);
+  Business business;
   @override
   _EditFormState createState() => _EditFormState();
 }
@@ -106,7 +114,7 @@ class _EditFormState extends State<EditForm> {
 
   Widget _buildName() {
     return TextFormField(
-      initialValue: passedBusiness.name,
+      initialValue: widget.business.name,
       decoration: InputDecoration(labelText: "Name"),
       validator: (value) {
         if (value != null && value.isEmpty) {
@@ -224,7 +232,7 @@ class _EditFormState extends State<EditForm> {
     //       }
     //     });
     return TextFormField(
-      initialValue: passedBusiness.location,
+      initialValue: widget.business.location,
       decoration: InputDecoration(labelText: "Location"),
       keyboardType: TextInputType.phone,
       validator: (value) {

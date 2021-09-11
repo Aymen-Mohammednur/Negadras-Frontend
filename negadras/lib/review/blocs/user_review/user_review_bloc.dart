@@ -19,38 +19,44 @@ class UserReviewBloc extends Bloc<UserReviewEvent, UserReviewState> {
   Stream<UserReviewState> mapEventToState(
     UserReviewEvent event,
   ) async* {
+    if (event is InitialUser) {
+      yield UserReviewInitial();
+    }
+
     if (event is RatingAdd) {
       yield Rated(event.rating);
     } else if (event is ReviewAdd) {
       Review reviewToSend = _makeReviewObject(event);
-      // yield ReviewSent(reviewToSend);
       try {
         await reviewRepository.create(reviewToSend);
         // var allReviews = reviewRepository.fetchAll(reviewToSend.businessId);
+
         yield ReviewSent(reviewToSend);
         print("Review sent to server");
       } catch (_) {
         print("Review did not reach server");
+        print(_);
         yield UserReviewOperationFaliure();
       }
     } else if (event is ReviewFoundOnServer) {
       yield ReviewExist(event.review);
-    } else if (event is ReviewReset){
+    } else if (event is ReviewReset) {
       yield UserReviewInitial();
-    } else if (event is ReviewDelete){
+    } else if (event is ReviewDelete) {
       yield TrashingReview();
-        try {
-          await reviewRepository.delete(event.businessId, event.userId);
-          yield UserReviewInitial();
-        } catch (_) {
-          yield UserReviewOperationFaliure();
-        }
+      try {
+        await reviewRepository.delete(event.businessId, event.userId);
+        yield UserReviewInitial();
+      } catch (_) {
+        yield UserReviewOperationFaliure();
+      }
       // delete review here
-      
+
       yield UserReviewInitial();
-    } else {
-      yield UserReviewOperationFaliure();
     }
+    //else {
+    //   yield UserReviewOperationFaliure();
+    // }
   }
 
   Review _makeReviewObject(ReviewAdd event) => Review(

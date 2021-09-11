@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:negadras/business/models/business.dart';
 import 'package:negadras/business/screens/SimpleBarChart.dart';
 import 'dart:convert';
 import 'package:negadras/review/blocs/blocs.dart';
@@ -72,19 +73,17 @@ Widget imageStackWidget() {
   return Stack(
     alignment: Alignment(0, 0.85),
     children: [
-      Image.asset(
-        "images/placeholder-1.jpg",
-        height: 220,
-        fit: BoxFit.cover,
-      ),
       Padding(
         padding: const EdgeInsets.only(left: 10, right: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              "Business Name",
-              style: normalText(),
+            Padding(
+              padding: const EdgeInsets.only(top: 12.0),
+              child: Text(
+                "Business Name",
+                style: veryBigText(),
+              ),
             ),
             Text(
               "N⭐",
@@ -97,7 +96,10 @@ Widget imageStackWidget() {
   );
 }
 
-Widget iconPair({required IconData icon,required String displayString,Function()? action}) {
+Widget iconPair(
+    {required IconData icon,
+    required String displayString,
+    Function()? action}) {
   return GestureDetector(
     onTap: action ?? () {},
     child: Column(
@@ -124,16 +126,6 @@ Widget buttonPanelWidget(iconPairList) {
   return Padding(
     padding: const EdgeInsets.only(top: 10, bottom: 10),
     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      SizedBox(
-        height: 10,
-      ),
-      Padding(
-        padding: const EdgeInsets.only(left: 10),
-        child: Text(
-          "Organization Name",
-          style: normalText(),
-        ),
-      ),
       SizedBox(
         height: 10,
       ),
@@ -167,23 +159,19 @@ _allReviews(List r) {
 Widget reviewBox(review, i) {
   var userReviewButtons = (i > 0
       ? [
-          IconButton (
-          icon: const Icon(Icons.delete),
-          tooltip: 'Delete your review',
-          onPressed: (
-            
-          ) {},
-        ),
-          IconButton (
-          icon: const Icon(Icons.edit),
-          tooltip: 'Edit your review',
-          onPressed: () {
-
-          },
-        ),
+          IconButton(
+            icon: const Icon(Icons.delete),
+            tooltip: 'Delete your review',
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(Icons.edit),
+            tooltip: 'Edit your review',
+            onPressed: () {},
+          ),
         ]
       : [Container()]);
-  
+
   String name = (i == 2 ? "Your Review" : review.username);
   String content = review.reviewText;
   String rating = review.rating.toString();
@@ -237,14 +225,20 @@ Widget businessReviewList(reviewList) {
       });
 }
 
+Widget handleReviewState(state, context, businessId) {
+  print("STATEEEEEEEEEEEEEEEEEEe");
+  print(state);
 
-Widget handleReviewState(state) {
-
-  if (state is PageOpen) {
+  if (state is ReviewInitial) {
+    BlocProvider.of<ReviewBloc>(context).add(PageOpen(businessId, ""));
+  }
+  if (state is ReviewOperationFaliure) {
     return Container(
-      child: Center(child: Text("Loading Reviews...")),
+      child: Center(child: Text("Some error occured")),
     );
   } else if (state is ReviewPageLoaded) {
+    print("REVIEW LISTTT: ${state.reviewList}");
+    // if (state.businessId)
     return _allReviews(state.reviewList);
   } else {
     return Container(child: Text("Loading Reviews..."));
@@ -252,6 +246,8 @@ Widget handleReviewState(state) {
 }
 
 class IconTextPair {
+  String? url;
+  IconTextPair({this.url});
   Widget claim({String s = "Claim", Function()? todo}) =>
       iconPair(icon: Icons.add_circle, displayString: s, action: todo);
   Widget edit({String s = "Edit", Function()? todo}) =>

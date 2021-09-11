@@ -15,6 +15,8 @@ class ReviewPageLoaded extends ReviewState {
   ReviewPageLoaded(this.reviewList);
 }
 
+// class BusinessInitialState extends ReviewState {}
+
 class HasNotReviewed extends ReviewState {}
 
 class ReviewOperationFaliure extends ReviewState {}

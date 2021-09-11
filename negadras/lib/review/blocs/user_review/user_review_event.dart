@@ -12,6 +12,8 @@ class RatingAdd extends UserReviewEvent {
   RatingAdd(this.rating);
 }
 
+class InitialUser extends UserReviewEvent {}
+
 class ReviewAdd extends UserReviewEvent {
   late String businessId;
   late String userId;

@@ -119,7 +119,7 @@ class _ListOrganizationPageState extends State<ListOrganizationPage> {
         centerTitle: true,
       ),
       // bottomNavigationBar: bottomNav(context, 0),
-      bottomNavigationBar: ownerBottomNav(context, 2),
+      bottomNavigationBar: ownerBottomNav(context, 2) as Widget,
       body: BlocBuilder<OrganizationBloc, OrganizationState>(
         builder: (context, orgState) {
           print(orgState);

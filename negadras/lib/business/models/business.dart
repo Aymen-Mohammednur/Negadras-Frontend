@@ -9,6 +9,7 @@ class Business {
   final String? email;
   final String? organization;
   final bool? isFavorite;
+  final bool? isOwner;
 
   Business(
       {required this.id,
@@ -20,7 +21,8 @@ class Business {
       this.website,
       this.email,
       this.organization,
-      this.isFavorite});
+      this.isFavorite,
+      this.isOwner});
 
   factory Business.fromJson(Map<String, dynamic> json) {
     return Business(
@@ -33,6 +35,7 @@ class Business {
         website: json['website'],
         email: json['email'],
         organization: json['organizationId'],
-        isFavorite: json['isFavorite']);
+        isFavorite: json['isFavorite'],
+        isOwner: json['isOwner']);
   }
 }

@@ -1,12 +1,15 @@
 import 'dart:convert';
 import 'package:negadras/review/models/review.dart';
 import 'package:http/http.dart' as http;
+import 'package:negadras/auth/constants/constants.dart';
 
 class ReviewDataProvider {
-  static final String _baseUrl = "http://192.168.43.80:3000/api/review";
+  // static final String _baseUrl = "http://192.168.43.80:3000/api/review";
+  static final String _baseUrl = "${StringConstants.BASE_URL_EMULATOR}/review";
 
   Future<Review> create(Review review) async {
     print("Inside data provider");
+    print("review: ${review.userId}");
     final http.Response response = await http.post(Uri.parse(_baseUrl),
         headers: <String, String>{"Content-Type": "application/json"},
         body: jsonEncode({
@@ -26,7 +29,11 @@ class ReviewDataProvider {
 
   // Fetch all reviews for a business
   Future<List<Review>> fetchAll(String businessId) async {
+    print("Reached here");
     final response = await http.get(Uri.parse("$_baseUrl/$businessId"));
+    print("Response is here");
+    print("$_baseUrl/$businessId");
+    print(response.body);
     if (response.statusCode == 200) {
       final reviews = jsonDecode(response.body) as List;
       var a =
@@ -66,7 +73,8 @@ class ReviewDataProvider {
   }
 
   Future<void> delete(String businessId, String userId) async {
-    final response = await http.delete(Uri.parse("$_baseUrl/$businessId/$userId"));
+    final response =
+        await http.delete(Uri.parse("$_baseUrl/$businessId/$userId"));
     if (response.statusCode != 204) {
       throw Exception("Field to delete the review");
     }

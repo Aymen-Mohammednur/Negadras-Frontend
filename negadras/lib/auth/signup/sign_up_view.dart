@@ -256,7 +256,7 @@ class _SignUpPageState extends State<SignUpPage> {
         padding: EdgeInsets.only(bottom: 30),
         child: TextButton(
           onPressed: () {
-            context.router.push(HomeRoute());
+            context.router.push(LoginRoute());
           },
           child: Text(
             'Already have an account? Sign in.',

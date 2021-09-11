@@ -2,8 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:negadras/business/bloc/business_bloc.dart';
+import 'package:negadras/business/models/business.dart';
 import 'package:negadras/business/screens/widgets/circular_avatar.dart';
 import 'package:negadras/business/screens/widgets/star_rating.dart';
+import 'package:negadras/routes/router.gr.dart';
+import 'package:auto_route/auto_route.dart';
 
 class BusinessCard extends StatefulWidget {
   final String businessId;
@@ -12,6 +15,7 @@ class BusinessCard extends StatefulWidget {
   final String locationInfo;
   final String imagePath;
   bool isFavorite;
+  bool isOwner;
   final Function from;
   BusinessCard({
     Key? key,
@@ -22,6 +26,7 @@ class BusinessCard extends StatefulWidget {
     required this.imagePath,
     required this.from,
     this.isFavorite = false,
+    this.isOwner = false,
   }) : super(key: key);
 
   @override
@@ -100,30 +105,65 @@ class _BusinessCardState extends State<BusinessCard> {
               ),
             ),
             Spacer(),
-            GestureDetector(
-              onTap: () {
-                // widget.isFavorite = !widget.isFavorite;
-                // if (widget.isFavorite) {
-                //   businessBloc.add(AddToFavoritesEvent(widget.businessId));
-                // } else {
-                //   businessBloc.add(RemoveFromFavoritesEvent(widget.businessId));
-                // }
-                print("BUSINESS CARD IS CALLED FROM");
-                widget.from(_isFavorite);
-                setState(() {
-                  _isFavorite = !_isFavorite;
-                });
-              },
-              child: this._isFavorite
-                  ? Icon(
-                      Icons.favorite,
-                      color: Colors.red,
-                      size: 30,
-                    )
-                  : Icon(
-                      Icons.favorite_outline_outlined,
-                      size: 30,
-                    ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    // widget.isFavorite = !widget.isFavorite;
+                    // if (widget.isFavorite) {
+                    //   businessBloc.add(AddToFavoritesEvent(widget.businessId));
+                    // } else {
+                    //   businessBloc.add(RemoveFromFavoritesEvent(widget.businessId));
+                    // }
+                    print("BUSINESS CARD IS CALLED FROM");
+                    widget.from(_isFavorite);
+                    setState(() {
+                      _isFavorite = !_isFavorite;
+                    });
+                  },
+                  child: this._isFavorite
+                      ? Icon(
+                          Icons.favorite,
+                          color: Colors.red,
+                          size: 30,
+                        )
+                      : Icon(
+                          Icons.favorite_outline_outlined,
+                          size: 30,
+                        ),
+                ),
+                SizedBox(height: 5),
+                widget.isOwner
+                    ? GestureDetector(
+                        onTap: () {
+                          // widget.isFavorite = !widget.isFavorite;
+                          // if (widget.isFavorite) {
+                          //   businessBloc.add(AddToFavoritesEvent(widget.businessId));
+                          // } else {
+                          //   businessBloc.add(RemoveFromFavoritesEvent(widget.businessId));
+                          // }
+                          print("BUSINESS CARD IS CALLED FROM");
+                          // widget.from(_isFavorite);
+                          // setState(() {
+                          //   _isFavorite = !_isFavorite;
+                          // });
+                          Business business = new Business(
+                              id: widget.businessId,
+                              name: widget.businessName,
+                              categoryId: "widget.categoryId",
+                              location: widget.locationInfo,
+                              avgRating: 2.5);
+                          context.router
+                              .push(EditBusinessRoute(business: business));
+                        },
+                        child: Icon(
+                          Icons.edit,
+                          color: Colors.red,
+                          size: 30,
+                        ))
+                    : Text("N/A"),
+              ],
             ),
             Spacer(),
             CircularAvatar(imagePath: widget.imagePath),

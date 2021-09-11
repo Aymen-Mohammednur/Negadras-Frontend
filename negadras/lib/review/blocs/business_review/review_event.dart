@@ -12,3 +12,6 @@ class PageOpen extends ReviewEvent {
   String userId;
   PageOpen(this.businessId, this.userId);
 }
+
+
+class NormalReviewEvent extends ReviewEvent{}

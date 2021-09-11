@@ -1,39 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:negadras/app.dart';
 // import 'package:negadras/business/screens/favorites.dart';
 // import 'package:negadras/business/screens/my_business.dart';
 import 'package:negadras/review/screens/widgets.dart';
 import 'package:negadras/review/blocs/blocs.dart';
 import 'package:negadras/review/screens/widgets/widgets.dart';
+import 'package:negadras/user/data_providers/data_providers.dart';
+import 'package:negadras/user/repository/user_repository.dart';
 import 'package:negadras/user/screens/me_tab.dart';
 import 'package:negadras/utils/bottom_nav_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
 // import 'package:negadras/review/scre'
 
 class UserViewPage extends StatefulWidget {
-  const UserViewPage({Key? key}) : super(key: key);
+  // const UserViewPage({Key? key}) : super(key: key);
 
   // const UserViewPage(this.businessId, this.userId, {Key? key}) : super(key: key);
   // final String businessId;
   // final String userId;
 
+  const UserViewPage(this.businessId, {Key? key}) : super(key: key);
+  final String businessId;
+  final String userId = "";
+
   @override
-  UserViewPageState createState() {
-    UserViewPageState s = UserViewPageState();
-    s.businessId = "6139de58b8c03ed2137941fc";
-    s.userId = "";
-    return s;
-  }
+  UserViewPageState createState() => UserViewPageState();
 }
 
 class UserViewPageState extends State<UserViewPage> {
+  @override
+  void initState() {
+    print("In init state");
+    Future.delayed(Duration.zero).then((value) {
+      ReviewBloc reviewBloc = BlocProvider.of<ReviewBloc>(context);
+      UserReviewBloc userReviewBloc = BlocProvider.of<UserReviewBloc>(context);
+      reviewBloc.add(NormalReviewEvent());
+      userReviewBloc.add(InitialUser());
+      print(widget.businessId);
+    });
+    print("before super.init");
+    super.initState();
+  }
+
   late String businessId;
   late String userId;
+  late String businessUrl;
+  late String businessPhone;
   bool _floatingActionIsVisible = false;
   @override
   Widget build(BuildContext context) {
     var _scrollController = ScrollController();
-    BlocProvider.of<ReviewBloc>(context).add(PageOpen(businessId, userId));
+    BlocProvider.of<ReviewBloc>(context).add(PageOpen(widget.businessId, ""));
+    DataBloc bloc = BlocProvider.of<DataBloc>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Business Details"),
@@ -45,19 +65,33 @@ class UserViewPageState extends State<UserViewPage> {
           children: [
                 imageStackWidget(),
                 buttonPanelWidget([
-                  IconTextPair().call(),
-                  IconTextPair().website(),
-                  IconTextPair().claim()
+                  IconTextPair().call(todo: () {
+                    launch("tel://123123");
+                  }),
+                  IconTextPair().website(todo: () {
+                    launch("https://$businessUrl");
+                  }),
+                  // IconTextPair().claim()
+                  IconButton(
+                      onPressed: () {
+                        UserDataProvider userDataProvider = UserDataProvider();
+                        UserRepository userRepository =
+                            UserRepository(dataProvider: userDataProvider);
+                        userRepository.makeClaim(bloc.state.userId, widget.businessId);
+                        print("CLAIMEDDDDDDDDDDD");
+                      },
+                      icon: Icon(Icons.add_circle))
                 ]),
                 BlocBuilder<UserReviewBloc, UserReviewState>(
                   builder: (context, state) =>
-                      UserReviewPromptClass(context, businessId, userId)
+                      UserReviewPromptClass(context, widget.businessId, "")
                           .UserReviewPrompt(),
                 ),
               ] +
               [
                 BlocBuilder<ReviewBloc, ReviewState>(
-                  builder: (context, state) => handleReviewState(state),
+                  builder: (context, state) =>
+                      handleReviewState(state, context, widget.businessId),
                 ),
               ],
         ),

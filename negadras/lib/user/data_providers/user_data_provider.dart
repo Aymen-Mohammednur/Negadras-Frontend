@@ -61,4 +61,18 @@ class UserDataProvider {
       throw Exception("Field to delete the user");
     }
   }
+
+  Future<void> makeClaim(String userId, String businessId) async {
+    final response = await http.post(Uri.parse("$_baseUrl/claim"),
+        headers: <String, String>{"Content-Type": "application/json"},
+        body: jsonEncode({
+          "userId": userId,
+          "businessId": businessId
+          // "role": user.role,
+        }));
+    
+    if (response.statusCode == 404) {
+      throw Exception("Field to clai the user");
+    }
+  }
 }

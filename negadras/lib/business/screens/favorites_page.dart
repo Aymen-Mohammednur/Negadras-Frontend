@@ -34,7 +34,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
     return Scaffold(
       backgroundColor: Color.fromRGBO(20, 40, 65, 1),
       // bottomNavigationBar: bottomNav(context, 1),
-      bottomNavigationBar: ownerBottomNav(context, 1),
+      bottomNavigationBar: ownerBottomNav(context, 1) as Widget,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

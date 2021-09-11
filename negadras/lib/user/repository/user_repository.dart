@@ -29,4 +29,8 @@ class UserRepository {
     final id = await prefs.getString("user_id");
     this.dataProvider.delete(id as String, password);
   }
+
+  Future<void> makeClaim(String userId, String businessId) async {
+    this.dataProvider.makeClaim(userId, businessId);
+  }
 }
