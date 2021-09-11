@@ -28,7 +28,9 @@ class _EditOrganizationPageState extends State<EditOrganizationPage> {
     // print(organization);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Edit Organization"),
+        backgroundColor: Color.fromRGBO(20, 40, 65, 1),
+        title: Text("Edit Organization",
+            style: TextStyle(color: Colors.amberAccent)),
         centerTitle: true,
       ),
       body: Stack(
@@ -132,9 +134,10 @@ class _EditOrganizationPageState extends State<EditOrganizationPage> {
           context.router.popAndPush(ListOrganizationRoute());
         }
       },
-      style: ButtonStyle(
-          shadowColor: MaterialStateProperty.all(Colors.limeAccent),
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.teal)),
+      style: ElevatedButton.styleFrom(
+        primary: Color.fromRGBO(20, 40, 65, 1),
+        minimumSize: Size(150, 35),
+      ),
       child: Text(
         "Edit Organization",
         style: TextStyle(color: Colors.white),

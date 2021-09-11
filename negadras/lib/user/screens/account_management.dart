@@ -10,6 +10,17 @@ class AccountManagementPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Color.fromRGBO(20, 40, 65, 1), //change your color here
+        ),
+        backgroundColor: Colors.amberAccent,
+        title: Text(
+          "Account",
+          style: TextStyle(color: Color.fromRGBO(20, 40, 65, 1)),
+        ),
+        centerTitle: true,
+      ),
       backgroundColor: Color.fromRGBO(20, 40, 65, 1),
       // bottomNavigationBar: bottomNav(context, 2),
       bottomNavigationBar: ownerBottomNav(context, 3) as Widget,

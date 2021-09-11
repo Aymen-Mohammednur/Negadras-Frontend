@@ -30,7 +30,8 @@ class _HomePageState extends State<HomePage> {
                   //     categoryId: categories.elementAt(index).id));
 
                   context.router.push(FilterBusinessRoute(
-                      categoryId: categories.elementAt(index).id));
+                      categoryId: categories.elementAt(index).id,
+                      categoryName: categories.elementAt(index).name));
                 },
                 onDoubleTap: () => setText(""),
                 child: _businessTypeContainer(index, categories));
@@ -41,7 +42,11 @@ class _HomePageState extends State<HomePage> {
   Container _businessTypeContainer(int index, Iterable categories) {
     return Container(
         decoration: gridItemDecoration(),
-        child: Center(child: Text('${categories.elementAt(index).name}')),
+        child: Center(
+            child: Text(
+          '${categories.elementAt(index).name}',
+          style: TextStyle(color: Colors.amberAccent),
+        )),
         margin: EdgeInsets.all(10));
   }
 
@@ -56,9 +61,13 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final categoryBloc = BlocProvider.of<CategoryBloc>(context);
     return Scaffold(
+      backgroundColor: Color.fromRGBO(20, 40, 65, 1),
       appBar: AppBar(
-        backgroundColor: Colors.green.shade900,
-        title: Text("Negadras"),
+        backgroundColor: Colors.amberAccent,
+        title: Text(
+          "Negadras",
+          style: TextStyle(color: Color.fromRGBO(20, 40, 65, 1)),
+        ),
         centerTitle: true,
       ),
       body: BlocBuilder<CategoryBloc, CategoryState>(
@@ -108,8 +117,11 @@ class _HomePageState extends State<HomePage> {
           context.router.push(AddBusinessRoute());
         },
         tooltip: 'Increment',
-        child: Icon(Icons.add),
-        backgroundColor: Colors.green.shade900,
+        child: Icon(
+          Icons.add,
+          color: Color.fromRGBO(20, 40, 65, 1),
+        ),
+        backgroundColor: Colors.amberAccent,
       ),
       // bottomNavigationBar: bottomNav(context, 0),
       bottomNavigationBar: ownerBottomNav(context, 0),

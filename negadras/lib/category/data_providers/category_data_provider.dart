@@ -5,7 +5,7 @@ import 'package:negadras/category/models/category.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CategoryDataProvider {
-  static final String _baseUrl = "${StringConstants.BASE_URL_DEVICE}/category";
+  static final String _baseUrl = "${StringConstants.BASE_URL_EMULATOR}/category";
 
   Future<Category> create(Category category) async {
     SharedPreferences pref = await SharedPreferences.getInstance();

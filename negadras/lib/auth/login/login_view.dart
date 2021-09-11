@@ -21,6 +21,17 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  @override
+  void initState() {
+    print("In init state");
+    Future.delayed(Duration.zero).then((value) {
+      LoginBloc loginBloc = BlocProvider.of<LoginBloc>(context);
+      loginBloc.add(InitialLogin());
+    });
+    print("before super.init");
+    super.initState();
+  }
+
   final _formKey = GlobalKey<FormState>();
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 

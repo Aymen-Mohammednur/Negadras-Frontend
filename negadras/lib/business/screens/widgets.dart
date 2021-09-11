@@ -8,6 +8,7 @@ import 'dart:convert';
 TextStyle normalText() {
   return TextStyle(
     fontSize: 24,
+    color: Colors.amberAccent,
   );
 }
 
@@ -44,7 +45,7 @@ BoxDecoration listItemDecoration() {
 
 BoxDecoration gridItemDecoration() {
   return BoxDecoration(
-    border: Border.all(),
+    border: Border.all(color: Colors.amberAccent),
     borderRadius: BorderRadius.all(Radius.circular(10)),
   );
 }

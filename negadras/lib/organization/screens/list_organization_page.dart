@@ -68,7 +68,8 @@ class _ListOrganizationPageState extends State<ListOrganizationPage> {
                     Expanded(
                       flex: 1,
                       child: IconButton(
-                        icon: Icon(Icons.edit, color: Colors.green.shade900),
+                        icon: Icon(Icons.edit,
+                            color: Color.fromRGBO(20, 40, 65, 1)),
                         onPressed: () => {
                           context.router.popAndPush(
                               EditOrganizationRoute(organization: orgs[i]))
@@ -78,7 +79,8 @@ class _ListOrganizationPageState extends State<ListOrganizationPage> {
                     Expanded(
                       flex: 1,
                       child: IconButton(
-                        icon: Icon(Icons.delete, color: Colors.green.shade900),
+                        icon: Icon(Icons.delete,
+                            color: Color.fromRGBO(20, 40, 65, 1)),
                         onPressed: () => {
                           BlocProvider.of<OrganizationBloc>(context)
                               .add(OrganizationDelete(orgs[i].id)),
@@ -107,8 +109,12 @@ class _ListOrganizationPageState extends State<ListOrganizationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Your Organizations"),
+        title: Text(
+          "My Organizations",
+          style: TextStyle(color: Colors.amberAccent),
+        ),
         centerTitle: true,
+        backgroundColor: Color.fromRGBO(20, 40, 65, 1),
       ),
       // bottomNavigationBar: bottomNav(context, 0),
       bottomNavigationBar: ownerBottomNav(context, 2) as Widget,
@@ -128,7 +134,10 @@ class _ListOrganizationPageState extends State<ListOrganizationPage> {
             return Center(
               child: Column(
                 children: [
-                  switchButton,
+                  // switchButton,
+                  SizedBox(
+                    height: 15,
+                  ),
                   Expanded(
                     child: Container(
                       child: getListView(orgState.organizations),
@@ -150,7 +159,7 @@ class _ListOrganizationPageState extends State<ListOrganizationPage> {
         },
         tooltip: 'Increment',
         child: Icon(Icons.add),
-        backgroundColor: Colors.green.shade900,
+        backgroundColor: Color.fromRGBO(20, 40, 65, 1),
       ),
     );
   }

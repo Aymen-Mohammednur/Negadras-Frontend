@@ -14,6 +14,14 @@ class MePage extends StatelessWidget {
     DataBloc bloc = BlocProvider.of<DataBloc>(context);
 
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.amberAccent,
+          title: Text(
+            "Me",
+            style: TextStyle(color: Color.fromRGBO(20, 40, 65, 1)),
+          ),
+          centerTitle: true,
+        ),
         backgroundColor: Color.fromRGBO(20, 40, 65, 1),
         // bottomNavigationBar: bottomNav(context, 2),
         bottomNavigationBar: ownerBottomNav(context, 3) as Widget,
