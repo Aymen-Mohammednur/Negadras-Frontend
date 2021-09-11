@@ -23,20 +23,20 @@ class MyBusinessPage extends StatelessWidget {
                 fontSize: 20,
               ),
             ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, i) {
-                  return BusinessCard(
-                    businessId: "kaldi's id",
-                    businessName: 'Kaldi\'s Coffee',
-                    rating: 2.5,
-                    locationInfo: '103 Bole Street, Cameroon Ave',
-                    imagePath: 'assets/images/macbook.jpg',
-                  );
-                },
-              ),
-            ),
+            // Expanded(
+            //   child: ListView.builder(
+            //     itemCount: 10,
+            //     itemBuilder: (context, i) {
+            //       return BusinessCard(
+            //         businessId: "kaldi's id",
+            //         businessName: 'Kaldi\'s Coffee',
+            //         rating: 2.5,
+            //         locationInfo: '103 Bole Street, Cameroon Ave',
+            //         imagePath: 'assets/images/macbook.jpg',
+            //       );
+            //     },
+            //   ),
+            // ),
           ],
         ),
       ),

@@ -16,7 +16,7 @@ class SearchBusinessPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SearchBar(),
+            SearchBar(),
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
@@ -25,20 +25,20 @@ class SearchBusinessPage extends StatelessWidget {
                 fontStyle: FontStyle.italic,
               ),
             ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 0,
-                itemBuilder: (context, i) {
-                  return BusinessCard(
-                    businessId: 'Kaldi\'s id',
-                    businessName: 'Kaldi\'s Coffee',
-                    rating: 2.5,
-                    locationInfo: '103 Bole Street, Cameroon Ave',
-                    imagePath: 'assets/images/hacker.jpeg',
-                  );
-                },
-              ),
-            ),
+            // Expanded(
+            //   child: ListView.builder(
+            //     itemCount: 0,
+            //     itemBuilder: (context, i) {
+            //       return BusinessCard(
+            //         businessId: 'Kaldi\'s id',
+            //         businessName: 'Kaldi\'s Coffee',
+            //         rating: 2.5,
+            //         locationInfo: '103 Bole Street, Cameroon Ave',
+            //         imagePath: 'assets/images/hacker.jpeg',
+            //       );
+            //     },
+            //   ),
+            // ),
           ],
         ),
       ),

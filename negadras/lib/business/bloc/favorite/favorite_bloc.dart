@@ -1,0 +1,51 @@
+import 'dart:async';
+import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:bloc/bloc.dart';
+import 'package:negadras/business/models/models.dart';
+import 'package:negadras/business/repository/buisness_repository.dart';
+
+part 'favorite_event.dart';
+part 'favorite_state.dart';
+
+class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
+  final BusinessRepository businessRepository;
+
+  FavoriteBloc({required this.businessRepository})
+      : super(FavoriteInitial());
+
+  @override
+  Stream<FavoriteState> mapEventToState(
+    FavoriteEvent event,
+  ) async* {
+    
+
+    if (event is ShowFavoritesEvent) {
+      yield FetchingState();
+      try {
+
+        // //Granted a working repo and data provider
+        final businessList = await businessRepository.fetchFavorites();
+        if (businessList.length == 0) {
+          yield NoFavoriteState();
+        }
+
+        yield FavoriteSuccess(businessList);
+      } catch (e) {
+        print("$e +++++++++ FETCH FAV ERROR");
+        yield FavoriteFailure();
+      }
+    }
+
+    // if (event is AddToFavoritesEvent) {
+    //   await businessRepository.addToFavorites(event.businessId);
+    // }
+
+    if (event is RemoveFromFavoritesEvent) {
+      await businessRepository.removeFromFavorites(event.businessId);
+      final businessList = await businessRepository.fetchFavorites();
+      yield FavoriteSuccess(businessList);
+    }
+  }
+}

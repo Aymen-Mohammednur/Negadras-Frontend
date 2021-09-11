@@ -12,6 +12,7 @@ class BusinessCard extends StatefulWidget {
   final String locationInfo;
   final String imagePath;
   bool isFavorite;
+  final Function from;
   BusinessCard({
     Key? key,
     required this.businessId,
@@ -19,6 +20,7 @@ class BusinessCard extends StatefulWidget {
     required this.rating,
     required this.locationInfo,
     required this.imagePath,
+    required this.from,
     this.isFavorite = false,
   }) : super(key: key);
 
@@ -27,6 +29,14 @@ class BusinessCard extends StatefulWidget {
 }
 
 class _BusinessCardState extends State<BusinessCard> {
+  late bool _isFavorite;
+
+  @override
+  void initState() {
+    super.initState();
+    _isFavorite = widget.isFavorite;
+  }
+
   @override
   Widget build(BuildContext context) {
     final businessBloc = BlocProvider.of<BusinessBloc>(context);
@@ -72,15 +82,20 @@ class _BusinessCardState extends State<BusinessCard> {
             Spacer(),
             GestureDetector(
               onTap: () {
-                widget.isFavorite = !widget.isFavorite;
-                if (widget.isFavorite) {
-                  businessBloc.add(AddToFavoritesEvent(widget.businessId));
-                } else {
-                  businessBloc.add(RemoveFromFavoritesEvent(widget.businessId));
-                }
-                setState(() {});
+                // widget.isFavorite = !widget.isFavorite;
+                // if (widget.isFavorite) {
+                //   businessBloc.add(AddToFavoritesEvent(widget.businessId));
+                // } else {
+                //   businessBloc.add(RemoveFromFavoritesEvent(widget.businessId));
+                // }
+                print("BUSINESS CARD IS CALLED FROM");
+                widget.from(_isFavorite);
+                setState(() {
+                  _isFavorite = !_isFavorite;
+                  
+                });
               },
-              child: widget.isFavorite
+              child: this._isFavorite
                   ? Icon(
                       Icons.favorite,
                       color: Colors.red,

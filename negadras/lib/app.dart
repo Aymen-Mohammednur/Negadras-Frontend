@@ -9,6 +9,7 @@ import 'package:negadras/auth/login/bloc/login_bloc.dart';
 import 'package:negadras/auth/repository/auth_repository.dart';
 import 'package:negadras/auth/signup/bloc/sign_up_bloc.dart';
 import 'package:negadras/business/bloc/business_bloc.dart';
+import 'package:negadras/business/bloc/favorite/favorite_bloc.dart';
 import 'package:negadras/category/blocs/category_bloc.dart';
 import 'package:negadras/organization/bloc/organization_bloc.dart';
 import 'package:negadras/organization/data_providers/organization_data_provider.dart';
@@ -57,6 +58,7 @@ class App extends StatelessWidget {
             create: (context) => ReviewBloc(reviewRepository)),
         BlocProvider<UserReviewBloc>(
             create: (context) => UserReviewBloc(reviewRepository)),
+        BlocProvider<FavoriteBloc>(create: (context) => FavoriteBloc(businessRepository: businessRepository)..add(ShowFavoritesEvent()))
         // BlocProvider<OrganizationBloc>(create: (context) => OrganizationBloc(organizationRepository: organizationRepository));
       ],
       child: MaterialApp.router(

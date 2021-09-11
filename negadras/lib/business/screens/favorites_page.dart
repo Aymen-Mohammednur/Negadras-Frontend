@@ -1,17 +1,36 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:negadras/business/bloc/business_bloc.dart';
+// import 'package:negadras/business/bloc/business_bloc.dart';
+import 'package:negadras/business/bloc/favorite/favorite_bloc.dart';
 import 'package:negadras/business/screens/widgets/business_card.dart';
 import 'package:negadras/business/screens/widgets/label.dart';
+import 'package:negadras/routes/router.gr.dart';
 import 'package:negadras/utils/bottom_nav_bar.dart';
+import 'package:auto_route/auto_route.dart';
 
-class FavoritesPage extends StatelessWidget {
+class FavoritesPage extends StatefulWidget {
   const FavoritesPage({Key? key}) : super(key: key);
 
   @override
+  _FavoritesPageState createState() => _FavoritesPageState();
+}
+
+class _FavoritesPageState extends State<FavoritesPage> {
+  @override
+  void initState() {
+    print("In init state");
+    Future.delayed(Duration.zero).then((value) {
+      FavoriteBloc favoriteBloc = BlocProvider.of<FavoriteBloc>(context);
+      favoriteBloc.add(ShowFavoritesEvent());
+    });
+    print("before super.init");
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final businessBloc = BlocProvider.of<BusinessBloc>(context);
+    final favoriteBloc = BlocProvider.of<FavoriteBloc>(context);
     return Scaffold(
       // bottomNavigationBar: bottomNav(context, 1),
       bottomNavigationBar: ownerBottomNav(context, 1),
@@ -29,38 +48,50 @@ class FavoritesPage extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: BlocBuilder<BusinessBloc, BusinessState>(
-                builder: (context, businessState) {
-                  if (businessState is BusinessInitialState) {
-                    businessBloc.add(ShowFavoritesEvent());
+              child: BlocBuilder<FavoriteBloc, FavoriteState>(
+                builder: (context, state) {
+                  if (state is FavoriteInitial) {
+                    favoriteBloc.add(ShowFavoritesEvent());
                   }
 
-                  if (businessState is BusinessFetchResultState) {
+                  if (state is NoFavoriteState) {
+                    return Center(
+                      child: Text("You have no favorite businesses"),
+                    );
+                  }
+
+                  if (state is FavoriteSuccess) {
                     return ListView.builder(
-                      itemCount: businessState.businessList.length,
+                      itemCount: state.businessList.length,
                       itemBuilder: (context, i) {
                         return GestureDetector(
                           onTap: () {
-                            businessBloc.add(LoadBusinessEvent(
-                                businessId: businessState.businessList[i].id));
+                            // favoriteBloc.add(RemoveFromFavoritesEvent(
+                            //     state.businessList[i].id));
+                            // context.router.popAndPush(FavoritesRoute());
                           },
                           child: BusinessCard(
-                            businessId: businessState.businessList[i].id,
-                            businessName: businessState.businessList[i].name,
+                            from: (_) {
+                              favoriteBloc.add(RemoveFromFavoritesEvent(
+                                  state.businessList[i].id));
+                              context.router.popAndPush(FavoritesRoute());
+                            },
+                            businessId: state.businessList[i].id,
+                            businessName: state.businessList[i].name,
                             rating:
                                 2.5, //Get the review repo and pass the business id
-                            locationInfo:
-                                businessState.businessList[i].location,
+                            locationInfo: state.businessList[i].location,
                             imagePath: 'assets/images/macbook.jpg',
-                            isFavorite: businessState.businessList[i].isFavorite
-                                as bool,
+                            isFavorite:
+                                state.businessList[i].isFavorite as bool,
                           ),
                         );
                       },
                     );
                   }
 
-                  if (businessState is BusinessOperationFailure) {
+                  if (state is FavoriteFailure) {
+                    // businessBloc.add(NormalBusinessEvent());
                     return Center(
                       child: Text("Failed to retrieve Favorites"),
                     );

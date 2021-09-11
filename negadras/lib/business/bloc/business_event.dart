@@ -12,7 +12,12 @@ class LoadBusinessEvent extends BusinessEvent {
   LoadBusinessEvent({required this.businessId});
 }
 
-class SearchBusinessEvent extends BusinessEvent {}
+class SearchBusinessEvent extends BusinessEvent {
+  String queryParameter;
+  String categoryId;
+
+  SearchBusinessEvent( this.categoryId, this.queryParameter);
+}
 
 class FilterBusinessEvent extends BusinessEvent {
   String? categoryId;
@@ -59,7 +64,7 @@ class DeleteBusiness extends BusinessEvent {
 
 class AddBusinessToFavoritesEvent extends BusinessEvent {}
 
-class ShowFavoritesEvent extends BusinessEvent {}
+// class ShowFavoritesEvent extends BusinessEvent {}
 
 class AddToFavoritesEvent extends BusinessEvent {
   final String businessId;

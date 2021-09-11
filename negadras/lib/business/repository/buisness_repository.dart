@@ -19,6 +19,13 @@ class BusinessRepository {
     return this.dataProvider.fetch();
   }
 
+  Future<List<Business>> fetchForSearch(String queryParameter, String? categoryId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    final userId = await prefs.getString("user_id");
+    return this.dataProvider.fetchForSearch(queryParameter,categoryId, userId);
+  }
+
   Future<Business> fetchOne(String id) async {
     return this.dataProvider.fetchOne(id);
   }
@@ -35,12 +42,12 @@ class BusinessRepository {
     this.dataProvider.delete(id);
   }
 
-  Future<void> fetchFavorites() async{
+  Future<List<Business>> fetchFavorites() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     final userId = await prefs.getString("user_id") as String;
 
-    this.dataProvider.fetchFavorites(userId);
+    return this.dataProvider.fetchFavorites(userId);
   }
 
   Future<void> addToFavorites(
