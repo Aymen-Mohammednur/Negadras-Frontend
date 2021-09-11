@@ -128,15 +128,17 @@ class _FilterBusinessPageState extends State<FilterBusinessPage> {
                               //     businessId:
                               //         businessState.businessList[i].id));
                               context.router.push(UserViewRoute(
-                                  businessId:
-                                      businessState.businessList[i].id,
-                                businessName:businessState.businessList[i].name,
-                                businessPhone:businessState.businessList[i].phoneNumber as String,
-                                businessWeb:businessState.businessList[i].website as String
-                              ));
+                                  businessId: businessState.businessList[i].id,
+                                  businessName:
+                                      businessState.businessList[i].name,
+                                  businessPhone: businessState
+                                      .businessList[i].phoneNumber as String,
+                                  businessWeb: businessState
+                                      .businessList[i].website as String));
                             },
                             child: BusinessCard(
-                              categoryId: businessState.businessList[i].categoryId,
+                              categoryId:
+                                  businessState.businessList[i].categoryId,
                               isOwner:
                                   businessState.businessList[i].isOwner as bool,
                               from: (_isFavorite) {
@@ -180,7 +182,7 @@ class _FilterBusinessPageState extends State<FilterBusinessPage> {
                           style: TextStyle(
                               fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.w500,
-                              fontSize: 16,
+                              fontSize: 18,
                               color: Colors.amberAccent),
                         ),
                       ),

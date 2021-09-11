@@ -129,7 +129,7 @@ class _ListOrganizationPageState extends State<ListOrganizationPage> {
               "Could not fetch organizations.",
               style: TextStyle(
                   fontWeight: FontWeight.w500,
-                  fontSize: 20,
+                  fontSize: 18,
                   color: Colors.amberAccent),
             ));
           }
@@ -140,7 +140,7 @@ class _ListOrganizationPageState extends State<ListOrganizationPage> {
               "You have no organizations. Click the '+' button to add one.",
               style: TextStyle(
                   fontWeight: FontWeight.w500,
-                  fontSize: 30,
+                  fontSize: 18,
                   color: Colors.amberAccent),
             ));
           }

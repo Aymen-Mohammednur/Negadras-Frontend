@@ -68,7 +68,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                         "You have no favorite businesses",
                         style: TextStyle(
                             fontWeight: FontWeight.w500,
-                            fontSize: 30,
+                            fontSize: 18,
                             color: Colors.amberAccent),
                       ),
                     );
@@ -111,7 +111,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                         "Failed to retrieve Favorites",
                         style: TextStyle(
                             fontWeight: FontWeight.w500,
-                            fontSize: 20,
+                            fontSize: 18,
                             color: Colors.amberAccent),
                       ),
                     );

@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                 "Could not do category operation",
                 style: TextStyle(
                     fontWeight: FontWeight.w500,
-                    fontSize: 30,
+                    fontSize: 18,
                     color: Colors.amberAccent),
               ),
             );
