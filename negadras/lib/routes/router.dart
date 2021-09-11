@@ -1,5 +1,6 @@
 import 'package:auto_route/annotations.dart';
 import 'package:negadras/auth/login/login_view.dart';
+import 'package:negadras/auth/signup/get_started.dart';
 import 'package:negadras/auth/signup/sign_up_view.dart';
 import 'package:negadras/business/screens/add_business.dart';
 import 'package:negadras/business/screens/business_owner_view.dart';
@@ -23,6 +24,7 @@ import 'package:negadras/user/screens/me_tab.dart';
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
     AutoRoute(page: HomePage),
+    AutoRoute(page: GetStartedPage, initial: true),
     AutoRoute(page: FilterBusinessPage),
     AutoRoute(page: SearchBusinessPage),
     AutoRoute(page: FavoritesPage),
@@ -30,7 +32,7 @@ import 'package:negadras/user/screens/me_tab.dart';
     AutoRoute(page: AccountManagementPage),
     AutoRoute(page: MyBusinessPage),
     AutoRoute(page: UserViewPage),
-    AutoRoute(page: SignUpPage, initial: true),
+    AutoRoute(page: SignUpPage),
     AutoRoute(page: LoginPage),
     AutoRoute(page: DeleteAccountPage),
     AutoRoute(page: ChangeUsernamePage),
