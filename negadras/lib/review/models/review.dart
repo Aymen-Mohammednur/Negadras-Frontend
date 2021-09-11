@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class Review {
-  final String userId;
+  late String userId;
   final String id;
   final String businessId;
   final int rating;

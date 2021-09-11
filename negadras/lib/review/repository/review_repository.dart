@@ -1,5 +1,6 @@
 import 'package:negadras/review/data_providers/review_data_provider.dart';
 import 'package:negadras/review/models/review.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ReviewRepository {
   final ReviewDataProvider dataProvider;
@@ -7,6 +8,10 @@ class ReviewRepository {
 
   Future<Review> create(Review review) async {
     print("Inside repository");
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String userId = pref.getString("userId") as String;
+    review.userId = userId;
+
     return this.dataProvider.create(review);
   }
 
@@ -23,6 +28,8 @@ class ReviewRepository {
   }
 
   Future<void> delete(String businessId, String userId) async {
-    this.dataProvider.delete(businessId, userId);
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String suserId = pref.getString("userId") as String;
+    this.dataProvider.delete(businessId, suserId);
   }
 }
