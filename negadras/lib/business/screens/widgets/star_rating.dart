@@ -19,7 +19,7 @@ class StarRating extends StatelessWidget {
     if (index >= rating) {
       icon = Icon(
         Icons.star_border,
-        color: Colors.blue,
+        color: Colors.amberAccent,
       );
     } else if (index > rating - 1 && index < rating) {
       icon = Icon(

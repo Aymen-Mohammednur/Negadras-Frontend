@@ -13,6 +13,7 @@ import 'package:negadras/organization/screens/add_organization.dart';
 import 'package:negadras/organization/screens/edit_organization.dart';
 import 'package:negadras/organization/screens/list_organization_page.dart';
 import 'package:negadras/review/screens/user_view.dart';
+// import 'package:negadras/start.dart';
 import 'package:negadras/user/screens/account_management.dart';
 import 'package:negadras/user/screens/changepassword.dart';
 import 'package:negadras/user/screens/changeusername.dart';
@@ -40,7 +41,8 @@ import 'package:negadras/user/screens/me_tab.dart';
     AutoRoute(page: AddOrganizationPage),
     AutoRoute(page: ListOrganizationPage),
     AutoRoute(page: BusinessOwnerViewPage),
-    AutoRoute(page: EditOrganizationPage)
+    AutoRoute(page: EditOrganizationPage),
+    // AutoRoute(page: GetStartedPage, initial: true),
   ],
 )
 class $AppRouter {}

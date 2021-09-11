@@ -73,7 +73,7 @@ class _BusinessCardState extends State<BusinessCard> {
                       ),
                     ),
                     StarRating(
-                      color: Colors.green.shade900,
+                      color: Color.fromRGBO(20, 40, 65, 1),
                       rating: widget.rating,
                       onRatingChanged: (rating) => setState(() => {}),
                     ),
@@ -109,7 +109,7 @@ class _BusinessCardState extends State<BusinessCard> {
                   child: this._isFavorite
                       ? Icon(
                           Icons.favorite,
-                          color: Colors.amberAccent,
+                          color: Color.fromRGBO(20, 40, 65, 1),
                           size: 30,
                         )
                       : Icon(

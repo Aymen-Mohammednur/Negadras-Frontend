@@ -193,7 +193,8 @@ class _LoginPageState extends State<LoginPage> {
               //     MaterialStateProperty.all<Color>(Colors.black87)),
               child: Text(
                 "Login",
-                style: TextStyle(color: Colors.white, fontSize: 20),
+                style: TextStyle(
+                    color: Color.fromRGBO(20, 40, 65, 1), fontSize: 20),
               ));
         }
       },

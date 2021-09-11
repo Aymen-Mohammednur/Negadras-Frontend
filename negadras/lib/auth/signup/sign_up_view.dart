@@ -242,7 +242,8 @@ class _SignUpPageState extends State<SignUpPage> {
                 //     backgroundColor: MaterialStateProperty.all(Colors.black87)),
                 child: Text(
                   "Sign Up",
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(
+                      color: Color.fromRGBO(20, 40, 65, 1), fontSize: 20),
                 ));
       },
     );
