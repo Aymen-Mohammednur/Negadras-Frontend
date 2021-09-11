@@ -59,7 +59,7 @@ class _FilterBusinessPageState extends State<FilterBusinessPage> {
               SearchBar(categoryId: widget.categoryId),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
+                    const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
                 // child: Label(
                 //   label: "${widget.categoryId} near you",
                 //   fontStyle: FontStyle.italic,

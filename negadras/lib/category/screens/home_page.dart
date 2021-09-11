@@ -134,8 +134,11 @@ class _HomePageState extends State<HomePage> {
           context.router.push(AddBusinessRoute());
         },
         tooltip: 'Add Business',
-        child: Icon(Icons.add),
-        backgroundColor: Colors.green.shade900,
+        child: Icon(
+          Icons.add,
+          color: Colors.amberAccent,
+        ),
+        backgroundColor: Colors.amber.shade900,
       ),
       // bottomNavigationBar: bottomNav(context, 0),
       bottomNavigationBar: ownerBottomNav(context, 0),

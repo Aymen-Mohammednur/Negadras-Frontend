@@ -65,7 +65,11 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
 
   Widget _buildName() {
     return TextFormField(
-      decoration: InputDecoration(labelText: "Name"),
+      decoration: InputDecoration(
+        labelText: "Name",
+        labelStyle:
+            TextStyle(fontWeight: FontWeight.w300, color: Colors.amberAccent),
+      ),
       validator: (value) {
         if (value != null && value.isEmpty) {
           return 'Please enter business name';
@@ -82,14 +86,22 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
 
   Widget _buildCategory() {
     return DropdownButtonFormField(
-      hint: Text("Please choose"),
+      hint: Text(
+        "Please choose",
+        style:
+            TextStyle(fontWeight: FontWeight.w500, color: Colors.amberAccent),
+      ),
 
       value: _currentCategory,
 
       items: _categories.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
-          child: Text(value),
+          child: Text(
+            value,
+            style: TextStyle(
+                fontWeight: FontWeight.w300, color: Colors.amberAccent),
+          ),
         );
       }).toList(),
 
@@ -112,7 +124,11 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
 
   Widget _buildWebsite() {
     return TextFormField(
-      decoration: InputDecoration(labelText: "Website"),
+      decoration: InputDecoration(
+        labelText: "Website",
+        labelStyle:
+            TextStyle(fontWeight: FontWeight.w300, color: Colors.amberAccent),
+      ),
       keyboardType: TextInputType.url,
       onSaved: (value) {
         setState(() {
@@ -128,7 +144,11 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
 
   Widget _buildPhoneNumber() {
     return TextFormField(
-      decoration: InputDecoration(labelText: "Phone Number"),
+      decoration: InputDecoration(
+        labelText: "Phone Number",
+        labelStyle:
+            TextStyle(fontWeight: FontWeight.w300, color: Colors.amberAccent),
+      ),
       keyboardType: TextInputType.phone,
       onSaved: (value) {
         setState(() {
@@ -144,7 +164,11 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
 
   Widget _buildEmail() {
     return TextFormField(
-      decoration: InputDecoration(labelText: "Email"),
+      decoration: InputDecoration(
+        labelText: "Email",
+        labelStyle:
+            TextStyle(fontWeight: FontWeight.w300, color: Colors.amberAccent),
+      ),
       validator: (value) {
         if (value!.isNotEmpty) {
           if (!RegExp(
@@ -179,7 +203,11 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
     //       }
     //     });
     return TextFormField(
-      decoration: InputDecoration(labelText: "Location"),
+      decoration: InputDecoration(
+        labelText: "Location",
+        labelStyle:
+            TextStyle(fontWeight: FontWeight.w300, color: Colors.amberAccent),
+      ),
       keyboardType: TextInputType.phone,
       validator: (value) {
         if (value != null && value.isEmpty) {
@@ -198,8 +226,17 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
   Widget build(BuildContext context) {
     final businessBloc = BlocProvider.of<BusinessBloc>(context);
     return Scaffold(
+      backgroundColor: Color.fromRGBO(20, 40, 65, 1),
+
       appBar: AppBar(
-        title: Text("Add New Business"),
+        backgroundColor: Color.fromRGBO(20, 40, 65, 1),
+        title: Text(
+          "Add New Business",
+          style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 25,
+              color: Colors.amberAccent),
+        ),
       ),
       // bottomNavigationBar: bottomNav(context),
       body: SingleChildScrollView(
@@ -222,6 +259,7 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
                 Label(
                   label: 'Additional Information(Optional)',
                   fontWeight: FontWeight.bold,
+                  fontColor: Colors.amberAccent,
                 ),
 
                 // Label(label: 'Contact Information(Optional)'),
@@ -238,43 +276,62 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
                 //   ],
                 // ),
                 SizedBox(height: 100),
-                ElevatedButton(
-                  onPressed: () {
-                    final form = _formKey.currentState;
-                    if (form != null && form.validate()) {
-                      form.save();
-                      print(_business);
-                      final BusinessEvent event = AddBusiness(
-                        Business(
-                            id: "",
-                            name: this._business["name"],
-                            location: this._business["location"],
-                            categoryId: this._business["categoryId"],
-                            website: this._business["website"],
-                            phoneNumber: this._business["phoneNumber"],
-                            email: this._business["email"],
-                            avgRating: this._business['averageRating']),
-                      );
-                      businessBloc.add(event);
-                      // print(event);
-                      // context.router.popAndPush(HomeRoute());
-                    }
-                  },
-                  child: Text(
-                    "Create Business",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.amber,
+                        minimumSize: Size(100, 48),
+                      ),
+                      onPressed: () {
+                        final form = _formKey.currentState;
+                        if (form != null && form.validate()) {
+                          form.save();
+                          print(_business);
+                          final BusinessEvent event = AddBusiness(
+                            Business(
+                                id: "",
+                                name: this._business["name"],
+                                location: this._business["location"],
+                                categoryId: this._business["categoryId"],
+                                website: this._business["website"],
+                                phoneNumber: this._business["phoneNumber"],
+                                email: this._business["email"],
+                                avgRating: this._business['averageRating']),
+                          );
+                          businessBloc.add(event);
+                          // print(event);
+                          // context.router.popAndPush(HomeRoute());
+                        }
+                      },
+                      child: Text(
+                        "Create Business",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                            color: Colors.black),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        businessBloc.add(NormalBusinessEvent());
+                        context.router.pop();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.amber,
+                        minimumSize: Size(100, 48),
+                      ),
+                      child: Text(
+                        "Cancel",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                            color: Colors.black),
+                      ),
+                    )
+                  ],
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    businessBloc.add(NormalBusinessEvent());
-                    context.router.pop();
-                  },
-                  child: Text(
-                    "Cancel",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                )
               ],
             ),
           ),
