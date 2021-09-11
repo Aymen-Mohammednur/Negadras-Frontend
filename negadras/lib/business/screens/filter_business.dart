@@ -96,7 +96,7 @@ class FilterBusinessPage extends StatelessWidget {
                             child: BusinessCard(
                               businessId: businessState.businessList[i].id,
                               businessName: businessState.businessList[i].name,
-                              rating: businessState.businessList[i].avgRating,
+                              rating: 2.5,//businessState.businessList[i].avgRating,
                               locationInfo:
                                   businessState.businessList[i].location,
                               imagePath: 'assets/images/macbook.jpg',

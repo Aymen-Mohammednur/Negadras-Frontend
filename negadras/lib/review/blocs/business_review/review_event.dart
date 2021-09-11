@@ -7,10 +7,8 @@ abstract class ReviewEvent extends Equatable {
   List<Object> get props => [];
 }
 
-
-class PageOpen extends ReviewEvent{
+class PageOpen extends ReviewEvent {
   String businessId;
   String userId;
   PageOpen(this.businessId, this.userId);
 }
-

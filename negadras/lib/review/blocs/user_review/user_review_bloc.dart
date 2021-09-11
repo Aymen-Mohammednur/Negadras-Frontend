@@ -19,12 +19,9 @@ class UserReviewBloc extends Bloc<UserReviewEvent, UserReviewState> {
   Stream<UserReviewState> mapEventToState(
     UserReviewEvent event,
   ) async* {
-    if (event is RatingAdd){
-
+    if (event is RatingAdd) {
       yield Rated(event.rating);
-    }
-    
-    else if  (event is ReviewAdd){
+    } else if (event is ReviewAdd) {
       Review reviewToSend = _makeReviewObject(event);
       // yield ReviewSent(reviewToSend);
       try {
@@ -36,27 +33,19 @@ class UserReviewBloc extends Bloc<UserReviewEvent, UserReviewState> {
         print("Review did not reach server");
         yield UserReviewOperationFaliure();
       }
-    }
-
-    else if (event is ReviewFoundOnServer){
+    } else if (event is ReviewFoundOnServer) {
       yield ReviewExist(event.review);
-    }
-    
-    else {
+    } else {
       yield UserReviewOperationFaliure();
     }
   }
 
-  Review _makeReviewObject(ReviewAdd event) => 
-          Review(
-          id: " ",
-          username: " ",
-          businessId: event.businessId,
-          userId: event.userId,
-          rating: state.rating,
-          reviewText: reviewController.text,
-          );
-
-
+  Review _makeReviewObject(ReviewAdd event) => Review(
+        id: " ",
+        username: " ",
+        businessId: event.businessId,
+        userId: event.userId,
+        rating: state.rating,
+        reviewText: reviewController.text,
+      );
 }
-

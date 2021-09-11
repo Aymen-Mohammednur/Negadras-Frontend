@@ -35,6 +35,14 @@ class BusinessRepository {
     this.dataProvider.delete(id);
   }
 
+  Future<void> fetchFavorites() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    final userId = await prefs.getString("user_id") as String;
+
+    this.dataProvider.fetchFavorites(userId);
+  }
+
   Future<void> addToFavorites(
     String businessId,
   ) async {

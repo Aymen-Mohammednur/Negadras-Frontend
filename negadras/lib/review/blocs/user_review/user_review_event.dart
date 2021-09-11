@@ -7,23 +7,21 @@ class UserReviewEvent extends Equatable {
   List<Object> get props => [];
 }
 
-
-class RatingAdd extends UserReviewEvent{
+class RatingAdd extends UserReviewEvent {
   late int rating;
   RatingAdd(this.rating);
 }
 
-class ReviewAdd extends UserReviewEvent{
+class ReviewAdd extends UserReviewEvent {
   late String businessId;
   late String userId;
   ReviewAdd(this.businessId, this.userId);
 }
 
-class ReviewFoundOnServer extends UserReviewEvent{
+class ReviewFoundOnServer extends UserReviewEvent {
   late Review review;
   ReviewFoundOnServer(this.review);
 }
-
 
 // TODO edit this
 // class ReviewDelete extends UserReviewEvent{

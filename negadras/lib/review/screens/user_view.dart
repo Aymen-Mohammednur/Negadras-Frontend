@@ -12,13 +12,13 @@ import 'package:negadras/utils/bottom_nav_bar.dart';
 
 class UserViewPage extends StatefulWidget {
   const UserViewPage({Key? key}) : super(key: key);
-  
+
   // const UserViewPage(this.businessId, this.userId, {Key? key}) : super(key: key);
   // final String businessId;
   // final String userId;
 
   @override
-  UserViewPageState createState(){
+  UserViewPageState createState() {
     UserViewPageState s = UserViewPageState();
     s.businessId = "6139de58b8c03ed2137941fc";
     s.userId = "6134db2369ba186847c14dba";
@@ -33,46 +33,52 @@ class UserViewPageState extends State<UserViewPage> {
   @override
   Widget build(BuildContext context) {
     var _scrollController = ScrollController();
-    BlocProvider.of<ReviewBloc>(context).add(PageOpen( businessId, userId ));
+    BlocProvider.of<ReviewBloc>(context).add(PageOpen(businessId, userId));
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Business Details"),
+      appBar: AppBar(
+        title: Text("Business Details"),
+      ),
+      body: NotificationListener(
+        child: ListView(
+          shrinkWrap: true,
+          controller: _scrollController,
+          children: [
+                imageStackWidget(),
+                buttonPanelWidget([
+                  IconTextPair().call(),
+                  IconTextPair().website(),
+                  IconTextPair().claim()
+                ]),
+                BlocBuilder<UserReviewBloc, UserReviewState>(
+                  builder: (context, state) =>
+                      UserReviewPromptClass(context, businessId, userId)
+                          .UserReviewPrompt(),
+                ),
+              ] +
+              [
+                BlocBuilder<ReviewBloc, ReviewState>(
+                  builder: (context, state) => handleUserReviewState(state),
+                ),
+              ],
         ),
-        body: NotificationListener(
-            child: ListView(
-                shrinkWrap: true,
-                controller: _scrollController,
-                children: [
-                      imageStackWidget(),
-                      buttonPanelWidget([
-                        IconTextPair().call(),
-                        IconTextPair().website(),
-                        IconTextPair().claim()
-                      ]),
-                      BlocBuilder<UserReviewBloc, UserReviewState>(
-                        builder: (context, state) => UserReviewPromptClass(context, businessId, userId).UserReviewPrompt(),
-                      ),
-                    ] +
-                    [BlocBuilder<ReviewBloc, ReviewState>(builder: (context, state) => handleUserReviewState(state),),],
-            ),
-            onNotification: (ping) {
-              return scrollToTopWidgetMaker(ping, _scrollController);
-            },
-          ),
-        // bottomNavigationBar: bottomNav(context),
-        floatingActionButton: Visibility(
-          visible: _floatingActionIsVisible,
-          child: FloatingActionButton(
-            focusColor: Colors.yellow,
-            focusElevation: 40,
-            onPressed: () {
-              _scrollController.animateTo(3,
-                  duration: Duration(milliseconds: 600),
-                  curve: Curves.bounceInOut);
-            },
-            child: Icon(Icons.arrow_circle_up_rounded),
-          ),
+        onNotification: (ping) {
+          return scrollToTopWidgetMaker(ping, _scrollController);
+        },
+      ),
+      // bottomNavigationBar: bottomNav(context),
+      floatingActionButton: Visibility(
+        visible: _floatingActionIsVisible,
+        child: FloatingActionButton(
+          focusColor: Colors.yellow,
+          focusElevation: 40,
+          onPressed: () {
+            _scrollController.animateTo(3,
+                duration: Duration(milliseconds: 600),
+                curve: Curves.bounceInOut);
+          },
+          child: Icon(Icons.arrow_circle_up_rounded),
         ),
+      ),
     );
   }
 
