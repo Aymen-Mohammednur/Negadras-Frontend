@@ -6,7 +6,7 @@ class Review {
   final String businessId;
   final int rating;
   final String? reviewText;
-  final String? username;
+  late final String? username;
 
   Review({
     required this.userId,
@@ -17,16 +17,16 @@ class Review {
     this.reviewText,
   });
 
-  factory Review.fromJson(Map<String, dynamic> json) {  
+  factory Review.fromJson(Map<String, dynamic> json) {
     Review r = Review(
-        username: json["username"],
-        id: json["_id"],
-        userId: json['userId'],
-        businessId: json['businessId'],
-        rating: int.parse(json['rating']),
-        reviewText: json['reviewText'] ?? " ",
-        );
-      
+      username: json["username"],
+      id: json["_id"],
+      userId: json['userId'],
+      businessId: json['businessId'],
+      rating: int.parse(json['rating']),
+      reviewText: json['reviewText'] ?? " ",
+    );
+
     return r;
   }
   // JsonCodec toJson(){

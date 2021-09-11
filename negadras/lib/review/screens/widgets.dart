@@ -112,9 +112,12 @@ Widget imageStackWidget() {
   );
 }
 
-Widget iconPair({required IconData icon, required String displayString, Function()? action}) {
+Widget iconPair(
+    {required IconData icon,
+    required String displayString,
+    Function()? action}) {
   return GestureDetector(
-    onTap: action ?? (){},
+    onTap: action ?? () {},
     child: Column(
       children: [
         Icon(icon, size: 40),
@@ -169,12 +172,14 @@ Widget _userReviewBox(r) {
   return reviewBox(r, 0);
 }
 
-_allReviews(List r){
+_allReviews(List r) {
   List<Widget> l = [];
-  for (int i = 0; i < r.length; i++){
+  for (int i = 0; i < r.length; i++) {
     l.add(_userReviewBox(r[i]));
   }
-  return Column(children: l,);
+  return Column(
+    children: l,
+  );
 }
 
 Widget reviewBox(review, i) {
@@ -184,7 +189,7 @@ Widget reviewBox(review, i) {
           Icon(Icons.flag),
         ]
       : [Container()]);
-  String name = review.username;
+  String name = (i == 3 ? "Your Review" : review.username);
   String content = review.reviewText;
   String rating = review.rating.toString();
   // String? ownerReply = review["reply"];
@@ -238,21 +243,16 @@ Widget businessReviewList(reviewList) {
       });
 }
 
-List<Widget> userReviewList(context) {
-  // var bloc = BlocProvider.of<ReviewBloc>(context);
-  List<Widget> widgetsToReturn = [BlocBuilder<ReviewBloc, ReviewState>(
-                        builder: (context, state) => handleUserReviewState(state),
-                      ),];
-  return widgetsToReturn;
-}
 
-Widget handleUserReviewState(state){
-  if (state is PageOpen){
+Widget handleUserReviewState(state) {
+
+  if (state is PageOpen) {
     return Container(
       child: Center(child: Text("Loading Reviews")),
     );
-  } else if (state is ReviewPageLoaded){
-    print("reviewlist yielded: ========================= ${state.reviewList.length}");
+  } else if (state is ReviewPageLoaded) {
+    print(
+        "reviewlist yielded: ========================= ${state.reviewList.length}");
     return _allReviews(state.reviewList);
   } else {
     print("Error causeing stats: ${state}");
@@ -261,12 +261,20 @@ Widget handleUserReviewState(state){
 }
 
 class IconTextPair {
-  Widget claim({String s = "Claim", Function()? todo}) => iconPair(icon:Icons.add_circle,displayString: s, action: todo);
-  Widget edit({String s = "Edit", Function()? todo}) => iconPair(icon:Icons.edit,displayString: s, action: todo);
-  Widget drop({String s = "Drop", Function()? todo}) => iconPair(icon:Icons.delete,displayString: s, action: todo);
-  Widget review({String s = "Reviews", Function()? todo}) => iconPair(icon:Icons.reviews,displayString: s, action: todo);
-  Widget website({String s = "Website", Function()? todo}) => iconPair(icon:Icons.language,displayString: s, action: todo);
-  Widget map({String s = "Open Maps", Function()? todo}) => iconPair(icon:Icons.location_on,displayString: s, action: todo);
-  Widget call({String s = "Call", Function()? todo}) => iconPair(icon:Icons.phone,displayString: s, action: todo);
-  Widget stats({String s = "Statistics", Function()? todo}) => iconPair(icon:Icons.signal_cellular_alt,displayString: s, action: todo);
+  Widget claim({String s = "Claim", Function()? todo}) =>
+      iconPair(icon: Icons.add_circle, displayString: s, action: todo);
+  Widget edit({String s = "Edit", Function()? todo}) =>
+      iconPair(icon: Icons.edit, displayString: s, action: todo);
+  Widget drop({String s = "Drop", Function()? todo}) =>
+      iconPair(icon: Icons.delete, displayString: s, action: todo);
+  Widget review({String s = "Reviews", Function()? todo}) =>
+      iconPair(icon: Icons.reviews, displayString: s, action: todo);
+  Widget website({String s = "Website", Function()? todo}) =>
+      iconPair(icon: Icons.language, displayString: s, action: todo);
+  Widget map({String s = "Open Maps", Function()? todo}) =>
+      iconPair(icon: Icons.location_on, displayString: s, action: todo);
+  Widget call({String s = "Call", Function()? todo}) =>
+      iconPair(icon: Icons.phone, displayString: s, action: todo);
+  Widget stats({String s = "Statistics", Function()? todo}) =>
+      iconPair(icon: Icons.signal_cellular_alt, displayString: s, action: todo);
 }

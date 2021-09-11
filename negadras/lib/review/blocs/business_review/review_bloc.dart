@@ -17,14 +17,13 @@ class ReviewBloc extends Bloc<ReviewEvent, ReviewState> {
 
   @override
   Stream<ReviewState> mapEventToState(ReviewEvent event) async* {
-
-    if (event is PageOpen){
+    if (event is PageOpen) {
       print("PageOpen detected in ReviewBloc");
       try {
         print("attempting to yield review list");
         final reviewList = await reviewRepository.fetchAll(event.businessId);
+        print("review list yielded");
         yield ReviewPageLoaded(reviewList);
-        
       } catch (_) {
         print("attempt to yield reviewlist failed");
         yield ReviewOperationFaliure();
