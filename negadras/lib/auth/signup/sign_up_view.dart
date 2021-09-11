@@ -100,6 +100,7 @@ class _SignUpPageState extends State<SignUpPage> {
       builder: (context, state) {
         return TextFormField(
           controller: usernameController,
+          style: TextStyle(color: Colors.white),
           decoration: InputDecoration(
               icon: ImageIcon(
                 AssetImage("assets/images/icons8-person-24.png"),
@@ -122,6 +123,7 @@ class _SignUpPageState extends State<SignUpPage> {
       builder: (context, state) {
         return TextFormField(
           controller: firstNameController,
+          style: TextStyle(color: Colors.white),
           decoration: InputDecoration(
               icon: ImageIcon(AssetImage("assets/images/icons8-person-24.png"),
                   color: Colors.amber.shade200),
@@ -142,6 +144,7 @@ class _SignUpPageState extends State<SignUpPage> {
       builder: (context, state) {
         return TextFormField(
           controller: lastNameController,
+          style: TextStyle(color: Colors.white),
           decoration: InputDecoration(
               icon: ImageIcon(AssetImage("assets/images/icons8-person-24.png"),
                   color: Colors.amber.shade200),
@@ -179,6 +182,7 @@ class _SignUpPageState extends State<SignUpPage> {
         return TextFormField(
           controller: passwordController,
           obscureText: true,
+          style: TextStyle(color: Colors.white),
           decoration: InputDecoration(
               icon: ImageIcon(
                   AssetImage("assets/images/icons8-password-24.png"),
@@ -201,6 +205,7 @@ class _SignUpPageState extends State<SignUpPage> {
         return TextFormField(
           controller: confirmPasswordController,
           obscureText: true,
+          style: TextStyle(color: Colors.white),
           decoration: InputDecoration(
               icon: ImageIcon(
                   AssetImage("assets/images/icons8-password-24.png"),
