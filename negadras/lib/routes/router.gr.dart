@@ -79,8 +79,9 @@ class AppRouter extends _i1.RootStackRouter {
         }),
     UserViewRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
-        builder: (_) {
-          return const _i10.UserViewPage();
+        builder: (data) {
+          final args = data.argsAs<UserViewRouteArgs>();
+          return _i10.UserViewPage(args.businessId, key: args.key);
         }),
     SignUpRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
@@ -254,10 +255,21 @@ class MyBusinessRoute extends _i1.PageRouteInfo {
   static const String name = 'MyBusinessRoute';
 }
 
-class UserViewRoute extends _i1.PageRouteInfo {
-  const UserViewRoute() : super(name, path: '/user-view-page');
+class UserViewRoute extends _i1.PageRouteInfo<UserViewRouteArgs> {
+  UserViewRoute({required String businessId, _i22.Key? key})
+      : super(name,
+            path: '/user-view-page',
+            args: UserViewRouteArgs(businessId: businessId, key: key));
 
   static const String name = 'UserViewRoute';
+}
+
+class UserViewRouteArgs {
+  const UserViewRouteArgs({required this.businessId, this.key});
+
+  final String businessId;
+
+  final _i22.Key? key;
 }
 
 class SignUpRoute extends _i1.PageRouteInfo<SignUpRouteArgs> {

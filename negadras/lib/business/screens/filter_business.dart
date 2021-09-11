@@ -43,7 +43,7 @@ class _FilterBusinessPageState extends State<FilterBusinessPage> {
           title: Text("Filter"),
         ),
         // bottomNavigationBar: bottomNav(context, 0),
-        bottomNavigationBar: ownerBottomNav(context, 0),
+        bottomNavigationBar: ownerBottomNav(context, 0) as Widget,
         body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,7 +105,10 @@ class _FilterBusinessPageState extends State<FilterBusinessPage> {
                         itemBuilder: (context, i) {
                           return GestureDetector(
                             onTap: () {
-                              businessBloc.add(LoadBusinessEvent(
+                              // businessBloc.add(LoadBusinessEvent(
+                              //     businessId:
+                              //         businessState.businessList[i].id));
+                              context.router.push(UserViewRoute(
                                   businessId:
                                       businessState.businessList[i].id));
                             },

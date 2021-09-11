@@ -33,7 +33,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
     final favoriteBloc = BlocProvider.of<FavoriteBloc>(context);
     return Scaffold(
       // bottomNavigationBar: bottomNav(context, 1),
-      bottomNavigationBar: ownerBottomNav(context, 1),
+      bottomNavigationBar: ownerBottomNav(context, 1) as Widget,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

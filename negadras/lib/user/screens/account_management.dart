@@ -11,7 +11,7 @@ class AccountManagementPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // bottomNavigationBar: bottomNav(context, 2),
-      bottomNavigationBar: ownerBottomNav(context, 3),
+      bottomNavigationBar: ownerBottomNav(context, 3) as Widget,
       body: SafeArea(
           child: Column(
         children: [

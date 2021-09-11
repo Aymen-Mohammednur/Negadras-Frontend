@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:negadras/routes/router.gr.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-Widget bottomNav(BuildContext context, int i) {
+Future<Widget> bottomNav(BuildContext context, int i) async {
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  String? role = pref.getString("role");
+
+
   Map<String, int> pageIndex = {"/": 0, "/favorites-page": 1, "/me-page": 2};
   String routeName = context.routeData.path;
   int currentIndex = pageIndex[routeName] ?? 0;
@@ -14,6 +19,8 @@ Widget bottomNav(BuildContext context, int i) {
     FavoritesRoute(),
     MeRoute(),
   ];
+
+  
 
   return BottomNavyBar(
     // animationDuration: Duration(milliseconds: 500),

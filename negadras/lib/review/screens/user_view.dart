@@ -8,32 +8,34 @@ import 'package:negadras/review/blocs/blocs.dart';
 import 'package:negadras/review/screens/widgets/widgets.dart';
 import 'package:negadras/user/screens/me_tab.dart';
 import 'package:negadras/utils/bottom_nav_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
 // import 'package:negadras/review/scre'
 
 class UserViewPage extends StatefulWidget {
-  const UserViewPage({Key? key}) : super(key: key);
+  // const UserViewPage({Key? key}) : super(key: key);
 
   // const UserViewPage(this.businessId, this.userId, {Key? key}) : super(key: key);
   // final String businessId;
   // final String userId;
 
+ const UserViewPage(this.businessId, {Key? key}) : super(key: key);
+  final String businessId;
+  final String userId = "";
+
   @override
-  UserViewPageState createState() {
-    UserViewPageState s = UserViewPageState();
-    s.businessId = "6139de58b8c03ed2137941fc";
-    s.userId = "";
-    return s;
-  }
+  UserViewPageState createState() => UserViewPageState();
 }
 
 class UserViewPageState extends State<UserViewPage> {
   late String businessId;
   late String userId;
+  late String businessUrl;
+  late String businessPhone;
   bool _floatingActionIsVisible = false;
   @override
   Widget build(BuildContext context) {
     var _scrollController = ScrollController();
-    BlocProvider.of<ReviewBloc>(context).add(PageOpen(businessId, userId));
+    BlocProvider.of<ReviewBloc>(context).add(PageOpen(widget.businessId, ""));
     return Scaffold(
       appBar: AppBar(
         title: Text("Business Details"),
@@ -45,13 +47,13 @@ class UserViewPageState extends State<UserViewPage> {
           children: [
                 imageStackWidget(),
                 buttonPanelWidget([
-                  IconTextPair().call(),
-                  IconTextPair().website(),
+                  IconTextPair().call(todo: (){launch("tel://123123");}),
+                  IconTextPair().website(todo: (){launch("https://$businessUrl");}),
                   IconTextPair().claim()
                 ]),
                 BlocBuilder<UserReviewBloc, UserReviewState>(
                   builder: (context, state) =>
-                      UserReviewPromptClass(context, businessId, userId)
+                      UserReviewPromptClass(context, widget.businessId, "")
                           .UserReviewPrompt(),
                 ),
               ] +

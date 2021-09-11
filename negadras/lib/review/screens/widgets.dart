@@ -72,19 +72,17 @@ Widget imageStackWidget() {
   return Stack(
     alignment: Alignment(0, 0.85),
     children: [
-      Image.asset(
-        "images/placeholder-1.jpg",
-        height: 220,
-        fit: BoxFit.cover,
-      ),
       Padding(
         padding: const EdgeInsets.only(left: 10, right: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              "Business Name",
-              style: normalText(),
+            Padding(
+              padding: const EdgeInsets.only(top:12.0),
+              child: Text(
+                "Business Name",
+                style: veryBigText(),
+              ),
             ),
             Text(
               "N⭐",
@@ -124,16 +122,6 @@ Widget buttonPanelWidget(iconPairList) {
   return Padding(
     padding: const EdgeInsets.only(top: 10, bottom: 10),
     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      SizedBox(
-        height: 10,
-      ),
-      Padding(
-        padding: const EdgeInsets.only(left: 10),
-        child: Text(
-          "Organization Name",
-          style: normalText(),
-        ),
-      ),
       SizedBox(
         height: 10,
       ),
@@ -252,6 +240,8 @@ Widget handleReviewState(state) {
 }
 
 class IconTextPair {
+  String? url;
+  IconTextPair({this.url});
   Widget claim({String s = "Claim", Function()? todo}) =>
       iconPair(icon: Icons.add_circle, displayString: s, action: todo);
   Widget edit({String s = "Edit", Function()? todo}) =>

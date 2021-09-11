@@ -7,7 +7,7 @@ class UserReviewPromptClass {
 
   UserReviewBloc? bloc;
 
-  UserReviewPromptClass(this.context, this.businessId, this.userId){
+  UserReviewPromptClass(this.context, this.businessId, this.userId) {
     bloc = BlocProvider.of<UserReviewBloc>(context);
   }
   Widget UserReviewPrompt() {
@@ -24,122 +24,100 @@ class UserReviewPromptClass {
       print(state);
       return Container(child: Text("Unrecognized State"));
     }
-
-    
   }
 
-    Widget userReviewBox(review, i) {
-      var userReviewButtons = (i > 0
-          ? [
-              IconButton (
+  Widget userReviewBox(review, i) {
+    var userReviewButtons = (i > 0
+        ? [
+            IconButton(
               icon: const Icon(Icons.delete),
               tooltip: 'Delete your review',
               onPressed: () {
                 bloc!.add(ReviewDelete(businessId, userId));
               },
             ),
-              IconButton (
+            IconButton(
               icon: const Icon(Icons.edit),
               tooltip: 'Edit your review',
               onPressed: () {
                 bloc!.add(ReviewReset());
               },
             ),
-            ]
-          : [Container()]);
-      
-      String name = (i == 2 ? "Your Review" : review.username);
-      String content = review.reviewText;
-      String rating = review.rating.toString();
-      // String? ownerReply = review["reply"];
+          ]
+        : [Container()]);
 
-      return Padding(
-        padding: const EdgeInsets.only(top: 3, left: 10, right: 10),
-        child: Container(
-          // decoration: BoxDecoration(border: Border.all()),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Icon(Icons.face),
-                  ),
-                  Text(name),
-                  SizedBox(width: 5),
-                  Text(rating),
-                  Icon(Icons.star),
-                ],
-              ),
-              Container(
-                margin: EdgeInsets.all(10),
-                padding: EdgeInsets.all(10),
-                child: Text(content),
-                decoration: BoxDecoration(
-                  border: Border.all(),
+    String name = (i == 2 ? "Your Review" : review.username);
+    String content = review.reviewText;
+    String rating = review.rating.toString();
+    // String? ownerReply = review["reply"];
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 3, left: 10, right: 10),
+      child: Container(
+        // decoration: BoxDecoration(border: Border.all()),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Icon(Icons.face),
                 ),
-                width: double.infinity,
+                Text(name),
+                SizedBox(width: 5),
+                Text(rating),
+                Icon(Icons.star),
+              ],
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              padding: EdgeInsets.all(10),
+              child: Text(content),
+              decoration: BoxDecoration(
+                border: Border.all(),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                child: Row(
-                  children: userReviewButtons,
-                ),
+              width: double.infinity,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+              child: Row(
+                children: userReviewButtons,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-      );
-    }
+      ),
+    );
+  }
 
   Widget _ratingPrompt(UserReviewBloc bloc) {
     return Padding(
-      padding: const EdgeInsets.only(left: 8.0),
+      padding: const EdgeInsets.only(left: 0.0),
       child: Container(
-          // height: 100,
-          decoration: BoxDecoration(
-            border: Border(
-              top: BorderSide(width: 1),
+        height: 100,
+        padding: EdgeInsets.all(8),
+        decoration: BoxDecoration(color: Colors.blueGrey[200]),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text("Rate your experiece with this place...", style: normalText()),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                5,
+                (i) {
+                  return GestureDetector(
+                    child: Icon(Icons.star_border),
+                    onTap: () {
+                      bloc.add(RatingAdd(i + 1));
+                    },
+                  );
+                },
+              ),
             ),
-          ),
-          child: Column(
-            children: [
-              Text("Rate your experiece with this place...",
-                  style: normalText()),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Column(
-                  children: [
-                    // SizedBox(height: 60),
-                    Icon(Icons.account_box, size: 50),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text("FirstName LastName", style: smallText()),
-                      ],
-                    ),
-                    Row(
-                      children: List.generate(
-                        5,
-                        (i) {
-                          return GestureDetector(
-                            child: Icon(Icons.star_border),
-                            onTap: () {
-                              print("Star $i touched");
-                              bloc.add(RatingAdd(i + 1));
-                              print("Star $i touch complete");
-                            },
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ]),
-            ],
-          )),
+          ],
+        ),
+      ),
     );
   }
 
@@ -156,6 +134,7 @@ class UserReviewPromptClass {
           maxLines: 5, // when user presses enter it will adapt to it
         ));
     return Container(
+      decoration: BoxDecoration(color: Colors.blueGrey[200]),
       child: Column(
         children: [
           reviewAcceptor,
@@ -178,9 +157,12 @@ class UserReviewPromptClass {
         },
         child: Text("Continue"),
         style: ButtonStyle(
+          backgroundColor: MaterialStateColor.resolveWith((states) => Colors.blueGrey[400]!),
+          foregroundColor: MaterialStateColor.resolveWith((states) => Colors.lightBlue[50]!),
+          shadowColor: MaterialStateColor.resolveWith((states) => Colors.blueGrey[200]!),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(18.0),
+              borderRadius: BorderRadius.circular(10.0),
               // side: BorderSide(color: Colors.red)
             ),
           ),
