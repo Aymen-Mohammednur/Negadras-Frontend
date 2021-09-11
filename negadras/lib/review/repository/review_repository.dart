@@ -9,9 +9,11 @@ class ReviewRepository {
   Future<Review> create(Review review) async {
     print("Inside repository");
     SharedPreferences pref = await SharedPreferences.getInstance();
-    String userId = pref.getString("userId") as String;
+    final userId = pref.getString("user_id") as String;
+    // print(pref.getString("userId"));
+    // print("SSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
     review.userId = userId;
-
+    // print(userId);
     return this.dataProvider.create(review);
   }
 

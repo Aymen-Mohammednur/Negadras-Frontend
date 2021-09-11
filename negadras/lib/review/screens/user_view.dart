@@ -18,7 +18,7 @@ class UserViewPage extends StatefulWidget {
   // final String businessId;
   // final String userId;
 
- const UserViewPage(this.businessId, {Key? key}) : super(key: key);
+  const UserViewPage(this.businessId, {Key? key}) : super(key: key);
   final String businessId;
   final String userId = "";
 
@@ -27,6 +27,20 @@ class UserViewPage extends StatefulWidget {
 }
 
 class UserViewPageState extends State<UserViewPage> {
+  @override
+  void initState() {
+    print("In init state");
+    Future.delayed(Duration.zero).then((value) {
+      ReviewBloc reviewBloc = BlocProvider.of<ReviewBloc>(context);
+      UserReviewBloc userReviewBloc = BlocProvider.of<UserReviewBloc>(context);
+      reviewBloc.add(NormalReviewEvent());
+      userReviewBloc.add(InitialUser());
+      print(widget.businessId);
+    });
+    print("before super.init");
+    super.initState();
+  }
+
   late String businessId;
   late String userId;
   late String businessUrl;
@@ -47,8 +61,12 @@ class UserViewPageState extends State<UserViewPage> {
           children: [
                 imageStackWidget(),
                 buttonPanelWidget([
-                  IconTextPair().call(todo: (){launch("tel://123123");}),
-                  IconTextPair().website(todo: (){launch("https://$businessUrl");}),
+                  IconTextPair().call(todo: () {
+                    launch("tel://123123");
+                  }),
+                  IconTextPair().website(todo: () {
+                    launch("https://$businessUrl");
+                  }),
                   IconTextPair().claim()
                 ]),
                 BlocBuilder<UserReviewBloc, UserReviewState>(
@@ -59,7 +77,8 @@ class UserViewPageState extends State<UserViewPage> {
               ] +
               [
                 BlocBuilder<ReviewBloc, ReviewState>(
-                  builder: (context, state) => handleReviewState(state),
+                  builder: (context, state) =>
+                      handleReviewState(state, context, widget.businessId),
                 ),
               ],
         ),

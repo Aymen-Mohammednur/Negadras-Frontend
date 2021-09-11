@@ -21,7 +21,7 @@ class UserReviewPromptClass {
       // BlocProvider.of<ReviewBloc>(context).add(PageOpen(businessId, userId));
       return userReviewBox(state.r, 2);
     } else {
-      print(state);
+      print("The issue causing state is $state");
       return Container(child: Text("Unrecognized State"));
     }
   }
