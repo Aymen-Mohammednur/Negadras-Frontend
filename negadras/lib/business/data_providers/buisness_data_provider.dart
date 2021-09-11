@@ -5,10 +5,10 @@ import 'package:negadras/business/models/models.dart';
 
 class BusinessDataProvider {
   static final String _baseUrl =
-      "${StringConstants.BASE_URL_EMULATOR}/business";
+      "${StringConstants.BASE_URL_DEVICE}/business";
 
   static final String _baseUrlFav =
-      "${StringConstants.BASE_URL_EMULATOR}/favorite";
+      "${StringConstants.BASE_URL_DEVICE}/favorite";
 
   Future<Business> create(Business business) async {
     final http.Response response = await http.post(Uri.parse(_baseUrl),

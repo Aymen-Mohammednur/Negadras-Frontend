@@ -5,7 +5,7 @@ import 'package:negadras/auth/constants/constants.dart';
 
 class ReviewDataProvider {
   // static final String _baseUrl = "http://192.168.43.80:3000/api/review";
-  static final String _baseUrl = "${StringConstants.BASE_URL_EMULATOR}/review";
+  static final String _baseUrl = "${StringConstants.BASE_URL_DEVICE}/review";
 
   Future<Review> create(Review review) async {
     print("Inside data provider");

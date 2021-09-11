@@ -7,7 +7,7 @@ class UserDataProvider {
   // static final String _baseUrl = "http://localhost/3000/api/user";
 
   // FOR EMULATOR
-  static final String _baseUrl = "${StringConstants.BASE_URL_EMULATOR}/user";
+  static final String _baseUrl = "${StringConstants.BASE_URL_DEVICE}/user";
 
   Future<User> fetchOne(String id) async {
     final response = await http.get(Uri.parse("$_baseUrl/$id"));
