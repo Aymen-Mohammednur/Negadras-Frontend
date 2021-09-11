@@ -23,11 +23,22 @@ class _State extends State<DeleteAccountPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return Container(
         child: RepositoryProvider(
             create: (context) =>
                 UserRepository(dataProvider: UserDataProvider()),
             child: Scaffold(
+              appBar: AppBar(
+                iconTheme: IconThemeData(
+                  color: Color.fromRGBO(20, 40, 65, 1), //change your color here
+                ),
+                backgroundColor: Colors.amberAccent,
+                centerTitle: true,
+                title: Text(
+                  "Delete Account",
+                  style: TextStyle(color: Color.fromRGBO(20, 40, 65, 1)),
+                ),
+              ),
               backgroundColor: Color.fromRGBO(20, 40, 65, 1),
               body: BlocProvider(
                 create: (context) =>
@@ -142,7 +153,8 @@ class _State extends State<DeleteAccountPage> {
                 ),
                 child: Text(
                   "Delete Account",
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(
+                      color: Color.fromRGBO(20, 40, 65, 1), fontSize: 20),
                 ));
       },
     );

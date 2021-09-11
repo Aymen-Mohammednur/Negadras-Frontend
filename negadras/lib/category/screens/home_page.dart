@@ -63,8 +63,11 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Color.fromRGBO(20, 40, 65, 1),
       appBar: AppBar(
-        backgroundColor: Colors.green.shade900,
-        title: Text("Negadras"),
+        backgroundColor: Colors.amberAccent,
+        title: Text(
+          "Negadras",
+          style: TextStyle(color: Color.fromRGBO(20, 40, 65, 1)),
+        ),
         centerTitle: true,
       ),
       body: BlocBuilder<CategoryBloc, CategoryState>(
@@ -114,8 +117,11 @@ class _HomePageState extends State<HomePage> {
           context.router.push(AddBusinessRoute());
         },
         tooltip: 'Increment',
-        child: Icon(Icons.add),
-        backgroundColor: Colors.green.shade900,
+        child: Icon(
+          Icons.add,
+          color: Color.fromRGBO(20, 40, 65, 1),
+        ),
+        backgroundColor: Colors.amberAccent,
       ),
       // bottomNavigationBar: bottomNav(context, 0),
       bottomNavigationBar: ownerBottomNav(context, 0),

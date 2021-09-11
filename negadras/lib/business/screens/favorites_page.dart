@@ -32,21 +32,29 @@ class _FavoritesPageState extends State<FavoritesPage> {
   Widget build(BuildContext context) {
     final favoriteBloc = BlocProvider.of<FavoriteBloc>(context);
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color.fromRGBO(20, 40, 65, 1),
+        centerTitle: true,
+        title: Text(
+          "Favorites",
+          style: TextStyle(color: Colors.amberAccent),
+        ),
+      ),
       // bottomNavigationBar: bottomNav(context, 1),
       bottomNavigationBar: ownerBottomNav(context, 1) as Widget,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
-              child: Label(
-                label: "Favorites",
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
-            ),
+            // Padding(
+            //   padding:
+            //       const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
+            //   child: Label(
+            //     label: "Favorites",
+            //     fontWeight: FontWeight.bold,
+            //     fontSize: 20,
+            //   ),
+            // ),
             Expanded(
               child: BlocBuilder<FavoriteBloc, FavoriteState>(
                 builder: (context, state) {

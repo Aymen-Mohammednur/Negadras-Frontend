@@ -27,11 +27,22 @@ class _ChangeUsernameState extends State<ChangeUsernamePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return Container(
         child: RepositoryProvider(
             create: (context) =>
                 UserRepository(dataProvider: UserDataProvider()),
             child: Scaffold(
+              appBar: AppBar(
+                iconTheme: IconThemeData(
+                  color: Color.fromRGBO(20, 40, 65, 1), //change your color here
+                ),
+                backgroundColor: Colors.amberAccent,
+                centerTitle: true,
+                title: Text(
+                  "Change Username",
+                  style: TextStyle(color: Color.fromRGBO(20, 40, 65, 1)),
+                ),
+              ),
               backgroundColor: Color.fromRGBO(20, 40, 65, 1),
               body: BlocProvider(
                 create: (context) =>
@@ -72,7 +83,7 @@ class _ChangeUsernameState extends State<ChangeUsernamePage> {
                 _usernameField(),
                 _newUsernameField(),
                 SizedBox(
-                  height: 10,
+                  height: 30,
                 ),
                 _submitButton(),
               ],
@@ -173,7 +184,8 @@ class _ChangeUsernameState extends State<ChangeUsernamePage> {
                 ),
                 child: Text(
                   "Change Username",
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(
+                      color: Color.fromRGBO(20, 40, 65, 1), fontSize: 20),
                 ));
       },
     );

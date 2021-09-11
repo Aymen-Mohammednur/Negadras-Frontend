@@ -25,13 +25,15 @@ class _AddOrganizationPageState extends State<AddOrganizationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add an Organization"),
+        backgroundColor: Color.fromRGBO(20, 40, 65, 1),
+        title: Text("Add an Organization",
+            style: TextStyle(color: Colors.amberAccent)),
         centerTitle: true,
       ),
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: [
-          _label(),
+          // _label(),
           _addOrganizationForm(),
         ],
       ),
@@ -129,9 +131,10 @@ class _AddOrganizationPageState extends State<AddOrganizationPage> {
           context.router.popAndPush(ListOrganizationRoute());
         }
       },
-      style: ButtonStyle(
-          shadowColor: MaterialStateProperty.all(Colors.limeAccent),
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.teal)),
+      style: ElevatedButton.styleFrom(
+        primary: Color.fromRGBO(20, 40, 65, 1),
+        minimumSize: Size(150, 35),
+      ),
       child: Text(
         "Add Organization",
         style: TextStyle(color: Colors.white),

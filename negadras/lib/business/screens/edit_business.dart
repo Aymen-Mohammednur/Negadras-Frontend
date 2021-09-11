@@ -259,7 +259,11 @@ class _EditFormState extends State<EditForm> {
     final businessBloc = BlocProvider.of<BusinessBloc>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Edit Business"),
+        title: Text(
+          "Edit Business",
+          style: TextStyle(color: Colors.amberAccent),
+        ),
+        backgroundColor: Color.fromRGBO(20, 40, 65, 1),
       ),
       // bottomNavigationBar: bottomNav(context),
       body: SingleChildScrollView(
@@ -284,6 +288,10 @@ class _EditFormState extends State<EditForm> {
                 _buildEmail(),
                 SizedBox(height: 100),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromRGBO(20, 40, 65, 1),
+                    minimumSize: Size(200, 48),
+                  ),
                   onPressed: () {
                     final form = _formKey.currentState;
                     if (form != null && form.validate()) {
@@ -308,17 +316,21 @@ class _EditFormState extends State<EditForm> {
                   },
                   child: Text(
                     "Edit Business",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                    style: TextStyle(color: Colors.amberAccent, fontSize: 16),
                   ),
                 ),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromRGBO(20, 40, 65, 1),
+                    minimumSize: Size(100, 48),
+                  ),
                   onPressed: () {
                     context.router.popAndPush(FilterBusinessRoute(
                         categoryId: widget.business.categoryId));
                   },
                   child: Text(
                     "Cancel",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                    style: TextStyle(color: Colors.amberAccent, fontSize: 16),
                   ),
                 )
               ],

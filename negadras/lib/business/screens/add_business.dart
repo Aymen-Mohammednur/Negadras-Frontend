@@ -65,7 +65,9 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
 
   Widget _buildName() {
     return TextFormField(
-      decoration: InputDecoration(labelText: "Name"),
+      decoration: InputDecoration(
+        labelText: "Name",
+      ),
       validator: (value) {
         if (value != null && value.isEmpty) {
           return 'Please enter business name';
@@ -198,8 +200,13 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
   Widget build(BuildContext context) {
     final businessBloc = BlocProvider.of<BusinessBloc>(context);
     return Scaffold(
+      // backgroundColor: Color.fromRGBO(20, 40, 65, 1),
       appBar: AppBar(
-        title: Text("Add New Business"),
+        title: Text(
+          "Add New Business",
+          style: TextStyle(color: Colors.amberAccent),
+        ),
+        backgroundColor: Color.fromRGBO(20, 40, 65, 1),
       ),
       // bottomNavigationBar: bottomNav(context),
       body: SingleChildScrollView(
@@ -239,6 +246,10 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
                 // ),
                 SizedBox(height: 100),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromRGBO(20, 40, 65, 1),
+                    minimumSize: Size(200, 48),
+                  ),
                   onPressed: () {
                     final form = _formKey.currentState;
                     if (form != null && form.validate()) {
@@ -261,17 +272,24 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
                   },
                   child: Text(
                     "Create Business",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                    style: TextStyle(color: Colors.amberAccent, fontSize: 16),
                   ),
                 ),
+                SizedBox(
+                  height: 10,
+                ),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromRGBO(20, 40, 65, 1),
+                    minimumSize: Size(100, 48),
+                  ),
                   onPressed: () {
                     businessBloc.add(NormalBusinessEvent());
                     context.router.pop();
                   },
                   child: Text(
                     "Cancel",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                    style: TextStyle(color: Colors.amberAccent, fontSize: 16),
                   ),
                 )
               ],

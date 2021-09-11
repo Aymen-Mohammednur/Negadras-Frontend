@@ -10,6 +10,7 @@ import 'package:negadras/user/data_providers/user_data_provider.dart';
 import 'package:negadras/user/repository/user_repository.dart';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:negadras/utils/bottom_nav_bar.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   ChangePasswordPage({Key? key}) : super(key: key);
@@ -31,11 +32,22 @@ class _ChangePasswordState extends State<ChangePasswordPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return Container(
         child: RepositoryProvider(
             create: (context) =>
                 UserRepository(dataProvider: UserDataProvider()),
             child: Scaffold(
+              appBar: AppBar(
+                iconTheme: IconThemeData(
+                  color: Color.fromRGBO(20, 40, 65, 1), //change your color here
+                ),
+                backgroundColor: Colors.amberAccent,
+                centerTitle: true,
+                title: Text(
+                  "Change Password",
+                  style: TextStyle(color: Color.fromRGBO(20, 40, 65, 1)),
+                ),
+              ),
               backgroundColor: Color.fromRGBO(20, 40, 65, 1),
               body: BlocProvider(
                 create: (context) =>
@@ -205,7 +217,8 @@ class _ChangePasswordState extends State<ChangePasswordPage> {
                 ),
                 child: Text(
                   "Change Password",
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(
+                      color: Color.fromRGBO(20, 40, 65, 1), fontSize: 20),
                 ));
       },
     );

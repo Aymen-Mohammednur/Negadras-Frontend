@@ -109,7 +109,7 @@ class _BusinessCardState extends State<BusinessCard> {
                   child: this._isFavorite
                       ? Icon(
                           Icons.favorite,
-                          color: Colors.red,
+                          color: Colors.amberAccent,
                           size: 30,
                         )
                       : Icon(
@@ -121,17 +121,8 @@ class _BusinessCardState extends State<BusinessCard> {
                 this._isOwner
                     ? GestureDetector(
                         onTap: () {
-                          // widget.isFavorite = !widget.isFavorite;
-                          // if (widget.isFavorite) {
-                          //   businessBloc.add(AddToFavoritesEvent(widget.businessId));
-                          // } else {
-                          //   businessBloc.add(RemoveFromFavoritesEvent(widget.businessId));
-                          // }
                           print("BUSINESS CARD IS CALLED FROM");
-                          // widget.from(_isFavorite);
-                          // setState(() {
-                          //   _isFavorite = !_isFavorite;
-                          // });
+
                           Business business = new Business(
                               id: widget.businessId,
                               name: widget.businessName,
@@ -143,10 +134,37 @@ class _BusinessCardState extends State<BusinessCard> {
                         },
                         child: Icon(
                           Icons.edit,
-                          color: Colors.red,
+                          color: Colors.amberAccent,
                           size: 30,
-                        ))
-                    : Text("N/A"),
+                        ),
+                      )
+                    : Text(""),
+                SizedBox(height: 5),
+                this._isOwner
+                    ? GestureDetector(
+                        onTap: () {
+                          // print("BUSINESS CARD IS CALLED FROM");
+
+                          // Business business = new Business(
+                          //     id: widget.businessId,
+                          //     name: widget.businessName,
+                          //     categoryId: widget.categoryId as String,
+                          //     location: widget.locationInfo,
+                          //     avgRating: 2.5);
+                          // context.router
+                          //     .push(EditBusinessRoute(business: business));
+                          BlocProvider.of<BusinessBloc>(context)
+                              .add(DeleteBusiness(widget.businessId));
+                          context.router.popAndPush(FilterBusinessRoute(
+                              categoryId: widget.categoryId as String));
+                        },
+                        child: Icon(
+                          Icons.delete,
+                          color: Colors.amberAccent,
+                          size: 30,
+                        ),
+                      )
+                    : Text(""),
               ],
             ),
             Spacer(),

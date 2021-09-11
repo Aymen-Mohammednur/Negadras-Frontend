@@ -41,8 +41,15 @@ class _FilterBusinessPageState extends State<FilterBusinessPage> {
   Widget build(BuildContext context) {
     final businessBloc = BlocProvider.of<BusinessBloc>(context);
     return Scaffold(
+
+        // backgroundColor: Color.fromRGBO(20, 40, 65, 1),
         appBar: AppBar(
-          title: Text("Filter"),
+          iconTheme: IconThemeData(
+            color: Colors.amberAccent, //change your color here
+          ),
+          title:
+              Text("Businesses", style: TextStyle(color: Colors.amberAccent)),
+          backgroundColor: Color.fromRGBO(20, 40, 65, 1),
         ),
         // bottomNavigationBar: bottomNav(context, 0),
         bottomNavigationBar: ownerBottomNav(context, 0) as Widget,
