@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Business {
   final String id;
   final String name;
@@ -16,7 +18,7 @@ class Business {
       required this.name,
       required this.categoryId,
       required this.location,
-      required this.avgRating,
+      this.avgRating,
       this.phoneNumber,
       this.website,
       this.email,
@@ -37,5 +39,11 @@ class Business {
         organization: json['organizationId'],
         isFavorite: json['isFavorite'],
         isOwner: json['isOwner']);
+  }
+
+  JsonCodec toJson(){
+    String jsonToReturn = '{"id": "$id", "name": "$name", "categoryId": "$categoryId", "location": "$location", "avgRating": "$avgRating", "phoneNumber": "$phoneNumber", "website": "$website", "email": "$email", "organization": "$organization", "isFavorite": "$isFavorite", "isOwner": "$isOwner"}';
+
+    return json.decode(jsonToReturn);
   }
 }

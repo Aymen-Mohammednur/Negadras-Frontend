@@ -116,6 +116,8 @@ class _FilterBusinessPageState extends State<FilterBusinessPage> {
                       businessBloc
                           .add(FilterBusinessEvent(businessState.categoryId));
                     }
+                    print(
+                        "IS OWNERRRRRR ${businessState.businessList[1].isOwner}");
                     return Expanded(
                       child: ListView.builder(
                         itemCount: businessState.businessList.length,
@@ -127,9 +129,14 @@ class _FilterBusinessPageState extends State<FilterBusinessPage> {
                               //         businessState.businessList[i].id));
                               context.router.push(UserViewRoute(
                                   businessId:
-                                      businessState.businessList[i].id));
+                                      businessState.businessList[i].id,
+                                businessName:businessState.businessList[i].name,
+                                businessPhone:businessState.businessList[i].phoneNumber as String,
+                                businessWeb:businessState.businessList[i].website as String
+                              ));
                             },
                             child: BusinessCard(
+                              categoryId: businessState.businessList[i].categoryId,
                               isOwner:
                                   businessState.businessList[i].isOwner as bool,
                               from: (_isFavorite) {

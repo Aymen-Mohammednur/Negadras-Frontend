@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:negadras/routes/router.gr.dart';
 import 'package:negadras/utils/bottom_nav_bar.dart';
 import 'package:negadras/business/screens/widgets/drop_business.dart';
 // import 'package:negadras/buisness/screens/widgets/form.dart';
@@ -296,18 +297,19 @@ class _EditFormState extends State<EditForm> {
                       print(_business);
                       final BusinessEvent event = UpdateBusiness(
                         Business(
-                            id: "613a0e7375cc773d183d881e",
-                            name: this._business["name"],
-                            location: this._business["location"],
-                            categoryId: this._business["categoryId"],
-                            website: this._business["website"],
-                            phoneNumber: this._business["phoneNumber"],
-                            email: this._business["email"],
-                            avgRating: this._business['averageRating']),
+                          id: widget.business.id,
+                          name: this._business["name"],
+                          location: this._business["location"],
+                          categoryId: this._business["categoryId"],
+                          website: this._business["website"],
+                          phoneNumber: this._business["phoneNumber"],
+                          email: this._business["email"],
+                        ),
                       );
                       businessBloc.add(event);
                       // print(event);
-                      // context.router.popAndPush(HomeRoute());
+                      context.router.popAndPush(FilterBusinessRoute(
+                          categoryId: widget.business.categoryId));
                     }
                   },
                   child: Text(
@@ -320,7 +322,8 @@ class _EditFormState extends State<EditForm> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    context.router.pop();
+                    context.router.popAndPush(FilterBusinessRoute(
+                        categoryId: widget.business.categoryId));
                   },
                   child: Text(
                     "Cancel",

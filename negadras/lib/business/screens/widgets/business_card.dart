@@ -14,6 +14,7 @@ class BusinessCard extends StatefulWidget {
   final double rating;
   final String locationInfo;
   final String imagePath;
+  final String? categoryId;
   bool isFavorite;
   bool isOwner;
   final Function from;
@@ -25,6 +26,7 @@ class BusinessCard extends StatefulWidget {
     required this.locationInfo,
     required this.imagePath,
     required this.from,
+    this.categoryId,
     this.isFavorite = false,
     this.isOwner = false,
   }) : super(key: key);
@@ -35,11 +37,13 @@ class BusinessCard extends StatefulWidget {
 
 class _BusinessCardState extends State<BusinessCard> {
   late bool _isFavorite;
+  late bool _isOwner;
 
   @override
   void initState() {
     super.initState();
     _isFavorite = widget.isFavorite;
+    _isOwner = widget.isOwner;
   }
 
   @override
@@ -134,7 +138,7 @@ class _BusinessCardState extends State<BusinessCard> {
                         ),
                 ),
                 SizedBox(height: 5),
-                widget.isOwner
+                this._isOwner
                     ? GestureDetector(
                         onTap: () {
                           // widget.isFavorite = !widget.isFavorite;
@@ -151,7 +155,7 @@ class _BusinessCardState extends State<BusinessCard> {
                           Business business = new Business(
                               id: widget.businessId,
                               name: widget.businessName,
-                              categoryId: "widget.categoryId",
+                              categoryId: widget.categoryId as String,
                               location: widget.locationInfo,
                               avgRating: 2.5);
                           context.router
