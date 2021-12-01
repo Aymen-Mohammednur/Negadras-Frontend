@@ -19,11 +19,3 @@ It allows users to search, review, and discover new businesses, and lets them ma
 - Business Owners can update their business' information
 - Business Owners can delete any organizations they have created.
 
-
-**Group Members**
-
-1. Abenezer Sleshi ATR/7940/11 Section 2
-2. Aymen Mohammednur ATR/5985/11 Section 2
-3. Bethlehem Teshibelay ETR/9292/11 Section 2
-4. Semere Habtu ATR/2583/11 Section 2
-5. Semere Tereffe ATR/4113/11 Section 2
