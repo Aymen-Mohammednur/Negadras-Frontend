@@ -56,7 +56,6 @@ class _BusinessStaticsPageState extends State<BusinessStaticsPage> {
                 IconTextPair().drop(),
                 IconTextPair().review()
               ]),
-              chartWidget(),
             ],
           ),
         ),

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
+// import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:negadras/business/models/business.dart';
-import 'package:negadras/business/screens/SimpleBarChart.dart';
 import 'dart:convert';
 import 'package:negadras/review/blocs/blocs.dart';
 import 'package:negadras/review/models/models.dart';
@@ -134,9 +133,7 @@ Widget buttonPanelWidget(iconPairList) {
   );
 }
 
-Widget chartWidget() {
-  return SizedBox(child: SimpleBarChart.withSampleData(), height: 400);
-}
+
 
 Widget _businessReviewBox(r) {
   return reviewBox(r, 1);
