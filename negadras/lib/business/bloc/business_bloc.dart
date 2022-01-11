@@ -30,9 +30,7 @@ class BusinessBloc extends Bloc<BusinessEvent, BusinessState> {
         print("About to fetch businesses under a category");
         final businessList =
             await businessRepository.fetchByCategory(categoryId);
-        print("finished fetching categories");
-        print(
-            "Result to check favorite here: ${businessList[0].isFavorite} ${businessList[1].isFavorite}");
+        
         yield BusinessFetchResultState(businessList, categoryId as String);
       } catch (e) {
         print(e.toString());

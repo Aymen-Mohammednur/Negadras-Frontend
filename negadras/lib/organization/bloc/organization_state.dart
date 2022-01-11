@@ -24,4 +24,3 @@ class OrganizationOperationFailure extends OrganizationState {
   // final Exception e;
   // OrganizationOperationFailure({required this.e});
 }
-

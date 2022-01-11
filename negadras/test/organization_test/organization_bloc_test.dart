@@ -9,15 +9,17 @@ import 'package:negadras/organization/data_providers/organization_data_provider.
 import 'package:negadras/organization/models/organization_model.dart';
 import 'package:negadras/organization/repository/organization_repository.dart';
 
-class MockLoginBloc extends MockBloc<OrganizationEvent, OrganizationState> implements OrganizationBloc {}
+class MockLoginBloc extends MockBloc<OrganizationEvent, OrganizationState>
+    implements OrganizationBloc {}
 
-void main(){
+void main() {
   group('Organization bloc test', () {
     blocTest<OrganizationBloc, OrganizationState>(
       'emits [] when nothing is added',
       build: () {
-        final OrganizationRepository organizationRepository = OrganizationRepository(OrganizationDataProvider());
-        return  OrganizationBloc(organizationRepository: organizationRepository);
+        final OrganizationRepository organizationRepository =
+            OrganizationRepository(OrganizationDataProvider());
+        return OrganizationBloc(organizationRepository: organizationRepository);
       },
       expect: () => <BusinessState>[],
     );
@@ -25,12 +27,12 @@ void main(){
     blocTest<OrganizationBloc, OrganizationState>(
       'Organization Load State',
       build: () {
-        final OrganizationRepository organizationRepository = OrganizationRepository(OrganizationDataProvider());
-        return  OrganizationBloc(organizationRepository: organizationRepository);
+        final OrganizationRepository organizationRepository =
+            OrganizationRepository(OrganizationDataProvider());
+        return OrganizationBloc(organizationRepository: organizationRepository);
       },
-      act:(bloc){
-        return bloc.add(
-            OrganizationLoad());
+      act: (bloc) {
+        return bloc.add(OrganizationLoad());
       },
       wait: const Duration(milliseconds: 500),
       expect: () {
@@ -39,16 +41,15 @@ void main(){
       },
     );
 
-
     blocTest<OrganizationBloc, OrganizationState>(
       'Organization Load State',
       build: () {
-        final OrganizationRepository organizationRepository = OrganizationRepository(OrganizationDataProvider());
-        return  OrganizationBloc(organizationRepository: organizationRepository);
+        final OrganizationRepository organizationRepository =
+            OrganizationRepository(OrganizationDataProvider());
+        return OrganizationBloc(organizationRepository: organizationRepository);
       },
-      act:(bloc){
-        return bloc.add(
-            OrganizationLoad());
+      act: (bloc) {
+        return bloc.add(OrganizationLoad());
       },
       wait: const Duration(milliseconds: 500),
       expect: () {

@@ -17,8 +17,9 @@ void main() {
     blocTest<LoginBloc, LoginState>(
       'emits [] when nothing is added',
       build: () {
-        final AuthRepository authRepo = AuthRepository(AuthDataProvider(http.Client()));
-        return  LoginBloc(authRepo: authRepo);
+        final AuthRepository authRepo =
+            AuthRepository(AuthDataProvider(http.Client()));
+        return LoginBloc(authRepo: authRepo);
       },
       expect: () => <LoginState>[],
     );
@@ -26,16 +27,19 @@ void main() {
     blocTest<LoginBloc, LoginState>(
       'Login Username changed',
       build: () {
-        final AuthRepository authRepo = AuthRepository(AuthDataProvider(http.Client()));
-        return  LoginBloc(authRepo: authRepo);
+        final AuthRepository authRepo =
+            AuthRepository(AuthDataProvider(http.Client()));
+        return LoginBloc(authRepo: authRepo);
       },
-      act:(bloc){
-        return bloc.add(
-            LoginUsernameChanged(username: "username"));
-        },
+      act: (bloc) {
+        return bloc.add(LoginUsernameChanged(username: "username"));
+      },
       wait: const Duration(milliseconds: 500),
       expect: () {
-        LoginState usernameState = LoginState(username:'username',password:'',formStatus: InitialFormStatus());
+        LoginState usernameState = LoginState(
+            username: 'username',
+            password: '',
+            formStatus: InitialFormStatus());
         return [isA<LoginState>()];
       },
     );
@@ -43,12 +47,12 @@ void main() {
     blocTest<LoginBloc, LoginState>(
       'Login Password changed',
       build: () {
-        final AuthRepository authRepo = AuthRepository(AuthDataProvider(http.Client()));
-        return  LoginBloc(authRepo: authRepo);
+        final AuthRepository authRepo =
+            AuthRepository(AuthDataProvider(http.Client()));
+        return LoginBloc(authRepo: authRepo);
       },
-      act:(bloc){
-        return bloc.add(
-            LoginPasswordChanged(password: "password"));
+      act: (bloc) {
+        return bloc.add(LoginPasswordChanged(password: "password"));
       },
       wait: const Duration(milliseconds: 500),
       expect: () {
@@ -59,16 +63,16 @@ void main() {
     blocTest<LoginBloc, LoginState>(
       'On submit login',
       build: () {
-        final AuthRepository authRepo = AuthRepository(AuthDataProvider(http.Client()));
-        return  LoginBloc(authRepo: authRepo);
+        final AuthRepository authRepo =
+            AuthRepository(AuthDataProvider(http.Client()));
+        return LoginBloc(authRepo: authRepo);
       },
-      act:(bloc){
-        return bloc.add(
-            LoginSubmitted());
+      act: (bloc) {
+        return bloc.add(LoginSubmitted());
       },
       wait: const Duration(milliseconds: 500),
       expect: () {
-        return [isA<LoginState>(),isA<LoginState>()];
+        return [isA<LoginState>(), isA<LoginState>()];
       },
     );
   });
@@ -76,8 +80,9 @@ void main() {
     blocTest<SignUpBloc, SignUpState>(
       'emits [] when nothing is added',
       build: () {
-        final AuthRepository authRepo = AuthRepository(AuthDataProvider(http.Client()));
-        return  SignUpBloc(authRepo: authRepo);
+        final AuthRepository authRepo =
+            AuthRepository(AuthDataProvider(http.Client()));
+        return SignUpBloc(authRepo: authRepo);
       },
       expect: () => <SignUpState>[],
     );
@@ -85,18 +90,17 @@ void main() {
     blocTest<SignUpBloc, SignUpState>(
       'Signup submitted',
       build: () {
-        final AuthRepository authRepo = AuthRepository(AuthDataProvider(http.Client()));
-        return  SignUpBloc(authRepo: authRepo);
+        final AuthRepository authRepo =
+            AuthRepository(AuthDataProvider(http.Client()));
+        return SignUpBloc(authRepo: authRepo);
       },
-      act:(bloc){
-        return bloc.add(
-            SignUpSubmitted());
+      act: (bloc) {
+        return bloc.add(SignUpSubmitted());
       },
       wait: const Duration(milliseconds: 500),
       expect: () {
-        return [isA<SignUpState>(),isA<SignUpState>()];
+        return [isA<SignUpState>(), isA<SignUpState>()];
       },
     );
-
   });
 }

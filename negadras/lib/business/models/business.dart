@@ -41,8 +41,9 @@ class Business {
         isOwner: json['isOwner']);
   }
 
-  JsonCodec toJson(){
-    String jsonToReturn = '{"id": "$id", "name": "$name", "categoryId": "$categoryId", "location": "$location", "avgRating": "$avgRating", "phoneNumber": "$phoneNumber", "website": "$website", "email": "$email", "organization": "$organization", "isFavorite": "$isFavorite", "isOwner": "$isOwner"}';
+  JsonCodec toJson() {
+    String jsonToReturn =
+        '{"id": "$id", "name": "$name", "categoryId": "$categoryId", "location": "$location", "avgRating": "$avgRating", "phoneNumber": "$phoneNumber", "website": "$website", "email": "$email", "organization": "$organization", "isFavorite": "$isFavorite", "isOwner": "$isOwner"}';
 
     return json.decode(jsonToReturn);
   }

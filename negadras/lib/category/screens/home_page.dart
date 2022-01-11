@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:negadras/app.dart';
 import 'package:negadras/business/bloc/business_bloc.dart';
 import 'package:negadras/business/screens/add_business.dart';
 import 'package:negadras/business/screens/widgets.dart';
@@ -21,23 +22,44 @@ class _HomePageState extends State<HomePage> {
   Widget businessType(BuildContext context, Bloc bloc, Iterable categories) =>
       GridView.count(
         crossAxisCount: 3,
-        children: List.generate(
-          categories.length,
-          (index) {
-            return GestureDetector(
-                onTap: () {
-                  // bloc.add(CategoryFilter(
-                  //     categoryId: categories.elementAt(index).id));
-
-                  context.router.push(FilterBusinessRoute(
-                      categoryId: categories.elementAt(index).id,
-                      categoryName: categories.elementAt(index).name));
-                },
-                onDoubleTap: () => setText(""),
-                child: _businessTypeContainer(index, categories));
-          },
-        ),
+        children: _getCategoryList(categories),
       );
+
+  List<Widget> _getCategoryList(Iterable categories) {
+    DataBloc bloc = BlocProvider.of<DataBloc>(context);
+    print("HAHAHAHAHA");
+    print(bloc.state.userId);
+    List<Widget> categoryList = [];
+    categoryList.add(
+      GestureDetector(
+            onTap: () {
+              context.router.push(FilterBusinessRoute(
+                  categoryId:"0",
+                  categoryName: "0"));
+            },
+            child: Container(
+        decoration: gridItemDecoration(),
+        child: Center(
+            child: Text(
+          'Your Recommendations',
+          style: TextStyle(color: Colors.amberAccent),
+        )),
+        margin: EdgeInsets.all(10)),
+    ));
+
+    return (categoryList + List.generate(
+      categories.length,
+      (index) {
+        return GestureDetector(
+            onTap: () {
+              context.router.push(FilterBusinessRoute(
+                  categoryId: categories.elementAt(index).id,
+                  categoryName: categories.elementAt(index).name));
+            },
+            child: _businessTypeContainer(index, categories));
+      },
+    ));
+  }
 
   Container _businessTypeContainer(int index, Iterable categories) {
     return Container(

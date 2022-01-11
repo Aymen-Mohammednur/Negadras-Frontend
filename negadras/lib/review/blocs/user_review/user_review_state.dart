@@ -38,6 +38,7 @@ class ReviewExist extends UserReviewState {
 class UserReviewOperationFaliure extends UserReviewState {
   UserReviewOperationFaliure() : super(-1);
 }
-class TrashingReview extends UserReviewState{
+
+class TrashingReview extends UserReviewState {
   TrashingReview() : super(-1);
 }

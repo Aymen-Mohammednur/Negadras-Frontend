@@ -6,7 +6,7 @@ import 'package:negadras/review/screens/widgets.dart';
 
 void main() {
   testWidgets('User View Page Shows Up', (WidgetTester tester) async {
-    await tester.pumpWidget(UserViewPage("","","",""));
+    await tester.pumpWidget(UserViewPage("", "", "", ""));
 
     final titleFinder = find.byType(Text);
     final listViewFinder = find.byWidget(ListView());

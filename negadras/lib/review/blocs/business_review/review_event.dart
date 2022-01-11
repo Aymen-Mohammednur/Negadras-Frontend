@@ -13,5 +13,4 @@ class PageOpen extends ReviewEvent {
   PageOpen(this.businessId, this.userId);
 }
 
-
-class NormalReviewEvent extends ReviewEvent{}
+class NormalReviewEvent extends ReviewEvent {}

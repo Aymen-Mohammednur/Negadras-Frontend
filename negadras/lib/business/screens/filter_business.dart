@@ -108,8 +108,8 @@ class _FilterBusinessPageState extends State<FilterBusinessPage> {
                       businessBloc
                           .add(FilterBusinessEvent(businessState.categoryId));
                     }
-                    print(
-                        "IS OWNERRRRRR ${businessState.businessList[1].isOwner}");
+                    // print(
+                    //     "IS OWNERRRRRR ${businessState.businessList[1].isOwner}");
                     return Expanded(
                       child: ListView.builder(
                         itemCount: businessState.businessList.length,
@@ -140,7 +140,7 @@ class _FilterBusinessPageState extends State<FilterBusinessPage> {
                               categoryId:
                                   businessState.businessList[i].categoryId,
                               isOwner:
-                                  businessState.businessList[i].isOwner as bool,
+                                  false,
                               from: (_isFavorite) {
                                 if (!_isFavorite) {
                                   businessBloc.add(AddToFavoritesEvent(
@@ -160,8 +160,7 @@ class _FilterBusinessPageState extends State<FilterBusinessPage> {
                               locationInfo:
                                   businessState.businessList[i].location,
                               imagePath: 'assets/images/macbook.jpg',
-                              isFavorite: businessState
-                                  .businessList[i].isFavorite as bool,
+                              isFavorite: false,
                             ),
                           );
                         },

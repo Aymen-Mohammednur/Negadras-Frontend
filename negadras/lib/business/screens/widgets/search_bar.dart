@@ -38,7 +38,8 @@ class _SearchBarState extends State<SearchBar> {
                 onChanged: (value) {
                   setState(() {
                     this._input = value;
-                    businessBloc.add(SearchBusinessEvent(widget.categoryId as String, value));
+                    businessBloc.add(SearchBusinessEvent(
+                        widget.categoryId as String, value));
                     // context.router.popAndPush(FilterBusinessRoute(queryParameter: value, categoryId: widget.categoryId));
                   });
                   // setState(() {
@@ -62,9 +63,10 @@ class _SearchBarState extends State<SearchBar> {
             onTap: () {
               // print("ontap");
               setState(() {
-                    businessBloc.add(SearchBusinessEvent(widget.categoryId as String, _input));
-                    // context.router.popAndPush(FilterBusinessRoute(queryParameter: value, categoryId: widget.categoryId));
-                  });
+                businessBloc.add(
+                    SearchBusinessEvent(widget.categoryId as String, _input));
+                // context.router.popAndPush(FilterBusinessRoute(queryParameter: value, categoryId: widget.categoryId));
+              });
             },
           )
         ],

@@ -17,7 +17,10 @@ class OrganizationDataProvider {
     String token = pref.getString("token") as String;
 
     final http.Response response = await http.post(Uri.parse(_baseUrl),
-        headers: <String, String>{"Content-Type": "application/json", "access-token":token},
+        headers: <String, String>{
+          "Content-Type": "application/json",
+          "access-token": token
+        },
         body: jsonEncode({"name": organization.name, "userId": userId}));
 
     if (response.statusCode == 201) {
@@ -32,7 +35,11 @@ class OrganizationDataProvider {
     String token = pref.getString("token") as String;
 
     // print("Inside data provider");
-    final response = await http.get(Uri.parse("$_baseUrl/$userId"), headers: <String, String>{"Content-Type": "application/json", "access-token":token});
+    final response = await http.get(Uri.parse("$_baseUrl/$userId"),
+        headers: <String, String>{
+          "Content-Type": "application/json",
+          "access-token": token
+        });
     // print(response.body);
     // print(response.statusCode);
 
@@ -51,7 +58,10 @@ class OrganizationDataProvider {
     String token = pref.getString("token") as String;
 
     final response = await http.get(Uri.parse("$_baseUrl/$id"),
-        headers: <String, String>{"Content-Type": "application/json", "access-token":token});
+        headers: <String, String>{
+          "Content-Type": "application/json",
+          "access-token": token
+        });
 
     if (response.statusCode == 200) {
       return Organization.fromJson(jsonDecode(response.body));
@@ -65,7 +75,10 @@ class OrganizationDataProvider {
     String token = pref.getString("token") as String;
 
     final response = await http.patch(Uri.parse("$_baseUrl/$id"),
-        headers: <String, String>{"Content-Type": "application/json", "access-token":token},
+        headers: <String, String>{
+          "Content-Type": "application/json",
+          "access-token": token
+        },
         body: jsonEncode({
           "name": organization.name,
         }));
@@ -81,7 +94,10 @@ class OrganizationDataProvider {
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("token") as String;
     final response = await http.delete(Uri.parse("$_baseUrl/$id"),
-        headers: <String, String>{"Content-Type": "application/json", "access-token":token});
+        headers: <String, String>{
+          "Content-Type": "application/json",
+          "access-token": token
+        });
     if (response.statusCode != 204) {
       throw Exception("Field to delete the Organization");
     }

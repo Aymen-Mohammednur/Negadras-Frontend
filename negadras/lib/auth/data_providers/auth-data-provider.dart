@@ -40,10 +40,8 @@ class AuthDataProvider {
     final http.Response response = await client.post(
       Uri.parse("$_baseUrl/login"),
       headers: <String, String>{"Content-Type": "application/json"},
-      body: jsonEncode({
-        "username": login.username,
-        "password": login.password
-      }),
+      body:
+          jsonEncode({"username": login.username, "password": login.password}),
     );
     print("Status Code: ${response.statusCode}");
     if (response.statusCode == 200) {

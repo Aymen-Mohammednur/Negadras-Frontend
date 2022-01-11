@@ -20,7 +20,8 @@ class ReviewBloc extends Bloc<ReviewEvent, ReviewState> {
     if (event is PageOpen) {
       print("PageOpen detected in ReviewBloc");
       try {
-        print("attempting to yield review list with business ID : ${event.businessId}");
+        print(
+            "attempting to yield review list with business ID : ${event.businessId}");
 
         final reviewList = await reviewRepository.fetchAll(event.businessId);
         print("review list yielded");

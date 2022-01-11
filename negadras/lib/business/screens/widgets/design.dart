@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class Bubble extends StatelessWidget {
   final double height;
   final double width;

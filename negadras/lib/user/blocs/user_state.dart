@@ -23,7 +23,6 @@ class UserState {
       this.password = '',
       this.newPassword = '',
       this.confirmPassword = '',
-
       this.formStatus = const InitialFormStatus()});
 
   UserState copyWith({

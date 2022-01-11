@@ -96,6 +96,7 @@ class App extends StatelessWidget {
               create: (context) => ReviewBloc(reviewRepository)),
           BlocProvider<UserReviewBloc>(
               create: (context) => UserReviewBloc(reviewRepository)),
+          
           BlocProvider<FavoriteBloc>(
               create: (context) =>
                   FavoriteBloc(businessRepository: businessRepository)

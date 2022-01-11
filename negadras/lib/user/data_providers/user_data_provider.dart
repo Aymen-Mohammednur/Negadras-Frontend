@@ -15,8 +15,10 @@ class UserDataProvider {
     String token = pref.getString("token") as String;
 
     final response = await http.get(Uri.parse("$_baseUrl/$id"),
-        headers: <String, String>{"Content-Type": "application/json", "access-token":token}
-    );
+        headers: <String, String>{
+          "Content-Type": "application/json",
+          "access-token": token
+        });
 
     if (response.statusCode == 200) {
       return User.fromJson(jsonDecode(response.body));
@@ -30,7 +32,10 @@ class UserDataProvider {
     String token = pref.getString("token") as String;
 
     final response = await http.patch(Uri.parse("$_baseUrl/username/$id"),
-        headers: <String, String>{"Content-Type": "application/json", "access-token":token},
+        headers: <String, String>{
+          "Content-Type": "application/json",
+          "access-token": token
+        },
         body: jsonEncode({
           "username": username,
           // "role": user.role,
@@ -49,7 +54,10 @@ class UserDataProvider {
     String token = pref.getString("token") as String;
 
     final response = await http.patch(Uri.parse("$_baseUrl/password/$id"),
-        headers: <String, String>{"Content-Type": "application/json", "access-token":token},
+        headers: <String, String>{
+          "Content-Type": "application/json",
+          "access-token": token
+        },
         body: jsonEncode(
           {"oldPassword": oldPassword, "newPassword": newPassword},
         ));
@@ -66,7 +74,10 @@ class UserDataProvider {
     String token = pref.getString("token") as String;
 
     final response = await http.delete(Uri.parse("$_baseUrl/$id"),
-        headers: <String, String>{"Content-Type": "application/json", "access-token":token},
+        headers: <String, String>{
+          "Content-Type": "application/json",
+          "access-token": token
+        },
         body: jsonEncode({
           "password": password
           // "role": user.role,
@@ -82,7 +93,10 @@ class UserDataProvider {
     String token = pref.getString("token") as String;
 
     final response = await http.post(Uri.parse("$_baseUrl/claim"),
-        headers: <String, String>{"Content-Type": "application/json", "access-token":token},
+        headers: <String, String>{
+          "Content-Type": "application/json",
+          "access-token": token
+        },
         body: jsonEncode({
           "userId": userId,
           "businessId": businessId

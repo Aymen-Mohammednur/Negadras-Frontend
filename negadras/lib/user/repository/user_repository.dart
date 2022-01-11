@@ -17,7 +17,9 @@ class UserRepository {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final id = await prefs.getString("user_id");
 
-    return this.dataProvider.changePassword(id as String, oldPassword, newPassword);
+    return this
+        .dataProvider
+        .changePassword(id as String, oldPassword, newPassword);
   }
 
   Future<User> fetchOne(String id) async {

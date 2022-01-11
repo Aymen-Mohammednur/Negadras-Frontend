@@ -154,7 +154,6 @@ Widget buttonPanelWidget(iconPairList) {
   );
 }
 
-
 Widget _businessReviewBox(r) {
   return reviewBox(r, 1);
 }

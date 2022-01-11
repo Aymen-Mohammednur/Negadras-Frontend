@@ -12,20 +12,15 @@ part 'favorite_state.dart';
 class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
   final BusinessRepository businessRepository;
 
-  FavoriteBloc({required this.businessRepository})
-      : super(FavoriteInitial());
+  FavoriteBloc({required this.businessRepository}) : super(FavoriteInitial());
 
   @override
   Stream<FavoriteState> mapEventToState(
     FavoriteEvent event,
   ) async* {
-    
-
     if (event is ShowFavoritesEvent) {
       yield FetchingState();
       try {
-
-        // //Granted a working repo and data provider
         final businessList = await businessRepository.fetchFavorites();
         if (businessList.length == 0) {
           yield NoFavoriteState();
@@ -37,10 +32,6 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
         yield FavoriteFailure();
       }
     }
-
-    // if (event is AddToFavoritesEvent) {
-    //   await businessRepository.addToFavorites(event.businessId);
-    // }
 
     if (event is RemoveFromFavoritesEvent) {
       await businessRepository.removeFromFavorites(event.businessId);

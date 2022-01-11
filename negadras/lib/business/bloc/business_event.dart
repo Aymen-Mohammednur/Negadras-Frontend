@@ -16,7 +16,7 @@ class SearchBusinessEvent extends BusinessEvent {
   String queryParameter;
   String categoryId;
 
-  SearchBusinessEvent( this.categoryId, this.queryParameter);
+  SearchBusinessEvent(this.categoryId, this.queryParameter);
 }
 
 class FilterBusinessEvent extends BusinessEvent {

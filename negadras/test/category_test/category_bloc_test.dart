@@ -8,15 +8,17 @@ import 'package:negadras/category/blocs/category_bloc.dart';
 import 'package:negadras/category/data_providers/category_data_provider.dart';
 import 'package:negadras/category/repository/category_repository.dart';
 
-class MockLoginBloc extends MockBloc<BusinessEvent, BusinessState> implements BusinessBloc {}
+class MockLoginBloc extends MockBloc<BusinessEvent, BusinessState>
+    implements BusinessBloc {}
 
-void main(){
+void main() {
   group('Category bloc test', () {
     blocTest<CategoryBloc, CategoryState>(
       'emits [] when nothing is added',
       build: () {
-        final CategoryRepository categoryRepository = CategoryRepository(CategoryDataProvider());
-        return  CategoryBloc(categoryRepository: categoryRepository);
+        final CategoryRepository categoryRepository =
+            CategoryRepository(CategoryDataProvider());
+        return CategoryBloc(categoryRepository: categoryRepository);
       },
       expect: () => <CategoryState>[],
     );
@@ -24,19 +26,18 @@ void main(){
     blocTest<CategoryBloc, CategoryState>(
       'Category Fetch State',
       build: () {
-        final CategoryRepository categoryRepository = CategoryRepository(CategoryDataProvider());
-        return  CategoryBloc(categoryRepository: categoryRepository);
+        final CategoryRepository categoryRepository =
+            CategoryRepository(CategoryDataProvider());
+        return CategoryBloc(categoryRepository: categoryRepository);
       },
-      act:(bloc){
-        return bloc.add(
-            CategoryFetch());
+      act: (bloc) {
+        return bloc.add(CategoryFetch());
       },
       wait: const Duration(milliseconds: 500),
       expect: () {
         CategoryState categoryState = Fetching();
-        return [isA<CategoryState>(),isA<CategoryState>()];
+        return [isA<CategoryState>(), isA<CategoryState>()];
       },
     );
-
   });
 }

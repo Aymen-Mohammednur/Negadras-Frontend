@@ -30,7 +30,7 @@ class UpdatePassword extends UserEvent {
   final String newPassword;
   final String oldPassword;
 
-  const UpdatePassword({required this.oldPassword ,required this.newPassword});
+  const UpdatePassword({required this.oldPassword, required this.newPassword});
 
   @override
   // List<Object> get props => [userId];

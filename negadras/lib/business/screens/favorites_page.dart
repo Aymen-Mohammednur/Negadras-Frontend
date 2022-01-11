@@ -91,7 +91,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                             locationInfo: state.businessList[i].location,
                             imagePath: 'assets/images/macbook.jpg',
                             isFavorite:
-                                state.businessList[i].isFavorite as bool,
+                                false,
                           ),
                         );
                       },
