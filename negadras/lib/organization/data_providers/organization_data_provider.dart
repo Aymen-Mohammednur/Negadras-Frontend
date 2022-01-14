@@ -10,7 +10,7 @@ class OrganizationDataProvider {
   // FOR EMULATOR
   // static final String _baseUrl = "http://10.0.2.2:3000/api/organization";
   static final String _baseUrl =
-      "${StringConstants.BASE_URL_EMULATOR}/organization";
+      "${StringConstants.REST_API_URL}/organization";
 
   Future<Organization> create(String userId, Organization organization) async {
     SharedPreferences pref = await SharedPreferences.getInstance();

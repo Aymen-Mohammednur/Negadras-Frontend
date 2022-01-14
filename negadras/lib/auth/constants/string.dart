@@ -1,10 +1,7 @@
 class StringConstants {
   // FOR EMULATOR
   // ignore: non_constant_identifier_names
-  static final String BASE_URL_EMULATOR = "http://192.168.242.92:3000/api";
-  // FOR ACTUAL DEVICE
-  // ignore: non_constant_identifier_names
-  static final String BASE_URL_DEVICE = "http://192.168.242.92:3000/api";
+  static final String REST_API_URL = "http://192.168.40.222:3000/api";
 
   // ignore: non_constant_identifier_names
   static final String USERNAME = "Username";

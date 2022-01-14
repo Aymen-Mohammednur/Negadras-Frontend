@@ -90,8 +90,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                 2.5, //Get the review repo and pass the business id
                             locationInfo: state.businessList[i].location,
                             imagePath: 'assets/images/macbook.jpg',
-                            isFavorite:
-                                false,
+                            isFavorite:state.businessList[i].isFavorite ?? false,
                           ),
                         );
                       },

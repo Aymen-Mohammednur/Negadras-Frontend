@@ -8,7 +8,7 @@ class UserDataProvider {
   // static final String _baseUrl = "http://localhost/3000/api/user";
 
   // FOR EMULATOR
-  static final String _baseUrl = "${StringConstants.BASE_URL_EMULATOR}/user";
+  static final String _baseUrl = "${StringConstants.REST_API_URL}/user";
 
   Future<User> fetchOne(String id) async {
     SharedPreferences pref = await SharedPreferences.getInstance();

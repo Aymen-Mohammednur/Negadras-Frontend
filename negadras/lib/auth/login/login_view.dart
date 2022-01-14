@@ -114,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
           alignment: Alignment.topCenter,
           padding: EdgeInsets.only(top: 20),
           child: Text(
-            'Sign In to Negadras',
+            'Sign in',
             style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 30,

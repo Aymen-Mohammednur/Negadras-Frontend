@@ -94,13 +94,6 @@ class _BusinessCardState extends State<BusinessCard> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    // widget.isFavorite = !widget.isFavorite;
-                    // if (widget.isFavorite) {
-                    //   businessBloc.add(AddToFavoritesEvent(widget.businessId));
-                    // } else {
-                    //   businessBloc.add(RemoveFromFavoritesEvent(widget.businessId));
-                    // }
-                    print("BUSINESS CARD IS CALLED FROM");
                     widget.from(_isFavorite);
                     setState(() {
                       _isFavorite = !_isFavorite;
@@ -121,8 +114,6 @@ class _BusinessCardState extends State<BusinessCard> {
                 this._isOwner
                     ? GestureDetector(
                         onTap: () {
-                          print("BUSINESS CARD IS CALLED FROM");
-
                           Business business = new Business(
                               id: widget.businessId,
                               name: widget.businessName,
@@ -143,16 +134,6 @@ class _BusinessCardState extends State<BusinessCard> {
                 this._isOwner
                     ? GestureDetector(
                         onTap: () {
-                          // print("BUSINESS CARD IS CALLED FROM");
-
-                          // Business business = new Business(
-                          //     id: widget.businessId,
-                          //     name: widget.businessName,
-                          //     categoryId: widget.categoryId as String,
-                          //     location: widget.locationInfo,
-                          //     avgRating: 2.5);
-                          // context.router
-                          //     .push(EditBusinessRoute(business: business));
                           BlocProvider.of<BusinessBloc>(context)
                               .add(DeleteBusiness(widget.businessId));
                           context.router.popAndPush(FilterBusinessRoute(
@@ -167,8 +148,9 @@ class _BusinessCardState extends State<BusinessCard> {
                     : Text(""),
               ],
             ),
-            Spacer(),
-            CircularAvatar(imagePath: widget.imagePath),
+            SizedBox(width: 25,),
+            // Spacer(),
+            // CircularAvatar(imagePath: widget.imagePath),
           ],
         ),
       ),

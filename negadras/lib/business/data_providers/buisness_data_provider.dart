@@ -5,14 +5,12 @@ import 'package:negadras/business/models/models.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class BusinessDataProvider {
-  static final String _baseUrl =
-      "${StringConstants.BASE_URL_EMULATOR}/business";
+  static final String _baseUrl = "${StringConstants.REST_API_URL}/business";
 
-  static final String _baseUrlFav =
-      "${StringConstants.BASE_URL_EMULATOR}/favorite";
+  static final String _baseUrlFav = "${StringConstants.REST_API_URL}/favorite";
 
   static final String _baseUrlRec =
-      "${StringConstants.BASE_URL_EMULATOR}/recommendation";
+      "${StringConstants.REST_API_URL}/recommendation";
 
   Future<Business> create(Business business) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -62,11 +60,14 @@ class BusinessDataProvider {
 
   Future<List<Business>> fetchByCategory(
       String? categoryId, String? userId) async {
+    print("Fetch BY Category recieved this");
+    print("CategoryId: $categoryId");
+    print("UserId: $userId");
     String url;
     print("INSIDE fetchByCategoryfetchByCategoryfetchByCategory");
     if (categoryId != "0") {
       print("searching for category: " + categoryId!);
-      url = "$_baseUrl/filter/$categoryId/";
+      url = "$_baseUrl/filter/$categoryId/$userId";
     } else {
       url = "$_baseUrlRec/$userId";
     }
@@ -82,14 +83,7 @@ class BusinessDataProvider {
     // print(response.body);
     if (response.statusCode == 200) {
       final business = jsonDecode(response.body) as List;
-      // print(business);
-      // final test = business.map((b) => Business.fromJson(b)).toList();
-      // print(test[0].name);
       var x = business.map((b) => Business.fromJson(b)).toList();
-      print("Found THISSS: ");
-      for (var xx in x) {
-        print(xx.id);
-      }
       return x;
     } else {
       throw Exception("Failed to get business");

@@ -2,7 +2,7 @@ part of 'login_bloc.dart';
 
 class LoginState {
   final String username;
-  bool get isValidUsername => username.length > 5;
+  bool get isValidUsername => username.length >= 4;
 
   final String password;
   bool get isValidPassword => password.length > 6;
