@@ -4,12 +4,13 @@ This repository contains code for a flutter client of a business reviewing and f
 
 It allows users to search, review, and discover new businesses, and lets them make well informed decisions on the places they plan to spend their time and money. business owners will also be able to extract value from this program.
 
-![Image](https://i.imgur.com/yNX5ZM5.jpeg "Sign up page")
-![Image](https://i.imgur.com/Lk1Uaaj.jpeg "Log in page")
-![Image](https://i.imgur.com/nj50tEP.jpeg "Business List")
-![Image](https://i.imgur.com/OH9I6IM.jpeg "Categories List")
-![Image](https://i.imgur.com/9jKRbTQ.jpeg "Favourites List")
 
+
+<img src="https://i.imgur.com/yNX5ZM5.jpeg" alt="Sign up page " width="200"/>
+<img src="https://i.imgur.com/Lk1Uaaj.jpeg" alt="Log In " width="200"/>
+<img src="https://i.imgur.com/nj50tEP.jpeg" alt="Business List" width="200"/>
+<img src="https://i.imgur.com/OH9I6IM.jpeg" alt="Categories List" width="200"/>
+<img src="https://i.imgur.com/9jKRbTQ.jpeg" alt="Favourites List" width="200"/>
 
 
 ### How to run
