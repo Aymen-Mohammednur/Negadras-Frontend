@@ -18,9 +18,8 @@ It allows users to search, review, and discover new businesses, and lets them ma
 A web version has been ported and deployed. Please note that this does not mirror the performance or user experience one would get with an Android or iOS device. Some artifacts may also appear as the codebase was developed with mobile devices in mind. With all that said, the web version of the client can be found [here](https://stark-brushlands-69254.herokuapp.com/ "Negadras Backend Link"). 
 
 To run the client locally, do the following:
-1. Clone this repository.
-2. `fluter pub get`
-3. `flutter run`
+1. > `git clone https://github.com/Aymen-Mohammednur/Negadras-Frontend`
+2. >`fluter pub get`
+3. >`flutter run`
 
-Note that this will automatically connect to the backend hosted on herokuapp. If you want to host a local instance of the backend, follow the instructions [here](https://github.com/Aymen-Mohammednur/Negadras-Backend "Negadras Backend Link").
-
+Note that this will automatically connect to the backend hosted on herokuapp. If you want to host a local instance of the backend, follow the instructions [here](https://github.com/Aymen-Mohammednur/Negadras-Backend "Negadras Backend Link"), and copy the IP of the hosted API to REST_API_URL variable at the 4th line of negadras/lib/auth/constants/string.dart.
