@@ -39,7 +39,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
         yield state.copyWith(formStatus: SubmissionSuccess(loginResponse));
       } catch (e) {
-        print("Exception at login event $e");
+        // print("Exception at login event $e");
         yield state.copyWith(formStatus: SubmissionFailed(e as Exception));
       }
     }

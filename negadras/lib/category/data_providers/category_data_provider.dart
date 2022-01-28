@@ -5,8 +5,7 @@ import 'package:negadras/category/models/category.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CategoryDataProvider {
-  static final String _baseUrl =
-      "${StringConstants.REST_API_URL}/category";
+  static final String _baseUrl = "${StringConstants.REST_API_URL}/category";
 
   Future<Category> create(Category category) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -31,14 +30,14 @@ class CategoryDataProvider {
   Future<List<Category>> fetchAll() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("token") as String;
-    // print("Inside data provider");
+    // // print("Inside data provider");
     final response = await http.get(Uri.parse(_baseUrl),
         headers: <String, String>{
           "Content-Type": "application/json",
           "access-token": token
         });
-    // print(response.body);
-    // print(response.statusCode);
+    // // print(response.body);
+    // // print(response.statusCode);
 
     if (response.statusCode == 200) {
       final category = jsonDecode(response.body) as List;

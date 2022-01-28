@@ -14,7 +14,7 @@ class CategoryRepository {
   }
 
   Future<List<Category>> fetchAll() async {
-    print("Inside repo");
+    // print("Inside repo");
     return this.dataProvider.fetchAll();
   }
 

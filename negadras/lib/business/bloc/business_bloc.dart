@@ -27,14 +27,14 @@ class BusinessBloc extends Bloc<BusinessEvent, BusinessState> {
       yield FetchingState();
       final categoryId = event.categoryId;
       try {
-        print("About to fetch businesses under a category");
+        // print("About to fetch businesses under a category");
         final businessList =
             await businessRepository.fetchByCategory(categoryId);
-        
+
         yield BusinessFetchResultState(businessList, categoryId as String);
       } catch (e) {
-        print(e.toString());
-        print("Unfortunately got error on the way");
+        // print(e.toString());
+        // print("Unfortunately got error on the way");
         yield Failure(categoryId as String);
       }
     }
@@ -44,16 +44,16 @@ class BusinessBloc extends Bloc<BusinessEvent, BusinessState> {
       final categoryId = event.categoryId;
       final queryParameter = event.queryParameter;
       try {
-        // print("About to fetch businesses under a category");
+        // // print("About to fetch businesses under a category");
         final businessList =
             await businessRepository.fetchForSearch(queryParameter, categoryId);
-        print("finished fetching categories");
-        // print(
+        // print("finished fetching categories");
+        // // print(
         //     "Result to check favorite here: ${businessList[0].isFavorite} ${businessList[1].isFavorite}");
         yield BusinessFetchResultState(businessList, categoryId);
       } catch (e) {
-        print(e.toString());
-        print("Unfortunately got error on the way");
+        // print(e.toString());
+        // print("Unfortunately got error on the way");
         yield Failure(categoryId);
       }
     }
@@ -72,7 +72,7 @@ class BusinessBloc extends Bloc<BusinessEvent, BusinessState> {
     // }
     if (event is AddBusiness) {
       try {
-        // print("inside bloc");
+        // // print("inside bloc");
         await businessRepository.create(event.business);
 
         final business = await businessRepository.fetch();
@@ -178,7 +178,7 @@ class BusinessBloc extends Bloc<BusinessEvent, BusinessState> {
 
 //         yield FavoriteSuccess(businessList);
 //       } catch (e) {
-//         print("$e +++++++++ FETCH FAV ERROR");
+//         // print("$e +++++++++ FETCH FAV ERROR");
 //         yield FavoriteFailure();
 //       }
 //     }

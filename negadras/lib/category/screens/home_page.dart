@@ -19,7 +19,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Widget businessType(BuildContext context, Bloc bloc, Iterable categories) =>
+  Widget businessTypes(BuildContext context, Bloc bloc, Iterable categories) =>
       GridView.count(
         crossAxisCount: 3,
         children: _getCategoryList(categories),
@@ -27,38 +27,42 @@ class _HomePageState extends State<HomePage> {
 
   List<Widget> _getCategoryList(Iterable categories) {
     DataBloc bloc = BlocProvider.of<DataBloc>(context);
-    print("HAHAHAHAHA");
-    print(bloc.state.userId);
     List<Widget> categoryList = [];
-    categoryList.add(
-      GestureDetector(
-            onTap: () {
-              context.router.push(FilterBusinessRoute(
-                  categoryId:"0",
-                  categoryName: "0"));
-            },
-            child: Container(
-        decoration: gridItemDecoration(),
-        child: Center(
-            child: Text(
-          'Your Recommendations',
-          style: TextStyle(color: Colors.amberAccent),
-        )),
-        margin: EdgeInsets.all(10)),
-    ));
-
-    return (categoryList + List.generate(
-      categories.length,
-      (index) {
-        return GestureDetector(
-            onTap: () {
-              context.router.push(FilterBusinessRoute(
-                  categoryId: categories.elementAt(index).id,
-                  categoryName: categories.elementAt(index).name));
-            },
-            child: _businessTypeContainer(index, categories));
+    categoryList.add(GestureDetector(
+      onTap: () {
+        context.router
+            .push(FilterBusinessRoute(categoryId: "0", categoryName: "0"));
       },
+      child: Container(
+          decoration: gridItemDecoration(),
+          child: Center(
+              child: Padding(
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+            child: Text(
+              'Recommended Places',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.amberAccent,
+              ),
+            ),
+          )),
+          margin: EdgeInsets.all(10)),
     ));
+    print(categories);
+
+    return (categoryList +
+        List.generate(
+          categories.length,
+          (index) {
+            return GestureDetector(
+                onTap: () {
+                  context.router.push(FilterBusinessRoute(
+                      categoryId: categories.elementAt(index).id,
+                      categoryName: categories.elementAt(index).name));
+                },
+                child: _businessTypeContainer(index, categories));
+          },
+        ));
   }
 
   Container _businessTypeContainer(int index, Iterable categories) {
@@ -72,30 +76,37 @@ class _HomePageState extends State<HomePage> {
         margin: EdgeInsets.all(10));
   }
 
-  String textString = "";
+  var headerText = "Available Business Categories";
 
-  void setText(String s) {
-    textString = s;
-    setState(() {});
+  void setHeader(String s) {
+    setState(() {
+      headerText = s;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final categoryBloc = BlocProvider.of<CategoryBloc>(context);
+
+    if (categoryBloc.state is CategoryOperationSuccess) {
+      if ((categoryBloc.state as CategoryOperationSuccess).categories.length ==
+          0) {
+        setHeader("No Categories Available");
+      }
+    }
+
     return Scaffold(
       backgroundColor: Color.fromRGBO(20, 40, 65, 1),
       appBar: AppBar(
         backgroundColor: Colors.amberAccent,
         title: Text(
-          "Negadras",
+          headerText,
           style: TextStyle(color: Color.fromRGBO(20, 40, 65, 1)),
         ),
         centerTitle: true,
       ),
       body: BlocBuilder<CategoryBloc, CategoryState>(
         builder: (context, state) {
-          print(state);
-
           if (state is CategoryOperationFailed) {
             return Center(
               child: Text("Could not do category operation"),
@@ -103,28 +114,7 @@ class _HomePageState extends State<HomePage> {
           }
 
           if (state is CategoryOperationSuccess) {
-            final categories = state.categories;
-
-            return Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // const SearchBar(),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0, top: 8.0),
-                    child: Text("What are you looking for...",
-                        style: normalText()),
-                  ),
-                  Expanded(
-                      flex: 3,
-                      child: businessType(context, categoryBloc, categories)),
-                  // Expanded(
-                  //   flex: 1,
-                  //   child: Center(child: Text(textString)),
-                  // )
-                ],
-              ),
-            );
+            return businessTypes(context, categoryBloc, state.categories);
           }
 
           return Center(
@@ -134,17 +124,17 @@ class _HomePageState extends State<HomePage> {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.router.push(AddBusinessRoute());
-        },
-        tooltip: 'Increment',
-        child: Icon(
-          Icons.add,
-          color: Color.fromRGBO(20, 40, 65, 1),
-        ),
-        backgroundColor: Colors.amberAccent,
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     context.router.push(AddBusinessRoute());
+      //   },
+      //   tooltip: 'Increment',
+      //   child: Icon(
+      //     Icons.add,
+      //     color: Color.fromRGBO(20, 40, 65, 1),
+      //   ),
+      //   backgroundColor: Colors.amberAccent,
+      // ),
       // bottomNavigationBar: bottomNav(context, 0),
       bottomNavigationBar: ownerBottomNav(context, 0),
     );

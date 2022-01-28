@@ -23,17 +23,17 @@ class OrganizationBloc extends Bloc<OrganizationEvent, OrganizationState> {
     if (event is OrganizationLoad) {
       yield OrganizationLoading();
       try {
-        print("Inside org loading");
+        // print("Inside org loading");
         final organizations = await organizationRepository.fetchByUserId();
         var a = organizations.length;
-        print("Organization lenght: $a");
+        // print("Organization lenght: $a");
         if (organizations.length == 0) {
           yield NoOrganizationsState();
         } else {
           yield OrganizationOperationSuccess(organizations);
         }
       } catch (e) {
-        print(e);
+        // print(e);
         yield OrganizationOperationFailure();
       }
     }

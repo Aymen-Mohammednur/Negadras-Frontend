@@ -18,42 +18,17 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   Stream<CategoryState> mapEventToState(CategoryEvent event) async* {
     if (event is CategoryFetch) {
       yield Fetching();
-      print("Before Try");
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
       final val = await prefs.getString("user_id");
-      print("SAVED the id: $val");
 
       try {
-        // print("Inside Try before fetch");
         final categories = await categoryRepository.fetchAll();
-        // print("after fetch");
-        // print("Categories: $categories");
         yield CategoryOperationSuccess(categories);
       } catch (e) {
-        print(e);
         yield CategoryOperationFailed();
       }
     }
 
-    // if (event is CategorySearch) {
-    //   yield Fetching();
-    //   try {
-    //     // final business = await businessRepository.fetch();
-    //     yield SearchSuccess(business);
-    //   } catch (_) {
-    //     yield CategoryOperationFailed();
-    //   }
-    // }
-
-    // if (event is CategoryFilter) {
-    //   yield Fetching();
-    //   try {
-    //     final categoryId = event.categoryId;
-    //     yield FilterSuccess(categoryId);
-    //   } catch (_) {
-    //     yield CategoryOperationFailed();
-    //   }
-    // }
   }
 }

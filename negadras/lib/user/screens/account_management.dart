@@ -23,7 +23,7 @@ class AccountManagementPage extends StatelessWidget {
       ),
       backgroundColor: Color.fromRGBO(20, 40, 65, 1),
       // bottomNavigationBar: bottomNav(context, 2),
-      bottomNavigationBar: ownerBottomNav(context, 3) as Widget,
+      bottomNavigationBar: ownerBottomNav(context, 3),
       body: SafeArea(
           child: Column(
         children: [

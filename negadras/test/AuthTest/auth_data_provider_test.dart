@@ -17,7 +17,7 @@ main() {
   group('AuthProvider test', () {
     test('registers a user', () async {
       final client = MockClient();
-      final String _baseUrl = "${StringConstants.BASE_URL_DEVICE}/auth";
+      final String _baseUrl = "${StringConstants.REST_API_URL}/auth";
 
       when(client.post(Uri.parse("$_baseUrl/register"),
               headers: anyNamed('headers'), body: anyNamed('body')))
@@ -40,7 +40,7 @@ main() {
         'Register: throws an exception if the http call completes with an error',
         () {
       final client = MockClient();
-      final String _baseUrl = "${StringConstants.BASE_URL_DEVICE}/auth";
+      final String _baseUrl = "${StringConstants.REST_API_URL}/auth";
 
       when(client.post(Uri.parse("$_baseUrl/register"),
               headers: anyNamed('headers'), body: anyNamed('body')))
@@ -59,7 +59,7 @@ main() {
 
     test('login a user', () async {
       final client = MockClient();
-      final String _baseUrl = "${StringConstants.BASE_URL_DEVICE}/auth";
+      final String _baseUrl = "${StringConstants.REST_API_URL}/auth";
 
       when(client.post(Uri.parse("$_baseUrl/login"),
               headers: anyNamed('headers'), body: anyNamed('body')))
@@ -79,7 +79,7 @@ main() {
         'Login user: throws an exception if the http call completes with an error',
         () {
       final client = MockClient();
-      final String _baseUrl = "${StringConstants.BASE_URL_DEVICE}/auth";
+      final String _baseUrl = "${StringConstants.REST_API_URL}/auth";
 
       when(client.post(Uri.parse("$_baseUrl/login"),
               headers: anyNamed('headers'), body: anyNamed('body')))

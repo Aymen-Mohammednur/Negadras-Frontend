@@ -25,7 +25,7 @@ class _EditOrganizationPageState extends State<EditOrganizationPage> {
 
   @override
   Widget build(BuildContext context) {
-    // print(organization);
+    // // print(organization);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(20, 40, 65, 1),

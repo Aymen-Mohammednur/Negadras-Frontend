@@ -221,8 +221,8 @@ Widget businessReviewList(reviewList) {
 }
 
 Widget handleReviewState(state, context, businessId) {
-  print("STATEEEEEEEEEEEEEEEEEEe");
-  print(state);
+  // print("STATEEEEEEEEEEEEEEEEEEe");
+  // print(state);
 
   if (state is ReviewInitial) {
     BlocProvider.of<ReviewBloc>(context).add(PageOpen(businessId, ""));
@@ -232,7 +232,7 @@ Widget handleReviewState(state, context, businessId) {
       child: Center(child: Text("Some error occured")),
     );
   } else if (state is ReviewPageLoaded) {
-    print("REVIEW LISTTT: ${state.reviewList}");
+    // print("REVIEW LISTTT: ${state.reviewList}");
     // if (state.businessId)
     return _allReviews(state.reviewList);
   } else {

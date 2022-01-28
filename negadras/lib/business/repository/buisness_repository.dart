@@ -7,8 +7,8 @@ class BusinessRepository {
   BusinessRepository(this.dataProvider);
 
   Future<Business> create(Business business) async {
-    // print("inside repo");
-    print("INSIDE BUSINESS REPO");
+    // // print("inside repo");
+    // print("INSIDE BUSINESS REPO");
     return this.dataProvider.create(business);
   }
 
@@ -33,7 +33,7 @@ class BusinessRepository {
   }
 
   Future<List<Business>> fetchByCategory(String? categoryId) async {
-    print("Inside business repo");
+    // print("Inside business repo");
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     final userId = await prefs.getString("user_id");

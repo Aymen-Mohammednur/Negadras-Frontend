@@ -7,7 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class BusinessDataProvider {
   static final String _baseUrl = "${StringConstants.REST_API_URL}/business";
 
-  static final String _baseUrlFav = "${StringConstants.REST_API_URL}/favorite";
+  static final String _baseUrlFav = (_baseUrl + "/favorite");
+  String x() => _baseUrl + "/favorites";
 
   static final String _baseUrlRec =
       "${StringConstants.REST_API_URL}/recommendation";
@@ -32,7 +33,7 @@ class BusinessDataProvider {
           "isFavorite": business.isFavorite,
         }));
 
-    print(response.body);
+    // print(response.body);
     if (response.statusCode == 201) {
       return Business.fromJson(jsonDecode(response.body));
     } else {
@@ -49,7 +50,7 @@ class BusinessDataProvider {
           "Content-Type": "application/json",
           "access-token": token
         });
-    print(response.body);
+    // print(response.body);
     if (response.statusCode == 200) {
       final business = jsonDecode(response.body) as List;
       return business.map((b) => Business.fromJson(b)).toList();
@@ -60,13 +61,13 @@ class BusinessDataProvider {
 
   Future<List<Business>> fetchByCategory(
       String? categoryId, String? userId) async {
-    print("Fetch BY Category recieved this");
-    print("CategoryId: $categoryId");
-    print("UserId: $userId");
+    // print("Fetch BY Category recieved this");
+    // print("CategoryId: $categoryId");
+    // print("UserId: $userId");
     String url;
-    print("INSIDE fetchByCategoryfetchByCategoryfetchByCategory");
+    // print("INSIDE fetchByCategoryfetchByCategoryfetchByCategory");
     if (categoryId != "0") {
-      print("searching for category: " + categoryId!);
+      // print("searching for category: " + categoryId!);
       url = "$_baseUrl/filter/$categoryId/$userId";
     } else {
       url = "$_baseUrlRec/$userId";
@@ -75,12 +76,12 @@ class BusinessDataProvider {
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("token") as String;
 
-    print("Inside business data provider");
+    // print("Inside business data provider");
     final response = await http.get(Uri.parse(url), headers: <String, String>{
       "Content-Type": "application/json",
       "access-token": token
     });
-    // print(response.body);
+    // // print(response.body);
     if (response.statusCode == 200) {
       final business = jsonDecode(response.body) as List;
       var x = business.map((b) => Business.fromJson(b)).toList();
@@ -127,7 +128,7 @@ class BusinessDataProvider {
           "isFavorite": business.isFavorite,
         }));
 
-    print(response.body);
+    // print(response.body);
 
     if (response.statusCode == 200) {
       return Business.fromJson(jsonDecode(response.body));
@@ -162,10 +163,10 @@ class BusinessDataProvider {
           "Content-Type": "application/json",
           "access-token": token
         });
-    print("RESPONSEEEEEEEEEEEEEEE");
-    print(
-        "$_baseUrl/search/$categoryId/$userId?queryParameter=$queryParameter");
-    print(response.body);
+    // print("RESPONSEEEEEEEEEEEEEEE");
+    // print(
+    // "$_baseUrl/search/$categoryId/$userId?queryParameter=$queryParameter");
+    // print(response.body);
     if (response.statusCode == 200) {
       final business = jsonDecode(response.body) as List;
       return business.map((b) => Business.fromJson(b)).toList();
@@ -185,7 +186,7 @@ class BusinessDataProvider {
           "access-token": token
         },
         body: jsonEncode({"userId": userId, "businessId": businessId}));
-    print("ADDED: $response.body");
+    // print("ADDED: $response.body");
     if (response.statusCode != 201) {
       throw Exception("Failed to add business to favorites");
     }
@@ -204,7 +205,7 @@ class BusinessDataProvider {
           "access-token": token
         },
         body: jsonEncode({"userId": userId, "businessId": businessId}));
-    print("DELETE: $response.body");
+    // print("DELETE: $response.body");
     if (response.statusCode != 204) {
       throw Exception("Failed to delete business to favorites");
     }
@@ -213,15 +214,27 @@ class BusinessDataProvider {
   Future<List<Business>> fetchFavorites(String userId) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("token") as String;
-    final response = await http.get(Uri.parse("$_baseUrl/favorites/$userId"),
-        headers: <String, String>{
-          "Content-Type": "application/json",
-          "access-token": token
-        });
+    print("_baseUrlFav - $_baseUrlFav");
+    print("_baseUrl - $_baseUrl");
+    String url = x() + "/$userId";
+    print('Sending GET request to $url');
+    final response = await http.get(Uri.parse(url), headers: <String, String>{
+      "Content-Type": "application/json",
+      "access-token": token
+    });
+    print("recieved response : " +
+        response.statusCode.toString() +
+        " " +
+        jsonDecode(response.body));
     if (response.statusCode == 200) {
-      final business = jsonDecode(response.body) as List;
-      return business.map((b) => Business.fromJson(b)).toList();
+      final business = jsonDecode(response.body);
+      if (business == "[]")
+        return [];
+      else
+        return (business as List).map((b) => Business.fromJson(b)).toList();
     } else {
+      print("printing");
+      print(response);
       throw Exception("Failed to get favorite businesses");
     }
   }

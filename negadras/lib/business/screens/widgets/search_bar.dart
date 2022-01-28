@@ -61,7 +61,7 @@ class _SearchBarState extends State<SearchBar> {
           GestureDetector(
             child: Icon(Icons.search),
             onTap: () {
-              // print("ontap");
+              // // print("ontap");
               setState(() {
                 businessBloc.add(
                     SearchBusinessEvent(widget.categoryId as String, _input));

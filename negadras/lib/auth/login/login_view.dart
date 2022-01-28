@@ -23,12 +23,12 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
-    print("In init state");
+    // print("In init state");
     Future.delayed(Duration.zero).then((value) {
       LoginBloc loginBloc = BlocProvider.of<LoginBloc>(context);
       loginBloc.add(InitialLogin());
     });
-    print("before super.init");
+    // print("before super.init");
     super.initState();
   }
 
@@ -83,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
           await prefs.setString("role", loginResponse.role as String);
           await prefs.setString("username", loginResponse.username);
 
-          print("username: ${prefs.getString("username")}");
+          // print("username: ${prefs.getString("username")}");
 
           context.router
               .pushAndPopUntil(HomeRoute(), predicate: (route) => false);
@@ -176,26 +176,23 @@ class _LoginPageState extends State<LoginPage> {
           return CircularProgressIndicator();
         } else {
           return ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  _formKey.currentState!.save();
+            onPressed: () {
+              if (_formKey.currentState!.validate()) {
+                _formKey.currentState!.save();
 
-                  context.read<LoginBloc>().add(LoginSubmitted());
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                primary: Colors.amberAccent,
-                minimumSize: Size(200, 48),
-              ),
-              // style: ButtonStyle(
-              //     shadowColor: MaterialStateProperty.all(Colors.grey),
-              //     backgroundColor:
-              //     MaterialStateProperty.all<Color>(Colors.black87)),
-              child: Text(
-                "Login",
-                style: TextStyle(
-                    color: Color.fromRGBO(20, 40, 65, 1), fontSize: 20),
-              ));
+                context.read<LoginBloc>().add(LoginSubmitted());
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              primary: Colors.amberAccent,
+              minimumSize: Size(200, 48),
+            ),
+            child: Text(
+              "Login",
+              style:
+                  TextStyle(color: Color.fromRGBO(20, 40, 65, 1), fontSize: 20),
+            ),
+          );
         }
       },
     );

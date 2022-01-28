@@ -254,7 +254,7 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
                     final form = _formKey.currentState;
                     if (form != null && form.validate()) {
                       form.save();
-                      print(_business);
+                      // print(_business);
                       final BusinessEvent event = AddBusiness(
                         Business(
                             id: "",
@@ -266,7 +266,7 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
                             email: this._business["email"]),
                       );
                       businessBloc.add(event);
-                      // print(event);
+                      // // print(event);
                       context.router.popAndPush(HomeRoute());
                     }
                   },

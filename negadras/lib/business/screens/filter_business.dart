@@ -28,12 +28,12 @@ class FilterBusinessPage extends StatefulWidget {
 class _FilterBusinessPageState extends State<FilterBusinessPage> {
   @override
   void initState() {
-    print("In init state");
+    // print("In init state");
     Future.delayed(Duration.zero).then((value) {
       BusinessBloc businessBloc = BlocProvider.of<BusinessBloc>(context);
       businessBloc.add(NormalBusinessEvent());
     });
-    print("before super.init");
+    // print("before super.init");
     super.initState();
   }
 
@@ -52,7 +52,7 @@ class _FilterBusinessPageState extends State<FilterBusinessPage> {
           backgroundColor: Color.fromRGBO(20, 40, 65, 1),
         ),
         // bottomNavigationBar: bottomNav(context, 0),
-        bottomNavigationBar: ownerBottomNav(context, 0) as Widget,
+        bottomNavigationBar: ownerBottomNav(context, 0),
         body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,9 +68,9 @@ class _FilterBusinessPageState extends State<FilterBusinessPage> {
               ),
               BlocBuilder<BusinessBloc, BusinessState>(
                 builder: (context, businessState) {
-                  print("Filter class: $businessState");
-                  // print(" ");
-                  print(widget.categoryId);
+                  // print("Filter class: $businessState");
+                  // // print(" ");
+                  // print(widget.categoryId);
 
                   if (businessState is BusinessInitialState) {
                     businessBloc.add(FilterBusinessEvent(widget.categoryId));
@@ -101,14 +101,14 @@ class _FilterBusinessPageState extends State<FilterBusinessPage> {
                   //   );
                   // }
                   if (businessState is BusinessFetchResultState) {
-                    // print(businessState.businessList[0].name);
-                    print(widget.categoryId);
+                    // // print(businessState.businessList[0].name);
+                    // print(widget.categoryId);
                     if (businessState.categoryId != widget.categoryId) {
                       businessState.categoryId = widget.categoryId as String;
                       businessBloc
                           .add(FilterBusinessEvent(businessState.categoryId));
                     }
-                    // print(
+                    // // print(
                     //     "IS OWNERRRRRR ${businessState.businessList[1].isOwner}");
                     return Expanded(
                       child: ListView.builder(
@@ -139,8 +139,7 @@ class _FilterBusinessPageState extends State<FilterBusinessPage> {
                             child: BusinessCard(
                               categoryId:
                                   businessState.businessList[i].categoryId,
-                              isOwner:
-                                  false,
+                              isOwner: false,
                               from: (_isFavorite) {
                                 if (!_isFavorite) {
                                   businessBloc.add(AddToFavoritesEvent(

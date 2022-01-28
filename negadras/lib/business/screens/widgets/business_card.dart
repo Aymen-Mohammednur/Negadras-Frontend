@@ -148,7 +148,9 @@ class _BusinessCardState extends State<BusinessCard> {
                     : Text(""),
               ],
             ),
-            SizedBox(width: 25,),
+            SizedBox(
+              width: 25,
+            ),
             // Spacer(),
             // CircularAvatar(imagePath: widget.imagePath),
           ],

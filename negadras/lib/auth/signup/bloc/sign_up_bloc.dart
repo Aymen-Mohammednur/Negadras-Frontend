@@ -43,6 +43,13 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
 
       // Form Submitted
     } else if (event is SignUpSubmitted) {
+      print({
+        "username": state.username,
+        "lastname": state.lastname,
+        "firstname": state.firstname,
+        "password": state.password
+      });
+
       yield state.copyWith(formStatus: FormSubmitting());
 
       try {

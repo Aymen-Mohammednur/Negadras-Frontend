@@ -32,10 +32,10 @@ class UserReviewBloc extends Bloc<UserReviewEvent, UserReviewState> {
         // var allReviews = reviewRepository.fetchAll(reviewToSend.businessId);
 
         yield ReviewSent(reviewToSend);
-        print("Review sent to server");
+        // print("Review sent to server");
       } catch (_) {
-        print("Review did not reach server");
-        print(_);
+        // print("Review did not reach server");
+        // print(_);
         yield UserReviewOperationFaliure();
       }
     } else if (event is ReviewFoundOnServer) {

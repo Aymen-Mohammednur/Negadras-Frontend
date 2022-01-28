@@ -147,17 +147,17 @@ class _EditFormState extends State<EditForm> {
       onChanged: (newValue) {
         setState(() {
           _currentCategory = newValue.toString();
-          print("ON CHANGEDDDDD");
-          print(_currentCategory);
+          // print("ON CHANGEDDDDD");
+          // print(_currentCategory);
         });
       },
 
       onSaved: (value) {
         setState(() {
           this._business["categoryId"] = categories[_currentCategory];
-          print("ON SAVEDDDDDD");
-          print(_currentCategory);
-          print(categories[_currentCategory]);
+          // print("ON SAVEDDDDDD");
+          // print(_currentCategory);
+          // print(categories[_currentCategory]);
         });
       },
       // onSaved: (String? value) {
@@ -296,7 +296,7 @@ class _EditFormState extends State<EditForm> {
                     final form = _formKey.currentState;
                     if (form != null && form.validate()) {
                       form.save();
-                      print(_business);
+                      // print(_business);
                       final BusinessEvent event = UpdateBusiness(
                         Business(
                           id: widget.business.id,
@@ -309,7 +309,7 @@ class _EditFormState extends State<EditForm> {
                         ),
                       );
                       businessBloc.add(event);
-                      // print(event);
+                      // // print(event);
                       context.router.popAndPush(FilterBusinessRoute(
                           categoryId: widget.business.categoryId));
                     }

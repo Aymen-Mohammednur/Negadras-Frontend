@@ -11,7 +11,8 @@ class AuthRepository {
   Future<LoginResponse> login(
       {required String username, required String password}) async {
     try {
-      print('attempting login');
+      print("authrepo - login function");
+      // print('attempting login');
       Login login = Login(username: username, password: password);
       return dataProvider.readLogin(login);
     } catch (e) {
@@ -25,13 +26,13 @@ class AuthRepository {
       required String firstname,
       required String password}) async {
     try {
-      // print("attempting signup");
+      // // print("attempting signup");
       final register = Register(
           username: username,
           password: password,
-          lastname: lastname,
-          firstname: firstname);
-      // print("Register: $register");
+          lastName: lastname,
+          firstName: firstname);
+      // // print("Register: $register");
       return dataProvider.createRegister(register);
     } catch (e) {
       throw Exception("SignUp failed");

@@ -20,7 +20,7 @@ class OrganizationRepository {
   Future<List<Organization>> fetchByUserId() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final userId = await prefs.getString("user_id");
-    print("Inside org repo");
+    // print("Inside org repo");
     return this.dataProvider.fetchByUserId(userId as String);
   }
 

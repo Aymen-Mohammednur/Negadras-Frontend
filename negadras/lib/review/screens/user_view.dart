@@ -38,15 +38,15 @@ class UserViewPage extends StatefulWidget {
 class UserViewPageState extends State<UserViewPage> {
   @override
   void initState() {
-    print("In init state");
+    // print("In init state");
     Future.delayed(Duration.zero).then((value) {
       ReviewBloc reviewBloc = BlocProvider.of<ReviewBloc>(context);
       UserReviewBloc userReviewBloc = BlocProvider.of<UserReviewBloc>(context);
       reviewBloc.add(NormalReviewEvent());
       userReviewBloc.add(InitialUser());
-      print(widget.businessId);
+      // print(widget.businessId);
     });
-    print("before super.init");
+    // print("before super.init");
     super.initState();
   }
 
@@ -57,6 +57,19 @@ class UserViewPageState extends State<UserViewPage> {
   bool _floatingActionIsVisible = false;
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.amberAccent, //change your color here
+        ),
+        title: Text("Business Details",
+            style: TextStyle(color: Colors.amberAccent)),
+        backgroundColor: Color.fromRGBO(20, 40, 65, 1),
+      ),
+      body: Center(child: Text("No Additional Information on this business")),
+      );
+    
+    
     var _scrollController = ScrollController();
     BlocProvider.of<ReviewBloc>(context).add(PageOpen(widget.businessId, ""));
     DataBloc bloc = BlocProvider.of<DataBloc>(context);
@@ -88,7 +101,7 @@ class UserViewPageState extends State<UserViewPage> {
                         UserRepository(dataProvider: userDataProvider);
                     userRepository.makeClaim(
                         bloc.state.userId, widget.businessId);
-                    print("CLAIMEDDDDDDDDDDD");
+                    // print("CLAIMEDDDDDDDDDDD");
                   })
                   // IconButton(
                   //   onPressed: () {
@@ -97,7 +110,7 @@ class UserViewPageState extends State<UserViewPage> {
                   //         UserRepository(dataProvider: userDataProvider);
                   //     userRepository.makeClaim(
                   //         bloc.state.userId, widget.businessId);
-                  //     print("CLAIMEDDDDDDDDDDD");
+                  //     // print("CLAIMEDDDDDDDDDDD");
                   //   },
                   //   icon: Icon(
                   //     Icons.add_circle,
@@ -151,7 +164,7 @@ class UserViewPageState extends State<UserViewPage> {
           _floatingActionIsVisible = false;
         });
     } else if (ping is ScrollUpdateNotification) {
-      print("Scrolling");
+      // print("Scrolling");
     }
     return true;
   }

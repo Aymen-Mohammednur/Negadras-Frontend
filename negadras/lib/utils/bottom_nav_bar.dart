@@ -11,14 +11,14 @@ Widget ownerBottomNav(BuildContext context, int i) {
   // String? role = pref.getString("role");
   DataBloc bloc = BlocProvider.of<DataBloc>(context);
   // String ID = bloc.state.userId;
-  print("BOTTTOM NAV ID AND ROLEEEEEEEEEEEEEEEEEEEE");
-  print(bloc.state.role);
-  print(bloc.state.userId);
+  // print("BOTTTOM NAV ID AND ROLEEEEEEEEEEEEEEEEEEEE");
+  // print(bloc.state.role);
+  // print(bloc.state.userId);
   if (bloc.state.role == "NormalUser") {
     Map<String, int> pageIndex = {"/": 0, "/favorites-page": 1, "/me-page": 2};
     String routeName = context.routeData.path;
     int currentIndex = pageIndex[routeName] ?? 0;
-    print(i);
+    // print(i);
 
     List routes = [
       HomeRoute(),
@@ -77,7 +77,7 @@ Widget ownerBottomNav(BuildContext context, int i) {
     };
     String routeName = context.routeData.path;
     int currentIndex = pageIndex[routeName] ?? 0;
-    print(i);
+    // print(i);
 
     List routes = [
       HomeRoute(),

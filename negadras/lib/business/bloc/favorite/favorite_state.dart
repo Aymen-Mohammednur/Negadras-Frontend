@@ -6,11 +6,6 @@ abstract class FavoriteState extends Equatable {
   List<Object> get props => [];
 }
 
-// class BusinessInitialState extends FavoriteState {
-//   // final String id;
-//   // BusinessInitialState(this.id);
-// }
-
 class FetchingState extends FavoriteState {}
 
 class FavoriteInitial extends FavoriteState {}

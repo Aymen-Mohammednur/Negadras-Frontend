@@ -20,13 +20,13 @@ class AuthDataProvider {
             body: jsonEncode({
               "username": register.username,
               "password": register.username,
-              "firstName": register.firstname,
-              "lastName": register.lastname
+              "firstName": register.firstName,
+              "lastName": register.lastName
             }));
 
-    print("Status Code: ${response.statusCode}");
+    // print("Status Code: ${response.statusCode}");
     if (response.statusCode == 200) {
-      print("resonse body signup ${response.body}");
+      // print("resonse body signup ${response.body}");
       var signUpRes = jsonDecode(response.body);
 
       return RegisterResponse.fromJson(signUpRes);
@@ -37,6 +37,7 @@ class AuthDataProvider {
   }
 
   Future<LoginResponse> readLogin(Login login) async {
+    print("authdataprovider - readLogin function");
     final http.Response response = await client.post(
       Uri.parse("$_baseUrl/login"),
       headers: <String, String>{"Content-Type": "application/json"},

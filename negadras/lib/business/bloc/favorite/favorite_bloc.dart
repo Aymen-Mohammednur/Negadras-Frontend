@@ -22,13 +22,12 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
       yield FetchingState();
       try {
         final businessList = await businessRepository.fetchFavorites();
+        print("FavoriteBloc recieved businessList: ${businessList.length}");
         if (businessList.length == 0) {
           yield NoFavoriteState();
         }
-
-        yield FavoriteSuccess(businessList);
+        else yield FavoriteSuccess(businessList);
       } catch (e) {
-        print("$e +++++++++ FETCH FAV ERROR");
         yield FavoriteFailure();
       }
     }

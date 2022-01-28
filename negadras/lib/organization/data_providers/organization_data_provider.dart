@@ -9,8 +9,7 @@ class OrganizationDataProvider {
   //static final String _baseUrl = "http://localhost:3000/api/organization";
   // FOR EMULATOR
   // static final String _baseUrl = "http://10.0.2.2:3000/api/organization";
-  static final String _baseUrl =
-      "${StringConstants.REST_API_URL}/organization";
+  static final String _baseUrl = "${StringConstants.REST_API_URL}/organization";
 
   Future<Organization> create(String userId, Organization organization) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -34,14 +33,14 @@ class OrganizationDataProvider {
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("token") as String;
 
-    // print("Inside data provider");
+    // // print("Inside data provider");
     final response = await http.get(Uri.parse("$_baseUrl/$userId"),
         headers: <String, String>{
           "Content-Type": "application/json",
           "access-token": token
         });
-    // print(response.body);
-    // print(response.statusCode);
+    // // print(response.body);
+    // // print(response.statusCode);
 
     if (response.statusCode == 200) {
       final organization = jsonDecode(response.body) as List;

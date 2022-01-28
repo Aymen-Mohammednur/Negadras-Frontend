@@ -19,6 +19,8 @@ import 'package:negadras/review/blocs/blocs.dart';
 import 'package:negadras/review/repository/review_repository.dart';
 import 'package:negadras/routes/router.gr.dart';
 import 'package:negadras/business/screens/widgets/design.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+
 
 import 'package:negadras/category/repository/category_repository.dart';
 import 'package:negadras/category/data_providers/category_data_provider.dart';
@@ -70,59 +72,68 @@ class App extends StatelessWidget {
     final reviewRepository = ReviewRepository(ReviewDataProvider());
     final organizationRepository =
         OrganizationRepository(OrganizationDataProvider());
+    
+    double paddingAmount = 0;
+    if (kIsWeb) {
+      paddingAmount = 500;
+    }
+   
 
-    return BlocProvider(
-      create: (context) => DataBloc(),
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider<CategoryBloc>(
-            create: (_) => CategoryBloc(
-              categoryRepository: categoryRepository,
-            )..add(CategoryFetch()),
-          ),
-          BlocProvider<BusinessBloc>(
-              create: (_) => BusinessBloc(
-                    businessRepository: businessRepository,
-                  )),
-          BlocProvider(
-              create: (context) => OrganizationBloc(
-                  organizationRepository: organizationRepository)
-                ..add(OrganizationLoad())),
-          BlocProvider(
-              create: (context) => LoginBloc(authRepo: authRepository)),
-          BlocProvider(
-              create: (context) => SignUpBloc(authRepo: authRepository)),
-          BlocProvider<ReviewBloc>(
-              create: (context) => ReviewBloc(reviewRepository)),
-          BlocProvider<UserReviewBloc>(
-              create: (context) => UserReviewBloc(reviewRepository)),
-          
-          BlocProvider<FavoriteBloc>(
-              create: (context) =>
-                  FavoriteBloc(businessRepository: businessRepository)
-                    ..add(ShowFavoritesEvent()))
-          // BlocProvider<OrganizationBloc>(create: (context) => OrganizationBloc(organizationRepository: organizationRepository));
-        ],
-        child: MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            fontFamily: GoogleFonts.josefinSans(
-                    fontSize: 50,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.amberAccent)
-                .fontFamily,
-
-            elevatedButtonTheme: ElevatedButtonThemeData(
-                style: ButtonStyle(
-                    // backgroundColor: Colors.amber,
+    return Padding(
+      padding: EdgeInsets.only(left: paddingAmount, right:paddingAmount ),
+      child: BlocProvider(
+        create: (context) => DataBloc(),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<CategoryBloc>(
+              create: (_) => CategoryBloc(
+                categoryRepository: categoryRepository,
+              )..add(CategoryFetch()),
+            ),
+            BlocProvider<BusinessBloc>(
+                create: (_) => BusinessBloc(
+                      businessRepository: businessRepository,
                     )),
-            // primaryColor: Colors.blue.shade900,
+            BlocProvider(
+                create: (context) => OrganizationBloc(
+                    organizationRepository: organizationRepository)
+                  ..add(OrganizationLoad())),
+            BlocProvider(
+                create: (context) => LoginBloc(authRepo: authRepository)),
+            BlocProvider(
+                create: (context) => SignUpBloc(authRepo: authRepository)),
+            BlocProvider<ReviewBloc>(
+                create: (context) => ReviewBloc(reviewRepository)),
+            BlocProvider<UserReviewBloc>(
+                create: (context) => UserReviewBloc(reviewRepository)),
+
+            BlocProvider<FavoriteBloc>(
+                create: (context) =>
+                    FavoriteBloc(businessRepository: businessRepository)
+                      ..add(ShowFavoritesEvent()))
+            // BlocProvider<OrganizationBloc>(create: (context) => OrganizationBloc(organizationRepository: organizationRepository));
+          ],
+          child: MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              fontFamily: GoogleFonts.josefinSans(
+                      fontSize: 50,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.amberAccent)
+                  .fontFamily,
+
+              elevatedButtonTheme: ElevatedButtonThemeData(
+                  style: ButtonStyle(
+                      // backgroundColor: Colors.amber,
+                      )),
+              // primaryColor: Colors.blue.shade900,
+            ),
+            routerDelegate: AutoRouterDelegate(
+              _appRouter,
+              navigatorObservers: () => [AutoRouteObserver()],
+            ),
+            routeInformationParser: _appRouter.defaultRouteParser(),
           ),
-          routerDelegate: AutoRouterDelegate(
-            _appRouter,
-            navigatorObservers: () => [AutoRouteObserver()],
-          ),
-          routeInformationParser: _appRouter.defaultRouteParser(),
         ),
       ),
     );

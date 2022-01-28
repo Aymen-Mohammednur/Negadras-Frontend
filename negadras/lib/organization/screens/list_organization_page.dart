@@ -120,7 +120,7 @@ class _ListOrganizationPageState extends State<ListOrganizationPage> {
       bottomNavigationBar: ownerBottomNav(context, 2) as Widget,
       body: BlocBuilder<OrganizationBloc, OrganizationState>(
         builder: (context, orgState) {
-          print(orgState);
+          // print(orgState);
           if (orgState is OrganizationOperationFailure) {
             return Center(child: Text("Could not fetch organizations."));
           }
