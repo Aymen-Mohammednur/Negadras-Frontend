@@ -15,7 +15,7 @@ It allows users to search, review, and discover new businesses, and lets them ma
 
 
 ### How to run
-A web version has been ported and deployed. Please note that this does not mirror the performance or user experience one would get with an Android or iOS device. Some artifacts may also appear as the codebase was developed with mobile devices in mind. With all that said, the web version of the client can be found [here](https://stark-brushlands-69254.herokuapp.com/ "Negadras Backend Link"). 
+A web version has been ported and deployed. Please note that this does not mirror the performance or user experience one would get with an Android or iOS device. Some artifacts may also appear as the codebase was developed with mobile devices in mind. With all that said, the web version of the client can be found [here](https://stark-brushlands-69254.herokuapp.com/ "Negadras Backend Link"). You can use login credentials "username" as username as "password" as password if you want to demo the app without creating an account.
 
 To run the client locally, do the following:
 1. > `git clone https://github.com/Aymen-Mohammednur/Negadras-Frontend`
